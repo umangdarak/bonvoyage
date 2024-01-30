@@ -136,6 +136,9 @@ CREATE TABLE multicityeach(
       traveldate TEXT,
       purpose TEXT,
       comments TEXT,
+      droplocation TEXT,
+      debitexpenses TEXT,
+      costorproject TEXT,
       issync INTEGER DEFAULT 0
     )
 ''');
@@ -278,10 +281,12 @@ CREATE TABLE roundtripinternational(
             department TEXT,
             email TEXT,
             mobileno TEXT,
+            approver TEXT,
             debitexpenses TEXT,
             project TEXT,
             requester TEXT,
             comments TEXT,
+            purpose TEXT,
             issync INTEGER DEFAULT 0
     )
 ''');

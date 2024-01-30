@@ -358,6 +358,18 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                               print(amount);
                                                             });
                                                           },
+                                                          onChanged: (s) {
+                                                            setState(() {
+                                                              if (amount
+                                                                      .length ==
+                                                                  0) {
+                                                                amount.add(s);
+                                                              } else {
+                                                                amount[0] = s;
+                                                              }
+                                                              print(amount);
+                                                            });
+                                                          },
                                                           onFieldSubmitted:
                                                               (s) {
                                                             setState(() {
@@ -403,54 +415,65 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                               Colors.black54),
                                                     ),
                                                     Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    8.0),
+                                                        padding: const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 8.0),
                                                         child: TextFormField(
-                                                          validator:
-                                                              _validateRequired,
-                                                          autovalidateMode:
-                                                              AutovalidateMode
-                                                                  .onUserInteraction,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.black),
-                                                          controller: remarks1,
-                                                          onEditingComplete:
-                                                              () {
-                                                            setState(() {
-                                                              if (remarks
-                                                                      .length ==
-                                                                  0) {
-                                                                remarks.add(
-                                                                    remarks1
-                                                                        .text);
-                                                              } else {
-                                                                remarks[0] =
-                                                                    remarks1
-                                                                        .text;
-                                                              }
-                                                            });
-                                                          },
-                                                          onFieldSubmitted:
-                                                              (s) {
-                                                            setState(() {
-                                                              if (remarks
-                                                                      .length ==
-                                                                  0) {
-                                                                remarks.add(
-                                                                    remarks1
-                                                                        .text);
-                                                              } else {
-                                                                remarks[0] =
-                                                                    remarks1
-                                                                        .text;
-                                                              }
-                                                            });
-                                                          },
-                                                        ))
+                                                            validator:
+                                                                _validateRequired,
+                                                            autovalidateMode:
+                                                                AutovalidateMode
+                                                                    .onUserInteraction,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                            controller:
+                                                                remarks1,
+                                                            onEditingComplete:
+                                                                () {
+                                                              setState(() {
+                                                                if (remarks
+                                                                        .length ==
+                                                                    0) {
+                                                                  remarks.add(
+                                                                      remarks1
+                                                                          .text);
+                                                                } else {
+                                                                  remarks[0] =
+                                                                      remarks1
+                                                                          .text;
+                                                                }
+                                                              });
+                                                            },
+                                                            onFieldSubmitted:
+                                                                (s) {
+                                                              setState(() {
+                                                                if (remarks
+                                                                        .length ==
+                                                                    0) {
+                                                                  remarks.add(
+                                                                      remarks1
+                                                                          .text);
+                                                                } else {
+                                                                  remarks[0] =
+                                                                      remarks1
+                                                                          .text;
+                                                                }
+                                                              });
+                                                            },
+                                                            onChanged: (s) {
+                                                              setState(() {
+                                                                if (remarks
+                                                                        .length ==
+                                                                    0) {
+                                                                  remarks
+                                                                      .add(s);
+                                                                } else {
+                                                                  remarks[0] =
+                                                                      s;
+                                                                }
+                                                              });
+                                                            }))
                                                   ]))),
                                     ]),
                                     SizedBox(height: 10),
@@ -670,61 +693,70 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                                     .black54),
                                                           ),
                                                           Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                          8.0),
+                                                              padding: const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                      8.0),
                                                               child:
                                                                   TextFormField(
-                                                                validator:
-                                                                    _validateRequired,
-                                                                autovalidateMode:
-                                                                    AutovalidateMode
-                                                                        .onUserInteraction,
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .number,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
-                                                                controller:
-                                                                    amount1,
-                                                                onFieldSubmitted:
-                                                                    (s) {
-                                                                  setState(() {
-                                                                    if (amount
-                                                                            .length ==
-                                                                        index) {
-                                                                      amount.add(
-                                                                          s);
-                                                                    } else {
-                                                                      amount[index] =
-                                                                          s;
-                                                                    }
-                                                                    print(
-                                                                        amount);
-                                                                  });
-                                                                },
-                                                                onEditingComplete:
-                                                                    () {
-                                                                  setState(() {
-                                                                    if (amount
-                                                                            .length ==
-                                                                        index) {
-                                                                      amount.add(
-                                                                          amount1
-                                                                              .text);
-                                                                    } else {
-                                                                      amount[index] =
-                                                                          amount1
-                                                                              .text;
-                                                                    }
-                                                                    print(
-                                                                        amount);
-                                                                  });
-                                                                },
-                                                              ))
+                                                                      validator:
+                                                                          _validateRequired,
+                                                                      autovalidateMode:
+                                                                          AutovalidateMode
+                                                                              .onUserInteraction,
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .number,
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black),
+                                                                      controller:
+                                                                          amount1,
+                                                                      onFieldSubmitted:
+                                                                          (s) {
+                                                                        setState(
+                                                                            () {
+                                                                          if (amount.length ==
+                                                                              index) {
+                                                                            amount.add(s);
+                                                                          } else {
+                                                                            amount[index] =
+                                                                                s;
+                                                                          }
+                                                                          print(
+                                                                              amount);
+                                                                        });
+                                                                      },
+                                                                      onEditingComplete:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          if (amount.length ==
+                                                                              index) {
+                                                                            amount.add(amount1.text);
+                                                                          } else {
+                                                                            amount[index] =
+                                                                                amount1.text;
+                                                                          }
+                                                                          print(
+                                                                              amount);
+                                                                        });
+                                                                      },
+                                                                      onChanged:
+                                                                          (s) {
+                                                                        setState(
+                                                                            () {
+                                                                          if (amount.length ==
+                                                                              index) {
+                                                                            amount.add(s);
+                                                                          } else {
+                                                                            amount[index] =
+                                                                                s;
+                                                                          }
+                                                                          print(
+                                                                              amount);
+                                                                        });
+                                                                      }))
                                                         ]))),
                                             SizedBox(width: 5),
                                             Padding(
@@ -763,48 +795,55 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                                           8.0),
                                                               child:
                                                                   TextFormField(
-                                                                validator:
-                                                                    _validateRequired,
-                                                                autovalidateMode:
-                                                                    AutovalidateMode
-                                                                        .onUserInteraction,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
-                                                                controller:
-                                                                    remarks1,
-                                                                onFieldSubmitted:
-                                                                    (s) {
-                                                                  setState(() {
-                                                                    if (remarks
-                                                                            .length ==
-                                                                        index) {
-                                                                      remarks
-                                                                          .add(
-                                                                              s);
-                                                                    } else {
-                                                                      remarks[
-                                                                          index] = s;
-                                                                    }
-                                                                  });
-                                                                },
-                                                                onEditingComplete:
-                                                                    () {
-                                                                  setState(() {
-                                                                    if (remarks
-                                                                            .length ==
-                                                                        index) {
-                                                                      remarks.add(
-                                                                          remarks1
-                                                                              .text);
-                                                                    } else {
-                                                                      remarks[index] =
-                                                                          remarks1
-                                                                              .text;
-                                                                    }
-                                                                  });
-                                                                },
-                                                              ))
+                                                                      validator:
+                                                                          _validateRequired,
+                                                                      autovalidateMode:
+                                                                          AutovalidateMode
+                                                                              .onUserInteraction,
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black),
+                                                                      controller:
+                                                                          remarks1,
+                                                                      onFieldSubmitted:
+                                                                          (s) {
+                                                                        setState(
+                                                                            () {
+                                                                          if (remarks.length ==
+                                                                              index) {
+                                                                            remarks.add(s);
+                                                                          } else {
+                                                                            remarks[index] =
+                                                                                s;
+                                                                          }
+                                                                        });
+                                                                      },
+                                                                      onEditingComplete:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          if (remarks.length ==
+                                                                              index) {
+                                                                            remarks.add(remarks1.text);
+                                                                          } else {
+                                                                            remarks[index] =
+                                                                                remarks1.text;
+                                                                          }
+                                                                        });
+                                                                      },
+                                                                      onChanged:
+                                                                          (s) {
+                                                                        setState(
+                                                                            () {
+                                                                          if (remarks.length ==
+                                                                              0) {
+                                                                            remarks.add(s);
+                                                                          } else {
+                                                                            remarks[0] =
+                                                                                s;
+                                                                          }
+                                                                        });
+                                                                      }))
                                                         ]))),
                                           ]),
                                           SizedBox(height: 10),
@@ -958,9 +997,12 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                   ),
                                 ),
                               ),
+                              SizedBox(height: 10),
                               _insurancerequiredController.text == 'Yes'
                                   ? Column(children: [
                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
                                             decoration: BoxDecoration(
@@ -1130,6 +1172,7 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                           ),
                                         ],
                                       ),
+                                      SizedBox(height: 10),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(right: 8.0),
@@ -1203,6 +1246,11 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                 padding: const EdgeInsets.only(
                                                     right: 8.0),
                                                 child: Container(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          2 -
+                                                      20,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -1260,7 +1308,12 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                                 Colors.black54),
                                                       ),
                                                       Container(
-                                                          width: 150,
+                                                          width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  2 -
+                                                              20,
                                                           child: TextFormField(
                                                               style: TextStyle(
                                                                   color: Colors
@@ -1326,6 +1379,141 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                     ])
                                   : Container()
                             ],
+                          ),
+                          SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Colors.black26)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    ' Airport Cab Required?',
+                                    style: TextStyle(color: Colors.black54),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Radio(
+                                            value: 'Yes',
+                                            onChanged: (i) {
+                                              setState(() {
+                                                _cabController.text =
+                                                    i.toString();
+                                              });
+                                            },
+                                            groupValue: _cabController.text,
+                                          ),
+                                          Text('Yes')
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Radio(
+                                            value: 'No',
+                                            onChanged: (i) {
+                                              setState(() {
+                                                _cabController.text =
+                                                    i.toString();
+                                              });
+                                            },
+                                            groupValue: _cabController.text,
+                                          ),
+                                          Text('No')
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Colors.black26)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    ' Visa Required?',
+                                    style: TextStyle(color: Colors.black54),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Radio(
+                                            value: 'Yes',
+                                            onChanged: (i) {
+                                              setState(() {
+                                                _visaController.text =
+                                                    i.toString();
+                                              });
+                                            },
+                                            groupValue: _visaController.text,
+                                          ),
+                                          Text('Yes')
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Radio(
+                                            value: 'No',
+                                            onChanged: (i) {
+                                              setState(() {
+                                                _visaController.text =
+                                                    i.toString();
+                                              });
+                                            },
+                                            groupValue: _visaController.text,
+                                          ),
+                                          Text('No')
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Colors.black26)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    ' Purpose',
+                                    style: TextStyle(color: Colors.black54),
+                                  ),
+                                  TextFormField(
+                                    validator: _validateRequired,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    style: TextStyle(color: Colors.black),
+                                    controller: _purposeController,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                           Divider(),
                           Padding(
@@ -2007,87 +2195,144 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                             _commentsController)
                                                   ]))),
                                       SizedBox(height: 10),
-                                      TextButton(
-                                          onPressed: () async {
-                                            if (formkey.currentState!
-                                                    .validate() &&
-                                                currencymode.isNotEmpty &&
-                                                currency.isNotEmpty &&
-                                                amount.isNotEmpty &&
-                                                remarks.isNotEmpty &&
-                                                _travellergenderController
-                                                    .text.isNotEmpty &&
-                                                _debitexpensesController
-                                                    .text.isNotEmpty) {
-                                              String connection =
-                                                  generateRandomString();
-                                              var d = await DataBaseHelper
-                                                  .insertItemOneWayDom({
-                                                ...widget.data,
-                                                "currencymode":
-                                                    currencymode.join(","),
-                                                "currency": currency.join(","),
-                                                "amount": amount.join(","),
-                                                "remarks": remarks.join(","),
-                                                "insurancerequired":
-                                                    _insurancerequiredController
-                                                        .text,
-                                                "insurancefromdate":
-                                                    _insurancefromdateController
-                                                        .text,
-                                                "insurancetodate":
-                                                    _insurancetodateController
-                                                        .text,
-                                                "insuranceavailable":
-                                                    _insuranceavailableController
-                                                        .text,
-                                                "insurancename":
-                                                    _insurancenameController
-                                                        .text,
-                                                "insurancevaliddate":
-                                                    _insurancevaliddateController
-                                                        .text,
-                                                "connectiontotravellerdetails":
-                                                    connection
-                                              }, 'roundtripinternational');
-                                             Navigator.push(context,MaterialPageRoute(builder: (_)=>RoundTripApproval(id:d,international:1)));
-
-                                            } else {
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return Center(
-                                                    child: AlertDialog(
-                                                      content: Column(
-                                                        mainAxisSize: MainAxisSize
-                                                            .min, // Ensure it only takes the necessary space
-                                                        children: <Widget>[
-                                                          Text(
-                                                            'Please fill all the details.',
-                                                            textAlign: TextAlign
-                                                                .center, // Center the text within the column
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () async {
+                                                if (formkey.currentState!
+                                                        .validate() &&
+                                                    currencymode.isNotEmpty &&
+                                                    currency.isNotEmpty &&
+                                                    amount.isNotEmpty &&
+                                                    remarks.isNotEmpty &&
+                                                    _travellergenderController
+                                                        .text.isNotEmpty &&
+                                                    _debitexpensesController
+                                                        .text.isNotEmpty) {
+                                                  String connection =
+                                                      generateRandomString();
+                                                  var d = await DataBaseHelper
+                                                      .insertItemOneWayDom({
+                                                    ...widget.data,
+                                                    "currencymode":
+                                                        currencymode.join(","),
+                                                    "currency":
+                                                        currency.join(","),
+                                                    "amount": amount.join(","),
+                                                    "remarks":
+                                                        remarks.join(","),
+                                                    "insurancerequired":
+                                                        _insurancerequiredController
+                                                            .text,
+                                                    "insurancefromdate":
+                                                        _insurancefromdateController
+                                                            .text,
+                                                    "insurancetodate":
+                                                        _insurancetodateController
+                                                            .text,
+                                                    "insuranceavailable":
+                                                        _insuranceavailableController
+                                                            .text,
+                                                    "insurancename":
+                                                        _insurancenameController
+                                                            .text,
+                                                    "insurancevaliddate":
+                                                        _insurancevaliddateController
+                                                            .text,
+                                                    "connectiontotravellerdetails":
+                                                        connection
+                                                  }, 'roundtripinternational');
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              RoundTripApproval(
+                                                                  id: d,
+                                                                  international:
+                                                                      1)));
+                                                } else {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Center(
+                                                        child: AlertDialog(
+                                                          content: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min, // Ensure it only takes the necessary space
+                                                            children: <Widget>[
+                                                              Text(
+                                                                'Please fill all the details.',
+                                                                textAlign: TextAlign
+                                                                    .center, // Center the text within the column
+                                                              ),
+                                                            ],
                                                           ),
-                                                        ],
-                                                      ),
-                                                      actions: <Widget>[
-                                                        Center(
-                                                          child: ElevatedButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop(); // Close the dialog
-                                                            },
-                                                            child: Text('OK'),
-                                                          ),
+                                                          actions: <Widget>[
+                                                            Center(
+                                                              child:
+                                                                  ElevatedButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop(); // Close the dialog
+                                                                },
+                                                                child:
+                                                                    Text('OK'),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
+                                                      );
+                                                    },
                                                   );
-                                                },
-                                              );
-                                            }
-                                          },
-                                          child: Text('Save Details'))
+                                                }
+                                              },
+                                              child: Container(
+                                                  width: 100,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      color: Color.fromARGB(
+                                                          255, 1, 75, 148)),
+                                                  child: Center(
+                                                    child: Text('Submit',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 20)),
+                                                  ))),
+                                          TextButton(
+                                              onPressed: () async {
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            RoundTripInternational(
+                                                              data: widget.data,
+                                                            )));
+                                              },
+                                              child: Container(
+                                                  width: 100,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255, 131, 14, 5)),
+                                                  child: Center(
+                                                    child: Text('Clear',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 20)),
+                                                  ))),
+                                        ],
+                                      )
                                     ])),
                           )
                         ]),

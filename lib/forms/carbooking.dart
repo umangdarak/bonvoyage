@@ -27,8 +27,6 @@ class _CarBookingState extends State<CarBooking> {
   TextEditingController _fromdateController = TextEditingController();
   TextEditingController _todateController = TextEditingController();
   TextEditingController _pickupdetailsController = TextEditingController();
-
-  TextEditingController _approverController = TextEditingController();
   TextEditingController _travellernameController = TextEditingController();
   TextEditingController _travellergenderController = TextEditingController();
   TextEditingController _levelController = TextEditingController();
@@ -39,12 +37,30 @@ class _CarBookingState extends State<CarBooking> {
   TextEditingController _costorprojectController = TextEditingController();
   TextEditingController _requesternameController = TextEditingController();
   TextEditingController _commentsController = TextEditingController();
+  TextEditingController _purposeController = TextEditingController();
+  TextEditingController _approverController = TextEditingController();
 
   String? _validateRequired(String? value) {
     if (value == null || value.isEmpty) {
       return 'This field is required';
     }
     return null;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _travellernameController.text = "Umang";
+    _travellergenderController.text = "Male";
+    _travelleremailController.text = "abc@gmail.com";
+    _travellermobilenoContorller.text = "909999999";
+    _levelController.text = "xyz";
+    _departmentController.text = "abc";
+    _debitexpensesController.text = "Cost Center";
+    _costorprojectController.text = "project";
+    _requesternameController.text = "Umang";
+    _approverController.text = "dde";
   }
 
   @override
@@ -575,8 +591,9 @@ class _CarBookingState extends State<CarBooking> {
                                                               BorderRadius
                                                                   .circular(5)),
                                                       child: Padding(
-                                                          padding: const EdgeInsets
-                                                              .only(left: 8.0),
+                                                          padding:
+                                                              const EdgeInsets.only(
+                                                                  left: 8.0),
                                                           child: Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
@@ -607,6 +624,8 @@ class _CarBookingState extends State<CarBooking> {
                                                                               75,
                                                                               148)),
                                                                     ),
+                                                                    readOnly:
+                                                                        true,
                                                                     controller:
                                                                         _travellernameController)
                                                               ]))),
@@ -709,8 +728,9 @@ class _CarBookingState extends State<CarBooking> {
                                                               BorderRadius
                                                                   .circular(5)),
                                                       child: Padding(
-                                                          padding: const EdgeInsets
-                                                              .only(left: 8.0),
+                                                          padding:
+                                                              const EdgeInsets.only(
+                                                                  left: 8.0),
                                                           child: Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
@@ -741,6 +761,8 @@ class _CarBookingState extends State<CarBooking> {
                                                                               75,
                                                                               148)),
                                                                     ),
+                                                                    readOnly:
+                                                                        true,
                                                                     controller:
                                                                         _levelController)
                                                               ]))),
@@ -761,8 +783,9 @@ class _CarBookingState extends State<CarBooking> {
                                                               BorderRadius
                                                                   .circular(5)),
                                                       child: Padding(
-                                                          padding: const EdgeInsets
-                                                              .only(left: 8.0),
+                                                          padding:
+                                                              const EdgeInsets.only(
+                                                                  left: 8.0),
                                                           child: Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
@@ -793,6 +816,8 @@ class _CarBookingState extends State<CarBooking> {
                                                                               75,
                                                                               148)),
                                                                     ),
+                                                                    readOnly:
+                                                                        true,
                                                                     controller:
                                                                         _departmentController)
                                                               ]))),
@@ -816,9 +841,8 @@ class _CarBookingState extends State<CarBooking> {
                                                             BorderRadius
                                                                 .circular(5)),
                                                     child: Padding(
-                                                        padding:
-                                                            const EdgeInsets.only(
-                                                                left: 8.0),
+                                                        padding: const EdgeInsets
+                                                            .only(left: 8.0),
                                                         child: Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
@@ -850,6 +874,8 @@ class _CarBookingState extends State<CarBooking> {
                                                                             75,
                                                                             148)),
                                                                   ),
+                                                                  readOnly:
+                                                                      true,
                                                                   controller:
                                                                       _travelleremailController)
                                                             ]))),
@@ -870,9 +896,8 @@ class _CarBookingState extends State<CarBooking> {
                                                             BorderRadius
                                                                 .circular(5)),
                                                     child: Padding(
-                                                        padding:
-                                                            const EdgeInsets.only(
-                                                                left: 8.0),
+                                                        padding: const EdgeInsets
+                                                            .only(left: 8.0),
                                                         child: Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
@@ -904,11 +929,70 @@ class _CarBookingState extends State<CarBooking> {
                                                                             75,
                                                                             148)),
                                                                   ),
+                                                                  readOnly:
+                                                                      true,
                                                                   controller:
                                                                       _travellermobilenoContorller)
                                                             ]))),
                                               ]),
                                             ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2 -
+                                                20,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.black26),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Text('Approver Name',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ),
+                                                Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8.0),
+                                                    child: TextFormField(
+                                                      controller:
+                                                          _approverController,
+                                                      autovalidateMode:
+                                                          AutovalidateMode
+                                                              .onUserInteraction,
+                                                      validator:
+                                                          _validateRequired,
+                                                      decoration: InputDecoration(
+                                                          hintText:
+                                                              'Approver Name',
+                                                          hintStyle: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      1,
+                                                                      75,
+                                                                      148)),
+                                                          constraints: BoxConstraints(
+                                                              maxWidth: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width -
+                                                                  100)),
+                                                    )),
+                                              ],
+                                            ),
                                           ),
                                           SizedBox(height: 10),
                                           Container(
@@ -1024,6 +1108,7 @@ class _CarBookingState extends State<CarBooking> {
                                                                           75,
                                                                           148)),
                                                                 ),
+                                                                readOnly: true,
                                                                 controller:
                                                                     _costorprojectController)
                                                           ]))),
@@ -1077,83 +1162,150 @@ class _CarBookingState extends State<CarBooking> {
                                                                           75,
                                                                           148)),
                                                                 ),
+                                                                readOnly: true,
                                                                 controller:
                                                                     _requesternameController)
                                                           ]))),
                                             ],
                                           ),
                                           SizedBox(height: 10),
-                                          Container(
-                                              height: 80,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.black26),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text('Comments',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                        TextFormField(
-                                                            autovalidateMode:
-                                                                AutovalidateMode
-                                                                    .onUserInteraction,
-                                                            validator:
-                                                                _validateRequired,
-                                                            decoration:
-                                                                InputDecoration(
-                                                              labelText:
-                                                                  'Comments',
-                                                              labelStyle: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
+                                          Row(
+                                            children: [
+                                              Container(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          2 -
+                                                      40,
+                                                  height: 80,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              Colors.black26),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text('Purpose',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold)),
+                                                            TextFormField(
+                                                                autovalidateMode:
+                                                                    AutovalidateMode
+                                                                        .onUserInteraction,
+                                                                validator:
+                                                                    _validateRequired,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  labelText:
+                                                                      'Purpose',
+                                                                  labelStyle: TextStyle(
+                                                                      color: Color.fromARGB(
                                                                           255,
                                                                           1,
                                                                           75,
                                                                           148)),
-                                                            ),
-                                                            controller:
-                                                                _commentsController)
-                                                      ]))),
+                                                                ),
+                                                                controller:
+                                                                    _purposeController)
+                                                          ]))),
+                                              SizedBox(width: 10),
+                                              Container(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          2 -
+                                                      40,
+                                                  height: 80,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              Colors.black26),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text('Comments',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold)),
+                                                            TextFormField(
+                                                                autovalidateMode:
+                                                                    AutovalidateMode
+                                                                        .onUserInteraction,
+                                                                validator:
+                                                                    _validateRequired,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  labelText:
+                                                                      'Comments',
+                                                                  labelStyle: TextStyle(
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          1,
+                                                                          75,
+                                                                          148)),
+                                                                ),
+                                                                controller:
+                                                                    _commentsController)
+                                                          ]))),
+                                            ],
+                                          ),
                                         ])),
                               ]))),
                 ),
-                TextButton(
-                    onPressed: () async {
-                      if (formkey.currentState!.validate()) {
-                        var d = await DataBaseHelper.insertItemOneWayDom({
-                          'fromplace': _fromplaceController.text,
-                          'places': _placestovisitController.text,
-                          'people': _peopleController.text,
-                          'cartype': _cartypeController.text,
-                          'fromdate': _fromdateController.text,
-                          'todate': _todateController.text,
-                          'pickupdetails': _pickupdetailsController.text,
-                          'travellername': _travellernameController.text,
-                          'travellergender': _travellergenderController.text,
-                          'level': _levelController.text,
-                          'department': _departmentController.text,
-                          'email': _travelleremailController.text,
-                          'mobileno': _travellermobilenoContorller.text,
-                          'debitexpenses': _debitexpensesController.text,
-                          'project': _costorprojectController.text,
-                          'requester': _requesternameController.text,
-                          'comments': _commentsController.text
-                        }, 'carbooking');
-                        var c =
-                            await DataBaseHelper.readOneWayDom('carbooking');
-                        print(c);
-                      }else{showDialog(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                        onPressed: () async {
+                          if (formkey.currentState!.validate()) {
+                            var d = await DataBaseHelper.insertItemOneWayDom({
+                              'fromplace': _fromplaceController.text,
+                              'places': _placestovisitController.text,
+                              'people': _peopleController.text,
+                              'cartype': _cartypeController.text,
+                              'fromdate': _fromdateController.text,
+                              'todate': _todateController.text,
+                              'pickupdetails': _pickupdetailsController.text,
+                              'travellername': _travellernameController.text,
+                              'travellergender':
+                                  _travellergenderController.text,
+                              'level': _levelController.text,
+                              'department': _departmentController.text,
+                              'email': _travelleremailController.text,
+                              'approver': _approverController.text,
+                              'mobileno': _travellermobilenoContorller.text,
+                              'debitexpenses': _debitexpensesController.text,
+                              'project': _costorprojectController.text,
+                              'requester': _requesternameController.text,
+                              'comments': _commentsController.text,
+                              'purpose': _purposeController.text
+                            }, 'carbooking');
+                            var c = await DataBaseHelper.readOneWayDom(
+                                'carbooking');
+                            print(c);
+                          } else {
+                            showDialog(
                               context: context,
                               builder: (context) {
                                 return Center(
@@ -1183,9 +1335,38 @@ class _CarBookingState extends State<CarBooking> {
                                   ),
                                 );
                               },
-                            );}
-                    },
-                    child: Text('Save'))
+                            );
+                          }
+                        },
+                        child: Container(
+                            width: 100,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color.fromARGB(255, 1, 75, 148)),
+                            child: Center(
+                              child: Text('Submit',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20)),
+                            ))),
+                    TextButton(
+                        onPressed: () async {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (_) => CarBooking()));
+                        },
+                        child: Container(
+                            width: 100,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: const Color.fromARGB(255, 131, 14, 5)),
+                            child: Center(
+                              child: Text('Clear',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20)),
+                            ))),
+                  ],
+                )
               ]),
             )));
   }

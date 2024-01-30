@@ -1218,19 +1218,22 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                         .symmetric(
                                                         horizontal: 8.0),
                                                     child: DropdownMenu(
+                                                        width: MediaQuery.of(context)
+                                                                    .size
+                                                                    .width /
+                                                                2 -
+                                                            20,
                                                         hintText: 'Seat',
                                                         inputDecorationTheme:
                                                             InputDecorationTheme(
-                                                                border:
-                                                                    InputBorder
-                                                                        .none,
+                                                                border: InputBorder
+                                                                    .none,
                                                                 hintStyle: TextStyle(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            1,
-                                                                            75,
-                                                                            148))),
+                                                                    color: Color.fromARGB(
+                                                                        255,
+                                                                        1,
+                                                                        75,
+                                                                        148))),
                                                         onSelected: (s) {
                                                           if (s ==
                                                               'select an option') {
@@ -1268,6 +1271,12 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                         .symmetric(
                                                         horizontal: 8.0),
                                                     child: DropdownMenu(
+                                                        width:
+                                                            MediaQuery.of(context)
+                                                                        .size
+                                                                        .width /
+                                                                    2 -
+                                                                20,
                                                         onSelected: (s) {
                                                           if (s ==
                                                               'Select an option') {
@@ -1284,12 +1293,11 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                                     InputBorder
                                                                         .none,
                                                                 hintStyle: TextStyle(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            1,
-                                                                            75,
-                                                                            148))),
+                                                                    color: Color.fromARGB(
+                                                                        255,
+                                                                        1,
+                                                                        75,
+                                                                        148))),
                                                         dropdownMenuEntries: [
                                                           'Select an option',
                                                           'up',
@@ -1319,11 +1327,19 @@ class _OneWayTicketNewState extends State<OneWay> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        Text('Region:',
+                                            style:
+                                                TextStyle(color: Colors.black)),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8.0),
                                           child: DropdownMenu(
                                               hintText: 'Region',
+                                              width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      2 -
+                                                  20,
                                               inputDecorationTheme:
                                                   InputDecorationTheme(
                                                       border: InputBorder.none,
@@ -2175,337 +2191,78 @@ class _OneWayTicketNewState extends State<OneWay> {
                   ),
                 )),
             SizedBox(height: 20),
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(children: [
-                      TextButton(
-                          onPressed: () {
-                            if (formkey.currentState!.validate()) {
-                              if (_travelClassController.text.isNotEmpty &&
-                                  traveltimevalues.isNotEmpty &&
-                                  _seatController.text.isNotEmpty &&
-                                  _foodController.text.isNotEmpty) {
-                                if (accom[0] || accom[1]) {
-                                  bool isConditionMet = true;
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              TextButton(
+                  onPressed: () {
+                    if (formkey.currentState!.validate()) {
+                      if (_travelClassController.text.isNotEmpty &&
+                          traveltimevalues.isNotEmpty &&
+                          _seatController.text.isNotEmpty &&
+                          _foodController.text.isNotEmpty) {
+                        if (accom[0] || accom[1]) {
+                          bool isConditionMet = true;
 
-                                  if (accom[0]) {
-                                    isConditionMet = isConditionMet &&
-                                        _accomodationController.text.isNotEmpty;
+                          if (accom[0]) {
+                            isConditionMet = isConditionMet &&
+                                _accomodationController.text.isNotEmpty;
+                          }
+
+                          if (accom[1]) {
+                            isConditionMet = isConditionMet &&
+                                _occupancyController.text.isNotEmpty &&
+                                _bagController.text.isNotEmpty;
+                          }
+                          bool Condition2 = true;
+                          if (widget.isInternational) {
+                            Condition2 =
+                                Condition2 && _regionController.text.isNotEmpty;
+                          }
+                          if (isConditionMet) {
+                            if (widget.isInternational) {
+                              if (Condition2) {
+                                setState(() {
+                                  //international+region is present
+                                  String c = '';
+
+                                  for (int i = 0;
+                                      i < traveltimevalues.length;
+                                      i++) {
+                                    c = "$c${traveltimevalues.elementAt(i)} ";
                                   }
-
-                                  if (accom[1]) {
-                                    isConditionMet = isConditionMet &&
-                                        _occupancyController.text.isNotEmpty &&
-                                        _bagController.text.isNotEmpty;
-                                  }
-                                  bool Condition2 = true;
-                                  if (widget.isInternational) {
-                                    Condition2 = Condition2 &&
-                                        _regionController.text.isNotEmpty;
-                                  }
-                                  if (isConditionMet) {
-                                    if (widget.isInternational) {
-                                      if (Condition2) {
-                                        setState(() {
-                                          //international+region is present
-                                          String c = '';
-
-                                          for (int i = 0;
-                                              i < traveltimevalues.length;
-                                              i++) {
-                                            c = "$c${traveltimevalues.elementAt(i)} ";
-                                          }
-                                          model1.name = authProvider.username;
-                                          model1.travelmode =
-                                              _traveltypeController.text;
-                                          model1.travelclass =
-                                              _travelClassController.text;
-                                          model1.origin =
-                                              _originController.text;
-                                          model1.destination =
-                                              _destinationController.text;
-                                          model1.traveldate =
-                                              _traveldateController.text;
-                                          model1.traveltime = c;
-                                          model1.eta = _etaController.text;
-                                          model1.seat = _seatController.text;
-                                          model1.food = _foodController.text;
-                                          model1.comments =
-                                              _comments1Controller.text;
-                                          model1.accomodation =
-                                              _accomodationController.text;
-                                          model1.occupancy =
-                                              _occupancyController.text;
-                                          model1.bags = _bagController.text;
-                                          model1.checkin =
-                                              _checkinController.text;
-                                          model1.checkout =
-                                              _checkoutController.text;
-                                          model1.weight =
-                                              _totalweightController.text;
-                                          model1.remarks =
-                                              _remarksController.text;
-                                          model1.hotel = _hotelController.text;
-                                          model1.region =
-                                              _regionController.text;
-                                        });
-                                        print(model1.toMap());
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    OneWayMiscInternational(
-                                                        isInternational: widget
-                                                            .isInternational,
-                                                        model: model1)));
-                                      } else {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return Center(
-                                              child: AlertDialog(
-                                                content: Column(
-                                                  mainAxisSize: MainAxisSize
-                                                      .min, // Ensure it only takes the necessary space
-                                                  children: <Widget>[
-                                                    Text(
-                                                      'Please fill all the details.',
-                                                      textAlign: TextAlign
-                                                          .center, // Center the text within the column
-                                                    ),
-                                                  ],
-                                                ),
-                                                actions: <Widget>[
-                                                  Center(
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop(); // Close the dialog
-                                                      },
-                                                      child: Text('OK'),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      }
-                                    } else {
-                                      setState(() {
-                                        String c = '';
-
-                                        for (int i = 0;
-                                            i < traveltimevalues.length;
-                                            i++) {
-                                          c = "$c${traveltimevalues.elementAt(i)} ";
-                                        }
-                                        model.name = authProvider.username;
-
-                                        model.travelmode =
-                                            _traveltypeController.text;
-                                        model.travelclass =
-                                            _travelClassController.text;
-                                        model.origin = _originController.text;
-                                        model.destination =
-                                            _destinationController.text;
-                                        model.traveldate =
-                                            _traveldateController.text;
-                                        model.traveltime = c;
-                                        model.eta = _etaController.text;
-                                        model.seat = _seatController.text;
-                                        model.food = _foodController.text;
-                                        model.comments =
-                                            _comments1Controller.text;
-                                        model.accomodation =
-                                            _accomodationController.text;
-                                        model.occupancy =
-                                            _occupancyController.text;
-                                        model.bags = _bagController.text;
-                                        model.checkin = _checkinController.text;
-                                        model.checkout =
-                                            _checkoutController.text;
-                                        model.weight =
-                                            _totalweightController.text;
-                                        model.remarks = _remarksController.text;
-                                        model.hotel = _hotelController.text;
-                                      });
-                                      print(model.toMap());
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => OneWayMisc(
-                                                  isInternational:
-                                                      widget.isInternational,
-                                                  model: model)));
-                                    }
-                                  } else {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return Center(
-                                          child: AlertDialog(
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize
-                                                  .min, // Ensure it only takes the necessary space
-                                              children: <Widget>[
-                                                Text(
-                                                  'Please fill all the details.',
-                                                  textAlign: TextAlign
-                                                      .center, // Center the text within the column
-                                                ),
-                                              ],
-                                            ),
-                                            actions: <Widget>[
-                                              Center(
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop(); // Close the dialog
-                                                  },
-                                                  child: Text('OK'),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  }
-                                } else {
-                                  bool Condition2 = true;
-                                  if (widget.isInternational) {
-                                    Condition2 = Condition2 &&
-                                        _regionController.text.isNotEmpty;
-                                  }
-                                  if (widget.isInternational) {
-                                    if (Condition2) {
-                                      setState(() {
-                                        String c = '';
-                                        //international
-                                        for (int i = 0;
-                                            i < traveltimevalues.length;
-                                            i++) {
-                                          c = "$c${traveltimevalues.elementAt(i)} ";
-                                        }
-                                        model1.name = authProvider.username;
-
-                                        model1.travelmode =
-                                            _traveltypeController.text;
-                                        model1.travelclass =
-                                            _travelClassController.text;
-                                        model1.origin = _originController.text;
-                                        model1.destination =
-                                            _destinationController.text;
-                                        model1.traveldate =
-                                            _traveldateController.text;
-                                        model1.traveltime = c;
-                                        model1.eta = _etaController.text;
-                                        model1.seat = _seatController.text;
-                                        model1.food = _foodController.text;
-                                        model1.comments =
-                                            _comments1Controller.text;
-                                        model1.accomodation = '';
-                                        model1.occupancy = '';
-                                        model1.bags = '';
-                                        model1.weight = '';
-                                        model1.remarks = '';
-                                        model1.checkin = '';
-                                        model1.checkout = '';
-                                        model1.hotel = '';
-                                        model1.region = _regionController.text;
-                                      });
-                                      print(model1.toMap());
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                  OneWayMiscInternational(
-                                                      isInternational: widget
-                                                          .isInternational,
-                                                      model: model1)));
-                                    } else {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return Center(
-                                            child: AlertDialog(
-                                              content: Column(
-                                                mainAxisSize: MainAxisSize
-                                                    .min, // Ensure it only takes the necessary space
-                                                children: <Widget>[
-                                                  Text(
-                                                    'Please fill all the details.',
-                                                    textAlign: TextAlign
-                                                        .center, // Center the text within the column
-                                                  ),
-                                                ],
-                                              ),
-                                              actions: <Widget>[
-                                                Center(
-                                                  child: ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop(); // Close the dialog
-                                                    },
-                                                    child: Text('OK'),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    }
-                                  } else {
-                                    setState(() {
-                                      String c = '';
-
-                                      for (int i = 0;
-                                          i < traveltimevalues.length;
-                                          i++) {
-                                        c = "$c${traveltimevalues.elementAt(i)} ";
-                                      }
-                                      model.name = authProvider.username;
-
-                                      model.travelmode =
-                                          _traveltypeController.text;
-                                      model.travelclass =
-                                          _travelClassController.text;
-                                      model.origin = _originController.text;
-                                      model.destination =
-                                          _destinationController.text;
-                                      model.traveldate =
-                                          _traveldateController.text;
-                                      model.traveltime = c;
-                                      model.eta = _etaController.text;
-                                      model.seat = _seatController.text;
-                                      model.food = _foodController.text;
-                                      model.comments =
-                                          _comments1Controller.text;
-                                      model.accomodation = '';
-                                      model.occupancy = '';
-                                      model.bags = '';
-                                      model.checkin = '';
-                                      model.checkout = '';
-                                      model.weight = '';
-                                      model.remarks = '';
-                                      model.hotel = '';
-                                    });
-                                    print(model.toMap());
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => OneWayMisc(
-                                                isInternational:
-                                                    widget.isInternational,
-                                                model: model)));
-                                  }
-                                }
+                                  model1.name = authProvider.username;
+                                  model1.travelmode =
+                                      _traveltypeController.text;
+                                  model1.travelclass =
+                                      _travelClassController.text;
+                                  model1.origin = _originController.text;
+                                  model1.destination =
+                                      _destinationController.text;
+                                  model1.traveldate =
+                                      _traveldateController.text;
+                                  model1.traveltime = c;
+                                  model1.eta = _etaController.text;
+                                  model1.seat = _seatController.text;
+                                  model1.food = _foodController.text;
+                                  model1.comments = _comments1Controller.text;
+                                  model1.accomodation =
+                                      _accomodationController.text;
+                                  model1.occupancy = _occupancyController.text;
+                                  model1.bags = _bagController.text;
+                                  model1.checkin = _checkinController.text;
+                                  model1.checkout = _checkoutController.text;
+                                  model1.weight = _totalweightController.text;
+                                  model1.remarks = _remarksController.text;
+                                  model1.hotel = _hotelController.text;
+                                  model1.region = _regionController.text;
+                                });
+                                print(model1.toMap());
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => OneWayMiscInternational(
+                                            isInternational:
+                                                widget.isInternational,
+                                            model: model1)));
                               } else {
                                 showDialog(
                                   context: context,
@@ -2540,6 +2297,127 @@ class _OneWayTicketNewState extends State<OneWay> {
                                 );
                               }
                             } else {
+                              setState(() {
+                                String c = '';
+
+                                for (int i = 0;
+                                    i < traveltimevalues.length;
+                                    i++) {
+                                  c = "$c${traveltimevalues.elementAt(i)} ";
+                                }
+                                model.name = authProvider.username;
+
+                                model.travelmode = _traveltypeController.text;
+                                model.travelclass = _travelClassController.text;
+                                model.origin = _originController.text;
+                                model.destination = _destinationController.text;
+                                model.traveldate = _traveldateController.text;
+                                model.traveltime = c;
+                                model.eta = _etaController.text;
+                                model.seat = _seatController.text;
+                                model.food = _foodController.text;
+                                model.comments = _comments1Controller.text;
+                                model.accomodation =
+                                    _accomodationController.text;
+                                model.occupancy = _occupancyController.text;
+                                model.bags = _bagController.text;
+                                model.checkin = _checkinController.text;
+                                model.checkout = _checkoutController.text;
+                                model.weight = _totalweightController.text;
+                                model.remarks = _remarksController.text;
+                                model.hotel = _hotelController.text;
+                              });
+                              print(model.toMap());
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => OneWayMisc(
+                                          isInternational:
+                                              widget.isInternational,
+                                          model: model)));
+                            }
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Center(
+                                  child: AlertDialog(
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize
+                                          .min, // Ensure it only takes the necessary space
+                                      children: <Widget>[
+                                        Text(
+                                          'Please fill all the details.',
+                                          textAlign: TextAlign
+                                              .center, // Center the text within the column
+                                        ),
+                                      ],
+                                    ),
+                                    actions: <Widget>[
+                                      Center(
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(); // Close the dialog
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        } else {
+                          bool Condition2 = true;
+                          if (widget.isInternational) {
+                            Condition2 =
+                                Condition2 && _regionController.text.isNotEmpty;
+                          }
+                          if (widget.isInternational) {
+                            if (Condition2) {
+                              setState(() {
+                                String c = '';
+                                //international
+                                for (int i = 0;
+                                    i < traveltimevalues.length;
+                                    i++) {
+                                  c = "$c${traveltimevalues.elementAt(i)} ";
+                                }
+                                model1.name = authProvider.username;
+
+                                model1.travelmode = _traveltypeController.text;
+                                model1.travelclass =
+                                    _travelClassController.text;
+                                model1.origin = _originController.text;
+                                model1.destination =
+                                    _destinationController.text;
+                                model1.traveldate = _traveldateController.text;
+                                model1.traveltime = c;
+                                model1.eta = _etaController.text;
+                                model1.seat = _seatController.text;
+                                model1.food = _foodController.text;
+                                model1.comments = _comments1Controller.text;
+                                model1.accomodation = '';
+                                model1.occupancy = '';
+                                model1.bags = '';
+                                model1.weight = '';
+                                model1.remarks = '';
+                                model1.checkin = '';
+                                model1.checkout = '';
+                                model1.hotel = '';
+                                model1.region = _regionController.text;
+                              });
+                              print(model1.toMap());
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => OneWayMiscInternational(
+                                          isInternational:
+                                              widget.isInternational,
+                                          model: model1)));
+                            } else {
                               showDialog(
                                 context: context,
                                 builder: (context) {
@@ -2572,10 +2450,143 @@ class _OneWayTicketNewState extends State<OneWay> {
                                 },
                               );
                             }
+                          } else {
+                            setState(() {
+                              String c = '';
+
+                              for (int i = 0;
+                                  i < traveltimevalues.length;
+                                  i++) {
+                                c = "$c${traveltimevalues.elementAt(i)} ";
+                              }
+                              model.name = authProvider.username;
+
+                              model.travelmode = _traveltypeController.text;
+                              model.travelclass = _travelClassController.text;
+                              model.origin = _originController.text;
+                              model.destination = _destinationController.text;
+                              model.traveldate = _traveldateController.text;
+                              model.traveltime = c;
+                              model.eta = _etaController.text;
+                              model.seat = _seatController.text;
+                              model.food = _foodController.text;
+                              model.comments = _comments1Controller.text;
+                              model.accomodation = '';
+                              model.occupancy = '';
+                              model.bags = '';
+                              model.checkin = '';
+                              model.checkout = '';
+                              model.weight = '';
+                              model.remarks = '';
+                              model.hotel = '';
+                            });
+                            print(model.toMap());
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => OneWayMisc(
+                                        isInternational: widget.isInternational,
+                                        model: model)));
+                          }
+                        }
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Center(
+                              child: AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize
+                                      .min, // Ensure it only takes the necessary space
+                                  children: <Widget>[
+                                    Text(
+                                      'Please fill all the details.',
+                                      textAlign: TextAlign
+                                          .center, // Center the text within the column
+                                    ),
+                                  ],
+                                ),
+                                actions: <Widget>[
+                                  Center(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop(); // Close the dialog
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
                           },
-                          child: Text('Save Draft')),
-                      TextButton(onPressed: () {}, child: Text('Cancel'))
-                    ])))
+                        );
+                      }
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Center(
+                            child: AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize
+                                    .min, // Ensure it only takes the necessary space
+                                children: <Widget>[
+                                  Text(
+                                    'Please fill all the details.',
+                                    textAlign: TextAlign
+                                        .center, // Center the text within the column
+                                  ),
+                                ],
+                              ),
+                              actions: <Widget>[
+                                Center(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pop(); // Close the dialog
+                                    },
+                                    child: Text('OK'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  },
+                  child: Container(
+                      width: 100,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color.fromARGB(255, 1, 75, 148)),
+                      child: Center(
+                        child: Text('Submit',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20)),
+                      ))),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => OneWay(
+                                isInternational: widget.isInternational)));
+                  },
+                  child: Container(
+                      width: 100,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color.fromARGB(255, 131, 14, 5)),
+                      child: Center(
+                        child: Text('Clear',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20)),
+                      )))
+            ])
           ]),
         ),
       ),

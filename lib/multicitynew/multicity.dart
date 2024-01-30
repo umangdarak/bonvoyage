@@ -1986,152 +1986,191 @@ class _MultiCityState extends State<MultiCity> {
                           );
                         }),
                   ),
-                  TextButton(
-                      onPressed: () async {
-                        print(_travelClassController[0]);
-                        if (formkey.currentState!.validate()) {
-                          List<Map<String, String>> d = [];
-                          for (int i = 0; i <= counter - 1; i++) {
-                            if (_travelClassController[i].text.isNotEmpty &&
-                                traveltimevalues[i].isNotEmpty &&
-                                _seatController[i].text.isNotEmpty &&
-                                _foodController[i].text.isNotEmpty &&
-                                _regionController[i].text.isNotEmpty) {
-                              bool isConditionMet = true;
-                              if (accom[i][0] || accom[i][1]) {
-                                if (accom[i][0]) {
-                                  isConditionMet = isConditionMet &&
-                                      _accomodationController[i]
-                                          .text
-                                          .isNotEmpty;
-                                }
+                  Row(mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                          onPressed: () async {
+                            print(_travelClassController[0]);
+                            if (formkey.currentState!.validate()) {
+                              List<Map<String, String>> d = [];
+                              for (int i = 0; i <= counter - 1; i++) {
+                                if (_travelClassController[i].text.isNotEmpty &&
+                                    traveltimevalues[i].isNotEmpty &&
+                                    _seatController[i].text.isNotEmpty &&
+                                    _foodController[i].text.isNotEmpty &&
+                                    _regionController[i].text.isNotEmpty) {
+                                  bool isConditionMet = true;
+                                  if (accom[i][0] || accom[i][1]) {
+                                    if (accom[i][0]) {
+                                      isConditionMet = isConditionMet &&
+                                          _accomodationController[i]
+                                              .text
+                                              .isNotEmpty;
+                                    }
 
-                                if (accom[i][1]) {
-                                  isConditionMet = isConditionMet &&
-                                      _occupancyController[i].text.isNotEmpty &&
-                                      _bagController[i].text.isNotEmpty;
-                                }
-                              }
-                              if (isConditionMet) {
-                                String c = traveltimevalues[i].join(',');
-                                Map<String, String> each = {
-                                  'travelmode': _traveltypeController[i].text,
-                                  'travelclass': _travelClassController[i].text,
-                                  'origin': _originController[i].text,
-                                  'destination': _destinationController[i].text,
-                                  'traveldate': _traveldateController[i].text,
-                                  'traveltime': c,
-                                  'eta': _etaController[i].text,
-                                  'food': _foodController[i].text,
-                                  'seat': _seatController[i].text,
-                                  'comments': _comments1Controller[i].text,
-                                  'accomodation':
-                                      _accomodationController[i].text,
-                                  'occupancy': _occupancyController[i].text,
-                                  'checkin': _checkinController[i].text,
-                                  'checkout': _checkoutController[i].text,
-                                  'bags': _bagController[i].text,
-                                  'weight': _totalweightController[i].text,
-                                  'remarks': _remarksController[i].text,
-                                };
-                                print(each);
-                                d.add(each);
-                              } else {
-                                print(_travelClassController[i].text +
-                                    "s " +
-                                    traveltimevalues[i].toString() +
-                                    "d " +
-                                    _seatController[i].text +
-                                    "e " +
-                                    _foodController[i].text +
-                                    "f " +
-                                    _regionController[i].text);
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Center(
-                                      child: AlertDialog(
-                                        content: Column(
-                                          mainAxisSize: MainAxisSize
-                                              .min, // Ensure it only takes the necessary space
-                                          children: <Widget>[
-                                            Text(
-                                              'Please fill all the details.',
-                                              textAlign: TextAlign
-                                                  .center, // Center the text within the column
+                                    if (accom[i][1]) {
+                                      isConditionMet = isConditionMet &&
+                                          _occupancyController[i].text.isNotEmpty &&
+                                          _bagController[i].text.isNotEmpty;
+                                    }
+                                  }
+                                  if (isConditionMet) {
+                                    String c = traveltimevalues[i].join(',');
+                                    Map<String, String> each = {
+                                      'travelmode': _traveltypeController[i].text,
+                                      'travelclass': _travelClassController[i].text,
+                                      'origin': _originController[i].text,
+                                      'destination': _destinationController[i].text,
+                                      'traveldate': _traveldateController[i].text,
+                                      'traveltime': c,
+                                      'eta': _etaController[i].text,
+                                      'food': _foodController[i].text,
+                                      'seat': _seatController[i].text,
+                                      'comments': _comments1Controller[i].text,
+                                      'accomodation':
+                                          _accomodationController[i].text,
+                                      'occupancy': _occupancyController[i].text,
+                                      'checkin': _checkinController[i].text,
+                                      'checkout': _checkoutController[i].text,
+                                      'bags': _bagController[i].text,
+                                      'weight': _totalweightController[i].text,
+                                      'remarks': _remarksController[i].text,
+                                    };
+                                    print(each);
+                                    d.add(each);
+                                  } else {
+                                    print(_travelClassController[i].text +
+                                        "s " +
+                                        traveltimevalues[i].toString() +
+                                        "d " +
+                                        _seatController[i].text +
+                                        "e " +
+                                        _foodController[i].text +
+                                        "f " +
+                                        _regionController[i].text);
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Center(
+                                          child: AlertDialog(
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize
+                                                  .min, // Ensure it only takes the necessary space
+                                              children: <Widget>[
+                                                Text(
+                                                  'Please fill all the details.',
+                                                  textAlign: TextAlign
+                                                      .center, // Center the text within the column
+                                                ),
+                                              ],
+                                            ),
+                                            actions: <Widget>[
+                                              Center(
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context)
+                                                        .pop(); // Close the dialog
+                                                  },
+                                                  child: Text('OK'),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }
+                                } else {
+                                  print("pp");
+                                  print(_travelClassController[i].text +
+                                      "s " +
+                                      traveltimevalues[i].toString() +
+                                      "d " +
+                                      _seatController[i].text +
+                                      "e " +
+                                      _foodController[i].text +
+                                      "f " +
+                                      _regionController[i].text);
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return Center(
+                                        child: AlertDialog(
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize
+                                                .min, // Ensure it only takes the necessary space
+                                            children: <Widget>[
+                                              Text(
+                                                'Please fill all the details.',
+                                                textAlign: TextAlign
+                                                    .center, // Center the text within the column
+                                              ),
+                                            ],
+                                          ),
+                                          actions: <Widget>[
+                                            Center(
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // Close the dialog
+                                                },
+                                                child: Text('OK'),
+                                              ),
                                             ),
                                           ],
                                         ),
-                                        actions: <Widget>[
-                                          Center(
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.of(context)
-                                                    .pop(); // Close the dialog
-                                              },
-                                              child: Text('OK'),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                );
-                              }
-                            } else {
-                              print("pp");
-                              print(_travelClassController[i].text +
-                                  "s " +
-                                  traveltimevalues[i].toString() +
-                                  "d " +
-                                  _seatController[i].text +
-                                  "e " +
-                                  _foodController[i].text +
-                                  "f " +
-                                  _regionController[i].text);
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return Center(
-                                    child: AlertDialog(
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize
-                                            .min, // Ensure it only takes the necessary space
-                                        children: <Widget>[
-                                          Text(
-                                            'Please fill all the details.',
-                                            textAlign: TextAlign
-                                                .center, // Center the text within the column
-                                          ),
-                                        ],
-                                      ),
-                                      actions: <Widget>[
-                                        Center(
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.of(context)
-                                                  .pop(); // Close the dialog
-                                            },
-                                            child: Text('OK'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      );
+                                    },
                                   );
-                                },
-                              );
+                                }
+                              }
+                              print(d);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => MultiCityNext(data: d)));
+                            } else {
+                              print("x");
                             }
-                          }
-                          print(d);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => MultiCityNext(data: d)));
-                        } else {
-                          print("x");
-                        }
-                      },
-                      child: Text('Save Draft'))
+                          },
+                          child: Container(
+                                            width: 100,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: Color.fromARGB(
+                                                    255, 1, 75, 148)),
+                                            child: Center(
+                                              child: Text('Submit',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20)),
+                                            ))),
+                                             TextButton(
+                                    onPressed: () async {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                 MultiCity()));
+                                    },
+                                    child: Container(
+                                        width: 100,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: const Color.fromARGB(
+                                                255, 131, 14, 5)),
+                                        child: Center(
+                                          child: Text('Clear',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20)),
+                                        ))),
+                    ],
+                  )
                 ]),
               ))),
       floatingActionButton: FloatingActionButton(

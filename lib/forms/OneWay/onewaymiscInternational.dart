@@ -349,6 +349,18 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.black),
+                                                          onChanged: (s) {
+                                                            setState(() {
+                                                              if (amount
+                                                                      .length ==
+                                                                  0) {
+                                                                amount.add(s);
+                                                              } else {
+                                                                amount[0] = s;
+                                                              }
+                                                              print(amount);
+                                                            });
+                                                          },
                                                           controller: amount1,
                                                           onEditingComplete:
                                                               () {
@@ -440,6 +452,17 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                                                 remarks[0] =
                                                                     remarks1
                                                                         .text;
+                                                              }
+                                                            });
+                                                          },
+                                                          onChanged: (s) {
+                                                            setState(() {
+                                                              if (remarks
+                                                                      .length ==
+                                                                  0) {
+                                                                remarks.add(s);
+                                                              } else {
+                                                                remarks[0] = s;
                                                               }
                                                             });
                                                           },
@@ -732,7 +755,21 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                                                     print(
                                                                         amount);
                                                                   });
-                                                                },
+                                                                }, onChanged:
+                                                                          (s) {
+                                                                        setState(
+                                                                            () {
+                                                                          if (amount.length ==
+                                                                              index) {
+                                                                            amount.add(s);
+                                                                          } else {
+                                                                            amount[index] =
+                                                                                s;
+                                                                          }
+                                                                          print(
+                                                                              amount);
+                                                                        });
+                                                                      }
                                                               ))
                                                         ]))),
                                             SizedBox(width: 5),
@@ -797,6 +834,19 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                                                     }
                                                                   });
                                                                 },
+                                                                  onChanged:
+                                                                          (s) {
+                                                                        setState(
+                                                                            () {
+                                                                          if (remarks.length ==
+                                                                              0) {
+                                                                            remarks.add(s);
+                                                                          } else {
+                                                                            remarks[0] =
+                                                                                s;
+                                                                          }
+                                                                        });
+                                                                      },
                                                                 onEditingComplete:
                                                                     () {
                                                                   setState(() {
@@ -967,9 +1017,12 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                   ),
                                 ),
                               ),
+                              SizedBox(height: 10),
                               _insurancerequiredController.text == 'Yes'
                                   ? Column(children: [
                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
                                             decoration: BoxDecoration(
@@ -1139,6 +1192,7 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                           ),
                                         ],
                                       ),
+                                      SizedBox(height: 10),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(right: 8.0),
@@ -1212,6 +1266,11 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                                 padding: const EdgeInsets.only(
                                                     right: 8.0),
                                                 child: Container(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          2 -
+                                                      20,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -1269,7 +1328,12 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                                                 Colors.black54),
                                                       ),
                                                       Container(
-                                                          width: 150,
+                                                          width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  2 -
+                                                              20,
                                                           child: TextFormField(
                                                               style: TextStyle(
                                                                   color: Colors
@@ -1336,7 +1400,7 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                   : Container()
                             ],
                           ),
-                          Divider(),
+                          SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Container(
@@ -1391,6 +1455,7 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                               ),
                             ),
                           ),
+                          SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Container(
@@ -1471,34 +1536,6 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                             ),
                           ),
                         ])),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 40,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(children: [
-                              Icon(FontAwesomeIcons.personWalkingLuggage,
-                                  size: 25,
-                                  color: Color.fromARGB(255, 1, 75, 148)),
-                              SizedBox(width: 5),
-                              Text('Traveller Details',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      color: Color.fromARGB(255, 1, 75, 148)))
-                            ]),
-                            Icon(Icons.arrow_drop_up,
-                                size: 25,
-                                color: Color.fromARGB(255, 1, 75, 148))
-                          ],
-                        ),
-                      ),
-                    ),
                     SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -2224,7 +2261,11 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                           currencymode.isNotEmpty &&
                                           currency.isNotEmpty &&
                                           amount.isNotEmpty &&
-                                          remarks.isNotEmpty  && _travellergenderController.text.isNotEmpty&&_debitexpensesController.text.isNotEmpty) {
+                                          remarks.isNotEmpty &&
+                                          _travellergenderController
+                                              .text.isNotEmpty &&
+                                          _debitexpensesController
+                                              .text.isNotEmpty) {
                                         String connection =
                                             generateRandomString();
                                         setState(() {
@@ -2249,7 +2290,7 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                               _insurancevaliddateController
                                                   .text;
                                         });
-                                     var e=  await DataBaseHelper
+                                        var e = await DataBaseHelper
                                             .insertItemOneWayDom(model.toMap(),
                                                 "onewayinternational");
                                         var c =
@@ -2302,7 +2343,11 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                         var f =
                                             await DataBaseHelper.readOneWayDom(
                                                 "travellerdetails");
-                       Navigator.push(context,MaterialPageRoute(builder: (_)=>OneWayApproval(id:e,international:1)));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => OneWayApproval(
+                                                    id: e, international: 1)));
 
                                         print(f);
                                       } else {
@@ -2339,25 +2384,46 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                         );
                                       }
                                     },
-                                    child: Text("Save Data")),
+                                    child: Container(
+                                        width: 100,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: Color.fromARGB(
+                                                255, 1, 75, 148)),
+                                        child: Center(
+                                          child: Text('Submit',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20)),
+                                        ))),
                                 SizedBox(height: 10),
                                 TextButton(
                                     onPressed: () async {
-                                      await DataBaseHelper
-                                          .deletewholetableonewaydom(
-                                              "onewayinternational");
-                                      await DataBaseHelper
-                                          .deletewholetableonewaydom(
-                                              "travellerdetails");
-                                      await DataBaseHelper
-                                          .deletewholetableonewaydom(
-                                              "internationalcurrency");
-                                      var c =
-                                          await DataBaseHelper.readOneWayDom(
-                                              "onewaydomestic");
-                                      print(c);
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  OneWayMiscInternational(
+                                                      model: widget.model,
+                                                      isInternational: widget
+                                                          .isInternational)));
                                     },
-                                    child: Text("Delete data")),
+                                    child: Container(
+                                        width: 100,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: const Color.fromARGB(
+                                                255, 131, 14, 5)),
+                                        child: Center(
+                                          child: Text('Clear',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20)),
+                                        ))),
                               ])),
                     )
                   ]),

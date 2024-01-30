@@ -359,6 +359,18 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                               print(amount);
                                                             });
                                                           },
+                                                          onChanged: (s) {
+                                                            setState(() {
+                                                              if (amount
+                                                                      .length ==
+                                                                  0) {
+                                                                amount.add(s);
+                                                              } else {
+                                                                amount[0] = s;
+                                                              }
+                                                              print(amount);
+                                                            });
+                                                          },
                                                           onFieldSubmitted:
                                                               (s) {
                                                             setState(() {
@@ -404,54 +416,65 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                               Colors.black54),
                                                     ),
                                                     Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    8.0),
+                                                        padding: const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 8.0),
                                                         child: TextFormField(
-                                                          validator:
-                                                              _validateRequired,
-                                                          autovalidateMode:
-                                                              AutovalidateMode
-                                                                  .onUserInteraction,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.black),
-                                                          controller: remarks1,
-                                                          onEditingComplete:
-                                                              () {
-                                                            setState(() {
-                                                              if (remarks
-                                                                      .length ==
-                                                                  0) {
-                                                                remarks.add(
-                                                                    remarks1
-                                                                        .text);
-                                                              } else {
-                                                                remarks[0] =
-                                                                    remarks1
-                                                                        .text;
-                                                              }
-                                                            });
-                                                          },
-                                                          onFieldSubmitted:
-                                                              (s) {
-                                                            setState(() {
-                                                              if (remarks
-                                                                      .length ==
-                                                                  0) {
-                                                                remarks.add(
-                                                                    remarks1
-                                                                        .text);
-                                                              } else {
-                                                                remarks[0] =
-                                                                    remarks1
-                                                                        .text;
-                                                              }
-                                                            });
-                                                          },
-                                                        ))
+                                                            validator:
+                                                                _validateRequired,
+                                                            autovalidateMode:
+                                                                AutovalidateMode
+                                                                    .onUserInteraction,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                            controller:
+                                                                remarks1,
+                                                            onEditingComplete:
+                                                                () {
+                                                              setState(() {
+                                                                if (remarks
+                                                                        .length ==
+                                                                    0) {
+                                                                  remarks.add(
+                                                                      remarks1
+                                                                          .text);
+                                                                } else {
+                                                                  remarks[0] =
+                                                                      remarks1
+                                                                          .text;
+                                                                }
+                                                              });
+                                                            },
+                                                            onFieldSubmitted:
+                                                                (s) {
+                                                              setState(() {
+                                                                if (remarks
+                                                                        .length ==
+                                                                    0) {
+                                                                  remarks.add(
+                                                                      remarks1
+                                                                          .text);
+                                                                } else {
+                                                                  remarks[0] =
+                                                                      remarks1
+                                                                          .text;
+                                                                }
+                                                              });
+                                                            },
+                                                            onChanged: (s) {
+                                                              setState(() {
+                                                                if (remarks
+                                                                        .length ==
+                                                                    0) {
+                                                                  remarks
+                                                                      .add(s);
+                                                                } else {
+                                                                  remarks[0] =
+                                                                      s;
+                                                                }
+                                                              });
+                                                            }))
                                                   ]))),
                                     ]),
                                     SizedBox(height: 10),
@@ -707,6 +730,21 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                                         amount);
                                                                   });
                                                                 },
+                                                                onChanged: (s) {
+                                                                  setState(() {
+                                                                    if (amount
+                                                                            .length ==
+                                                                        index) {
+                                                                      amount.add(
+                                                                          s);
+                                                                    } else {
+                                                                      amount[index] =
+                                                                          s;
+                                                                    }
+                                                                    print(
+                                                                        amount);
+                                                                  });
+                                                                },
                                                                 onEditingComplete:
                                                                     () {
                                                                   setState(() {
@@ -764,48 +802,55 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                                           8.0),
                                                               child:
                                                                   TextFormField(
-                                                                validator:
-                                                                    _validateRequired,
-                                                                autovalidateMode:
-                                                                    AutovalidateMode
-                                                                        .onUserInteraction,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
-                                                                controller:
-                                                                    remarks1,
-                                                                onFieldSubmitted:
-                                                                    (s) {
-                                                                  setState(() {
-                                                                    if (remarks
-                                                                            .length ==
-                                                                        index) {
-                                                                      remarks
-                                                                          .add(
-                                                                              s);
-                                                                    } else {
-                                                                      remarks[
-                                                                          index] = s;
-                                                                    }
-                                                                  });
-                                                                },
-                                                                onEditingComplete:
-                                                                    () {
-                                                                  setState(() {
-                                                                    if (remarks
-                                                                            .length ==
-                                                                        index) {
-                                                                      remarks.add(
-                                                                          remarks1
-                                                                              .text);
-                                                                    } else {
-                                                                      remarks[index] =
-                                                                          remarks1
-                                                                              .text;
-                                                                    }
-                                                                  });
-                                                                },
-                                                              ))
+                                                                      validator:
+                                                                          _validateRequired,
+                                                                      autovalidateMode:
+                                                                          AutovalidateMode
+                                                                              .onUserInteraction,
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black),
+                                                                      controller:
+                                                                          remarks1,
+                                                                      onFieldSubmitted:
+                                                                          (s) {
+                                                                        setState(
+                                                                            () {
+                                                                          if (remarks.length ==
+                                                                              index) {
+                                                                            remarks.add(s);
+                                                                          } else {
+                                                                            remarks[index] =
+                                                                                s;
+                                                                          }
+                                                                        });
+                                                                      },
+                                                                      onEditingComplete:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          if (remarks.length ==
+                                                                              index) {
+                                                                            remarks.add(remarks1.text);
+                                                                          } else {
+                                                                            remarks[index] =
+                                                                                remarks1.text;
+                                                                          }
+                                                                        });
+                                                                      },
+                                                                      onChanged:
+                                                                          (s) {
+                                                                        setState(
+                                                                            () {
+                                                                          if (remarks.length ==
+                                                                              index) {
+                                                                            remarks.add(s);
+                                                                          } else {
+                                                                            remarks[index] =
+                                                                                s;
+                                                                          }
+                                                                        });
+                                                                      }))
                                                         ]))),
                                           ]),
                                           SizedBox(height: 10),
@@ -2182,150 +2227,202 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                   controller:
                                                       _commentsController)
                                             ]))),
-                                TextButton(
-                                    onPressed: () async {
-                                      if (formkey.currentState!.validate() &&
-                                          currencymode.isNotEmpty &&
-                                          currency.isNotEmpty &&
-                                          amount.isNotEmpty &&
-                                          remarks.isNotEmpty &&
-                                          _travellergenderController
-                                              .text.isNotEmpty &&
-                                          _debitexpensesController
-                                              .text.isNotEmpty) {
-                                        String connection =
-                                            generateRandomString();
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TextButton(
+                                        onPressed: () async {
+                                          if (formkey.currentState!
+                                                  .validate() &&
+                                              currencymode.isNotEmpty &&
+                                              currency.isNotEmpty &&
+                                              amount.isNotEmpty &&
+                                              remarks.isNotEmpty &&
+                                              _travellergenderController
+                                                  .text.isNotEmpty &&
+                                              _debitexpensesController
+                                                  .text.isNotEmpty) {
+                                            String connection =
+                                                generateRandomString();
 
-                                        var p = await DataBaseHelper
-                                            .insertItemOneWayDom({
-                                          'sameuser': connection,
-                                          'visa': _visaController.text,
-                                          "connectiontocurrencytable":
-                                              connection,
-                                          'cab': _cabController.text,
-                                          'purpose': _purposeController.text,
-                                          'insurancerequired':
-                                              _insurancerequiredController.text,
-                                          'insurancefromdate':
-                                              _insurancefromdateController.text,
-                                          'insurancetodate':
-                                              _insurancetodateController.text,
-                                          'insuranceavailability':
-                                              _insuranceavailableController
+                                            var p = await DataBaseHelper
+                                                .insertItemOneWayDom({
+                                              'sameuser': connection,
+                                              'visa': _visaController.text,
+                                              "connectiontocurrencytable":
+                                                  connection,
+                                              'cab': _cabController.text,
+                                              'purpose':
+                                                  _purposeController.text,
+                                              'insurancerequired':
+                                                  _insurancerequiredController
+                                                      .text,
+                                              'insurancefromdate':
+                                                  _insurancefromdateController
+                                                      .text,
+                                              'insurancetodate':
+                                                  _insurancetodateController
+                                                      .text,
+                                              'insuranceavailability':
+                                                  _insuranceavailableController
+                                                      .text,
+                                              'insurancename':
+                                                  _insurancenameController.text,
+                                              'insurancevaliddate':
+                                                  _insurancevaliddateController
+                                                      .text,
+                                              'connectiontotravellertable':
+                                                  connection,
+                                            }, 'multicity');
+                                            for (int i = 0;
+                                                i < currencymode.length;
+                                                i++) {
+                                              await DataBaseHelper
+                                                  .insertItemOneWayDom({
+                                                "connectiontocurrencytable":
+                                                    connection,
+                                                "currencymode": currencymode[i],
+                                                "currency": currency[i],
+                                                "amount": amount[i],
+                                                "remarks": remarks[i],
+                                              }, "internationalcurrency");
+                                            }
+                                            print(widget.data);
+                                            for (int i = 0;
+                                                i < widget.data.length;
+                                                i++) {
+                                              await DataBaseHelper
+                                                  .insertItemOneWayDom({
+                                                ...widget.data[i],
+                                                'connection': connection
+                                              }, 'multicityeach');
+                                            }
+                                            var d = await DataBaseHelper
+                                                .readOneWayDom(
+                                                    "internationalcurrency");
+
+                                            print(d);
+
+                                            await DataBaseHelper
+                                                .insertItemOneWayDom({
+                                              'connection': connection,
+                                              'approver':
+                                                  _approverController.text,
+                                              'travellername':
+                                                  _travellernameController.text,
+                                              'travellergender':
+                                                  _travellergenderController
+                                                      .text,
+                                              'travellerlevel':
+                                                  _levelController.text,
+                                              'department':
+                                                  _departmentController.text,
+                                              'email': _travelleremailController
                                                   .text,
-                                          'insurancename':
-                                              _insurancenameController.text,
-                                          'insurancevaliddate':
-                                              _insurancevaliddateController
-                                                  .text,
-                                          'connectiontotravellertable':
-                                              connection,
-                                        }, 'multicity');
-                                        for (int i = 0;
-                                            i < currencymode.length;
-                                            i++) {
-                                          await DataBaseHelper
-                                              .insertItemOneWayDom({
-                                            "connectiontocurrencytable":
-                                                connection,
-                                            "currencymode": currencymode[i],
-                                            "currency": currency[i],
-                                            "amount": amount[i],
-                                            "remarks": remarks[i],
-                                          }, "internationalcurrency");
-                                        }
-                                        print(widget.data);
-                                        for (int i = 0;
-                                            i < widget.data.length;
-                                            i++) {
-                                          await DataBaseHelper
-                                              .insertItemOneWayDom({
-                                            ...widget.data[i],
-                                            'connection': connection
-                                          }, 'multicityeach');
-                                        }
-                                        var d =
-                                            await DataBaseHelper.readOneWayDom(
-                                                "internationalcurrency");
+                                              'mobileno':
+                                                  _travellermobilenoContorller
+                                                      .text,
+                                              'debitexpenses':
+                                                  _debitexpensesController.text,
+                                              'costorproject':
+                                                  _costorprojectController.text,
+                                              'requester':
+                                                  _requesternameController.text,
+                                              'comments':
+                                                  _commentsController.text
+                                            }, "travellerdetails");
+                                            var f = await DataBaseHelper
+                                                .readOneWayDom(
+                                                    "travellerdetails");
+                                            print(f);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        MultiCityApprovalPage(
+                                                            id: p)));
+                                          } else {
+                                            print(currencymode);
+                                            print(currency);
+                                            print(amount);
+                                            print(remarks);
+                                            print(_travellergenderController
+                                                .text);
+                                            print(
+                                                _debitexpensesController.text);
 
-                                        print(d);
-
-                                        await DataBaseHelper
-                                            .insertItemOneWayDom({
-                                          'connection': connection,
-                                          'approver': _approverController.text,
-                                          'travellername':
-                                              _travellernameController.text,
-                                          'travellergender':
-                                              _travellergenderController.text,
-                                          'travellerlevel':
-                                              _levelController.text,
-                                          'department':
-                                              _departmentController.text,
-                                          'email':
-                                              _travelleremailController.text,
-                                          'mobileno':
-                                              _travellermobilenoContorller.text,
-                                          'debitexpenses':
-                                              _debitexpensesController.text,
-                                          'costorproject':
-                                              _costorprojectController.text,
-                                          'requester':
-                                              _requesternameController.text,
-                                          'comments': _commentsController.text
-                                        }, "travellerdetails");
-                                        var f =
-                                            await DataBaseHelper.readOneWayDom(
-                                                "travellerdetails");
-                                        print(f);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    MultiCityApprovalPage(
-                                                        id: p)));
-                                      } else {
-                                        print(currencymode);
-                                        print(currency);
-                                        print(amount);
-                                        print(remarks);
-                                        print(_travellergenderController.text);
-                                        print(_debitexpensesController.text);
-
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return Center(
-                                              child: AlertDialog(
-                                                content: Column(
-                                                  mainAxisSize: MainAxisSize
-                                                      .min, // Ensure it only takes the necessary space
-                                                  children: <Widget>[
-                                                    Text(
-                                                      'Please fill all the details.',
-                                                      textAlign: TextAlign
-                                                          .center, // Center the text within the column
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return Center(
+                                                  child: AlertDialog(
+                                                    content: Column(
+                                                      mainAxisSize: MainAxisSize
+                                                          .min, // Ensure it only takes the necessary space
+                                                      children: <Widget>[
+                                                        Text(
+                                                          'Please fill all the details.',
+                                                          textAlign: TextAlign
+                                                              .center, // Center the text within the column
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                actions: <Widget>[
-                                                  Center(
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop(); // Close the dialog
-                                                      },
-                                                      child: Text('OK'),
-                                                    ),
+                                                    actions: <Widget>[
+                                                      Center(
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
+                                                          },
+                                                          child: Text('OK'),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
+                                                );
+                                              },
                                             );
-                                          },
-                                        );
-                                      }
-                                    },
-                                    child: Text("Save Data")),
+                                          }
+                                        },
+                                        child: Container(
+                                            width: 100,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: Color.fromARGB(
+                                                    255, 1, 75, 148)),
+                                            child: Center(
+                                              child: Text('Submit',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20)),
+                                            ))),
+                                    TextButton(
+                                        onPressed: () async {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) => MultiCityNext(
+                                                      data: widget.data)));
+                                        },
+                                        child: Container(
+                                            width: 100,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: const Color.fromARGB(
+                                                    255, 131, 14, 5)),
+                                            child: Center(
+                                              child: Text('Clear',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20)),
+                                            ))),
+                                  ],
+                                ),
                                 SizedBox(height: 10),
                               ])),
                     )

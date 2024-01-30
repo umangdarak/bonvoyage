@@ -1,4 +1,5 @@
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
+import 'package:bonvoyage/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -308,6 +309,18 @@ class _AccomTravelAdvanceState extends State<AccomTravelAdvance> {
                                                                 color: Colors
                                                                     .black),
                                                             controller: amount1,
+                                                            onChanged: (s) {
+                                                              setState(() {
+                                                                if (amount
+                                                                        .length ==
+                                                                    0) {
+                                                                  amount.add(s);
+                                                                } else {
+                                                                  amount[0] = s;
+                                                                }
+                                                                print(amount);
+                                                              });
+                                                            },
                                                             onEditingComplete:
                                                                 () {
                                                               setState(() {
@@ -400,6 +413,19 @@ class _AccomTravelAdvanceState extends State<AccomTravelAdvance> {
                                                                     .black),
                                                             controller:
                                                                 remarks1,
+                                                            onChanged: (s) {
+                                                              setState(() {
+                                                                if (remarks
+                                                                        .length ==
+                                                                    0) {
+                                                                  remarks
+                                                                      .add(s);
+                                                                } else {
+                                                                  remarks[0] =
+                                                                      s;
+                                                                }
+                                                              });
+                                                            },
                                                             onEditingComplete:
                                                                 () {
                                                               setState(() {
@@ -1431,67 +1457,109 @@ class _AccomTravelAdvanceState extends State<AccomTravelAdvance> {
                                                       ])))
                                         ])))
                           ])),
-                      TextButton(
-                          onPressed: () async {
-                            if (formkey.currentState!.validate() &&
-                                currencymode.isNotEmpty &&
-                                currency.isNotEmpty &&
-                                amount.isNotEmpty &&
-                                remarks.isNotEmpty) {
-                              var d = await DataBaseHelper.insertItemOneWayDom({
-                                ...widget.data,
-                                'currencymode': currencymode.join(','),
-                                'currency': currency.join(','),
-                                'amount': amount.join(','),
-                                'remarks': remarks.join(','),
-                                'approver': _approverController.text,
-                                'travellername': _travellernameController.text,
-                                'travellergender':
-                                    _travellergenderController.text,
-                                'travellerlevel': _levelController.text,
-                                'department': _departmentController.text,
-                                'email': _travelleremailController.text,
-                                'mobileno': _travellermobilenoContorller.text,
-                                'debitexpenses': _debitexpensesController.text,
-                                'costorproject': _costorprojectController.text,
-                                'requester': _requesternameController.text,
-                                'comments': _commentsController.text
-                              }, 'accomodation');
-                            } else {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return Center(
-                                    child: AlertDialog(
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize
-                                            .min, // Ensure it only takes the necessary space
-                                        children: <Widget>[
-                                          Text(
-                                            'Please fill all the details.',
-                                            textAlign: TextAlign
-                                                .center, // Center the text within the column
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                              onPressed: () async {
+                                if (formkey.currentState!.validate() &&
+                                    currencymode.isNotEmpty &&
+                                    currency.isNotEmpty &&
+                                    amount.isNotEmpty &&
+                                    remarks.isNotEmpty) {
+                                  var d =
+                                      await DataBaseHelper.insertItemOneWayDom({
+                                    ...widget.data,
+                                    'currencymode': currencymode.join(','),
+                                    'currency': currency.join(','),
+                                    'amount': amount.join(','),
+                                    'remarks': remarks.join(','),
+                                    'approver': _approverController.text,
+                                    'travellername':
+                                        _travellernameController.text,
+                                    'travellergender':
+                                        _travellergenderController.text,
+                                    'travellerlevel': _levelController.text,
+                                    'department': _departmentController.text,
+                                    'email': _travelleremailController.text,
+                                    'mobileno':
+                                        _travellermobilenoContorller.text,
+                                    'debitexpenses':
+                                        _debitexpensesController.text,
+                                    'costorproject':
+                                        _costorprojectController.text,
+                                    'requester': _requesternameController.text,
+                                    'comments': _commentsController.text
+                                  }, 'accomodation');
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>DashBoard()));
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return Center(
+                                        child: AlertDialog(
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize
+                                                .min, // Ensure it only takes the necessary space
+                                            children: <Widget>[
+                                              Text(
+                                                'Please fill all the details.',
+                                                textAlign: TextAlign
+                                                    .center, // Center the text within the column
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                      actions: <Widget>[
-                                        Center(
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.of(context)
-                                                  .pop(); // Close the dialog
-                                            },
-                                            child: Text('OK'),
-                                          ),
+                                          actions: <Widget>[
+                                            Center(
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // Close the dialog
+                                                },
+                                                child: Text('OK'),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      );
+                                    },
                                   );
-                                },
-                              );
-                            }
-                          },
-                          child: Text('Save Data'))
+                                }
+                              },
+                              child: Container(
+                                  width: 100,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Color.fromARGB(255, 1, 75, 148)),
+                                  child: Center(
+                                    child: Text('Submit',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20)),
+                                  ))),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => AccomTravelAdvance(
+                                              data: widget.data,
+                                            )));
+                              },
+                              child: Container(
+                                  width: 100,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: const Color.fromARGB(
+                                          255, 131, 14, 5)),
+                                  child: Center(
+                                    child: Text('Clear',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20)),
+                                  )))
+                        ],
+                      )
                     ])))));
   }
 }

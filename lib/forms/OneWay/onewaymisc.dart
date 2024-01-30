@@ -1032,115 +1032,162 @@ class _OneWayMiscState extends State<OneWayMisc> {
                                                   controller:
                                                       _commentsController)
                                             ]))),
-                                TextButton(
-                                    onPressed: () async {
-                                      if (formkey.currentState!.validate() &&
-                                          _cabController.text.isNotEmpty &&
-                                          _travellergenderController
-                                              .text.isNotEmpty &&
-                                          _debitexpensesController
-                                              .text.isNotEmpty) {
-                                        String connection =
-                                            generateRandomString();
-                                        setState(() {
-                                          model.currencymode =
-                                              _modeController.text;
-                                          model.currency =
-                                              _currencyController.text;
-                                          model.amount = _amountController.text;
-                                          model.cab = _cabController.text;
-                                          model.purpose =
-                                              _purposeController.text;
-                                          model.connectiontotravellertable =
-                                              connection;
-                                        });
-                                        var d = await DataBaseHelper
-                                            .insertItemOneWayDom(model.toMap(),
-                                                "onewaydomestic");
-                                        var c =
-                                            await DataBaseHelper.readOneWayDom(
-                                                "onewaydomestic");
-                                        print(c);
-                                        await DataBaseHelper
-                                            .insertItemOneWayDom({
-                                          'connection': connection,
-                                          'approver': _approverController.text,
-                                          'travellername':
-                                              _travellernameController.text,
-                                          'travellergender':
-                                              _travellergenderController.text,
-                                          'travellerlevel':
-                                              _levelController.text,
-                                          'department':
-                                              _departmentController.text,
-                                          'email':
-                                              _travelleremailController.text,
-                                          'mobileno':
-                                              _travellermobilenoContorller.text,
-                                          'debitexpenses':
-                                              _debitexpensesController.text,
-                                          'costorproject':
-                                              _costorprojectController.text,
-                                          'requester':
-                                              _requesternameController.text,
-                                          'comments': _commentsController.text
-                                        }, "travellerdetails");
-                                        var e =
-                                            await DataBaseHelper.readOneWayDom(
-                                                "travellerdetails");
-                                        print(e);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) => OneWayApproval(
-                                                    id: d, international: 0)));
-                                      } else {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return Center(
-                                              child: AlertDialog(
-                                                content: Column(
-                                                  mainAxisSize: MainAxisSize
-                                                      .min, // Ensure it only takes the necessary space
-                                                  children: <Widget>[
-                                                    Text(
-                                                      'Please fill all the details.',
-                                                      textAlign: TextAlign
-                                                          .center, // Center the text within the column
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () async {
+                                            if (formkey.currentState!
+                                                    .validate() &&
+                                                _cabController
+                                                    .text.isNotEmpty &&
+                                                _travellergenderController
+                                                    .text.isNotEmpty &&
+                                                _debitexpensesController
+                                                    .text.isNotEmpty) {
+                                              String connection =
+                                                  generateRandomString();
+                                              setState(() {
+                                                model.currencymode =
+                                                    _modeController.text;
+                                                model.currency =
+                                                    _currencyController.text;
+                                                model.amount =
+                                                    _amountController.text;
+                                                model.cab = _cabController.text;
+                                                model.purpose =
+                                                    _purposeController.text;
+                                                model.connectiontotravellertable =
+                                                    connection;
+                                              });
+                                              var d = await DataBaseHelper
+                                                  .insertItemOneWayDom(
+                                                      model.toMap(),
+                                                      "onewaydomestic");
+                                              var c = await DataBaseHelper
+                                                  .readOneWayDom(
+                                                      "onewaydomestic");
+                                              print(c);
+                                              await DataBaseHelper
+                                                  .insertItemOneWayDom({
+                                                'connection': connection,
+                                                'approver':
+                                                    _approverController.text,
+                                                'travellername':
+                                                    _travellernameController
+                                                        .text,
+                                                'travellergender':
+                                                    _travellergenderController
+                                                        .text,
+                                                'travellerlevel':
+                                                    _levelController.text,
+                                                'department':
+                                                    _departmentController.text,
+                                                'email':
+                                                    _travelleremailController
+                                                        .text,
+                                                'mobileno':
+                                                    _travellermobilenoContorller
+                                                        .text,
+                                                'debitexpenses':
+                                                    _debitexpensesController
+                                                        .text,
+                                                'costorproject':
+                                                    _costorprojectController
+                                                        .text,
+                                                'requester':
+                                                    _requesternameController
+                                                        .text,
+                                                'comments':
+                                                    _commentsController.text
+                                              }, "travellerdetails");
+                                              var e = await DataBaseHelper
+                                                  .readOneWayDom(
+                                                      "travellerdetails");
+                                              print(e);
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          OneWayApproval(
+                                                              id: d,
+                                                              international:
+                                                                  0)));
+                                            } else {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return Center(
+                                                    child: AlertDialog(
+                                                      content: Column(
+                                                        mainAxisSize: MainAxisSize
+                                                            .min, // Ensure it only takes the necessary space
+                                                        children: <Widget>[
+                                                          Text(
+                                                            'Please fill all the details.',
+                                                            textAlign: TextAlign
+                                                                .center, // Center the text within the column
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      actions: <Widget>[
+                                                        Center(
+                                                          child: ElevatedButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(); // Close the dialog
+                                                            },
+                                                            child: Text('OK'),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                actions: <Widget>[
-                                                  Center(
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop(); // Close the dialog
-                                                      },
-                                                      child: Text('OK'),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
+                                                  );
+                                                },
+                                              );
+                                            }
                                           },
-                                        );
-                                      }
-                                    },
-                                    child: Text("Save Data")),
-                                SizedBox(height: 10),
-                                TextButton(
-                                    onPressed: () async {
-                                      await DataBaseHelper
-                                          .deletewholetableonewaydom(
-                                              "onewaydomestic");
-                                      var c =
-                                          await DataBaseHelper.readOneWayDom(
-                                              "onewaydomestic");
-                                      print(c);
-                                    },
-                                    child: Text("Delete data")),
+                                          child: Container(
+                                              width: 100,
+                                              height: 40,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color: Color.fromARGB(
+                                                      255, 1, 75, 148)),
+                                              child: Center(
+                                                child: Text('Submit',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20)),
+                                              ))),
+                                      SizedBox(height: 10),
+                                      TextButton(
+                                          onPressed: () async {
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) => OneWayMisc(
+                                                        model: widget.model,
+                                                        isInternational: widget
+                                                            .isInternational)));
+                                          },
+                                          child: Container(
+                                              width: 100,
+                                              height: 40,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color: const Color.fromARGB(
+                                                      255, 131, 14, 5)),
+                                              child: Center(
+                                                child: Text('Clear',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20)),
+                                              ))),
+                                    ])
                               ]),
                         )),
                   ]),

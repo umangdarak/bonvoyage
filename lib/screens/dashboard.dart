@@ -6,6 +6,7 @@ import 'package:bonvoyage/forms/roundtrip/roundtrip.dart';
 import 'package:bonvoyage/multicitynew/multicity.dart';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../forms/carbooking.dart';
 
@@ -34,6 +35,7 @@ class _DashBoardState extends State<DashBoard> {
   List<bool> traveltype = [false, false];
   List<bool> triptype = [false, false, false];
   String s = '';
+  List<bool> busdestination = [true, false];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -431,8 +433,158 @@ class _DashBoardState extends State<DashBoard> {
             ListTile(
               title: Text('Bus Booking'),
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => BusForm()));
+                closeDrawer();
+                showDialog(
+                    context: context,
+                    builder: (ctx) {
+                      return StatefulBuilder(builder: (ctx, setState) {
+                        return AlertDialog(
+                          title: Text('Company Bus -8 PM'),
+                          actions: [
+                            Column(
+                              children: [
+                                Text(
+                                  'Bus going from Shameerpet to',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue[800]),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => {
+                                        setState(() {
+                                          busdestination[0] =
+                                              !busdestination[0];
+                                          busdestination[1] = false;
+                                        })
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: busdestination[0]
+                                              ? const Color.fromARGB(
+                                                  255, 1, 75, 148)
+                                              : Colors.transparent,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: Text('Azamabad',
+                                              style: TextStyle(
+                                                  color: busdestination[0]
+                                                      ? Colors.white
+                                                      : Colors.black)),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 30),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          busdestination[1] =
+                                              !busdestination[1];
+                                          busdestination[0] = false;
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: busdestination[1]
+                                              ? const Color.fromARGB(
+                                                  255, 1, 75, 148)
+                                              : Colors.transparent,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: Text('Lingampalli',
+                                              style: TextStyle(
+                                                  color: busdestination[1]
+                                                      ? Colors.white
+                                                      : Colors.black)),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 30),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                        decoration: BoxDecoration(
+                                            border:
+                                                Border.all(color: Colors.green),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 5.0),
+                                          child: TextButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                if (busdestination[0] == true) {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) => BusForm(
+                                                              destination:
+                                                                  "Azamabad")));
+                                                } else {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) => BusForm(
+                                                              destination:
+                                                                  "Lingampalli")));
+                                                }
+                                              });
+                                            },
+                                            child: Text('OK',
+                                                style: TextStyle(
+                                                    color: Colors.green)),
+                                          ),
+                                        )),
+                                    Container(
+                                        decoration: BoxDecoration(
+                                            border:
+                                                Border.all(color: Colors.red),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 5.0),
+                                          child: TextButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                Navigator.pop(context);
+                                              });
+                                            },
+                                            child: Text('Cancel',
+                                                style: TextStyle(
+                                                    color: Colors.red)),
+                                          ),
+                                        )),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        );
+                      });
+                    });
               },
             ),
             ListTile(
@@ -467,13 +619,13 @@ class _DashBoardState extends State<DashBoard> {
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 8),
                       child: Container(
-                        height: 300,
+                        height: 250,
                         child: Stack(
                           children: [
                             Card(
                               elevation: 5,
                               child: Container(
-                                height: 200,
+                                height: 150,
                                 decoration: BoxDecoration(
                                     color: Color.fromARGB(255, 1, 75, 148),
                                     borderRadius: BorderRadius.circular(5)),
@@ -484,17 +636,15 @@ class _DashBoardState extends State<DashBoard> {
                                         child: Image.asset(
                                             'assets/images/vv.png')),
                                     Positioned(
-                                        left: 4,
                                         child: IconButton(
-                                          onPressed: () {
-                                            openDrawer();
-                                          },
-                                          icon: Icon(Icons.more_horiz_sharp,
-                                              size: 34),
-                                        )),
+                                      onPressed: () {
+                                        openDrawer();
+                                      },
+                                      icon: Icon(Icons.menu, size: 34),
+                                    )),
                                     Positioned(
                                       left: 50,
-                                      top: 5,
+                                      top: 10,
                                       child: Text(
                                         'Bon',
                                         style: TextStyle(
@@ -506,7 +656,7 @@ class _DashBoardState extends State<DashBoard> {
                                     ),
                                     Positioned(
                                       left: 95,
-                                      top: 5,
+                                      top: 10,
                                       child: Text(
                                         'Voyage',
                                         style: TextStyle(
@@ -517,13 +667,13 @@ class _DashBoardState extends State<DashBoard> {
                                     ),
                                     Positioned(
                                       top: 70,
+                                      left: 5,
                                       child: Column(
                                         children: [
                                           SizedBox(
-                                            width: 120,
+                                            width: 200,
                                             child: Text(
                                                 'Good $s ${authProvider.username}',
-                                                textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                       255,
@@ -532,13 +682,13 @@ class _DashBoardState extends State<DashBoard> {
                                                       0,
                                                     ),
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 17)),
+                                                    fontSize: 14)),
                                           ),
                                           const SizedBox(
-                                            width: 120,
+                                            width: 200,
                                             child: Text('Welcome to BonVoyage',
-                                                textAlign: TextAlign.center,
                                                 style: TextStyle(
+                                                    fontSize: 14,
                                                     color: Colors.white)),
                                           ),
                                         ],
@@ -549,7 +699,7 @@ class _DashBoardState extends State<DashBoard> {
                               ),
                             ),
                             Positioned(
-                                bottom: 25,
+                                bottom: 30,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 10, right: 10),
@@ -575,7 +725,7 @@ class _DashBoardState extends State<DashBoard> {
                                             child: Stack(children: [
                                               Center(
                                                 child: CircleAvatar(
-                                                    radius: 35,
+                                                    radius: 36,
                                                     backgroundColor:
                                                         const Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -1023,13 +1173,13 @@ class _DashBoardState extends State<DashBoard> {
                                             child: Stack(children: [
                                               Center(
                                                 child: CircleAvatar(
-                                                    radius: 35,
+                                                    radius: 36,
                                                     backgroundColor:
                                                         const Color.fromARGB(
                                                             255, 1, 75, 148),
                                                     child: Image.asset(
                                                         'assets/images/earth.png',
-                                                        fit: BoxFit.contain)),
+                                                        fit: BoxFit.scaleDown)),
                                               ),
                                               Positioned(
                                                   bottom: 10,
@@ -1037,31 +1187,219 @@ class _DashBoardState extends State<DashBoard> {
                                                     alignment:
                                                         Alignment.bottomCenter,
                                                     child: Container(
+                                                        // width: double.infinity,
                                                         decoration: BoxDecoration(
                                                             color: Colors.white,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
                                                                         5)),
-                                                        child: Text(
-                                                            'Out Station',
-                                                            style: TextStyle(
-                                                                fontSize: 14))),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: Text(
+                                                              'Out Station',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      14)),
+                                                        )),
                                                   ))
                                             ]),
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          BusForm()));
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) {
+                                                    return StatefulBuilder(
+                                                        builder:
+                                                            (ctx, setState) {
+                                                      return AlertDialog(
+                                                        title: Text(
+                                                            'Company Bus -8 PM'),
+                                                        actions: [
+                                                          Column(
+                                                            children: [
+                                                              Text(
+                                                                'Bus going from Shameerpet to',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        18,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color: Colors
+                                                                            .blue[
+                                                                        800]),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  GestureDetector(
+                                                                    onTap: () =>
+                                                                        {
+                                                                      setState(
+                                                                          () {
+                                                                        busdestination[0] =
+                                                                            !busdestination[0];
+                                                                        busdestination[1] =
+                                                                            false;
+                                                                      })
+                                                                    },
+                                                                    child:
+                                                                        Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.black),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10),
+                                                                        color: busdestination[0]
+                                                                            ? const Color.fromARGB(
+                                                                                255,
+                                                                                1,
+                                                                                75,
+                                                                                148)
+                                                                            : Colors.transparent,
+                                                                      ),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                8.0),
+                                                                        child: Text(
+                                                                            'Azamabad',
+                                                                            style:
+                                                                                TextStyle(color: busdestination[0] ? Colors.white : Colors.black)),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                      width:
+                                                                          30),
+                                                                  GestureDetector(
+                                                                    onTap: () {
+                                                                      setState(
+                                                                          () {
+                                                                        busdestination[1] =
+                                                                            !busdestination[1];
+                                                                        busdestination[0] =
+                                                                            false;
+                                                                      });
+                                                                    },
+                                                                    child:
+                                                                        Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.black),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10),
+                                                                        color: busdestination[1]
+                                                                            ? const Color.fromARGB(
+                                                                                255,
+                                                                                1,
+                                                                                75,
+                                                                                148)
+                                                                            : Colors.transparent,
+                                                                      ),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                8.0),
+                                                                        child: Text(
+                                                                            'Lingampalli',
+                                                                            style:
+                                                                                TextStyle(color: busdestination[1] ? Colors.white : Colors.black)),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                  height: 30),
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Container(
+                                                                      decoration: BoxDecoration(
+                                                                          border: Border.all(
+                                                                              color: Colors
+                                                                                  .green),
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10)),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                5.0),
+                                                                        child:
+                                                                            TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            setState(() {
+                                                                              if (busdestination[0] == true) {
+                                                                                Navigator.push(context, MaterialPageRoute(builder: (_) => BusForm(destination: "Azamabad")));
+                                                                              } else {
+                                                                                Navigator.push(context, MaterialPageRoute(builder: (_) => BusForm(destination: "Lingampalli")));
+                                                                              }
+                                                                            });
+                                                                          },
+                                                                          child: Text(
+                                                                              'OK',
+                                                                              style: TextStyle(color: Colors.green)),
+                                                                        ),
+                                                                      )),
+                                                                  Container(
+                                                                      decoration: BoxDecoration(
+                                                                          border: Border.all(
+                                                                              color: Colors
+                                                                                  .red),
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10)),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                5.0),
+                                                                        child:
+                                                                            TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            setState(() {
+                                                                              Navigator.pop(context);
+                                                                            });
+                                                                          },
+                                                                          child: Text(
+                                                                              'Cancel',
+                                                                              style: TextStyle(color: Colors.red)),
+                                                                        ),
+                                                                      )),
+                                                                ],
+                                                              )
+                                                            ],
+                                                          )
+                                                        ],
+                                                      );
+                                                    });
+                                                  });
                                             },
                                             child: Stack(children: [
                                               Center(
                                                 child: CircleAvatar(
-                                                    radius: 35,
+                                                    radius: 36,
                                                     backgroundColor:
                                                         const Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -1094,7 +1432,7 @@ class _DashBoardState extends State<DashBoard> {
                                             child: Stack(children: [
                                               Center(
                                                 child: CircleAvatar(
-                                                    radius: 35,
+                                                    radius: 36,
                                                     backgroundColor:
                                                         const Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -1127,6 +1465,7 @@ class _DashBoardState extends State<DashBoard> {
                     const Text('    Upcoming Travels:',
                         style: TextStyle(
                             fontWeight: FontWeight.w800,
+                            color: Color.fromARGB(255, 1, 75, 148),
                             fontStyle: FontStyle.italic)),
                     const SizedBox(
                       height: 10,
@@ -1137,8 +1476,7 @@ class _DashBoardState extends State<DashBoard> {
                           itemCount: loc.length,
                           itemBuilder: (ctx, index) {
                             return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 8.0, horizontal: 12),
+                              padding: const EdgeInsets.all(4.0),
                               child: Card(
                                 clipBehavior: Clip.antiAlias,
                                 shadowColor: Colors.grey[300],
@@ -1235,13 +1573,24 @@ class _DashBoardState extends State<DashBoard> {
                                         Positioned(
                                           top: 30,
                                           right: 0,
-                                          child: CircleAvatar(
-                                            backgroundColor:
-                                                const Color.fromARGB(
-                                                    255, 1, 75, 148),
-                                            radius: 20,
-                                            child: Icon(
-                                              Icons.arrow_forward_ios_rounded,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color: Color.fromARGB(255, 1,
+                                                    75, 148), // Border color
+                                                width: 2.0, // Border width
+                                              ),
+                                            ),
+                                            child: CircleAvatar(
+                                              radius: 20,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              child: Icon(
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
+                                                  color: Color.fromARGB(
+                                                      255, 1, 75, 148)),
                                             ),
                                           ),
                                         )
@@ -1256,30 +1605,26 @@ class _DashBoardState extends State<DashBoard> {
               ],
             ),
           )),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
-        child: BottomNavigationBarTheme(
-          data: const BottomNavigationBarThemeData(
-              backgroundColor: Colors.white54,
-              unselectedItemColor: Colors.grey,
-              selectedItemColor: const Color.fromARGB(255, 1, 75, 148)),
-          child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              unselectedItemColor: Colors.grey,
-              selectedItemColor: const Color.fromARGB(255, 1, 75, 148),
-              items: [
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.home_outlined, size: 24), label: ''),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.backpack_outlined, size: 24), label: ''),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.person_4_outlined, size: 24), label: ''),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.help_center_outlined, size: 24), label: '')
-              ]),
-        ),
+      bottomNavigationBar: BottomNavigationBarTheme(
+        data: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.white54,
+            selectedItemColor: const Color.fromARGB(255, 1, 75, 148)),
+        child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: const Color.fromARGB(255, 1, 75, 148),
+            items: [
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined, size: 24), label: 'Home'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.work_outline_rounded, size: 24),
+                  label: 'My Request'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.person_4_outlined, size: 24),
+                  label: 'Profile'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.help_outline_outlined, size: 24),
+                  label: 'help')
+            ]),
       ),
     );
   }
