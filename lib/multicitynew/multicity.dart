@@ -40,8 +40,7 @@ class _MultiCityState extends State<MultiCity> {
       List.generate(1, (index) => TextEditingController());
   List<TextEditingController> _foodController =
       List.generate(1, (index) => TextEditingController());
-  List<TextEditingController> _comments1Controller =
-      List.generate(1, (index) => TextEditingController());
+
   List<TextEditingController> _seatController =
       List.generate(1, (index) => TextEditingController());
   List<TextEditingController> _accomodationController =
@@ -66,7 +65,7 @@ class _MultiCityState extends State<MultiCity> {
   List<List<bool>> travelmode = List.generate(1, (index) => [true, false]);
   List<List<bool>> _isSelected = List.generate(1, (index) => [false, false]);
   List<List<bool>> trainclass =
-      List.generate(1, (index) => List.generate(6, (index) => false));
+      List.generate(1, (index) => List.generate(3, (index) => false));
   List<List<bool>> _isSelected1 =
       List.generate(1, (index) => List.generate(4, (index) => false));
   List<List<bool>> _isSelected2 = List.generate(1, (index) => [false, false]);
@@ -188,8 +187,7 @@ class _MultiCityState extends State<MultiCity> {
                                                           .removeLast();
                                                       _traveldateController
                                                           .removeLast();
-                                                      _comments1Controller
-                                                          .removeLast();
+
                                                       _etaController
                                                           .removeLast();
                                                       _foodController
@@ -631,50 +629,23 @@ class _MultiCityState extends State<MultiCity> {
                                                                                     ),
                                                                                     child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass[index][0] ? Colors.white : Colors.blue[300])))),
                                                                             Tooltip(
-                                                                                message: 'SC',
+                                                                                message: '2A',
                                                                                 child: Container(
                                                                                     padding: EdgeInsets.all(8),
                                                                                     decoration: BoxDecoration(
                                                                                       color: trainclass[index][1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
                                                                                       borderRadius: BorderRadius.circular(30),
                                                                                     ),
-                                                                                    child: Text('SC', style: TextStyle(fontSize: 24, color: trainclass[index][1] ? Colors.white : Colors.blue[300])))),
+                                                                                    child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[index][1] ? Colors.white : Colors.blue[300])))),
                                                                             Tooltip(
-                                                                                message: 'CC',
+                                                                                message: '1A',
                                                                                 child: Container(
                                                                                     padding: EdgeInsets.all(8),
                                                                                     decoration: BoxDecoration(
                                                                                       color: trainclass[index][2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
                                                                                       borderRadius: BorderRadius.circular(30),
                                                                                     ),
-                                                                                    child: Text('CC', style: TextStyle(fontSize: 24, color: trainclass[index][2] ? Colors.white : Colors.blue[300])))),
-                                                                            Tooltip(
-                                                                                message: '3A',
-                                                                                child: Container(
-                                                                                    padding: EdgeInsets.all(8),
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: trainclass[index][3] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                      borderRadius: BorderRadius.circular(30),
-                                                                                    ),
-                                                                                    child: Text('3A', style: TextStyle(fontSize: 24, color: trainclass[index][3] ? Colors.white : Colors.blue[300])))),
-                                                                            Tooltip(
-                                                                                message: '2A',
-                                                                                child: Container(
-                                                                                    padding: EdgeInsets.all(8),
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: trainclass[index][4] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                      borderRadius: BorderRadius.circular(30),
-                                                                                    ),
-                                                                                    child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[index][4] ? Colors.white : Colors.blue[300])))),
-                                                                            Tooltip(
-                                                                                message: '1A',
-                                                                                child: Container(
-                                                                                    padding: EdgeInsets.all(8),
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: trainclass[index][5] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                      borderRadius: BorderRadius.circular(30),
-                                                                                    ),
-                                                                                    child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass[index][5] ? Colors.white : Colors.blue[300]))))
+                                                                                    child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass[index][2] ? Colors.white : Colors.blue[300]))))
                                                                           ],
                                                                           isSelected: trainclass[
                                                                               index],
@@ -688,19 +659,11 @@ class _MultiCityState extends State<MultiCity> {
                                                                             if (trainclass[index][0]) {
                                                                               _travelClassController[index].text = 'SL';
                                                                             }
+
                                                                             if (trainclass[index][1]) {
-                                                                              _travelClassController[index].text = 'SC';
-                                                                            }
-                                                                            if (trainclass[index][2]) {
-                                                                              _travelClassController[index].text = 'CC';
-                                                                            }
-                                                                            if (trainclass[index][3]) {
-                                                                              _travelClassController[index].text = '3A';
-                                                                            }
-                                                                            if (trainclass[index][4]) {
                                                                               _travelClassController[index].text = '2A';
                                                                             }
-                                                                            if (trainclass[index][5]) {
+                                                                            if (trainclass[index][2]) {
                                                                               _travelClassController[index].text = '1A';
                                                                             }
                                                                           }),
@@ -1402,79 +1365,6 @@ class _MultiCityState extends State<MultiCity> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 8.0),
-                                                  child: Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                2 -
-                                                            20,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                            color: Colors
-                                                                .black26)),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 8.0,
-                                                                  top: 8.0),
-                                                          child: Text(
-                                                              'Comments:',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black)),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: TextFormField(
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black),
-                                                              controller:
-                                                                  _comments1Controller[
-                                                                      index],
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    InputBorder
-                                                                        .none,
-                                                                hintText:
-                                                                    'Comments',
-                                                                hintStyle: TextStyle(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            1,
-                                                                            75,
-                                                                            148)),
-                                                              )),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 10),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
                                                 ToggleButtons(
                                                   color: Colors.black,
                                                   fillColor: Colors.transparent,
@@ -1986,7 +1876,8 @@ class _MultiCityState extends State<MultiCity> {
                           );
                         }),
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
                           onPressed: () async {
@@ -2010,23 +1901,28 @@ class _MultiCityState extends State<MultiCity> {
 
                                     if (accom[i][1]) {
                                       isConditionMet = isConditionMet &&
-                                          _occupancyController[i].text.isNotEmpty &&
+                                          _occupancyController[i]
+                                              .text
+                                              .isNotEmpty &&
                                           _bagController[i].text.isNotEmpty;
                                     }
                                   }
                                   if (isConditionMet) {
                                     String c = traveltimevalues[i].join(',');
                                     Map<String, String> each = {
-                                      'travelmode': _traveltypeController[i].text,
-                                      'travelclass': _travelClassController[i].text,
+                                      'travelmode':
+                                          _traveltypeController[i].text,
+                                      'travelclass':
+                                          _travelClassController[i].text,
                                       'origin': _originController[i].text,
-                                      'destination': _destinationController[i].text,
-                                      'traveldate': _traveldateController[i].text,
+                                      'destination':
+                                          _destinationController[i].text,
+                                      'traveldate':
+                                          _traveldateController[i].text,
                                       'traveltime': c,
                                       'eta': _etaController[i].text,
                                       'food': _foodController[i].text,
                                       'seat': _seatController[i].text,
-                                      'comments': _comments1Controller[i].text,
                                       'accomodation':
                                           _accomodationController[i].text,
                                       'occupancy': _occupancyController[i].text,
@@ -2134,41 +2030,32 @@ class _MultiCityState extends State<MultiCity> {
                             }
                           },
                           child: Container(
-                                            width: 100,
-                                            height: 40,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Color.fromARGB(
-                                                    255, 1, 75, 148)),
-                                            child: Center(
-                                              child: Text('Submit',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 20)),
-                                            ))),
-                                             TextButton(
-                                    onPressed: () async {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                 MultiCity()));
-                                    },
-                                    child: Container(
-                                        width: 100,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: const Color.fromARGB(
-                                                255, 131, 14, 5)),
-                                        child: Center(
-                                          child: Text('Clear',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20)),
-                                        ))),
+                              width: 100,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color.fromARGB(255, 1, 75, 148)),
+                              child: Center(
+                                child: Text('Submit',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20)),
+                              ))),
+                      TextButton(
+                          onPressed: () async {
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (_) => MultiCity()));
+                          },
+                          child: Container(
+                              width: 100,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: const Color.fromARGB(255, 131, 14, 5)),
+                              child: Center(
+                                child: Text('Clear',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20)),
+                              ))),
                     ],
                   )
                 ]),
@@ -2183,7 +2070,6 @@ class _MultiCityState extends State<MultiCity> {
             _originController.add(TextEditingController());
             _destinationController.add(TextEditingController());
             _traveldateController.add(TextEditingController());
-            _comments1Controller.add(TextEditingController());
             _etaController.add(TextEditingController());
             _foodController.add(TextEditingController());
             _seatController.add(TextEditingController());

@@ -57,6 +57,22 @@ class _RoundTripDomesticState extends State<RoundTripDomestic> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _travellernameController.text = "Umang";
+    _travellergenderController.text = "Male";
+    _travelleremailController.text = "abc@gmail.com";
+    _travellermobilenoContorller.text = "909999999";
+    _levelController.text = "xyz";
+    _departmentController.text = "abc";
+    _debitexpensesController.text = "Cost Center";
+    _costorprojectController.text = "project";
+    _requesternameController.text = "Umang";
+    _approverController.text = "dde";
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -1021,7 +1037,11 @@ class _RoundTripDomesticState extends State<RoundTripDomestic> {
                                             _requesternameController.text,
                                         'comments': _commentsController.text
                                       }, 'travellerdetails');
-                                      Navigator.push(context,MaterialPageRoute(builder: (_)=>RoundTripApproval(id:c,international:0)));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) => RoundTripApproval(
+                                                  id: c, international: 0)));
                                     } else {
                                       showDialog(
                                         context: context,

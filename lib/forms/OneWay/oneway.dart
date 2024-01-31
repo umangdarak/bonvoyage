@@ -147,7 +147,7 @@ class _OneWayTicketNewState extends State<OneWay> {
   List<bool> roadclass = List.generate(2, (i) => false);
   bool s = false;
   List<bool> accom = [false, false];
-  List<int> bags = List.generate(4, (index) => index);
+  List<int> bags = List.generate(11, (index) => index);
 
   Color c1 = Color.fromARGB(255, 191, 218, 240);
   Color c2 = Color.fromARGB(255, 1, 75, 148);
@@ -1453,54 +1453,78 @@ class _OneWayTicketNewState extends State<OneWay> {
                             visible: accom[0],
                             child: Card(
                               elevation: 5,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0, top: 8, bottom: 8),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 8.0, top: 8, bottom: 1),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Text('Accomodation Type:',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                        )),
-                                                    Column(
-                                                      children: [
-                                                        ToggleButtons(
-                                                          color: Colors.black,
-                                                          fillColor: Colors
-                                                              .transparent,
-                                                          renderBorder: false,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(30),
-                                                          children: [
-                                                            Tooltip(
-                                                                message:
-                                                                    'house',
-                                                                triggerMode:
-                                                                    TooltipTriggerMode
-                                                                        .manual,
-                                                                child:
-                                                                    Container(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0, top: 8, bottom: 8),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Text('Accomodation Type:',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                      )),
+                                                  Column(
+                                                    children: [
+                                                      ToggleButtons(
+                                                        color: Colors.black,
+                                                        fillColor:
+                                                            Colors.transparent,
+                                                        renderBorder: false,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30),
+                                                        children: [
+                                                          Tooltip(
+                                                              message: 'house',
+                                                              triggerMode:
+                                                                  TooltipTriggerMode
+                                                                      .manual,
+                                                              child: Container(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(8),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color:
+                                                                      _accom2[0]
+                                                                          ? c2
+                                                                          : c1,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              30),
+                                                                ),
+                                                                child: ImageIcon(
+                                                                    AssetImage(
+                                                                        'assets/images/accommodation_btn_icon.png'),
+                                                                    size: 24,
+                                                                    color: _accom2[
+                                                                            0]
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .blue[300]),
+                                                              )),
+                                                          Tooltip(
+                                                              message: 'hotel',
+                                                              triggerMode:
+                                                                  TooltipTriggerMode
+                                                                      .manual,
+                                                              child: Container(
                                                                   padding:
                                                                       EdgeInsets
                                                                           .all(
@@ -1508,7 +1532,7 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     color:
-                                                                        _accom2[0]
+                                                                        _accom2[1]
                                                                             ? c2
                                                                             : c1,
                                                                     borderRadius:
@@ -1517,385 +1541,210 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                                   ),
                                                                   child: ImageIcon(
                                                                       AssetImage(
-                                                                          'assets/images/accommodation_btn_icon.png'),
+                                                                          'assets/images/hotel_btn_icon.png'),
                                                                       size: 24,
                                                                       color: _accom2[
-                                                                              0]
-                                                                          ? Colors
-                                                                              .white
-                                                                          : Colors
-                                                                              .blue[300]),
-                                                                )),
-                                                            Tooltip(
-                                                                message:
-                                                                    'hotel',
-                                                                triggerMode:
-                                                                    TooltipTriggerMode
-                                                                        .manual,
-                                                                child:
-                                                                    Container(
-                                                                        padding:
-                                                                            EdgeInsets.all(
-                                                                                8),
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color: _accom2[1]
-                                                                              ? c2
-                                                                              : c1,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(30),
-                                                                        ),
-                                                                        child: ImageIcon(
-                                                                            AssetImage(
-                                                                                'assets/images/hotel_btn_icon.png'),
-                                                                            size:
-                                                                                24,
-                                                                            color: _accom2[1]
-                                                                                ? Colors.white
-                                                                                : Colors.blue[300])))
-                                                          ],
-                                                          isSelected: _accom2,
-                                                          onPressed:
-                                                              (int index) {
-                                                            setState(() {
-                                                              for (int i = 0;
-                                                                  i <
-                                                                      _accom2
-                                                                          .length;
-                                                                  i++) {
-                                                                _accom2[i] =
-                                                                    i == index;
-                                                              }
-                                                            });
-                                                            if (index == 0 &&
-                                                                _accom2[index] ==
-                                                                    true) {
-                                                              _accomodationController
-                                                                      .text =
-                                                                  'Private House';
-                                                            } else if (index ==
-                                                                    1 &&
-                                                                _accom2[index] ==
-                                                                    true) {
-                                                              _accomodationController
-                                                                      .text =
-                                                                  'Hotel';
-                                                            }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text('Occupancy:',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                        )),
-                                                    Column(
-                                                      children: [
-                                                        ToggleButtons(
-                                                          color: Colors.black,
-                                                          fillColor: Colors
-                                                              .transparent,
-                                                          renderBorder: false,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(30),
-                                                          children: [
-                                                            Tooltip(
-                                                                message:
-                                                                    'Single',
-                                                                triggerMode:
-                                                                    TooltipTriggerMode
-                                                                        .manual,
-                                                                child:
-                                                                    Container(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              8),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color:
-                                                                        _occupancy[0]
-                                                                            ? c2
-                                                                            : c1,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            30),
-                                                                  ),
-                                                                  child: ImageIcon(
-                                                                      AssetImage(
-                                                                          'assets/images/1_Occupancy_btn_icon.png'),
-                                                                      size: 24,
-                                                                      color: _occupancy[
-                                                                              0]
-                                                                          ? Colors
-                                                                              .white
-                                                                          : Colors
-                                                                              .blue[300]),
-                                                                )),
-                                                            Tooltip(
-                                                                message:
-                                                                    'Couple',
-                                                                triggerMode:
-                                                                    TooltipTriggerMode
-                                                                        .manual,
-                                                                child:
-                                                                    Container(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              8),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color:
-                                                                        _occupancy[1]
-                                                                            ? c2
-                                                                            : c1,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            30),
-                                                                  ),
-                                                                  child: ImageIcon(
-                                                                      AssetImage(
-                                                                          'assets/images/2_Occupancies_btn_icon.png'),
-                                                                      size: 24,
-                                                                      color: _occupancy[
                                                                               1]
                                                                           ? Colors
                                                                               .white
                                                                           : Colors
-                                                                              .blue[300]),
-                                                                )),
-                                                            Tooltip(
-                                                                message: 'Many',
-                                                                triggerMode:
-                                                                    TooltipTriggerMode
-                                                                        .manual,
-                                                                child:
-                                                                    Container(
-                                                                        padding:
-                                                                            EdgeInsets.all(
-                                                                                8),
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color: _occupancy[2]
-                                                                              ? c2
-                                                                              : c1,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(30),
-                                                                        ),
-                                                                        child: ImageIcon(
-                                                                            AssetImage(
-                                                                                'assets/images/3_Occupancies_btn_icon.png'),
-                                                                            size:
-                                                                                24,
-                                                                            color: _occupancy[2]
-                                                                                ? Colors.white
-                                                                                : Colors.blue[300])))
-                                                          ],
-                                                          isSelected:
-                                                              _occupancy,
-                                                          onPressed:
-                                                              (int index) {
-                                                            setState(() {
-                                                              for (int i = 0;
-                                                                  i <
-                                                                      _occupancy
-                                                                          .length;
-                                                                  i++) {
-                                                                _occupancy[i] =
-                                                                    i == index;
-                                                              }
-                                                            });
-                                                            if (index == 0 &&
-                                                                _occupancy[
-                                                                        index] ==
-                                                                    true) {
-                                                              _occupancyController
-                                                                      .text =
-                                                                  'Single';
-                                                            } else if (index ==
-                                                                    1 &&
-                                                                _occupancy[
-                                                                        index] ==
-                                                                    true) {
-                                                              _occupancyController
-                                                                      .text =
-                                                                  'Couple';
-                                                            } else if (index ==
-                                                                    2 &&
-                                                                _occupancy[
-                                                                        index] ==
-                                                                    true) {
-                                                              _occupancyController
-                                                                      .text =
-                                                                  'Family';
+                                                                              .blue[300])))
+                                                        ],
+                                                        isSelected: _accom2,
+                                                        onPressed: (int index) {
+                                                          setState(() {
+                                                            for (int i = 0;
+                                                                i <
+                                                                    _accom2
+                                                                        .length;
+                                                                i++) {
+                                                              _accom2[i] =
+                                                                  i == index;
                                                             }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 0.05,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(height: 10),
-                                            _accom2[1]
-                                                ? Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                2 -
-                                                            40,
-                                                    decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                            color:
-                                                                Colors.black26),
+                                                          });
+                                                          if (index == 0 &&
+                                                              _accom2[index] ==
+                                                                  true) {
+                                                            _accomodationController
+                                                                    .text =
+                                                                'Private House';
+                                                          } else if (index ==
+                                                                  1 &&
+                                                              _accom2[index] ==
+                                                                  true) {
+                                                            _accomodationController
+                                                                .text = 'Hotel';
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text('Occupancy:',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                      )),
+                                                  Column(
+                                                    children: [
+                                                      ToggleButtons(
+                                                        color: Colors.black,
+                                                        fillColor:
+                                                            Colors.transparent,
+                                                        renderBorder: false,
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(5)),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 8.0),
-                                                      child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                'Hotel Preference:',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                )),
-                                                            TextFormField(
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              validator:
-                                                                  _validateRequired,
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black),
-                                                              controller:
-                                                                  _hotelController,
-                                                              decoration: InputDecoration(
-                                                                  constraints:
-                                                                      BoxConstraints(
-                                                                          maxWidth: MediaQuery.of(context).size.width -
-                                                                              100),
-                                                                  hintText:
-                                                                      'Hotel',
-                                                                  hintStyle: TextStyle(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          1,
-                                                                          75,
-                                                                          148))),
-                                                            )
-                                                          ]),
-                                                    ))
-                                                : Container(),
-                                            SizedBox(height: 10),
-                                            Row(children: [
-                                              Container(
-                                                  width: MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          2 -
-                                                      40,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color:
-                                                              Colors.black26),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5)),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8.0),
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                                .circular(30),
                                                         children: [
-                                                          Text('Check-In:',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
+                                                          Tooltip(
+                                                              message: 'Single',
+                                                              triggerMode:
+                                                                  TooltipTriggerMode
+                                                                      .manual,
+                                                              child: Container(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(8),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color:
+                                                                      _occupancy[
+                                                                              0]
+                                                                          ? c2
+                                                                          : c1,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              30),
+                                                                ),
+                                                                child: ImageIcon(
+                                                                    AssetImage(
+                                                                        'assets/images/1_Occupancy_btn_icon.png'),
+                                                                    size: 24,
+                                                                    color: _occupancy[
+                                                                            0]
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .blue[300]),
                                                               )),
-                                                          TextFormField(
-                                                              validator:
-                                                                  _validateRequired,
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black),
-                                                              controller:
-                                                                  _checkinController,
-                                                              readOnly: true,
-                                                              decoration: InputDecoration(
-                                                                  constraints: BoxConstraints(
-                                                                      maxWidth: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width -
-                                                                          100),
-                                                                  hintText:
-                                                                      'Check-In',
-                                                                  hintStyle: TextStyle(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          1,
-                                                                          75,
-                                                                          148))),
-                                                              onTap: () async {
-                                                                DateFormat t =
-                                                                    DateFormat(
-                                                                        "yyyy-MM-dd");
-                                                                DateTime? pickeddate = await showDatePicker(
-                                                                    context:
-                                                                        context,
-                                                                    initialDate:
-                                                                        t.parse(_etaController
-                                                                            .text),
-                                                                    firstDate: t.parse(
-                                                                        _etaController
-                                                                            .text),
-                                                                    lastDate:
-                                                                        DateTime(
-                                                                            2101));
-                                                                if (pickeddate !=
-                                                                    null) {
-                                                                  setState(() {
-                                                                    _checkinController
-                                                                        .text = DateFormat(
-                                                                            "yyyy-MM-dd")
-                                                                        .format(
-                                                                            pickeddate);
-                                                                  });
-                                                                }
-                                                              })
-                                                        ]),
-                                                  )),
-                                              SizedBox(
-                                                width: 19,
+                                                          Tooltip(
+                                                              message: 'Couple',
+                                                              triggerMode:
+                                                                  TooltipTriggerMode
+                                                                      .manual,
+                                                              child: Container(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(8),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color:
+                                                                      _occupancy[
+                                                                              1]
+                                                                          ? c2
+                                                                          : c1,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              30),
+                                                                ),
+                                                                child: ImageIcon(
+                                                                    AssetImage(
+                                                                        'assets/images/2_Occupancies_btn_icon.png'),
+                                                                    size: 24,
+                                                                    color: _occupancy[
+                                                                            1]
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .blue[300]),
+                                                              )),
+                                                          Tooltip(
+                                                              message: 'Many',
+                                                              triggerMode:
+                                                                  TooltipTriggerMode
+                                                                      .manual,
+                                                              child: Container(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              8),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color:
+                                                                        _occupancy[2]
+                                                                            ? c2
+                                                                            : c1,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            30),
+                                                                  ),
+                                                                  child: ImageIcon(
+                                                                      AssetImage(
+                                                                          'assets/images/3_Occupancies_btn_icon.png'),
+                                                                      size: 24,
+                                                                      color: _occupancy[
+                                                                              2]
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .blue[300])))
+                                                        ],
+                                                        isSelected: _occupancy,
+                                                        onPressed: (int index) {
+                                                          setState(() {
+                                                            for (int i = 0;
+                                                                i <
+                                                                    _occupancy
+                                                                        .length;
+                                                                i++) {
+                                                              _occupancy[i] =
+                                                                  i == index;
+                                                            }
+                                                          });
+                                                          if (index == 0 &&
+                                                              _occupancy[
+                                                                      index] ==
+                                                                  true) {
+                                                            _occupancyController
+                                                                    .text =
+                                                                'Single';
+                                                          } else if (index ==
+                                                                  1 &&
+                                                              _occupancy[
+                                                                      index] ==
+                                                                  true) {
+                                                            _occupancyController
+                                                                    .text =
+                                                                'Couple';
+                                                          } else if (index ==
+                                                                  2 &&
+                                                              _occupancy[
+                                                                      index] ==
+                                                                  true) {
+                                                            _occupancyController
+                                                                    .text =
+                                                                'Family';
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
-                                              Container(
+                                              SizedBox(
+                                                width: 0.05,
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          _accom2[1]
+                                              ? Container(
                                                   width: MediaQuery.of(context)
                                                               .size
                                                               .width /
@@ -1917,128 +1766,265 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Text('Check-Out:',
+                                                          Text(
+                                                              'Hotel Preference:',
                                                               style: TextStyle(
                                                                 color: Colors
                                                                     .black,
                                                               )),
                                                           TextFormField(
-                                                              validator:
-                                                                  _validateRequired,
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black),
-                                                              controller:
-                                                                  _checkoutController,
-                                                              readOnly: true,
-                                                              decoration: InputDecoration(
-                                                                  constraints: BoxConstraints(
-                                                                      maxWidth: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width -
-                                                                          100),
-                                                                  hintText:
-                                                                      'Check-Out',
-                                                                  hintStyle: TextStyle(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          1,
-                                                                          75,
-                                                                          148))),
-                                                              onTap: () async {
-                                                                DateFormat t =
-                                                                    DateFormat(
-                                                                        "yyyy-MM-dd");
-                                                                DateTime? pickeddate = await showDatePicker(
-                                                                    context:
-                                                                        context,
-                                                                    initialDate:
-                                                                        t.parse(_checkinController
-                                                                            .text),
-                                                                    firstDate: t.parse(
-                                                                        _checkinController
-                                                                            .text),
-                                                                    lastDate:
-                                                                        DateTime(
-                                                                            2101));
-                                                                if (pickeddate !=
-                                                                    null) {
-                                                                  setState(() {
-                                                                    _checkoutController
-                                                                        .text = DateFormat(
-                                                                            "yyyy-MM-dd")
-                                                                        .format(
-                                                                            pickeddate);
-                                                                  });
-                                                                }
-                                                              })
+                                                            autovalidateMode:
+                                                                AutovalidateMode
+                                                                    .onUserInteraction,
+                                                            validator:
+                                                                _validateRequired,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                            controller:
+                                                                _hotelController,
+                                                            decoration: InputDecoration(
+                                                                constraints: BoxConstraints(
+                                                                    maxWidth: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width -
+                                                                        100),
+                                                                hintText:
+                                                                    'Hotel',
+                                                                hintStyle: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            1,
+                                                                            75,
+                                                                            148))),
+                                                          )
                                                         ]),
                                                   ))
-                                            ])
-                                          ]),
-                                    )),
-                              ),
+                                              : Container(),
+                                          SizedBox(height: 10),
+                                          Row(children: [
+                                            Container(
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        2 -
+                                                    40,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black26),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('Check-In:',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                            )),
+                                                        TextFormField(
+                                                            validator:
+                                                                _validateRequired,
+                                                            autovalidateMode:
+                                                                AutovalidateMode
+                                                                    .onUserInteraction,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                            controller:
+                                                                _checkinController,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                                constraints: BoxConstraints(
+                                                                    maxWidth: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width -
+                                                                        100),
+                                                                hintText:
+                                                                    'Check-In',
+                                                                hintStyle: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            1,
+                                                                            75,
+                                                                            148))),
+                                                            onTap: () async {
+                                                              DateFormat t =
+                                                                  DateFormat(
+                                                                      "yyyy-MM-dd");
+                                                              DateTime? pickeddate = await showDatePicker(
+                                                                  context:
+                                                                      context,
+                                                                  initialDate: t.parse(
+                                                                      _etaController
+                                                                          .text),
+                                                                  firstDate: t.parse(
+                                                                      _etaController
+                                                                          .text),
+                                                                  lastDate:
+                                                                      DateTime(
+                                                                          2101));
+                                                              if (pickeddate !=
+                                                                  null) {
+                                                                setState(() {
+                                                                  _checkinController
+                                                                      .text = DateFormat(
+                                                                          "yyyy-MM-dd")
+                                                                      .format(
+                                                                          pickeddate);
+                                                                });
+                                                              }
+                                                            })
+                                                      ]),
+                                                )),
+                                            SizedBox(
+                                              width: 19,
+                                            ),
+                                            Container(
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        2 -
+                                                    40,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black26),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('Check-Out:',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                            )),
+                                                        TextFormField(
+                                                            validator:
+                                                                _validateRequired,
+                                                            autovalidateMode:
+                                                                AutovalidateMode
+                                                                    .onUserInteraction,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                            controller:
+                                                                _checkoutController,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                                constraints: BoxConstraints(
+                                                                    maxWidth: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width -
+                                                                        100),
+                                                                hintText:
+                                                                    'Check-Out',
+                                                                hintStyle: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            1,
+                                                                            75,
+                                                                            148))),
+                                                            onTap: () async {
+                                                              DateFormat t =
+                                                                  DateFormat(
+                                                                      "yyyy-MM-dd");
+                                                              DateTime? pickeddate = await showDatePicker(
+                                                                  context:
+                                                                      context,
+                                                                  initialDate: t.parse(
+                                                                      _checkinController
+                                                                          .text),
+                                                                  firstDate: t.parse(
+                                                                      _checkinController
+                                                                          .text),
+                                                                  lastDate:
+                                                                      DateTime(
+                                                                          2101));
+                                                              if (pickeddate !=
+                                                                  null) {
+                                                                setState(() {
+                                                                  _checkoutController
+                                                                      .text = DateFormat(
+                                                                          "yyyy-MM-dd")
+                                                                      .format(
+                                                                          pickeddate);
+                                                                });
+                                                              }
+                                                            })
+                                                      ]),
+                                                ))
+                                          ])
+                                        ]),
+                                  )),
                             )),
                         SizedBox(height: 20),
                         Visibility(
                             visible: accom[1],
                             child: Card(
                               elevation: 4,
-                              child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, top: 1, bottom: 8),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(children: [
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                2 -
-                                                            40,
-                                                    decoration: BoxDecoration(
-                                                        border: Border.all(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0, bottom: 8, top: 8),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        2 -
+                                                    40,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black26),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('Bags:',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                          )),
+                                                      DropdownMenu(
+                                                        requestFocusOnTap:
+                                                            false,
+                                                        textStyle: TextStyle(
                                                             color:
-                                                                Colors.black26),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5)),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text('Bags:',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                              )),
-                                                          DropdownMenu(
-                                                            requestFocusOnTap:
-                                                                false,
-                                                            textStyle: TextStyle(
-                                                                color: Colors
-                                                                    .black),
-                                                            hintText: 'Bags',
-                                                            inputDecorationTheme: InputDecorationTheme(
+                                                                Colors.black),
+                                                        hintText: 'Bags',
+                                                        inputDecorationTheme:
+                                                            InputDecorationTheme(
                                                                 border:
                                                                     InputBorder
                                                                         .none,
@@ -2049,142 +2035,137 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                                             1,
                                                                             75,
                                                                             148))),
-                                                            controller:
-                                                                _bagController,
-                                                            initialSelection:
-                                                                _bagController
-                                                                    .text,
-                                                            width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    2 -
-                                                                40,
-                                                            dropdownMenuEntries:
-                                                                bags.map(
-                                                                    (int e) {
-                                                              return DropdownMenuEntry(
-                                                                  value: e,
-                                                                  label: '$e');
-                                                            }).toList(),
-                                                          ),
-                                                        ],
+                                                        controller:
+                                                            _bagController,
+                                                        initialSelection:
+                                                            _bagController.text,
+                                                        width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                2 -
+                                                            40,
+                                                        dropdownMenuEntries:
+                                                            bags.map((int e) {
+                                                          return DropdownMenuEntry(
+                                                              value: e,
+                                                              label: '$e');
+                                                        }).toList(),
                                                       ),
-                                                    ),
+                                                    ],
                                                   ),
-                                                  SizedBox(width: 20),
-                                                  Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                      .size
-                                                                      .width /
-                                                                  2 -
-                                                              40,
-                                                      decoration: BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Colors
-                                                                  .black26),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                'Total Weight:',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                )),
-                                                            TextFormField(
-                                                              validator:
-                                                                  _validateRequired,
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              controller:
-                                                                  _totalweightController,
-                                                              decoration: InputDecoration(
-                                                                  border:
-                                                                      InputBorder
-                                                                          .none,
-                                                                  constraints: BoxConstraints(
-                                                                      maxWidth: MediaQuery.of(
-                                                                                  context)
-                                                                              .size
-                                                                              .width -
-                                                                          100),
-                                                                  hintText:
-                                                                      'Total Extra Weight(Kgs)',
-                                                                  hintStyle: TextStyle(
-                                                                      color: Color.fromARGB(
+                                                ),
+                                              ),
+                                              SizedBox(width: 20),
+                                              Container(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          2 -
+                                                      40,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              Colors.black26),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('Total Weight:',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                            )),
+                                                        TextFormField(
+                                                          validator:
+                                                              _validateRequired,
+                                                          autovalidateMode:
+                                                              AutovalidateMode
+                                                                  .onUserInteraction,
+                                                          controller:
+                                                              _totalweightController,
+                                                          decoration: InputDecoration(
+                                                              border:
+                                                                  InputBorder
+                                                                      .none,
+                                                              constraints: BoxConstraints(
+                                                                  maxWidth: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width -
+                                                                      100),
+                                                              hintText:
+                                                                  'Total Extra Weight(Kgs)',
+                                                              hintStyle: TextStyle(
+                                                                  color: Color
+                                                                      .fromARGB(
                                                                           255,
                                                                           1,
                                                                           75,
                                                                           148))),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ))
-                                                ]),
-                                                SizedBox(height: 10),
-                                                Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width -
-                                                            10,
-                                                    decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                            color:
-                                                                Colors.black26),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5)),
-                                                    child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text('Remarks:',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                  )),
-                                                              TextFormField(
-                                                                controller:
-                                                                    _remarksController,
-                                                                decoration: InputDecoration(
-                                                                    border:
-                                                                        InputBorder
-                                                                            .none,
-                                                                    constraints: BoxConstraints(
-                                                                        maxWidth:
-                                                                            MediaQuery.of(context).size.width -
-                                                                                100),
-                                                                    hintText:
-                                                                        'Remarks',
-                                                                    hintStyle: TextStyle(
-                                                                        color: Color.fromARGB(
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ))
+                                            ]),
+                                            SizedBox(height: 10),
+                                            Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    10,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.black26),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text('Remarks:',
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                              )),
+                                                          TextFormField(
+                                                            controller:
+                                                                _remarksController,
+                                                            decoration: InputDecoration(
+                                                                border:
+                                                                    InputBorder
+                                                                        .none,
+                                                                constraints: BoxConstraints(
+                                                                    maxWidth: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width -
+                                                                        100),
+                                                                hintText:
+                                                                    'Remarks',
+                                                                hintStyle: TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
                                                                             255,
                                                                             1,
                                                                             75,
                                                                             148))),
-                                                              ),
-                                                            ]))),
-                                              ])))),
+                                                          ),
+                                                        ]))),
+                                          ]))),
                             )),
                       ],
                     ),

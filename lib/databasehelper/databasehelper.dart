@@ -54,7 +54,6 @@ CREATE TABLE multicityeach(
       food TEXT,
       accomodation TEXT,
       bags TEXT,
-      comments TEXT,
       hotel TEXT,
       occupancy TEXT,
       checkin TEXT,
@@ -218,12 +217,13 @@ CREATE TABLE roundtripinternational(
         traveltimereturn TEXT,
         etareturn TEXT,
         foodreturn TEXT,
-        commentsreturn TEXT,
+        bagreturn TEXT,
+        totalweightreturn TEXT,
+        remarksreturn TEXT,
         cab TEXT,
         purpose TEXT,
         region TEXT,
-              connectiontotravellertable TEXT,
-
+        connectiontotravellertable TEXT,
         issync INTEGER DEFAULT 0)
 ''');
   }

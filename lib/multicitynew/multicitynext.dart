@@ -68,6 +68,16 @@ class _MultiCityNextState extends State<MultiCityNext> {
     _visaController.text = 'No';
     _insurancerequiredController.text = 'No';
     _insuranceavailableController.text = 'No';
+    _travellernameController.text = "Umang";
+    _travellergenderController.text = "Male";
+    _travelleremailController.text = "abc@gmail.com";
+    _travellermobilenoContorller.text = "909999999";
+    _levelController.text = "xyz";
+    _departmentController.text = "abc";
+    _debitexpensesController.text = "Cost Center";
+    _costorprojectController.text = "project";
+    _requesternameController.text = "Umang";
+    _approverController.text = "dde";
   }
 
   static const String _chars = 'abcdefghijklmnopqrstuvwxyz0123456789';

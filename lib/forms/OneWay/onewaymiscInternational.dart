@@ -71,6 +71,16 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
     _visaController.text = 'No';
     _insurancerequiredController.text = 'No';
     _insuranceavailableController.text = 'No';
+     _travellernameController.text = "Umang";
+    _travellergenderController.text = "Male";
+    _travelleremailController.text = "abc@gmail.com";
+    _travellermobilenoContorller.text = "909999999";
+    _levelController.text = "xyz";
+    _departmentController.text = "abc";
+    _debitexpensesController.text = "Cost Center";
+    _costorprojectController.text = "project";
+    _requesternameController.text = "Umang";
+    _approverController.text = "dde";
   }
 
   String generateRandomString({int length = 10}) {

@@ -35,11 +35,11 @@ class _RoundTripState extends State<RoundTrip> {
   TextEditingController _totalweightController = TextEditingController();
   TextEditingController _remarksController = TextEditingController();
   TextEditingController _seatController = TextEditingController();
-  TextEditingController _modeController = TextEditingController();
-  TextEditingController _currencyController = TextEditingController();
-  TextEditingController _amountController = TextEditingController();
-  TextEditingController _cabController = TextEditingController();
-  TextEditingController _purposeController = TextEditingController();
+  // TextEditingController _modeController = TextEditingController();
+  // TextEditingController _currencyController = TextEditingController();
+  // TextEditingController _amountController = TextEditingController();
+  // TextEditingController _cabController = TextEditingController();
+  // TextEditingController _purposeController = TextEditingController();
   TextEditingController _traveltype1Controller = TextEditingController();
   TextEditingController _travelClass1Controller = TextEditingController();
   TextEditingController _seat1Controller = TextEditingController();
@@ -47,25 +47,33 @@ class _RoundTripState extends State<RoundTrip> {
   TextEditingController _traveltime1Controller = TextEditingController();
   TextEditingController _eta1Controller = TextEditingController();
   TextEditingController _food1Controller = TextEditingController();
-  TextEditingController _comments2Controller = TextEditingController();
   TextEditingController _regionController = TextEditingController();
   TextEditingController _region2Controller = TextEditingController();
+  TextEditingController _bag2Controller = TextEditingController();
+  TextEditingController _totalweight2Controller = TextEditingController();
+  TextEditingController _remarks2Controller = TextEditingController();
   Image img = Image.asset('assets/images/Bon_Voyage_Login_BG.gif',
       height: 1000, width: 1000);
 
   bool i = false;
 
   List<bool> _isSelected = [false, false];
+  List<bool> _isSelectedflight = [false, false];
   List<bool> _isSelected1 = [false, false, false, false];
   List<bool> _isSelected2 = [false, false];
   List<bool> _accom2 = [false, false];
   List<bool> _occupancy = [false, false, false];
   List<bool> travelmode = [true, false, false];
+  List<bool> travelmode1 = [true, false, false];
   List<bool> trainclass = List.generate(6, (index) => false);
+  List<bool> trainclass1 = List.generate(6, (index) => false);
   List<bool> roadclass = List.generate(2, (i) => false);
+  List<bool> roadclass1 = List.generate(2, (i) => false);
   bool s = false;
   List<bool> accom = [false, false];
-  List<int> bags = List.generate(4, (index) => index);
+  List<int> bags = List.generate(11, (index) => index);
+  List<int> bags2 = List.generate(11, (index) => index);
+  bool baggagereturn = false;
   static String? validate(String? i) {
     if (i!.isEmpty) {
       return 'Field Required';
@@ -274,6 +282,8 @@ class _RoundTripState extends State<RoundTrip> {
                                                               i++) {
                                                             travelmode[i] =
                                                                 i == p;
+                                                            travelmode1[i] =
+                                                                i == p;
                                                           }
                                                         });
                                                         if (travelmode[0]) {
@@ -421,6 +431,9 @@ class _RoundTripState extends State<RoundTrip> {
                                                                   i++) {
                                                                 _isSelected[i] =
                                                                     i == index;
+                                                                _isSelectedflight[
+                                                                        i] =
+                                                                    i == index;
                                                               }
                                                             });
                                                             if (index == 0 &&
@@ -444,7 +457,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                       ],
                                                     )
                                                   : (travelmode[2] &&
-                                                          widget
+                                                          !widget
                                                               .isInternational)
                                                       ? Column(
                                                           crossAxisAlignment:
@@ -482,11 +495,11 @@ class _RoundTripState extends State<RoundTrip> {
                                                                                 TooltipTriggerMode.manual,
                                                                             child: Container(
                                                                               padding: EdgeInsets.all(8),
-                                                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: _isSelected[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
+                                                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: roadclass[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
                                                                               child: Icon(
                                                                                 FontAwesomeIcons.bus,
                                                                                 size: 24,
-                                                                                color: _isSelected[1] ? Colors.white : Colors.blue[300],
+                                                                                color: roadclass[0] ? Colors.white : Colors.blue[300],
                                                                               ),
                                                                             )),
                                                                         Tooltip(
@@ -496,11 +509,11 @@ class _RoundTripState extends State<RoundTrip> {
                                                                                 TooltipTriggerMode.manual,
                                                                             child: Container(
                                                                                 padding: EdgeInsets.all(8),
-                                                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: _isSelected[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
+                                                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: roadclass[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
                                                                                 child: Icon(
                                                                                   FontAwesomeIcons.car,
                                                                                   size: 24,
-                                                                                  color: _isSelected[1] ? Colors.white : Colors.blue[300],
+                                                                                  color: roadclass[1] ? Colors.white : Colors.blue[300],
                                                                                 )))
                                                                       ],
                                                                       isSelected: roadclass,
@@ -511,6 +524,8 @@ class _RoundTripState extends State<RoundTrip> {
                                                                               i < roadclass.length;
                                                                               i++) {
                                                                             roadclass[i] =
+                                                                                i == index;
+                                                                            roadclass1[i] =
                                                                                 i == index;
                                                                           }
                                                                         });
@@ -524,6 +539,8 @@ class _RoundTripState extends State<RoundTrip> {
                                                                           _travelClassController.text =
                                                                               'Car';
                                                                         }
+                                                                        print(_travelClassController
+                                                                            .text);
                                                                       }))
                                                             ])
                                                       : travelmode[1]
@@ -626,6 +643,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                                 for (int i = 0; i < trainclass.length; i++) {
                                                                                   trainclass[i] = i == index;
                                                                                 }
+                                                                                trainclass1 = trainclass;
                                                                               });
                                                                               if (trainclass[0]) {
                                                                                 _travelClassController.text = 'SL';
@@ -1431,34 +1449,6 @@ class _RoundTripState extends State<RoundTrip> {
                                                   ),
                                           ]),
                                           SizedBox(height: 10),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 8.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  border: Border.all(
-                                                      color: Colors.black26)),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    ' Comments',
-                                                    style: TextStyle(
-                                                        color: Colors.black54),
-                                                  ),
-                                                  TextFormField(
-                                                    style: TextStyle(
-                                                        color: Colors.black),
-                                                    controller:
-                                                        _comments1Controller,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
 
                                           SizedBox(
                                             height: 5,
@@ -1979,7 +1969,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                     ),
                                                     SizedBox(height: 5),
                                                     ToggleButtons(
-                                                      isSelected: travelmode,
+                                                      isSelected: travelmode1,
                                                       renderBorder: false,
                                                       children: [
                                                         Tooltip(
@@ -1991,7 +1981,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                               padding: EdgeInsets.all(
                                                                   8),
                                                               decoration: BoxDecoration(
-                                                                  color: travelmode[0]
+                                                                  color: travelmode1[0]
                                                                       ? Color.fromARGB(
                                                                           255,
                                                                           1,
@@ -2007,7 +1997,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                           30)),
                                                               child: Icon(FontAwesomeIcons.plane,
                                                                   size: 24,
-                                                                  color: travelmode[0]
+                                                                  color: travelmode1[0]
                                                                       ? Colors.white
                                                                       : Colors.blue[300])),
                                                         ),
@@ -2020,7 +2010,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                               padding: EdgeInsets.all(
                                                                   8),
                                                               decoration: BoxDecoration(
-                                                                  color: travelmode[1]
+                                                                  color: travelmode1[1]
                                                                       ? Color.fromARGB(
                                                                           255,
                                                                           1,
@@ -2036,11 +2026,11 @@ class _RoundTripState extends State<RoundTrip> {
                                                                           30)),
                                                               child: Icon(FontAwesomeIcons.train,
                                                                   size: 24,
-                                                                  color: travelmode[1]
+                                                                  color: travelmode1[1]
                                                                       ? Colors.white
                                                                       : Colors.blue[300])),
                                                         ),
-                                                        widget.isInternational
+                                                        !widget.isInternational
                                                             ? Tooltip(
                                                                 message: 'Road',
                                                                 triggerMode:
@@ -2051,7 +2041,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                         EdgeInsets.all(
                                                                             8),
                                                                     decoration: BoxDecoration(
-                                                                        color: travelmode[2]
+                                                                        color: travelmode1[2]
                                                                             ? Color.fromARGB(
                                                                                 255, 1, 75, 148)
                                                                             : Color.fromARGB(
@@ -2066,7 +2056,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                         FontAwesomeIcons
                                                                             .car,
                                                                         size: 24,
-                                                                        color: travelmode[2] ? Colors.white : Colors.blue[300])),
+                                                                        color: travelmode1[2] ? Colors.white : Colors.blue[300])),
                                                               )
                                                             : Container()
                                                       ],
@@ -2074,22 +2064,22 @@ class _RoundTripState extends State<RoundTrip> {
                                                         setState(() {
                                                           for (int i = 0;
                                                               i <
-                                                                  travelmode
+                                                                  travelmode1
                                                                       .length;
                                                               i++) {
-                                                            travelmode[i] =
+                                                            travelmode1[i] =
                                                                 i == p;
                                                           }
                                                         });
-                                                        if (travelmode[0]) {
+                                                        if (travelmode1[0]) {
                                                           _traveltype1Controller
                                                               .text = 'Flight';
                                                         }
-                                                        if (travelmode[1]) {
+                                                        if (travelmode1[1]) {
                                                           _traveltype1Controller
                                                               .text = 'Rail';
                                                         }
-                                                        if (travelmode[2] &&
+                                                        if (travelmode1[2] &&
                                                             widget
                                                                 .isInternational) {
                                                           _traveltype1Controller
@@ -2099,7 +2089,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                     )
                                                   ]),
                                               SizedBox(width: 20),
-                                              travelmode[0]
+                                              travelmode1[0]
                                                   ? Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
@@ -2143,7 +2133,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                               8),
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: _isSelected[
+                                                                    color: _isSelectedflight[
                                                                             0]
                                                                         ? Color.fromARGB(
                                                                             255,
@@ -2162,7 +2152,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                   child:
                                                                       ImageIcon(
                                                                     size: 24,
-                                                                    color: _isSelected[
+                                                                    color: _isSelectedflight[
                                                                             0]
                                                                         ? Colors
                                                                             .white
@@ -2188,7 +2178,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               30),
-                                                                      color: _isSelected[
+                                                                      color: _isSelectedflight[
                                                                               1]
                                                                           ? Color.fromARGB(
                                                                               255,
@@ -2203,7 +2193,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                   child:
                                                                       ImageIcon(
                                                                     size: 24,
-                                                                    color: _isSelected[
+                                                                    color: _isSelectedflight[
                                                                             1]
                                                                         ? Colors
                                                                             .white
@@ -2215,21 +2205,22 @@ class _RoundTripState extends State<RoundTrip> {
                                                                 ))
                                                           ],
                                                           isSelected:
-                                                              _isSelected,
+                                                              _isSelectedflight,
                                                           onPressed:
                                                               (int index) {
                                                             setState(() {
                                                               for (int i = 0;
                                                                   i <
-                                                                      _isSelected
+                                                                      _isSelectedflight
                                                                           .length;
                                                                   i++) {
-                                                                _isSelected[i] =
+                                                                _isSelectedflight[
+                                                                        i] =
                                                                     i == index;
                                                               }
                                                             });
                                                             if (index == 0 &&
-                                                                _isSelected[
+                                                                _isSelectedflight[
                                                                         index] ==
                                                                     true) {
                                                               _travelClass1Controller
@@ -2237,7 +2228,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                   'Economy class';
                                                             } else if (index ==
                                                                     1 &&
-                                                                _isSelected[
+                                                                _isSelectedflight[
                                                                         index] ==
                                                                     true) {
                                                               _travelClass1Controller
@@ -2248,8 +2239,8 @@ class _RoundTripState extends State<RoundTrip> {
                                                         ),
                                                       ],
                                                     )
-                                                  : (travelmode[2] &&
-                                                          widget
+                                                  : (travelmode1[2] &&
+                                                          !widget
                                                               .isInternational)
                                                       ? Column(
                                                           crossAxisAlignment:
@@ -2287,11 +2278,11 @@ class _RoundTripState extends State<RoundTrip> {
                                                                                 TooltipTriggerMode.manual,
                                                                             child: Container(
                                                                               padding: EdgeInsets.all(8),
-                                                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: _isSelected[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
+                                                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: roadclass1[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
                                                                               child: Icon(
                                                                                 FontAwesomeIcons.bus,
                                                                                 size: 24,
-                                                                                color: _isSelected[1] ? Colors.white : Colors.blue[300],
+                                                                                color: roadclass1[0] ? Colors.white : Colors.blue[300],
                                                                               ),
                                                                             )),
                                                                         Tooltip(
@@ -2301,37 +2292,37 @@ class _RoundTripState extends State<RoundTrip> {
                                                                                 TooltipTriggerMode.manual,
                                                                             child: Container(
                                                                                 padding: EdgeInsets.all(8),
-                                                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: _isSelected[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
+                                                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: roadclass1[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
                                                                                 child: Icon(
                                                                                   FontAwesomeIcons.car,
                                                                                   size: 24,
-                                                                                  color: _isSelected[1] ? Colors.white : Colors.blue[300],
+                                                                                  color: roadclass1[1] ? Colors.white : Colors.blue[300],
                                                                                 )))
                                                                       ],
-                                                                      isSelected: roadclass,
+                                                                      isSelected: roadclass1,
                                                                       onPressed: (index) {
                                                                         setState(
                                                                             () {
                                                                           for (int i = 0;
-                                                                              i < roadclass.length;
+                                                                              i < roadclass1.length;
                                                                               i++) {
-                                                                            roadclass[i] =
+                                                                            roadclass1[i] =
                                                                                 i == index;
                                                                           }
                                                                         });
-                                                                        if (roadclass[
+                                                                        if (roadclass1[
                                                                             0]) {
                                                                           _travelClass1Controller.text =
                                                                               'Bus';
                                                                         }
-                                                                        if (roadclass[
+                                                                        if (roadclass1[
                                                                             1]) {
                                                                           _travelClass1Controller.text =
                                                                               'Car';
                                                                         }
                                                                       }))
                                                             ])
-                                                      : travelmode[1]
+                                                      : travelmode1[1]
                                                           ? Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
@@ -2373,81 +2364,81 @@ class _RoundTripState extends State<RoundTrip> {
                                                                                   child: Container(
                                                                                       padding: EdgeInsets.all(8),
                                                                                       decoration: BoxDecoration(
-                                                                                        color: trainclass[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                        color: trainclass1[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
                                                                                         borderRadius: BorderRadius.circular(30),
                                                                                       ),
-                                                                                      child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass[0] ? Colors.white : Colors.blue[300])))),
+                                                                                      child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass1[0] ? Colors.white : Colors.blue[300])))),
                                                                               Tooltip(
                                                                                   message: 'SC',
                                                                                   child: Container(
                                                                                       padding: EdgeInsets.all(8),
                                                                                       decoration: BoxDecoration(
-                                                                                        color: trainclass[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                        color: trainclass1[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
                                                                                         borderRadius: BorderRadius.circular(30),
                                                                                       ),
-                                                                                      child: Text('SC', style: TextStyle(fontSize: 24, color: trainclass[1] ? Colors.white : Colors.blue[300])))),
+                                                                                      child: Text('SC', style: TextStyle(fontSize: 24, color: trainclass1[1] ? Colors.white : Colors.blue[300])))),
                                                                               Tooltip(
                                                                                   message: 'CC',
                                                                                   child: Container(
                                                                                       padding: EdgeInsets.all(8),
                                                                                       decoration: BoxDecoration(
-                                                                                        color: trainclass[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                        color: trainclass1[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
                                                                                         borderRadius: BorderRadius.circular(30),
                                                                                       ),
-                                                                                      child: Text('CC', style: TextStyle(fontSize: 24, color: trainclass[2] ? Colors.white : Colors.blue[300])))),
+                                                                                      child: Text('CC', style: TextStyle(fontSize: 24, color: trainclass1[2] ? Colors.white : Colors.blue[300])))),
                                                                               Tooltip(
                                                                                   message: '3A',
                                                                                   child: Container(
                                                                                       padding: EdgeInsets.all(8),
                                                                                       decoration: BoxDecoration(
-                                                                                        color: trainclass[3] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                        color: trainclass1[3] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
                                                                                         borderRadius: BorderRadius.circular(30),
                                                                                       ),
-                                                                                      child: Text('3A', style: TextStyle(fontSize: 24, color: trainclass[3] ? Colors.white : Colors.blue[300])))),
+                                                                                      child: Text('3A', style: TextStyle(fontSize: 24, color: trainclass1[3] ? Colors.white : Colors.blue[300])))),
                                                                               Tooltip(
                                                                                   message: '2A',
                                                                                   child: Container(
                                                                                       padding: EdgeInsets.all(8),
                                                                                       decoration: BoxDecoration(
-                                                                                        color: trainclass[4] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                        color: trainclass1[4] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
                                                                                         borderRadius: BorderRadius.circular(30),
                                                                                       ),
-                                                                                      child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[4] ? Colors.white : Colors.blue[300])))),
+                                                                                      child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass1[4] ? Colors.white : Colors.blue[300])))),
                                                                               Tooltip(
                                                                                   message: '1A',
                                                                                   child: Container(
                                                                                       padding: EdgeInsets.all(8),
                                                                                       decoration: BoxDecoration(
-                                                                                        color: trainclass[5] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                        color: trainclass1[5] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
                                                                                         borderRadius: BorderRadius.circular(30),
                                                                                       ),
-                                                                                      child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass[5] ? Colors.white : Colors.blue[300]))))
+                                                                                      child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass1[5] ? Colors.white : Colors.blue[300]))))
                                                                             ],
                                                                             isSelected:
-                                                                                trainclass,
+                                                                                trainclass1,
                                                                             onPressed:
                                                                                 (index) {
                                                                               setState(() {
-                                                                                for (int i = 0; i < trainclass.length; i++) {
-                                                                                  trainclass[i] = i == index;
+                                                                                for (int i = 0; i < trainclass1.length; i++) {
+                                                                                  trainclass1[i] = i == index;
                                                                                 }
                                                                               });
-                                                                              if (trainclass[0]) {
+                                                                              if (trainclass1[0]) {
                                                                                 _travelClass1Controller.text = 'SL';
                                                                               }
-                                                                              if (trainclass[1]) {
+                                                                              if (trainclass1[1]) {
                                                                                 _travelClass1Controller.text = 'SC';
                                                                               }
-                                                                              if (trainclass[2]) {
+                                                                              if (trainclass1[2]) {
                                                                                 _travelClass1Controller.text = 'CC';
                                                                               }
-                                                                              if (trainclass[3]) {
+                                                                              if (trainclass1[3]) {
                                                                                 _travelClass1Controller.text = '3A';
                                                                               }
-                                                                              if (trainclass[4]) {
+                                                                              if (trainclass1[4]) {
                                                                                 _travelClass1Controller.text = '2A';
                                                                               }
-                                                                              if (trainclass[5]) {
+                                                                              if (trainclass1[5]) {
                                                                                 _travelClass1Controller.text = '1A';
                                                                               }
                                                                             }),
@@ -3229,43 +3220,218 @@ class _RoundTripState extends State<RoundTrip> {
                                                   ),
                                           ]),
                                           SizedBox(height: 10),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 8.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  border: Border.all(
-                                                      color: Colors.black26)),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    ' Comments',
-                                                    style: TextStyle(
-                                                        color: Colors.black54),
-                                                  ),
-                                                  TextFormField(
-                                                    style: TextStyle(
-                                                        color: Colors.black),
-                                                    controller:
-                                                        _comments2Controller,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
 
                                           SizedBox(
                                             height: 5,
                                           ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                baggagereturn = !baggagereturn;
+                                              });
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                color: baggagereturn ? c2 : c1,
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                              child: ImageIcon(
+                                                  AssetImage(
+                                                      'assets/images/baggage_btn_icon.png'),
+                                                  size: 24,
+                                                  color: baggagereturn
+                                                      ? Colors.white
+                                                      : Colors.blue[300]),
+                                            ),
+                                          ),
+                                          Visibility(
+                                              visible: baggagereturn,
+                                              child: Card(
+                                                elevation: 4,
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20)),
+                                                    child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 8.0,
+                                                                bottom: 8,
+                                                                top: 8),
+                                                        child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Row(children: [
+                                                                Container(
+                                                                  width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          2 -
+                                                                      40,
+                                                                  decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: Colors
+                                                                              .black26),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                            8.0),
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                            'Bags:',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.black,
+                                                                            )),
+                                                                        DropdownMenu(
+                                                                          requestFocusOnTap:
+                                                                              false,
+                                                                          textStyle:
+                                                                              TextStyle(color: Colors.black),
+                                                                          hintText:
+                                                                              'Bags',
+                                                                          inputDecorationTheme: InputDecorationTheme(
+                                                                              border: InputBorder.none,
+                                                                              hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
+                                                                          controller:
+                                                                              _bag2Controller,
+                                                                          initialSelection:
+                                                                              _bag2Controller.text,
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width / 2 - 40,
+                                                                          dropdownMenuEntries:
+                                                                              bags.map((int e) {
+                                                                            return DropdownMenuEntry(
+                                                                                value: e,
+                                                                                label: '$e');
+                                                                          }).toList(),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                    width: 20),
+                                                                Container(
+                                                                    width: MediaQuery.of(context).size.width /
+                                                                            2 -
+                                                                        40,
+                                                                    decoration: BoxDecoration(
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .black26),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                5)),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child:
+                                                                          Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                              'Total Weight:',
+                                                                              style: TextStyle(
+                                                                                color: Colors.black,
+                                                                              )),
+                                                                          TextFormField(
+                                                                            autovalidateMode:
+                                                                                AutovalidateMode.onUserInteraction,
+                                                                            controller:
+                                                                                _totalweight2Controller,
+                                                                            decoration: InputDecoration(
+                                                                                border: InputBorder.none,
+                                                                                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 100),
+                                                                                hintText: 'Total Extra Weight(Kgs)',
+                                                                                hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                    ))
+                                                              ]),
+                                                              SizedBox(
+                                                                  height: 10),
+                                                              Container(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width -
+                                                                      10,
+                                                                  decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: Colors
+                                                                              .black26),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  child: Padding(
+                                                                      padding: const EdgeInsets.all(8.0),
+                                                                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                                                        Text(
+                                                                            'Remarks:',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.black,
+                                                                            )),
+                                                                        TextFormField(
+                                                                          controller:
+                                                                              _remarks2Controller,
+                                                                          decoration: InputDecoration(
+                                                                              border: InputBorder.none,
+                                                                              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 100),
+                                                                              hintText: 'Remarks',
+                                                                              hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
+                                                                        ),
+                                                                      ]))),
+                                                            ]))),
+                                              )),
                                         ],
                                       ),
                                     ),
                                   ))
-                                : Container()
+                                : Container(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(color: Colors.black26)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      ' Comments',
+                                      style: TextStyle(color: Colors.black54),
+                                    ),
+                                    TextFormField(
+                                      style: TextStyle(color: Colors.black),
+                                      controller: _comments1Controller,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ])),
                         ),
                         Align(
@@ -3357,270 +3523,332 @@ class _RoundTripState extends State<RoundTrip> {
                       ],
                     ),
                     SizedBox(height: 10),
-                    TextButton(
-                        onPressed: () {
-                          if (formkey.currentState!.validate()) {
-                            print("1");
-                            if (_travelClassController.text.isNotEmpty &&
-                                _seatController.text.isNotEmpty &&
-                                _foodController.text.isNotEmpty) {
-                              print(2);
-                              bool isConditionMet = true;
-                              bool Condition2 = true;
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      TextButton(
+                          onPressed: () {
+                            if (formkey.currentState!.validate()) {
+                              print("1");
+                              if (_travelClassController.text.isNotEmpty &&
+                                  _seatController.text.isNotEmpty &&
+                                  _foodController.text.isNotEmpty) {
+                                print(2);
+                                bool isConditionMet = true;
+                                bool Condition2 = true;
+                                bool Condition3 = true;
+                                if (accom[0] || accom[1]) {
+                                  if (accom[0]) {
+                                    isConditionMet = isConditionMet &&
+                                        _accomodationController.text.isNotEmpty;
+                                  }
 
-                              if (accom[0] || accom[1]) {
-                                if (accom[0]) {
-                                  isConditionMet = isConditionMet &&
-                                      _accomodationController.text.isNotEmpty;
+                                  if (accom[1]) {
+                                    isConditionMet = isConditionMet &&
+                                        _occupancyController.text.isNotEmpty &&
+                                        _bagController.text.isNotEmpty;
+                                  }
+                                  if (widget.isInternational) {
+                                    Condition2 = Condition2 &&
+                                        _regionController.text.isNotEmpty;
+                                  }
                                 }
-
-                                if (accom[1]) {
-                                  isConditionMet = isConditionMet &&
-                                      _occupancyController.text.isNotEmpty &&
-                                      _bagController.text.isNotEmpty;
+                                if (baggagereturn) {
+                                  if (_bag2Controller.text.isNotEmpty &&
+                                      _totalweight2Controller.text.isNotEmpty) {
+                                    Condition3 = true;
+                                  } else {
+                                    Condition3 = false;
+                                  }
                                 }
                                 if (widget.isInternational) {
-                                  Condition2 = Condition2 &&
-                                      _regionController.text.isNotEmpty;
-                                }
-                              }
-                              if (widget.isInternational) {
-                                if (isConditionMet && Condition2) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              RoundTripInternational(data: {
-                                                'travelmode':
-                                                    _traveltypeController.text,
-                                                'travelclass':
-                                                    _travelClassController.text,
-                                                'origin':
-                                                    _originController.text,
-                                                'destination':
-                                                    _destinationController.text,
-                                                'traveldate':
-                                                    _traveldateController.text,
-                                                'traveltime':
-                                                    _traveltimeController.text,
-                                                'eta': _etaController.text,
-                                                'food': _foodController.text,
-                                                'seat': _seatController.text,
-                                                'comments':
-                                                    _comments1Controller.text,
-                                                'accomodation':
-                                                    _accomodationController
-                                                        .text,
-                                                'occupancy':
-                                                    _occupancyController.text,
-                                                'checkin':
-                                                    _checkinController.text,
-                                                'checkout':
-                                                    _checkoutController.text,
-                                                'bags': _bagController.text,
-                                                'weight':
-                                                    _totalweightController.text,
-                                                'remarks':
-                                                    _remarksController.text,
-                                                'travelmodeereturn':
-                                                    _traveltype1Controller.text,
-                                                'travelclassreturn':
-                                                    _travelClass1Controller
-                                                        .text,
-                                                'originreturn':
-                                                    _destinationController.text,
-                                                'destinationreturn':
-                                                    _originController.text,
-                                                'traveldatereturn':
-                                                    _traveldate1Controller.text,
-                                                'traveltimereturn':
-                                                    _traveltime1Controller.text,
-                                                'etareturn':
-                                                    _eta1Controller.text,
-                                                'foodreturn':
-                                                    _food1Controller.text,
-                                                'seatreturn':
-                                                    _seat1Controller.text,
-                                                'commentsreturn':
-                                                    _comments2Controller.text,
-                                                'region':
-                                                    _regionController.text,
-                                                'regionreturn':
-                                                    _region2Controller.text
-                                              })));
-                                } else {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return Center(
-                                        child: AlertDialog(
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ensure it only takes the necessary space
-                                            children: <Widget>[
-                                              Text(
-                                                'Please fill all the details.',
-                                                textAlign: TextAlign
-                                                    .center, // Center the text within the column
+                                  if (isConditionMet &&
+                                      Condition2 &&
+                                      Condition3) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                RoundTripInternational(data: {
+                                                  'travelmode':
+                                                      _traveltypeController
+                                                          .text,
+                                                  'travelclass':
+                                                      _travelClassController
+                                                          .text,
+                                                  'origin':
+                                                      _originController.text,
+                                                  'destination':
+                                                      _destinationController
+                                                          .text,
+                                                  'traveldate':
+                                                      _traveldateController
+                                                          .text,
+                                                  'traveltime':
+                                                      _traveltimeController
+                                                          .text,
+                                                  'eta': _etaController.text,
+                                                  'food': _foodController.text,
+                                                  'seat': _seatController.text,
+                                                  'comments':
+                                                      _comments1Controller.text,
+                                                  'accomodation':
+                                                      _accomodationController
+                                                          .text,
+                                                  'occupancy':
+                                                      _occupancyController.text,
+                                                  'checkin':
+                                                      _checkinController.text,
+                                                  'checkout':
+                                                      _checkoutController.text,
+                                                  'bags': _bagController.text,
+                                                  'weight':
+                                                      _totalweightController
+                                                          .text,
+                                                  'remarks':
+                                                      _remarksController.text,
+                                                  'travelmodeereturn':
+                                                      _traveltype1Controller
+                                                          .text,
+                                                  'travelclassreturn':
+                                                      _travelClass1Controller
+                                                          .text,
+                                                  'originreturn':
+                                                      _destinationController
+                                                          .text,
+                                                  'destinationreturn':
+                                                      _originController.text,
+                                                  'traveldatereturn':
+                                                      _traveldate1Controller
+                                                          .text,
+                                                  'traveltimereturn':
+                                                      _traveltime1Controller
+                                                          .text,
+                                                  'etareturn':
+                                                      _eta1Controller.text,
+                                                  'foodreturn':
+                                                      _food1Controller.text,
+                                                  'seatreturn':
+                                                      _seat1Controller.text,
+                                                  'region':
+                                                      _regionController.text,
+                                                  'regionreturn':
+                                                      _region2Controller.text,
+                                                  'bagreturn':
+                                                      _bag2Controller.text,
+                                                  'totalweightreturn':
+                                                      _totalweight2Controller
+                                                          .text,
+                                                  'remarksreturn':
+                                                      _remarks2Controller.text
+                                                })));
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Center(
+                                          child: AlertDialog(
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize
+                                                  .min, // Ensure it only takes the necessary space
+                                              children: <Widget>[
+                                                Text(
+                                                  'Please fill all the details.',
+                                                  textAlign: TextAlign
+                                                      .center, // Center the text within the column
+                                                ),
+                                              ],
+                                            ),
+                                            actions: <Widget>[
+                                              Center(
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context)
+                                                        .pop(); // Close the dialog
+                                                  },
+                                                  child: Text('OK'),
+                                                ),
                                               ),
                                             ],
                                           ),
-                                          actions: <Widget>[
-                                            Center(
-                                              child: ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.of(context)
-                                                      .pop(); // Close the dialog
-                                                },
-                                                child: Text('OK'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                }
-                              } else {
-                                if (isConditionMet) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              RoundTripDomestic(data: {
-                                                'travelmode':
-                                                    _traveltypeController.text,
-                                                'travelclass':
-                                                    _travelClassController.text,
-                                                'origin':
-                                                    _originController.text,
-                                                'destination':
-                                                    _destinationController.text,
-                                                'traveldate':
-                                                    _traveldateController.text,
-                                                'traveltime':
-                                                    _traveltimeController.text,
-                                                'eta': _etaController.text,
-                                                'food': _foodController.text,
-                                                'seat': _seatController.text,
-                                                'comments':
-                                                    _comments1Controller.text,
-                                                'accomodation':
-                                                    _accomodationController
-                                                        .text,
-                                                'occupancy':
-                                                    _occupancyController.text,
-                                                'checkin':
-                                                    _checkinController.text,
-                                                'checkout':
-                                                    _checkoutController.text,
-                                                'bags': _bagController.text,
-                                                'weight':
-                                                    _totalweightController.text,
-                                                'remarks':
-                                                    _remarksController.text,
-                                                'travelmodeereturn':
-                                                    _traveltype1Controller.text,
-                                                'travelclassreturn':
-                                                    _travelClass1Controller
-                                                        .text,
-                                                'originreturn':
-                                                    _destinationController.text,
-                                                'destinationreturn':
-                                                    _originController.text,
-                                                'traveldatereturn':
-                                                    _traveldate1Controller.text,
-                                                'traveltimereturn':
-                                                    _traveltime1Controller.text,
-                                                'etareturn':
-                                                    _eta1Controller.text,
-                                                'foodreturn':
-                                                    _food1Controller.text,
-                                                'seatreturn':
-                                                    _seat1Controller.text,
-                                                'commentsreturn':
-                                                    _comments2Controller.text
-                                              })));
+                                        );
+                                      },
+                                    );
+                                  }
                                 } else {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return Center(
-                                        child: AlertDialog(
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ensure it only takes the necessary space
-                                            children: <Widget>[
-                                              Text(
-                                                'Please fill all the details.',
-                                                textAlign: TextAlign
-                                                    .center, // Center the text within the column
+                                  if (isConditionMet) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                RoundTripDomestic(data: {
+                                                  'travelmode':
+                                                      _traveltypeController
+                                                          .text,
+                                                  'travelclass':
+                                                      _travelClassController
+                                                          .text,
+                                                  'origin':
+                                                      _originController.text,
+                                                  'destination':
+                                                      _destinationController
+                                                          .text,
+                                                  'traveldate':
+                                                      _traveldateController
+                                                          .text,
+                                                  'traveltime':
+                                                      _traveltimeController
+                                                          .text,
+                                                  'eta': _etaController.text,
+                                                  'food': _foodController.text,
+                                                  'seat': _seatController.text,
+                                                  'comments':
+                                                      _comments1Controller.text,
+                                                  'accomodation':
+                                                      _accomodationController
+                                                          .text,
+                                                  'occupancy':
+                                                      _occupancyController.text,
+                                                  'checkin':
+                                                      _checkinController.text,
+                                                  'checkout':
+                                                      _checkoutController.text,
+                                                  'bags': _bagController.text,
+                                                  'weight':
+                                                      _totalweightController
+                                                          .text,
+                                                  'remarks':
+                                                      _remarksController.text,
+                                                  'travelmodeereturn':
+                                                      _traveltype1Controller
+                                                          .text,
+                                                  'travelclassreturn':
+                                                      _travelClass1Controller
+                                                          .text,
+                                                  'originreturn':
+                                                      _destinationController
+                                                          .text,
+                                                  'destinationreturn':
+                                                      _originController.text,
+                                                  'traveldatereturn':
+                                                      _traveldate1Controller
+                                                          .text,
+                                                  'traveltimereturn':
+                                                      _traveltime1Controller
+                                                          .text,
+                                                  'etareturn':
+                                                      _eta1Controller.text,
+                                                  'foodreturn':
+                                                      _food1Controller.text,
+                                                  'seatreturn':
+                                                      _seat1Controller.text,
+                                                  'bagreturn':
+                                                      _bag2Controller.text,
+                                                  'totalweightreturn':
+                                                      _totalweight2Controller
+                                                          .text,
+                                                  'remarksreturn':
+                                                      _remarks2Controller.text
+                                                })));
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Center(
+                                          child: AlertDialog(
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize
+                                                  .min, // Ensure it only takes the necessary space
+                                              children: <Widget>[
+                                                Text(
+                                                  'Please fill all the details.',
+                                                  textAlign: TextAlign
+                                                      .center, // Center the text within the column
+                                                ),
+                                              ],
+                                            ),
+                                            actions: <Widget>[
+                                              Center(
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context)
+                                                        .pop(); // Close the dialog
+                                                  },
+                                                  child: Text('OK'),
+                                                ),
                                               ),
                                             ],
                                           ),
-                                          actions: <Widget>[
-                                            Center(
-                                              child: ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.of(context)
-                                                      .pop(); // Close the dialog
-                                                },
-                                                child: Text('OK'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
+                                        );
+                                      },
+                                    );
+                                  }
                                 }
                               }
-                            }
-                          } else {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Center(
-                                  child: AlertDialog(
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize
-                                          .min, // Ensure it only takes the necessary space
-                                      children: <Widget>[
-                                        Text(
-                                          'Please fill all the details.',
-                                          textAlign: TextAlign
-                                              .center, // Center the text within the column
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Center(
+                                    child: AlertDialog(
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize
+                                            .min, // Ensure it only takes the necessary space
+                                        children: <Widget>[
+                                          Text(
+                                            'Please fill all the details.',
+                                            textAlign: TextAlign
+                                                .center, // Center the text within the column
+                                          ),
+                                        ],
+                                      ),
+                                      actions: <Widget>[
+                                        Center(
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop(); // Close the dialog
+                                            },
+                                            child: Text('OK'),
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    actions: <Widget>[
-                                      Center(
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .pop(); // Close the dialog
-                                          },
-                                          child: Text('OK'),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
-                          }
-                        },
-                        child: Container(
-                            width: 100,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Color.fromARGB(255, 1, 75, 148)),
-                            child: Center(
-                              child: Text('Submit',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20)),
-                            )))
+                                  );
+                                },
+                              );
+                            }
+                          },
+                          child: Container(
+                              width: 100,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color.fromARGB(255, 1, 75, 148)),
+                              child: Center(
+                                child: Text('Submit',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20)),
+                              ))),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => RoundTrip(
+                                        isInternational:
+                                            widget.isInternational)));
+                          },
+                          child: Container(
+                              width: 100,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: const Color.fromARGB(255, 131, 14, 5)),
+                              child: Center(
+                                child: Text('Clear',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20)),
+                              )))
+                    ])
                   ],
                 ))));
   }
