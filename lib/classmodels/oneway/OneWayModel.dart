@@ -93,7 +93,10 @@ class OneWayModelInternational {
   String? weight;
   String? remarks;
   String? region;
-  String? connectiontocurrencytable;
+  String? currencymode;
+  String? currency;
+  String? amount;
+  String? remarkscurrency;
   String? insurancerequired;
   String? insurancefromdate;
   String? insurancetodate;
@@ -126,7 +129,10 @@ class OneWayModelInternational {
       'seat': seat ?? '',
       'weight': weight ?? '',
       'region': region ?? '',
-      'connectiontocurrencytable': connectiontocurrencytable ?? '',
+      'currencymode': currencymode ?? '',
+      'currency': currency ?? '',
+      'amount': amount ?? '',
+      'remarkscurrency': remarkscurrency ?? '',
       'insuranceavailability': insuranceavailability ?? '',
       'insurancefromdate': insurancefromdate ?? '',
       'insurancetodate': insurancetodate ?? '',
@@ -161,7 +167,10 @@ class OneWayModelInternational {
       this.seat,
       this.weight,
       this.region,
-      this.connectiontocurrencytable,
+      this.currencymode,
+      this.currency,
+      this.amount,
+      this.remarkscurrency,
       this.insurancerequired,
       this.insurancetodate,
       this.insurancefromdate,

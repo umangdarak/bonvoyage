@@ -2259,8 +2259,12 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                 .insertItemOneWayDom({
                                               'sameuser': connection,
                                               'visa': _visaController.text,
-                                              "connectiontocurrencytable":
-                                                  connection,
+                                              "currencymode":
+                                                  currencymode.join(","),
+                                              "currency": currency.join(","),
+                                              "amount": amount.join(","),
+                                              "remarkscurrency":
+                                                  remarks.join(","),
                                               'cab': _cabController.text,
                                               'purpose':
                                                   _purposeController.text,
@@ -2284,19 +2288,7 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                               'connectiontotravellertable':
                                                   connection,
                                             }, 'multicity');
-                                            for (int i = 0;
-                                                i < currencymode.length;
-                                                i++) {
-                                              await DataBaseHelper
-                                                  .insertItemOneWayDom({
-                                                "connectiontocurrencytable":
-                                                    connection,
-                                                "currencymode": currencymode[i],
-                                                "currency": currency[i],
-                                                "amount": amount[i],
-                                                "remarks": remarks[i],
-                                              }, "internationalcurrency");
-                                            }
+
                                             print(widget.data);
                                             for (int i = 0;
                                                 i < widget.data.length;
@@ -2307,11 +2299,8 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                 'connection': connection
                                               }, 'multicityeach');
                                             }
-                                            var d = await DataBaseHelper
-                                                .readOneWayDom(
-                                                    "internationalcurrency");
+                                          
 
-                                            print(d);
 
                                             await DataBaseHelper
                                                 .insertItemOneWayDom({

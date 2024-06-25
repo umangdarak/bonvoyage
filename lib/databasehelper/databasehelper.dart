@@ -7,7 +7,6 @@ class DataBaseHelper {
         onCreate: (sql.Database database, int version) async {
       await oneWayDomesticTable(database);
       await oneWayInternationalTable(database);
-      await internationalCurrencyTable(database);
       await travellerDetailsTable(database);
       await companyBusTable(database);
       await carBookingDetails(database);
@@ -15,6 +14,8 @@ class DataBaseHelper {
       await roundtripinternational(database);
       await multicityMultipleTable(database);
       await multicityTable(database);
+      await multicityTabledomestic(database);
+      await multicityMultipleTableDomestic(database);
     });
   }
 
@@ -24,8 +25,11 @@ class DataBaseHelper {
       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       sameuser TEXT,
       visa TEXT,
-      connectiontocurrencytable TEXT,
-      cab TEXT,
+currencymode TEXT,
+        currency TEXT,
+        amount TEXT,
+        remarkscurrency TEXT,
+              cab TEXT,
       purpose TEXT,
       insurancerequired TEXT,
       insurancefromdate TEXT,
@@ -36,6 +40,48 @@ class DataBaseHelper {
       connectiontotravellertable TEXT,
       issync INTEGER DEFAULT 0
     )
+''');
+  }
+
+  static Future<void> multicityTabledomestic(sql.Database database) async {
+    await database.execute('''
+    CREATE TABLE multicitydomestic(
+      id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+      sameuser TEXT,
+      currencymode TEXT,
+      currency TEXT,
+      amount TEXT,
+      cab TEXT,
+      purpose TEXT,
+      connectiontotravellertable TEXT,
+      issync INTEGER DEFAULT 0
+    )
+''');
+  }
+
+  static Future<void> multicityMultipleTableDomestic(
+      sql.Database database) async {
+    await database.execute('''
+CREATE TABLE multicityeachdomestic(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+      connection TEXT,
+      travelmode TEXT,
+      travelclass TEXT,
+      origin TEXT,
+      destination TEXT,
+      traveldate TEXT,
+      traveltime TEXT,
+      eta TEXT,
+      food TEXT,
+      accomodation TEXT,
+      bags TEXT,
+      hotel TEXT,
+      occupancy TEXT,
+      checkin TEXT,
+      checkout TEXT,
+      remarks TEXT,
+      seat TEXT,
+      weight TEXT
+      )
 ''');
   }
 
@@ -90,8 +136,11 @@ CREATE TABLE multicityeach(
       weight TEXT,
       region TEXT,
       visa TEXT,
-      connectiontocurrencytable TEXT,
-      cab TEXT,
+currencymode TEXT,
+        currency TEXT,
+        amount TEXT,
+        remarkscurrency TEXT,
+              cab TEXT,
       purpose TEXT,
       insurancerequired TEXT,
       insurancefromdate TEXT,
@@ -101,19 +150,6 @@ CREATE TABLE multicityeach(
       insurancevaliddate TEXT,
       connectiontotravellertable TEXT,
       issync INTEGER DEFAULT 0
-    )
-''');
-  }
-
-  static Future<void> internationalCurrencyTable(sql.Database database) async {
-    await database.execute('''
-    CREATE TABLE internationalcurrency(
-      connectiontocurrencytable TEXT,
-      currencymode TEXT,
-      currency TEXT,
-      amount TEXT,
-      remarks TEXT,
-      FOREIGN KEY (connectiontocurrencytable) REFERENCES onewayinternational(connectiontocurrencytable)
     )
 ''');
   }
@@ -176,6 +212,7 @@ CREATE TABLE roundtripinternational(
         currencymode TEXT,
         currency TEXT,
         amount TEXT,
+        remarkscurrency TEXT,
         cab TEXT,
         purpose TEXT,
         visa TEXT,

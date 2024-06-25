@@ -71,7 +71,7 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
     _visaController.text = 'No';
     _insurancerequiredController.text = 'No';
     _insuranceavailableController.text = 'No';
-     _travellernameController.text = "Umang";
+    _travellernameController.text = "Umang";
     _travellergenderController.text = "Male";
     _travelleremailController.text = "abc@gmail.com";
     _travellermobilenoContorller.text = "909999999";
@@ -712,60 +712,26 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                                                     .black54),
                                                           ),
                                                           Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                          8.0),
+                                                              padding: const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                      8.0),
                                                               child:
                                                                   TextFormField(
-                                                                validator:
-                                                                    _validateRequired,
-                                                                autovalidateMode:
-                                                                    AutovalidateMode
-                                                                        .onUserInteraction,
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .number,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
-                                                                controller:
-                                                                    amount1,
-                                                                onFieldSubmitted:
-                                                                    (s) {
-                                                                  setState(() {
-                                                                    if (amount
-                                                                            .length ==
-                                                                        index) {
-                                                                      amount.add(
-                                                                          s);
-                                                                    } else {
-                                                                      amount[index] =
-                                                                          s;
-                                                                    }
-                                                                    print(
-                                                                        amount);
-                                                                  });
-                                                                },
-                                                                onEditingComplete:
-                                                                    () {
-                                                                  setState(() {
-                                                                    if (amount
-                                                                            .length ==
-                                                                        index) {
-                                                                      amount.add(
-                                                                          amount1
-                                                                              .text);
-                                                                    } else {
-                                                                      amount[index] =
-                                                                          amount1
-                                                                              .text;
-                                                                    }
-                                                                    print(
-                                                                        amount);
-                                                                  });
-                                                                }, onChanged:
+                                                                      validator:
+                                                                          _validateRequired,
+                                                                      autovalidateMode:
+                                                                          AutovalidateMode
+                                                                              .onUserInteraction,
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .number,
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black),
+                                                                      controller:
+                                                                          amount1,
+                                                                      onFieldSubmitted:
                                                                           (s) {
                                                                         setState(
                                                                             () {
@@ -779,8 +745,37 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                                                           print(
                                                                               amount);
                                                                         });
-                                                                      }
-                                                              ))
+                                                                      },
+                                                                      onEditingComplete:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          if (amount.length ==
+                                                                              index) {
+                                                                            amount.add(amount1.text);
+                                                                          } else {
+                                                                            amount[index] =
+                                                                                amount1.text;
+                                                                          }
+                                                                          print(
+                                                                              amount);
+                                                                        });
+                                                                      },
+                                                                      onChanged:
+                                                                          (s) {
+                                                                        setState(
+                                                                            () {
+                                                                          if (amount.length ==
+                                                                              index) {
+                                                                            amount.add(s);
+                                                                          } else {
+                                                                            amount[index] =
+                                                                                s;
+                                                                          }
+                                                                          print(
+                                                                              amount);
+                                                                        });
+                                                                      }))
                                                         ]))),
                                             SizedBox(width: 5),
                                             Padding(
@@ -844,19 +839,20 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                                                     }
                                                                   });
                                                                 },
-                                                                  onChanged:
-                                                                          (s) {
-                                                                        setState(
-                                                                            () {
-                                                                          if (remarks.length ==
-                                                                              0) {
-                                                                            remarks.add(s);
-                                                                          } else {
-                                                                            remarks[0] =
-                                                                                s;
-                                                                          }
-                                                                        });
-                                                                      },
+                                                                onChanged: (s) {
+                                                                  setState(() {
+                                                                    if (remarks
+                                                                            .length ==
+                                                                        0) {
+                                                                      remarks
+                                                                          .add(
+                                                                              s);
+                                                                    } else {
+                                                                      remarks[
+                                                                          0] = s;
+                                                                    }
+                                                                  });
+                                                                },
                                                                 onEditingComplete:
                                                                     () {
                                                                   setState(() {
@@ -2282,8 +2278,12 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                           model.cab = _cabController.text;
                                           model.purpose =
                                               _purposeController.text;
-                                          model.connectiontocurrencytable =
-                                              connection;
+                                          model.currencymode =
+                                              currencymode.join(',');
+                                          model.currency = currency.join(',');
+                                          model.amount = amount.join(',');
+                                          model.remarkscurrency =
+                                              remarks.join(',');
                                           model.visa = _visaController.text;
                                           model.insuranceavailability =
                                               _insuranceavailableController
@@ -2299,6 +2299,8 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                           model.insurancevaliddate =
                                               _insurancevaliddateController
                                                   .text;
+                                          model.connectiontotravellertable =
+                                              connection;
                                         });
                                         var e = await DataBaseHelper
                                             .insertItemOneWayDom(model.toMap(),
@@ -2306,25 +2308,8 @@ class _OneWayMiscInternationalState extends State<OneWayMiscInternational> {
                                         var c =
                                             await DataBaseHelper.readOneWayDom(
                                                 "onewayinternational");
-                                        for (int i = 0;
-                                            i < currencymode.length;
-                                            i++) {
-                                          await DataBaseHelper
-                                              .insertItemOneWayDom({
-                                            "connectiontocurrencytable":
-                                                connection,
-                                            "currencymode": currencymode[i],
-                                            "currency": currency[i],
-                                            "amount": amount[i],
-                                            "remarks": remarks[i],
-                                          }, "internationalcurrency");
-                                        }
 
-                                        var d =
-                                            await DataBaseHelper.readOneWayDom(
-                                                "internationalcurrency");
                                         print(c);
-                                        print(d);
 
                                         await DataBaseHelper
                                             .insertItemOneWayDom({

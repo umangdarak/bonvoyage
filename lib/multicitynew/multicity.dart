@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:bonvoyage/multicitynew/multicitynewdomestic.dart';
 import 'package:bonvoyage/multicitynew/multicitynext.dart';
 import 'package:bonvoyage/screens/dashboard.dart';
 import 'package:flutter/material.dart';
@@ -656,220 +657,484 @@ class _MultiCityState extends State<MultiCity> {
                                                   ],
                                                 ),
                                                 SizedBox(width: 20),
-                                                travelmode[index][0]
-                                                    ? Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Text(
-                                                                'Select Travel Class:',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black)),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 5,
-                                                          ),
-                                                          Column(
-                                                            children: [
-                                                              ToggleButtons(
-                                                                renderBorder:
-                                                                    false,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30),
-                                                                children: [
-                                                                  Tooltip(
-                                                                      message:
-                                                                          'Economy',
-                                                                      triggerMode:
-                                                                          TooltipTriggerMode
-                                                                              .manual,
-                                                                      child:
-                                                                          Container(
-                                                                        padding:
-                                                                            EdgeInsets.all(8),
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color: _isSelected[index][0]
-                                                                              ? Color.fromARGB(255, 1, 75, 148)
-                                                                              : Color.fromARGB(255, 191, 218, 240),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(30),
-                                                                        ),
-                                                                        child:
-                                                                            ImageIcon(
-                                                                          size:
-                                                                              24,
-                                                                          color: _isSelected[index][0]
-                                                                              ? Colors.white
-                                                                              : Colors.blue[300],
-                                                                          AssetImage(
-                                                                              'assets/images/travel_class_flight_btn_economy_icon_active.png'),
-                                                                        ),
-                                                                      )),
-                                                                  Tooltip(
-                                                                      message:
-                                                                          'Business',
-                                                                      triggerMode:
-                                                                          TooltipTriggerMode
-                                                                              .manual,
-                                                                      child:
-                                                                          Container(
-                                                                        padding:
-                                                                            EdgeInsets.all(8),
-                                                                        decoration: BoxDecoration(
-                                                                            borderRadius: BorderRadius.circular(
-                                                                                30),
-                                                                            color: _isSelected[index][1]
-                                                                                ? Color.fromARGB(255, 1, 75, 148)
-                                                                                : Color.fromARGB(255, 191, 218, 240)),
-                                                                        child:
-                                                                            ImageIcon(
-                                                                          size:
-                                                                              24,
-                                                                          color: _isSelected[index][1]
-                                                                              ? Colors.white
-                                                                              : Colors.blue[300],
-                                                                          AssetImage(
-                                                                              'assets/images/travel_class_flight_btn_business_icon_active.png'),
-                                                                        ),
-                                                                      ))
-                                                                ],
-                                                                isSelected:
-                                                                    _isSelected[
-                                                                        index],
-                                                                onPressed: (int
-                                                                    index1) {
-                                                                  setState(() {
-                                                                    for (int i =
-                                                                            0;
-                                                                        i < _isSelected[index].length;
-                                                                        i++) {
-                                                                      _isSelected[index]
-                                                                              [
-                                                                              i] =
-                                                                          i ==
-                                                                              index1;
-                                                                    }
-                                                                  });
-
-                                                                  if (index1 ==
-                                                                          0 &&
-                                                                      _isSelected[index]
-                                                                              [
-                                                                              index1] ==
-                                                                          true) {
-                                                                    _travelClassController[index]
-                                                                            .text =
-                                                                        'Economy class';
-                                                                  } else if (index ==
-                                                                          1 &&
-                                                                      _isSelected[index]
-                                                                              [
-                                                                              index1] ==
-                                                                          true) {
-                                                                    _travelClassController[index]
-                                                                            .text =
-                                                                        'Business class';
-                                                                  }
-                                                                },
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      )
-                                                    : travelmode[index][1]
+                                                widget.isInternational
+                                                    ? (travelmode[index][0]
                                                         ? Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                    'Select Travel Class:',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black)),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              Column(
+                                                                children: [
+                                                                  ToggleButtons(
+                                                                    renderBorder:
+                                                                        false,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            30),
+                                                                    children: [
+                                                                      Tooltip(
+                                                                          message:
+                                                                              'Economy',
+                                                                          triggerMode: TooltipTriggerMode
+                                                                              .manual,
+                                                                          child:
+                                                                              Container(
+                                                                            padding:
+                                                                                EdgeInsets.all(8),
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: _isSelected[index][0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                              borderRadius: BorderRadius.circular(30),
+                                                                            ),
+                                                                            child:
+                                                                                ImageIcon(
+                                                                              size: 24,
+                                                                              color: _isSelected[index][0] ? Colors.white : Colors.blue[300],
+                                                                              AssetImage('assets/images/travel_class_flight_btn_economy_icon_active.png'),
+                                                                            ),
+                                                                          )),
+                                                                      Tooltip(
+                                                                          message:
+                                                                              'Business',
+                                                                          triggerMode: TooltipTriggerMode
+                                                                              .manual,
+                                                                          child:
+                                                                              Container(
+                                                                            padding:
+                                                                                EdgeInsets.all(8),
+                                                                            decoration:
+                                                                                BoxDecoration(borderRadius: BorderRadius.circular(30), color: _isSelected[index][1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
+                                                                            child:
+                                                                                ImageIcon(
+                                                                              size: 24,
+                                                                              color: _isSelected[index][1] ? Colors.white : Colors.blue[300],
+                                                                              AssetImage('assets/images/travel_class_flight_btn_business_icon_active.png'),
+                                                                            ),
+                                                                          ))
+                                                                    ],
+                                                                    isSelected:
+                                                                        _isSelected[
+                                                                            index],
+                                                                    onPressed: (int
+                                                                        index1) {
+                                                                      setState(
+                                                                          () {
+                                                                        for (int i =
+                                                                                0;
+                                                                            i < _isSelected[index].length;
+                                                                            i++) {
+                                                                          _isSelected[index][i] =
+                                                                              i == index1;
+                                                                        }
+                                                                      });
+
+                                                                      if (index1 ==
+                                                                              0 &&
+                                                                          _isSelected[index][index1] ==
+                                                                              true) {
+                                                                        _travelClassController[index].text =
+                                                                            'Economy class';
+                                                                      } else if (index ==
+                                                                              1 &&
+                                                                          _isSelected[index][index1] ==
+                                                                              true) {
+                                                                        _travelClassController[index].text =
+                                                                            'Business class';
+                                                                      }
+                                                                    },
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          )
+                                                        : travelmode[index][1]
+                                                            ? Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
                                                                           .all(
                                                                           8.0),
-                                                                  child: Text(
-                                                                      'Select Travel Class:',
-                                                                      style: TextStyle(
-                                                                          color:
-                                                                              Colors.black)),
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 5,
-                                                                ),
-                                                                Container(
-                                                                  height: 50,
-                                                                  width: 210,
-                                                                  child:
-                                                                      ListView(
-                                                                    scrollDirection:
-                                                                        Axis.horizontal,
+                                                                      child: Text(
+                                                                          'Select Travel Class:',
+                                                                          style:
+                                                                              TextStyle(color: Colors.black)),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: 5,
+                                                                    ),
+                                                                    Container(
+                                                                      height:
+                                                                          50,
+                                                                      width:
+                                                                          210,
+                                                                      child:
+                                                                          ListView(
+                                                                        scrollDirection:
+                                                                            Axis.horizontal,
+                                                                        children: [
+                                                                          ToggleButtons(
+                                                                              renderBorder: false,
+                                                                              children: [
+                                                                                Tooltip(
+                                                                                    message: 'SL',
+                                                                                    child: Container(
+                                                                                        padding: EdgeInsets.all(8),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: trainclass[index][0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                          borderRadius: BorderRadius.circular(30),
+                                                                                        ),
+                                                                                        child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass[index][0] ? Colors.white : Colors.blue[300])))),
+                                                                                Tooltip(
+                                                                                    message: '2A',
+                                                                                    child: Container(
+                                                                                        padding: EdgeInsets.all(8),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: trainclass[index][1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                          borderRadius: BorderRadius.circular(30),
+                                                                                        ),
+                                                                                        child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[index][1] ? Colors.white : Colors.blue[300])))),
+                                                                                Tooltip(
+                                                                                    message: '1A',
+                                                                                    child: Container(
+                                                                                        padding: EdgeInsets.all(8),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: trainclass[index][2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                          borderRadius: BorderRadius.circular(30),
+                                                                                        ),
+                                                                                        child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass[index][2] ? Colors.white : Colors.blue[300]))))
+                                                                              ],
+                                                                              isSelected: trainclass[index],
+                                                                              onPressed: (index1) {
+                                                                                setState(() {
+                                                                                  for (int i = 0; i < trainclass[index].length; i++) {
+                                                                                    trainclass[index][i] = i == index1;
+                                                                                  }
+                                                                                });
+                                                                                if (trainclass[index][0]) {
+                                                                                  _travelClassController[index].text = 'SL';
+                                                                                }
+
+                                                                                if (trainclass[index][1]) {
+                                                                                  _travelClassController[index].text = '2A';
+                                                                                }
+                                                                                if (trainclass[index][2]) {
+                                                                                  _travelClassController[index].text = '1A';
+                                                                                }
+                                                                              })
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  ])
+                                                            : Container())
+                                                    : travelmodedomestic[index]
+                                                            [0]
+                                                        ? Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                    'Select Travel Class:',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black)),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              Column(
+                                                                children: [
+                                                                  ToggleButtons(
+                                                                    renderBorder:
+                                                                        false,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            30),
                                                                     children: [
+                                                                      Tooltip(
+                                                                          message:
+                                                                              'Economy',
+                                                                          triggerMode: TooltipTriggerMode
+                                                                              .manual,
+                                                                          child:
+                                                                              Container(
+                                                                            padding:
+                                                                                EdgeInsets.all(8),
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: _isSelected[index][0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                              borderRadius: BorderRadius.circular(30),
+                                                                            ),
+                                                                            child:
+                                                                                ImageIcon(
+                                                                              size: 24,
+                                                                              color: _isSelected[index][0] ? Colors.white : Colors.blue[300],
+                                                                              AssetImage('assets/images/travel_class_flight_btn_economy_icon_active.png'),
+                                                                            ),
+                                                                          )),
+                                                                      Tooltip(
+                                                                          message:
+                                                                              'Business',
+                                                                          triggerMode: TooltipTriggerMode
+                                                                              .manual,
+                                                                          child:
+                                                                              Container(
+                                                                            padding:
+                                                                                EdgeInsets.all(8),
+                                                                            decoration:
+                                                                                BoxDecoration(borderRadius: BorderRadius.circular(30), color: _isSelected[index][1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
+                                                                            child:
+                                                                                ImageIcon(
+                                                                              size: 24,
+                                                                              color: _isSelected[index][1] ? Colors.white : Colors.blue[300],
+                                                                              AssetImage('assets/images/travel_class_flight_btn_business_icon_active.png'),
+                                                                            ),
+                                                                          ))
+                                                                    ],
+                                                                    isSelected:
+                                                                        _isSelected[
+                                                                            index],
+                                                                    onPressed: (int
+                                                                        index1) {
+                                                                      setState(
+                                                                          () {
+                                                                        for (int i =
+                                                                                0;
+                                                                            i < _isSelected[index].length;
+                                                                            i++) {
+                                                                          _isSelected[index][i] =
+                                                                              i == index1;
+                                                                        }
+                                                                      });
+
+                                                                      if (index1 ==
+                                                                              0 &&
+                                                                          _isSelected[index][index1] ==
+                                                                              true) {
+                                                                        _travelClassController[index].text =
+                                                                            'Economy class';
+                                                                      } else if (index ==
+                                                                              1 &&
+                                                                          _isSelected[index][index1] ==
+                                                                              true) {
+                                                                        _travelClassController[index].text =
+                                                                            'Business class';
+                                                                      }
+                                                                    },
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          )
+                                                        : travelmodedomestic[
+                                                                index][1]
+                                                            ? Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                      child: Text(
+                                                                          'Select Travel Class:',
+                                                                          style:
+                                                                              TextStyle(color: Colors.black)),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: 5,
+                                                                    ),
+                                                                    Container(
+                                                                      height:
+                                                                          50,
+                                                                      width:
+                                                                          210,
+                                                                      child:
+                                                                          ListView(
+                                                                        scrollDirection:
+                                                                            Axis.horizontal,
+                                                                        children: [
+                                                                          ToggleButtons(
+                                                                              renderBorder: false,
+                                                                              children: [
+                                                                                Tooltip(
+                                                                                    message: 'SL',
+                                                                                    child: Container(
+                                                                                        padding: EdgeInsets.all(8),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: trainclassdomestic[index][0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                          borderRadius: BorderRadius.circular(30),
+                                                                                        ),
+                                                                                        child: Text('SL', style: TextStyle(fontSize: 24, color: trainclassdomestic[index][0] ? Colors.white : Colors.blue[300])))),
+                                                                                Tooltip(
+                                                                                    message: 'SC',
+                                                                                    child: Container(
+                                                                                        padding: EdgeInsets.all(8),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: trainclassdomestic[index][1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                          borderRadius: BorderRadius.circular(30),
+                                                                                        ),
+                                                                                        child: Text('SC', style: TextStyle(fontSize: 24, color: trainclassdomestic[index][1] ? Colors.white : Colors.blue[300])))),
+                                                                                Tooltip(
+                                                                                    message: 'CC',
+                                                                                    child: Container(
+                                                                                        padding: EdgeInsets.all(8),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: trainclassdomestic[index][2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                          borderRadius: BorderRadius.circular(30),
+                                                                                        ),
+                                                                                        child: Text('CC', style: TextStyle(fontSize: 24, color: trainclassdomestic[index][2] ? Colors.white : Colors.blue[300])))),
+                                                                                Tooltip(
+                                                                                    message: '3A',
+                                                                                    child: Container(
+                                                                                        padding: EdgeInsets.all(8),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: trainclassdomestic[index][3] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                          borderRadius: BorderRadius.circular(30),
+                                                                                        ),
+                                                                                        child: Text('3A', style: TextStyle(fontSize: 24, color: trainclassdomestic[index][3] ? Colors.white : Colors.blue[300])))),
+                                                                                Tooltip(
+                                                                                    message: '2A',
+                                                                                    child: Container(
+                                                                                        padding: EdgeInsets.all(8),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: trainclassdomestic[index][4] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                          borderRadius: BorderRadius.circular(30),
+                                                                                        ),
+                                                                                        child: Text('2A', style: TextStyle(fontSize: 24, color: trainclassdomestic[index][4] ? Colors.white : Colors.blue[300])))),
+                                                                                Tooltip(
+                                                                                    message: '1A',
+                                                                                    child: Container(
+                                                                                        padding: EdgeInsets.all(8),
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: trainclassdomestic[index][5] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                          borderRadius: BorderRadius.circular(30),
+                                                                                        ),
+                                                                                        child: Text('1A', style: TextStyle(fontSize: 24, color: trainclassdomestic[index][5] ? Colors.white : Colors.blue[300]))))
+                                                                              ],
+                                                                              isSelected: trainclassdomestic[index],
+                                                                              onPressed: (index1) {
+                                                                                setState(() {
+                                                                                  for (int i = 0; i < trainclassdomestic[index].length; i++) {
+                                                                                    trainclassdomestic[index][i] = i == index1;
+                                                                                  }
+                                                                                });
+                                                                                if (trainclassdomestic[index][0]) {
+                                                                                  _travelClassController[index].text = 'SL';
+                                                                                }
+
+                                                                                if (trainclassdomestic[index][1]) {
+                                                                                  _travelClassController[index].text = 'SC';
+                                                                                }
+                                                                                if (trainclassdomestic[index][2]) {
+                                                                                  _travelClassController[index].text = 'CC';
+                                                                                }
+                                                                                if (trainclassdomestic[index][3]) {
+                                                                                  _travelClassController[index].text = '3A';
+                                                                                }
+                                                                                if (trainclassdomestic[index][4]) {
+                                                                                  _travelClassController[index].text = '2A';
+                                                                                }
+                                                                                if (trainclassdomestic[index][5]) {
+                                                                                  _travelClassController[index].text = '1A';
+                                                                                }
+                                                                              }),
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  ])
+                                                            : travelmodedomestic[
+                                                                    index][2]
+                                                                ? Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .all(
+                                                                            8.0),
+                                                                        child: Text(
+                                                                            'Select Travel Class:',
+                                                                            style:
+                                                                                TextStyle(color: Colors.black)),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            5,
+                                                                      ),
                                                                       ToggleButtons(
                                                                           renderBorder:
                                                                               false,
                                                                           children: [
                                                                             Tooltip(
-                                                                                message: 'SL',
+                                                                                message: 'Bus',
+                                                                                triggerMode: TooltipTriggerMode.manual,
                                                                                 child: Container(
-                                                                                    padding: EdgeInsets.all(8),
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: trainclass[index][0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                      borderRadius: BorderRadius.circular(30),
-                                                                                    ),
-                                                                                    child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass[index][0] ? Colors.white : Colors.blue[300])))),
+                                                                                  padding: EdgeInsets.all(8),
+                                                                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: roadclassdomestic[index][0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
+                                                                                  child: Icon(
+                                                                                    FontAwesomeIcons.bus,
+                                                                                    size: 24,
+                                                                                    color: roadclassdomestic[index][0] ? Colors.white : Colors.blue[300],
+                                                                                  ),
+                                                                                )),
                                                                             Tooltip(
-                                                                                message: '2A',
+                                                                                message: 'Car',
+                                                                                triggerMode: TooltipTriggerMode.manual,
                                                                                 child: Container(
                                                                                     padding: EdgeInsets.all(8),
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: trainclass[index][1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                      borderRadius: BorderRadius.circular(30),
-                                                                                    ),
-                                                                                    child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[index][1] ? Colors.white : Colors.blue[300])))),
-                                                                            Tooltip(
-                                                                                message: '1A',
-                                                                                child: Container(
-                                                                                    padding: EdgeInsets.all(8),
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: trainclass[index][2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                      borderRadius: BorderRadius.circular(30),
-                                                                                    ),
-                                                                                    child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass[index][2] ? Colors.white : Colors.blue[300]))))
+                                                                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: roadclassdomestic[index][1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240)),
+                                                                                    child: Icon(
+                                                                                      FontAwesomeIcons.car,
+                                                                                      size: 24,
+                                                                                      color: roadclassdomestic[index][1] ? Colors.white : Colors.blue[300],
+                                                                                    )))
                                                                           ],
-                                                                          isSelected: trainclass[
+                                                                          isSelected: roadclassdomestic[
                                                                               index],
                                                                           onPressed:
-                                                                              (index1) {
+                                                                              (inde1x) {
                                                                             setState(() {
-                                                                              for (int i = 0; i < trainclass[index].length; i++) {
-                                                                                trainclass[index][i] = i == index1;
+                                                                              for (int i = 0; i < roadclassdomestic[index].length; i++) {
+                                                                                roadclassdomestic[index][i] = i == inde1x;
                                                                               }
                                                                             });
-                                                                            if (trainclass[index][0]) {
-                                                                              _travelClassController[index].text = 'SL';
+                                                                            if (roadclassdomestic[index][0]) {
+                                                                              _travelClassController[index].text = 'Bus';
                                                                             }
-
-                                                                            if (trainclass[index][1]) {
-                                                                              _travelClassController[index].text = '2A';
+                                                                            if (roadclassdomestic[index][1]) {
+                                                                              _travelClassController[index].text = 'Car';
                                                                             }
-                                                                            if (trainclass[index][2]) {
-                                                                              _travelClassController[index].text = '1A';
-                                                                            }
+                                                                            print(_travelClassController[index].text);
                                                                           }),
                                                                     ],
-                                                                  ),
-                                                                )
-                                                              ])
-                                                        : Container()
+                                                                  )
+                                                                : Container()
                                               ],
                                             ),
                                             Row(children: [
@@ -1369,23 +1634,186 @@ class _MultiCityState extends State<MultiCity> {
                                             ),
                                             SizedBox(height: 10),
                                             Row(children: [
-                                              (travelmode[index][0] ||
-                                                      travelmode[index][1])
-                                                  ? Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                      .size
-                                                                      .width /
-                                                                  2 -
+                                              widget.isInternational
+                                                  ? (travelmode[index][0] ||
+                                                          travelmode[index][1])
+                                                      ? Container(
+                                                          width: MediaQuery.of(context).size.width / 2 -
                                                               40,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          border: Border.all(
-                                                              color: Colors
-                                                                  .black26)),
-                                                      child: Column(
+                                                          decoration: BoxDecoration(
+                                                              borderRadius: BorderRadius.circular(
+                                                                  5),
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .black26)),
+                                                          child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          left:
+                                                                              8.0,
+                                                                          top:
+                                                                              8),
+                                                                  child: Text(
+                                                                      'Seat:',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              Colors.black)),
+                                                                ),
+                                                                travelmode[index]
+                                                                        [0]
+                                                                    ? Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                8.0),
+                                                                        child: DropdownMenu(
+                                                                            width: MediaQuery.of(context).size.width / 2 - 40,
+                                                                            hintText: 'Seat',
+                                                                            inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
+                                                                            onSelected: (s) {
+                                                                              if (s == 'select an option') {
+                                                                                _seatController[index].text = '';
+                                                                              }
+                                                                              if (s == 'Window') {
+                                                                                _seatController[index].text = 'Window';
+                                                                              }
+                                                                              if (s == 'Aisle') {
+                                                                                _seatController[index].text = 'Aisle';
+                                                                              }
+                                                                            },
+                                                                            initialSelection: _seatController[index].text,
+                                                                            controller: _seatController[index],
+                                                                            dropdownMenuEntries: ['Select an option', 'Window', 'Aisle'].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
+                                                                      )
+                                                                    : Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                8.0),
+                                                                        child: DropdownMenu(
+                                                                            width: MediaQuery.of(context).size.width / 2 - 40,
+                                                                            onSelected: (s) {
+                                                                              if (s == 'Select an option') {
+                                                                                _seatController[index].text = '';
+                                                                              }
+                                                                            },
+                                                                            controller: _seatController[index],
+                                                                            hintText: 'Seat',
+                                                                            inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
+                                                                            dropdownMenuEntries: ['Select an option', 'up', 'down'].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
+                                                                      ),
+                                                              ]))
+                                                      : Container()
+                                                  : (travelmodedomestic[index]
+                                                              [0] ||
+                                                          travelmodedomestic[index]
+                                                              [1])
+                                                      ? Container(
+                                                          width:
+                                                              MediaQuery.of(context)
+                                                                          .size
+                                                                          .width /
+                                                                      2 -
+                                                                  40,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius.circular(
+                                                                      5),
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .black26)),
+                                                          child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          left:
+                                                                              8.0,
+                                                                          top:
+                                                                              8),
+                                                                  child: Text(
+                                                                      'Seat:',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              Colors.black)),
+                                                                ),
+                                                                travelmodedomestic[
+                                                                        index][0]
+                                                                    ? Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                8.0),
+                                                                        child: DropdownMenu(
+                                                                            width: MediaQuery.of(context).size.width / 2 - 40,
+                                                                            hintText: 'Seat',
+                                                                            inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
+                                                                            onSelected: (s) {
+                                                                              if (s == 'select an option') {
+                                                                                _seatController[index].text = '';
+                                                                              }
+                                                                              if (s == 'Window') {
+                                                                                _seatController[index].text = 'Window';
+                                                                              }
+                                                                              if (s == 'Aisle') {
+                                                                                _seatController[index].text = 'Aisle';
+                                                                              }
+                                                                            },
+                                                                            initialSelection: _seatController[index].text,
+                                                                            controller: _seatController[index],
+                                                                            dropdownMenuEntries: ['Select an option', 'Window', 'Aisle'].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
+                                                                      )
+                                                                    : Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                8.0),
+                                                                        child: DropdownMenu(
+                                                                            width: MediaQuery.of(context).size.width / 2 - 40,
+                                                                            onSelected: (s) {
+                                                                              if (s == 'Select an option') {
+                                                                                _seatController[index].text = '';
+                                                                              }
+                                                                            },
+                                                                            controller: _seatController[index],
+                                                                            hintText: 'Seat',
+                                                                            inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
+                                                                            dropdownMenuEntries: ['Select an option', 'up', 'down'].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
+                                                                      ),
+                                                              ]))
+                                                      : Container(),
+                                              SizedBox(width: 10),
+                                              widget.isInternational
+                                                  ? Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                2 -
+                                                            20,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .black26)),
+                                                        child: Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,
@@ -1397,166 +1825,53 @@ class _MultiCityState extends State<MultiCity> {
                                                                       left: 8.0,
                                                                       top: 8),
                                                               child: Text(
-                                                                  'Seat:',
+                                                                  'Region:',
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black)),
                                                             ),
-                                                            travelmode[index][0]
-                                                                ? Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .symmetric(
-                                                                        horizontal:
-                                                                            8.0),
-                                                                    child:
-                                                                        DropdownMenu(
-                                                                            width: MediaQuery.of(context).size.width / 2 -
-                                                                                40,
-                                                                            hintText:
-                                                                                'Seat',
-                                                                            inputDecorationTheme: InputDecorationTheme(
-                                                                                border: InputBorder
-                                                                                    .none,
-                                                                                hintStyle: TextStyle(
-                                                                                    color: Color.fromARGB(
-                                                                                        255, 1, 75, 148))),
-                                                                            onSelected:
-                                                                                (s) {
-                                                                              if (s == 'select an option') {
-                                                                                _seatController[index].text = '';
-                                                                              }
-                                                                              if (s == 'Window') {
-                                                                                _seatController[index].text = 'Window';
-                                                                              }
-                                                                              if (s == 'Aisle') {
-                                                                                _seatController[index].text = 'Aisle';
-                                                                              }
-                                                                            },
-                                                                            initialSelection: _seatController[index]
-                                                                                .text,
-                                                                            controller: _seatController[
-                                                                                index],
-                                                                            dropdownMenuEntries:
-                                                                                [
-                                                                              'Select an option',
-                                                                              'Window',
-                                                                              'Aisle'
-                                                                            ].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
-                                                                  )
-                                                                : Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .symmetric(
-                                                                        horizontal:
-                                                                            8.0),
-                                                                    child:
-                                                                        DropdownMenu(
-                                                                            width: MediaQuery.of(context).size.width / 2 -
-                                                                                40,
-                                                                            onSelected:
-                                                                                (s) {
-                                                                              if (s == 'Select an option') {
-                                                                                _seatController[index].text = '';
-                                                                              }
-                                                                            },
-                                                                            controller: _seatController[
-                                                                                index],
-                                                                            hintText:
-                                                                                'Seat',
-                                                                            inputDecorationTheme: InputDecorationTheme(
-                                                                                border: InputBorder
-                                                                                    .none,
-                                                                                hintStyle: TextStyle(
-                                                                                    color: Color.fromARGB(255, 1, 75,
-                                                                                        148))),
-                                                                            dropdownMenuEntries:
-                                                                                [
-                                                                              'Select an option',
-                                                                              'up',
-                                                                              'down'
-                                                                            ].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
-                                                                  ),
-                                                          ]))
-                                                  : Container(),
-                                              SizedBox(width: 10),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8.0),
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          2 -
-                                                      20,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      border: Border.all(
-                                                          color:
-                                                              Colors.black26)),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                left: 8.0,
-                                                                top: 8),
-                                                        child: Text('Region:',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black)),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          8.0),
+                                                              child:
+                                                                  DropdownMenu(
+                                                                      hintText:
+                                                                          'Region',
+                                                                      inputDecorationTheme: InputDecorationTheme(
+                                                                          border: InputBorder
+                                                                              .none,
+                                                                          hintStyle: TextStyle(
+                                                                              color: Color.fromARGB(255, 1, 75,
+                                                                                  148))),
+                                                                      onSelected:
+                                                                          (s) {
+                                                                        if (s ==
+                                                                            'Select an option') {
+                                                                          _regionController[index].text =
+                                                                              '';
+                                                                        }
+                                                                      },
+                                                                      controller:
+                                                                          _regionController[
+                                                                              index],
+                                                                      dropdownMenuEntries: [
+                                                                        'Select an option',
+                                                                        'Asia/Africa',
+                                                                        'Europe/America'
+                                                                      ]
+                                                                          .map((e) => DropdownMenuEntry(
+                                                                              label: e,
+                                                                              value: e))
+                                                                          .toList()),
+                                                            )
+                                                          ],
+                                                        ),
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    8.0),
-                                                        child: DropdownMenu(
-                                                            hintText: 'Region',
-                                                            inputDecorationTheme: InputDecorationTheme(
-                                                                border:
-                                                                    InputBorder
-                                                                        .none,
-                                                                hintStyle: TextStyle(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            1,
-                                                                            75,
-                                                                            148))),
-                                                            onSelected: (s) {
-                                                              if (s ==
-                                                                  'Select an option') {
-                                                                _regionController[
-                                                                        index]
-                                                                    .text = '';
-                                                              }
-                                                            },
-                                                            controller:
-                                                                _regionController[
-                                                                    index],
-                                                            dropdownMenuEntries: [
-                                                              'Select an option',
-                                                              'Asia/Africa',
-                                                              'Europe/America'
-                                                            ]
-                                                                .map((e) =>
-                                                                    DropdownMenuEntry(
-                                                                        label:
-                                                                            e,
-                                                                        value:
-                                                                            e))
-                                                                .toList()),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              )
+                                                    )
+                                                  : Container()
                                             ]),
                                             SizedBox(height: 10),
                                             Row(
@@ -2079,68 +2394,159 @@ class _MultiCityState extends State<MultiCity> {
                     children: [
                       TextButton(
                           onPressed: () async {
-                            print(_travelClassController[0]);
-                            if (formkey.currentState!.validate()) {
-                              List<Map<String, String>> d = [];
-                              for (int i = 0; i <= counter - 1; i++) {
-                                if (_travelClassController[i].text.isNotEmpty &&
-                                    traveltimevalues[i].isNotEmpty &&
-                                    _seatController[i].text.isNotEmpty &&
-                                    _foodController[i].text.isNotEmpty &&
-                                    _regionController[i].text.isNotEmpty) {
-                                  bool isConditionMet = true;
-                                  if (accom[i][0] || accom[i][1]) {
-                                    if (accom[i][0]) {
-                                      isConditionMet = isConditionMet &&
-                                          _accomodationController[i]
-                                              .text
-                                              .isNotEmpty;
-                                    }
+                            if (counter >= 3) {
+                              if (formkey.currentState!.validate()) {
+                                List<Map<String, String>> d = [];
+                                for (int i = 0; i <= counter - 1; i++) {
+                                  if (_travelClassController[i]
+                                          .text
+                                          .isNotEmpty &&
+                                      traveltimevalues[i].isNotEmpty &&
+                                      _foodController[i].text.isNotEmpty) {
+                                    bool isConditionMet = true;
 
-                                    if (accom[i][1]) {
+                                    if (widget.isInternational) {
                                       isConditionMet = isConditionMet &&
-                                          _occupancyController[i]
-                                              .text
-                                              .isNotEmpty &&
-                                          _bagController[i].text.isNotEmpty;
+                                          _regionController[i].text.isNotEmpty;
                                     }
-                                  }
-                                  if (isConditionMet) {
-                                    String c = traveltimevalues[i].join(',');
-                                    Map<String, String> each = {
-                                      'travelmode':
-                                          _traveltypeController[i].text,
-                                      'travelclass':
-                                          _travelClassController[i].text,
-                                      'origin': _originController[i].text,
-                                      'destination':
-                                          _destinationController[i].text,
-                                      'traveldate':
-                                          _traveldateController[i].text,
-                                      'traveltime': c,
-                                      'eta': _etaController[i].text,
-                                      'food': _foodController[i].text,
-                                      'seat': _seatController[i].text,
-                                      'accomodation':
-                                          _accomodationController[i].text,
-                                      'occupancy': _occupancyController[i].text,
-                                      'checkin': _checkinController[i].text,
-                                      'checkout': _checkoutController[i].text,
-                                      'bags': _bagController[i].text,
-                                      'weight': _totalweightController[i].text,
-                                      'remarks': _remarksController[i].text,
-                                    };
-                                    print(each);
-                                    d.add(each);
+                                    if (!widget.isInternational &&
+                                        !travelmodedomestic[i][2]) {
+                                      isConditionMet = isConditionMet &&
+                                          _seatController[i].text.isNotEmpty;
+                                    }
+                                    if (accom[i][0] || accom[i][1]) {
+                                      if (accom[i][0]) {
+                                        isConditionMet = isConditionMet &&
+                                            _accomodationController[i]
+                                                .text
+                                                .isNotEmpty;
+                                      }
+
+                                      if (accom[i][1]) {
+                                        isConditionMet = isConditionMet &&
+                                            _occupancyController[i]
+                                                .text
+                                                .isNotEmpty &&
+                                            _bagController[i].text.isNotEmpty;
+                                      }
+                                    }
+                                    if (isConditionMet) {
+                                      if (widget.isInternational) {
+                                        String c =
+                                            traveltimevalues[i].join(',');
+                                        Map<String, String> each = {
+                                          'travelmode':
+                                              _traveltypeController[i].text,
+                                          'travelclass':
+                                              _travelClassController[i].text,
+                                          'origin': _originController[i].text,
+                                          'destination':
+                                              _destinationController[i].text,
+                                          'traveldate':
+                                              _traveldateController[i].text,
+                                          'traveltime': c,
+                                          'eta': _etaController[i].text,
+                                          'food': _foodController[i].text,
+                                          'seat': _seatController[i].text,
+                                          'region': _regionController[i].text,
+                                          'accomodation':
+                                              _accomodationController[i].text,
+                                          'occupancy':
+                                              _occupancyController[i].text,
+                                          'checkin': _checkinController[i].text,
+                                          'checkout':
+                                              _checkoutController[i].text,
+                                          'bags': _bagController[i].text,
+                                          'weight':
+                                              _totalweightController[i].text,
+                                          'remarks': _remarksController[i].text,
+                                        };
+                                        print(each);
+                                        d.add(each);
+                                      } else {
+                                        String c =
+                                            traveltimevalues[i].join(',');
+                                        Map<String, String> each = {
+                                          'travelmode':
+                                              _traveltypeController[i].text,
+                                          'travelclass':
+                                              _travelClassController[i].text,
+                                          'origin': _originController[i].text,
+                                          'destination':
+                                              _destinationController[i].text,
+                                          'traveldate':
+                                              _traveldateController[i].text,
+                                          'traveltime': c,
+                                          'eta': _etaController[i].text,
+                                          'food': _foodController[i].text,
+                                          'seat': _seatController[i].text,
+                                          'accomodation':
+                                              _accomodationController[i].text,
+                                          'occupancy':
+                                              _occupancyController[i].text,
+                                          'checkin': _checkinController[i].text,
+                                          'checkout':
+                                              _checkoutController[i].text,
+                                          'bags': _bagController[i].text,
+                                          'weight':
+                                              _totalweightController[i].text,
+                                          'remarks': _remarksController[i].text,
+                                        };
+                                        print(each);
+                                        d.add(each);
+                                      }
+                                    } else {
+                                      print(_travelClassController[i].text +
+                                          "s " +
+                                          traveltimevalues[i].toString() +
+                                          "d " +
+                                          _seatController[i].text +
+                                          "e " +
+                                          _foodController[i].text +
+                                          "f " +
+                                          _regionController[i].text);
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return Center(
+                                            child: AlertDialog(
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize
+                                                    .min, // Ensure it only takes the necessary space
+                                                children: <Widget>[
+                                                  Text(
+                                                    'Please fill all the details.',
+                                                    textAlign: TextAlign
+                                                        .center, // Center the text within the column
+                                                  ),
+                                                ],
+                                              ),
+                                              actions: <Widget>[
+                                                Center(
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop(); // Close the dialog
+                                                    },
+                                                    child: Text('OK'),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }
                                   } else {
+                                    print("pp");
                                     print(_travelClassController[i].text +
-                                        "s " +
+                                        " s " +
                                         traveltimevalues[i].toString() +
-                                        "d " +
+                                        " d " +
                                         _seatController[i].text +
-                                        "e " +
+                                        " e " +
                                         _foodController[i].text +
-                                        "f " +
+                                        " f " +
                                         _regionController[i].text);
                                     showDialog(
                                       context: context,
@@ -2174,57 +2580,56 @@ class _MultiCityState extends State<MultiCity> {
                                       },
                                     );
                                   }
-                                } else {
-                                  print("pp");
-                                  print(_travelClassController[i].text +
-                                      "s " +
-                                      traveltimevalues[i].toString() +
-                                      "d " +
-                                      _seatController[i].text +
-                                      "e " +
-                                      _foodController[i].text +
-                                      "f " +
-                                      _regionController[i].text);
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return Center(
-                                        child: AlertDialog(
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ensure it only takes the necessary space
-                                            children: <Widget>[
-                                              Text(
-                                                'Please fill all the details.',
-                                                textAlign: TextAlign
-                                                    .center, // Center the text within the column
-                                              ),
-                                            ],
-                                          ),
-                                          actions: <Widget>[
-                                            Center(
-                                              child: ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.of(context)
-                                                      .pop(); // Close the dialog
-                                                },
-                                                child: Text('OK'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
                                 }
+                                print(d);
+                                if (widget.isInternational) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              MultiCityNext(data: d)));
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              Multicitynewdomestic(data: d)));
+                                }
+                              } else {
+                                print("x");
                               }
-                              print(d);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => MultiCityNext(data: d)));
                             } else {
-                              print("x");
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Center(
+                                    child: AlertDialog(
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize
+                                            .min, // Ensure it only takes the necessary space
+                                        children: <Widget>[
+                                          Text(
+                                            'Please enter atleast 3 travel indexes',
+                                            textAlign: TextAlign
+                                                .center, // Center the text within the column
+                                          ),
+                                        ],
+                                      ),
+                                      actions: <Widget>[
+                                        Center(
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop(); // Close the dialog
+                                            },
+                                            child: Text('OK'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
                             }
                           },
                           child: Container(

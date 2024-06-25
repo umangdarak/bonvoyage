@@ -2221,7 +2221,7 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                     "currency":
                                                         currency.join(","),
                                                     "amount": amount.join(","),
-                                                    "remarks":
+                                                    "remarkscurrency":
                                                         remarks.join(","),
                                                     "insurancerequired":
                                                         _insurancerequiredController

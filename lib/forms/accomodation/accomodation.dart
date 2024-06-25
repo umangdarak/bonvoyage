@@ -1097,9 +1097,9 @@ class _AccomodationPageState extends State<AccomodationPage> {
                                   );
                                 } else {
                                   if (formkey.currentState!.validate() &&
-                                      _accomodationController.text != '' &&
-                                      _occupancyController.text != '' &&
-                                      _peopleController.text != '') {
+                                      _accomodationController.text.isNotEmpty &&
+                                      _occupancyController.text.isNotEmpty &&
+                                      _peopleController.text.isNotEmpty) {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
