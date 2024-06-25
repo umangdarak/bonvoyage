@@ -742,10 +742,10 @@ class _RoundTripState extends State<RoundTrip> {
                                                                                       child: Container(
                                                                                           padding: EdgeInsets.all(8),
                                                                                           decoration: BoxDecoration(
-                                                                                            color: trainclass[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            color: trainclass[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
                                                                                             borderRadius: BorderRadius.circular(30),
                                                                                           ),
-                                                                                          child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[2] ? Colors.white : Colors.blue[300])))),
+                                                                                          child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[1] ? Colors.white : Colors.blue[300])))),
                                                                                   Tooltip(
                                                                                       message: '1A',
                                                                                       child: Container(
