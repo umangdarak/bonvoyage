@@ -1,11 +1,12 @@
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 
 class MultiCityApprovalPage extends StatefulWidget {
   int id;
-  MultiCityApprovalPage({super.key, required this.id});
+  int international;
+  MultiCityApprovalPage(
+      {super.key, required this.id, required this.international});
 
   @override
   State<MultiCityApprovalPage> createState() => _MultiCityApprovalPageState();
@@ -14,12 +15,34 @@ class MultiCityApprovalPage extends StatefulWidget {
 class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
   List<Map<String, dynamic>> data1 = [];
   getData() async {
-    return await DataBaseHelper.readOneItem('multicity', widget.id);
+    if (widget.international == 0) {
+      return await DataBaseHelper.readOneItem('multicitydomestic', widget.id);
+    }
+    if (widget.international == 1) {
+      return await DataBaseHelper.readOneItem('multicity', widget.id);
+    }
   }
 
-  getAllData(String connection) async {
-    return await DataBaseHelper.readOneItemRandom(
-        'multicityeach', 'connection', connection);
+  Future<List<Map<String, dynamic>>> getAllData(String connection) async {
+    List<Map<String, Object?>>? rawData;
+
+    if (widget.international == 0) {
+      rawData = await DataBaseHelper.readOneItemRandom(
+          'multicityeachdomestic', 'connection', connection);
+    } else if (widget.international == 1) {
+      rawData = await DataBaseHelper.readOneItemRandom(
+          'multicityeach', 'connection', connection);
+    }
+
+    if (rawData == null) {
+      return [];
+    }
+
+    List<Map<String, dynamic>> stringData = rawData.map((entry) {
+      return entry.map((key, value) => MapEntry(key, value?.toString() ?? ''));
+    }).toList();
+
+    return stringData;
   }
 
   List<Map<String, dynamic>> data = [];
@@ -34,11 +57,10 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
 
   fetchData() async {
     data1 = await getData();
-    print(data1[0]['sameuser']);
+
     data = await getAllData(data1[0]['sameuser']!);
     print(data);
-    var data2 = await DataBaseHelper.readOneWayDom('multicityeach');
-    print(data2);
+
     gestures = List.generate(data.length, (index) => false);
   }
 
@@ -51,9 +73,10 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
             leadingWidth: 20,
             leading: IconButton(
                 onPressed: () async {
-                  await DataBaseHelper.deletewholetableonewaydom('multicity');
                   await DataBaseHelper.deletewholetableonewaydom(
-                      'multicityeach');
+                      'multicitydomestic');
+                  await DataBaseHelper.deletewholetableonewaydom(
+                      'multicityeachdomestic');
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.arrow_back_ios, color: Colors.amber)),
@@ -461,7 +484,7 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
                                                                 )
                                                               : Container(),
                                                           data[index]['comments'] !=
-                                                                  ''
+                                                                  null
                                                               ? Container(
                                                                   width: 120,
                                                                   child:
@@ -488,7 +511,7 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
                                                                         ),
                                                                         Text(
                                                                             data[index][
-                                                                                'comments']!,
+                                                                                'comments'],
                                                                             style: TextStyle(
                                                                                 color: Color.fromARGB(255, 1, 75, 148),
                                                                                 fontWeight: FontWeight.bold,

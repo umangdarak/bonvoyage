@@ -2299,8 +2299,6 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                 'connection': connection
                                               }, 'multicityeach');
                                             }
-                                          
-
 
                                             await DataBaseHelper
                                                 .insertItemOneWayDom({
@@ -2339,7 +2337,8 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                 MaterialPageRoute(
                                                     builder: (_) =>
                                                         MultiCityApprovalPage(
-                                                            id: p)));
+                                                            id: p,
+                                                            international: 1)));
                                           } else {
                                             print(currencymode);
                                             print(currency);

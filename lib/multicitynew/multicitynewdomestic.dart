@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:bonvoyage/approval%20pages/multicityapprovalpage.dart';
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
 import 'package:bonvoyage/screens/usernamecard.dart';
 import 'package:flutter/material.dart';
@@ -1079,6 +1080,13 @@ class _MulticitynewdomesticState extends State<Multicitynewdomestic> {
                                                 'multicityeachdomestic',
                                                 'connection',
                                                 connection));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    MultiCityApprovalPage(
+                                                        id: d,
+                                                        international: 0)));
                                       } else {
                                         showDialog(
                                           context: context,

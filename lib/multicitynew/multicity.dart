@@ -749,7 +749,7 @@ class _MultiCityState extends State<MultiCity> {
                                                                               true) {
                                                                         _travelClassController[index].text =
                                                                             'Economy class';
-                                                                      } else if (index ==
+                                                                      } else if (index1 ==
                                                                               1 &&
                                                                           _isSelected[index][index1] ==
                                                                               true) {
@@ -943,6 +943,9 @@ class _MultiCityState extends State<MultiCity> {
                                                                         _travelClassController[index].text =
                                                                             'Business class';
                                                                       }
+                                                                      print(_travelClassController[
+                                                                              index]
+                                                                          .text);
                                                                     },
                                                                   ),
                                                                 ],
@@ -2395,9 +2398,31 @@ class _MultiCityState extends State<MultiCity> {
                       TextButton(
                           onPressed: () async {
                             if (counter >= 3) {
-                              if (formkey.currentState!.validate()) {
-                                List<Map<String, String>> d = [];
-                                for (int i = 0; i <= counter - 1; i++) {
+                              List<Map<String, String>> d = [];
+                              for (int i = 0; i <= counter - 1; i++) {
+                                if (formkey.currentState!.validate()) {
+                                  Map<String, String> each = {
+                                    'travelmode': _traveltypeController[i].text,
+                                    'travelclass':
+                                        _travelClassController[i].text,
+                                    'origin': _originController[i].text,
+                                    'destination':
+                                        _destinationController[i].text,
+                                    'traveldate': _traveldateController[i].text,
+                                    // 'traveltime': c,
+                                    'eta': _etaController[i].text,
+                                    'food': _foodController[i].text,
+                                    'seat': _seatController[i].text,
+                                    'accomodation':
+                                        _accomodationController[i].text,
+                                    'occupancy': _occupancyController[i].text,
+                                    'checkin': _checkinController[i].text,
+                                    'checkout': _checkoutController[i].text,
+                                    'bags': _bagController[i].text,
+                                    'weight': _totalweightController[i].text,
+                                    'remarks': _remarksController[i].text,
+                                  };
+                                  print(each);
                                   if (_travelClassController[i]
                                           .text
                                           .isNotEmpty &&
@@ -2536,6 +2561,7 @@ class _MultiCityState extends State<MultiCity> {
                                           );
                                         },
                                       );
+                                      break;
                                     }
                                   } else {
                                     print("pp");
@@ -2579,9 +2605,77 @@ class _MultiCityState extends State<MultiCity> {
                                         );
                                       },
                                     );
+                                    break;
                                   }
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return Center(
+                                        child: AlertDialog(
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize
+                                                .min, // Ensure it only takes the necessary space
+                                            children: <Widget>[
+                                              Text(
+                                                'Please enter atleast 3 travel indexes',
+                                                textAlign: TextAlign
+                                                    .center, // Center the text within the column
+                                              ),
+                                            ],
+                                          ),
+                                          actions: <Widget>[
+                                            Center(
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // Close the dialog
+                                                },
+                                                child: Text('OK'),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                  break;
                                 }
-                                print(d);
+                              }
+
+                              if (d.length != counter) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Center(
+                                      child: AlertDialog(
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize
+                                              .min, // Ensure it only takes the necessary space
+                                          children: <Widget>[
+                                            Text(
+                                              'Please enter all the details',
+                                              textAlign: TextAlign
+                                                  .center, // Center the text within the column
+                                            ),
+                                          ],
+                                        ),
+                                        actions: <Widget>[
+                                          Center(
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context)
+                                                    .pop(); // Close the dialog
+                                              },
+                                              child: Text('OK'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              } else {
                                 if (widget.isInternational) {
                                   Navigator.push(
                                       context,
@@ -2595,8 +2689,6 @@ class _MultiCityState extends State<MultiCity> {
                                           builder: (_) =>
                                               Multicitynewdomestic(data: d)));
                                 }
-                              } else {
-                                print("x");
                               }
                             } else {
                               showDialog(
