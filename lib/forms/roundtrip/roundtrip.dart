@@ -35,11 +35,7 @@ class _RoundTripState extends State<RoundTrip> {
   TextEditingController _totalweightController = TextEditingController();
   TextEditingController _remarksController = TextEditingController();
   TextEditingController _seatController = TextEditingController();
-  // TextEditingController _modeController = TextEditingController();
-  // TextEditingController _currencyController = TextEditingController();
-  // TextEditingController _amountController = TextEditingController();
-  // TextEditingController _cabController = TextEditingController();
-  // TextEditingController _purposeController = TextEditingController();
+
   TextEditingController _traveltype1Controller = TextEditingController();
   TextEditingController _travelClass1Controller = TextEditingController();
   TextEditingController _seat1Controller = TextEditingController();
@@ -65,10 +61,20 @@ class _RoundTripState extends State<RoundTrip> {
   List<bool> _occupancy = [false, false, false];
   List<bool> travelmode = [true, false, false];
   List<bool> travelmode1 = [true, false, false];
-  List<bool> trainclass = List.generate(6, (index) => false);
-  List<bool> trainclass1 = List.generate(6, (index) => false);
+  late List<bool> trainclass;
+  late List<bool> trainclass1;
   List<bool> roadclass = List.generate(2, (i) => false);
   List<bool> roadclass1 = List.generate(2, (i) => false);
+  Set<String> traveltimevalues = {};
+  List<String> traveltimevalues1 = [
+    'Before 6am',
+    '6am to 12pm',
+    '12pm to 6pm',
+    'After 6pm'
+  ];
+  Set<String> traveltimevaluesreturn = {};
+  List<bool> _isSelected1return = [false, false, false, false];
+  List<bool> _isSelected2return = [false, false];
   bool s = false;
   List<bool> accom = [false, false];
   List<int> bags = List.generate(11, (index) => index);
@@ -89,6 +95,12 @@ class _RoundTripState extends State<RoundTrip> {
     setState(() {
       _traveltypeController.text = 'Flight';
       _traveltype1Controller.text = 'Flight';
+      trainclass = widget.isInternational
+          ? List.generate(3, (index) => false)
+          : List.generate(6, (index) => false);
+      trainclass1 = widget.isInternational
+          ? List.generate(3, (index) => false)
+          : List.generate(6, (index) => false);
     });
   }
 
@@ -289,15 +301,21 @@ class _RoundTripState extends State<RoundTrip> {
                                                         if (travelmode[0]) {
                                                           _traveltypeController
                                                               .text = 'Flight';
+                                                          _traveltype1Controller
+                                                              .text = 'Flight';
                                                         }
                                                         if (travelmode[1]) {
                                                           _traveltypeController
+                                                              .text = 'Rail';
+                                                          _traveltype1Controller
                                                               .text = 'Rail';
                                                         }
                                                         if (travelmode[2] &&
                                                             !widget
                                                                 .isInternational) {
                                                           _traveltypeController
+                                                              .text = 'Road';
+                                                          _traveltype1Controller
                                                               .text = 'Road';
                                                         }
                                                       },
@@ -443,12 +461,18 @@ class _RoundTripState extends State<RoundTrip> {
                                                               _travelClassController
                                                                       .text =
                                                                   'Economy class';
+                                                              _travelClass1Controller
+                                                                      .text =
+                                                                  'Economy class';
                                                             } else if (index ==
                                                                     1 &&
                                                                 _isSelected[
                                                                         index] ==
                                                                     true) {
                                                               _travelClassController
+                                                                      .text =
+                                                                  'Business class';
+                                                              _travelClass1Controller
                                                                       .text =
                                                                   'Business class';
                                                             }
@@ -533,10 +557,14 @@ class _RoundTripState extends State<RoundTrip> {
                                                                             0]) {
                                                                           _travelClassController.text =
                                                                               'Bus';
+                                                                          _travelClass1Controller.text =
+                                                                              'Bus';
                                                                         }
                                                                         if (roadclass[
                                                                             1]) {
                                                                           _travelClassController.text =
+                                                                              'Car';
+                                                                          _travelClass1Controller.text =
                                                                               'Car';
                                                                         }
                                                                         print(_travelClassController
@@ -544,134 +572,220 @@ class _RoundTripState extends State<RoundTrip> {
                                                                       }))
                                                             ])
                                                       : travelmode[1]
-                                                          ? Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                  Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
+                                                          ? (!widget
+                                                                  .isInternational
+                                                              ? Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
                                                                             .all(
                                                                             8.0),
-                                                                    child: Text(
-                                                                        'Select Travel Class:',
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12,
-                                                                            color: Color.fromARGB(
-                                                                                255,
-                                                                                1,
-                                                                                75,
-                                                                                148))),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 5,
-                                                                  ),
-                                                                  Container(
-                                                                    height: 50,
-                                                                    width: 210,
-                                                                    child:
-                                                                        ListView(
-                                                                      scrollDirection:
-                                                                          Axis.horizontal,
-                                                                      children: [
-                                                                        ToggleButtons(
-                                                                            renderBorder:
-                                                                                false,
-                                                                            children: [
-                                                                              Tooltip(
-                                                                                  message: 'SL',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass[0] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: 'SC',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('SC', style: TextStyle(fontSize: 24, color: trainclass[1] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: 'CC',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('CC', style: TextStyle(fontSize: 24, color: trainclass[2] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: '3A',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass[3] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('3A', style: TextStyle(fontSize: 24, color: trainclass[3] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: '2A',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass[4] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[4] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: '1A',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass[5] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass[5] ? Colors.white : Colors.blue[300]))))
-                                                                            ],
-                                                                            isSelected:
-                                                                                trainclass,
-                                                                            onPressed:
-                                                                                (index) {
-                                                                              setState(() {
-                                                                                for (int i = 0; i < trainclass.length; i++) {
-                                                                                  trainclass[i] = i == index;
-                                                                                }
-                                                                                trainclass1 = trainclass;
-                                                                              });
-                                                                              if (trainclass[0]) {
-                                                                                _travelClassController.text = 'SL';
-                                                                              }
-                                                                              if (trainclass[1]) {
-                                                                                _travelClassController.text = 'SC';
-                                                                              }
-                                                                              if (trainclass[2]) {
-                                                                                _travelClassController.text = 'CC';
-                                                                              }
-                                                                              if (trainclass[3]) {
-                                                                                _travelClassController.text = '3A';
-                                                                              }
-                                                                              if (trainclass[4]) {
-                                                                                _travelClassController.text = '2A';
-                                                                              }
-                                                                              if (trainclass[5]) {
-                                                                                _travelClassController.text = '1A';
-                                                                              }
-                                                                            }),
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                ])
-                                                          : Container(),
+                                                                        child: Text(
+                                                                            'Select Travel Class:',
+                                                                            style:
+                                                                                TextStyle(fontSize: 12, color: Color.fromARGB(255, 1, 75, 148))),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            5,
+                                                                      ),
+                                                                      Container(
+                                                                        height:
+                                                                            50,
+                                                                        width:
+                                                                            210,
+                                                                        child:
+                                                                            ListView(
+                                                                          scrollDirection:
+                                                                              Axis.horizontal,
+                                                                          children: [
+                                                                            ToggleButtons(
+                                                                                renderBorder: false,
+                                                                                children: [
+                                                                                  Tooltip(
+                                                                                      message: 'SL',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass[0] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: 'SC',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('SC', style: TextStyle(fontSize: 24, color: trainclass[1] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: 'CC',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('CC', style: TextStyle(fontSize: 24, color: trainclass[2] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '3A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass[3] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('3A', style: TextStyle(fontSize: 24, color: trainclass[3] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '2A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass[4] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[4] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '1A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass[5] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass[5] ? Colors.white : Colors.blue[300]))))
+                                                                                ],
+                                                                                isSelected: trainclass,
+                                                                                onPressed: (index) {
+                                                                                  setState(() {
+                                                                                    for (int i = 0; i < trainclass.length; i++) {
+                                                                                      trainclass[i] = i == index;
+                                                                                    }
+                                                                                    trainclass1 = trainclass;
+                                                                                  });
+                                                                                  if (trainclass[0]) {
+                                                                                    _travelClassController.text = 'SL';
+                                                                                    _travelClass1Controller.text = 'SL';
+                                                                                  }
+                                                                                  if (trainclass[1]) {
+                                                                                    _travelClassController.text = 'SC';
+                                                                                    _travelClass1Controller.text = 'SC';
+                                                                                  }
+                                                                                  if (trainclass[2]) {
+                                                                                    _travelClassController.text = 'CC';
+                                                                                    _travelClass1Controller.text = 'CC';
+                                                                                  }
+                                                                                  if (trainclass[3]) {
+                                                                                    _travelClassController.text = '3A';
+                                                                                    _travelClass1Controller.text = '3A';
+                                                                                  }
+                                                                                  if (trainclass[4]) {
+                                                                                    _travelClassController.text = '2A';
+                                                                                    _travelClass1Controller.text = '2A';
+                                                                                  }
+                                                                                  if (trainclass[5]) {
+                                                                                    _travelClassController.text = '1A';
+                                                                                    _travelClass1Controller.text = '1A';
+                                                                                  }
+                                                                                }),
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ])
+                                                              : Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .all(
+                                                                            8.0),
+                                                                        child: Text(
+                                                                            'Select Travel Class:',
+                                                                            style:
+                                                                                TextStyle(fontSize: 12, color: Color.fromARGB(255, 1, 75, 148))),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            5,
+                                                                      ),
+                                                                      Container(
+                                                                        height:
+                                                                            50,
+                                                                        width:
+                                                                            210,
+                                                                        child:
+                                                                            ListView(
+                                                                          scrollDirection:
+                                                                              Axis.horizontal,
+                                                                          children: [
+                                                                            ToggleButtons(
+                                                                                renderBorder: false,
+                                                                                children: [
+                                                                                  Tooltip(
+                                                                                      message: 'SL',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass[0] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '2A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass[2] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '1A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass[2] ? Colors.white : Colors.blue[300]))))
+                                                                                ],
+                                                                                isSelected: trainclass,
+                                                                                onPressed: (index) {
+                                                                                  setState(() {
+                                                                                    for (int i = 0; i < trainclass.length; i++) {
+                                                                                      trainclass[i] = i == index;
+                                                                                    }
+                                                                                    trainclass1 = trainclass;
+                                                                                  });
+                                                                                  if (trainclass[0]) {
+                                                                                    _travelClassController.text = 'SL';
+                                                                                    _travelClass1Controller.text = 'SL';
+                                                                                  }
+
+                                                                                  if (trainclass[1]) {
+                                                                                    _travelClassController.text = '3A';
+                                                                                    _travelClass1Controller.text = '3A';
+                                                                                  }
+
+                                                                                  if (trainclass[2]) {
+                                                                                    _travelClassController.text = '1A';
+                                                                                    _travelClass1Controller.text = '1A';
+                                                                                  }
+                                                                                }),
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ]))
+                                                          : Container()
                                             ],
                                           ),
-                                          //Text('${_travelClassController.text}'),
                                           SizedBox(
                                             height: 10,
                                           ),
@@ -875,125 +989,32 @@ class _RoundTripState extends State<RoundTrip> {
                                                       Text(
                                                           'Select Travel Time:',
                                                           style: TextStyle(
-                                                              color: Colors
-                                                                  .black54,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      1,
+                                                                      75,
+                                                                      148),
                                                               fontSize: 12)),
                                                       SizedBox(
-                                                        height: 20,
+                                                        height: 10,
                                                       ),
-                                                      ToggleButtons(
-                                                        renderBorder: false,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(30),
+                                                      Column(
                                                         children: [
-                                                          Tooltip(
-                                                            message: '6am',
-                                                            triggerMode:
-                                                                TooltipTriggerMode
-                                                                    .manual,
-                                                            child: Container(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(8),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color:
-                                                                    _isSelected1[
-                                                                            0]
-                                                                        ? c2
-                                                                        : c1,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30),
-                                                              ),
-                                                              child: ImageIcon(
-                                                                  AssetImage(
-                                                                      'assets/images/before6am_active.png'),
-                                                                  size: 24,
-                                                                  color: _isSelected1[
-                                                                          0]
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors.blue[
-                                                                          300]),
-                                                            ),
-                                                          ),
-                                                          Tooltip(
-                                                            message:
-                                                                '6amto12pm',
-                                                            triggerMode:
-                                                                TooltipTriggerMode
-                                                                    .manual,
-                                                            child: Container(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(8),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color:
-                                                                    _isSelected1[
-                                                                            1]
-                                                                        ? c2
-                                                                        : c1,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30),
-                                                              ),
-                                                              child: ImageIcon(
-                                                                  AssetImage(
-                                                                      'assets/images/6amto12pm_active.png'),
-                                                                  size: 24,
-                                                                  color: _isSelected1[
-                                                                          1]
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors.blue[
-                                                                          300]),
-                                                            ),
-                                                          ),
-                                                          Tooltip(
-                                                              message:
-                                                                  '12pmto6pm',
-                                                              triggerMode:
-                                                                  TooltipTriggerMode
-                                                                      .manual,
-                                                              child: Container(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .all(8),
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color:
-                                                                      _isSelected1[
-                                                                              2]
-                                                                          ? c2
-                                                                          : c1,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              30),
-                                                                ),
-                                                                child: ImageIcon(
-                                                                    AssetImage(
-                                                                        'assets/images/12pmto6pm_active.png'),
-                                                                    size: 24,
-                                                                    color: _isSelected1[
-                                                                            2]
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .blue[300]),
-                                                              )),
-                                                          Tooltip(
-                                                              message:
-                                                                  'after6pm',
-                                                              triggerMode:
-                                                                  TooltipTriggerMode
-                                                                      .manual,
-                                                              child: Container(
+                                                          ToggleButtons(
+                                                            renderBorder: false,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30),
+                                                            children: [
+                                                              Tooltip(
+                                                                message: '6am',
+                                                                triggerMode:
+                                                                    TooltipTriggerMode
+                                                                        .manual,
+                                                                child:
+                                                                    Container(
                                                                   padding:
                                                                       EdgeInsets
                                                                           .all(
@@ -1001,7 +1022,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     color:
-                                                                        _isSelected1[3]
+                                                                        _isSelected1[0]
                                                                             ? c2
                                                                             : c1,
                                                                     borderRadius:
@@ -1010,60 +1031,126 @@ class _RoundTripState extends State<RoundTrip> {
                                                                   ),
                                                                   child: ImageIcon(
                                                                       AssetImage(
-                                                                          'assets/images/after6pm_active.png'),
+                                                                          'assets/images/before6am_active.png'),
                                                                       size: 24,
                                                                       color: _isSelected1[
-                                                                              2]
+                                                                              0]
                                                                           ? Colors
                                                                               .white
                                                                           : Colors
-                                                                              .blue[300])))
+                                                                              .blue[300]),
+                                                                ),
+                                                              ),
+                                                              Tooltip(
+                                                                message:
+                                                                    '6amto12pm',
+                                                                triggerMode:
+                                                                    TooltipTriggerMode
+                                                                        .manual,
+                                                                child:
+                                                                    Container(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              8),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color:
+                                                                        _isSelected1[1]
+                                                                            ? c2
+                                                                            : c1,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            30),
+                                                                  ),
+                                                                  child: ImageIcon(
+                                                                      AssetImage(
+                                                                          'assets/images/6amto12pm_active.png'),
+                                                                      size: 24,
+                                                                      color: _isSelected1[
+                                                                              1]
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .blue[300]),
+                                                                ),
+                                                              ),
+                                                              Tooltip(
+                                                                  message:
+                                                                      '12pmto6pm',
+                                                                  triggerMode:
+                                                                      TooltipTriggerMode
+                                                                          .manual,
+                                                                  child:
+                                                                      Container(
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .all(8),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: _isSelected1[
+                                                                              2]
+                                                                          ? c2
+                                                                          : c1,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              30),
+                                                                    ),
+                                                                    child: ImageIcon(
+                                                                        AssetImage(
+                                                                            'assets/images/12pmto6pm_active.png'),
+                                                                        size:
+                                                                            24,
+                                                                        color: _isSelected1[2]
+                                                                            ? Colors.white
+                                                                            : Colors.blue[300]),
+                                                                  )),
+                                                              Tooltip(
+                                                                  message:
+                                                                      'after6pm',
+                                                                  triggerMode:
+                                                                      TooltipTriggerMode
+                                                                          .manual,
+                                                                  child:
+                                                                      Container(
+                                                                          padding: EdgeInsets.all(
+                                                                              8),
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color: _isSelected1[3]
+                                                                                ? c2
+                                                                                : c1,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(30),
+                                                                          ),
+                                                                          child: ImageIcon(
+                                                                              AssetImage('assets/images/after6pm_active.png'),
+                                                                              size: 24,
+                                                                              color: _isSelected1[3] ? Colors.white : Colors.blue[300])))
+                                                            ],
+                                                            isSelected:
+                                                                _isSelected1,
+                                                            onPressed:
+                                                                (int index) {
+                                                              setState(() {
+                                                                if (_isSelected1[
+                                                                    index]) {
+                                                                  traveltimevalues.remove(
+                                                                      traveltimevalues1[
+                                                                          index]);
+                                                                } else {
+                                                                  traveltimevalues.add(
+                                                                      traveltimevalues1[
+                                                                          index]);
+                                                                }
+                                                                _isSelected1[
+                                                                        index] =
+                                                                    !_isSelected1[
+                                                                        index];
+                                                              });
+                                                            },
+                                                          ),
                                                         ],
-                                                        isSelected:
-                                                            _isSelected1,
-                                                        onPressed: (int index) {
-                                                          setState(() {
-                                                            for (int i = 0;
-                                                                i <
-                                                                    _isSelected1
-                                                                        .length;
-                                                                i++) {
-                                                              _isSelected1[i] =
-                                                                  i == index;
-                                                            }
-                                                          });
-                                                          if (index == 0 &&
-                                                              _isSelected1[
-                                                                      index] ==
-                                                                  true) {
-                                                            _traveltimeController
-                                                                    .text =
-                                                                'Before 6am';
-                                                          } else if (index ==
-                                                                  1 &&
-                                                              _isSelected1[
-                                                                      index] ==
-                                                                  true) {
-                                                            _traveltimeController
-                                                                    .text =
-                                                                '6am to 12pm';
-                                                          } else if (index ==
-                                                                  2 &&
-                                                              _isSelected1[
-                                                                      index] ==
-                                                                  true) {
-                                                            _traveltimeController
-                                                                    .text =
-                                                                '12pm to 6pm';
-                                                          } else {
-                                                            _traveltimeController
-                                                                    .text =
-                                                                'After 6pm';
-                                                          }
-                                                          print(
-                                                              _traveltimeController
-                                                                  .text);
-                                                        },
                                                       ),
                                                     ]))
                                           ]),
@@ -1285,12 +1372,20 @@ class _RoundTripState extends State<RoundTrip> {
                                             height: 10,
                                           ),
                                           Row(children: [
-                                            (travelmode[0] || travelmode[1])
+                                            (travelmode[0] ||
+                                                    travelmode[1] ||
+                                                    travelmode[2])
                                                 ? Padding(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             right: 8.0),
                                                     child: Container(
+                                                        width:
+                                                            MediaQuery.of(context)
+                                                                        .size
+                                                                        .width /
+                                                                    2 -
+                                                                20,
                                                         decoration: BoxDecoration(
                                                             borderRadius:
                                                                 BorderRadius
@@ -1304,68 +1399,60 @@ class _RoundTripState extends State<RoundTrip> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              Text(
-                                                                ' Seat Preference',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black54),
-                                                              ),
-                                                              travelmode[0]
-                                                                  ? DropdownMenu(
-                                                                      inputDecorationTheme: InputDecorationTheme(
-                                                                          border: InputBorder
-                                                                              .none),
-                                                                      onSelected:
-                                                                          (s) {
-                                                                        if (s ==
-                                                                            'select an option') {
-                                                                          _seatController.text =
-                                                                              '';
-                                                                        }
-                                                                        if (s ==
-                                                                            'Window') {
-                                                                          _seatController.text =
-                                                                              'Window';
-                                                                        }
-                                                                        if (s ==
-                                                                            'Aisle') {
-                                                                          _seatController.text =
-                                                                              'Aisle';
-                                                                        }
-                                                                      },
-                                                                      controller:
-                                                                          _seatController,
-                                                                      dropdownMenuEntries: [
-                                                                        'select an option',
-                                                                        'Window',
-                                                                        'Aisle'
-                                                                      ]
-                                                                          .map((e) => DropdownMenuEntry(
-                                                                              label:
-                                                                                  e,
-                                                                              value:
-                                                                                  e))
-                                                                          .toList())
-                                                                  : DropdownMenu(
-                                                                      onSelected:
-                                                                          (s) {
-                                                                        if (s ==
-                                                                            'Select an option') {
-                                                                          _seatController.text =
-                                                                              '';
-                                                                        }
-                                                                      },
-                                                                      controller:
-                                                                          _seatController,
-                                                                      inputDecorationTheme: InputDecorationTheme(
-                                                                          border: InputBorder
-                                                                              .none),
-                                                                      dropdownMenuEntries:
-                                                                          [
-                                                                        'Select an option'
-                                                                            'up',
-                                                                        'down'
-                                                                      ].map((e) => DropdownMenuEntry(label: e, value: e)).toList())
+                                                              Text('Seat:',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black)),
+                                                              Padding(
+                                                                padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        8.0),
+                                                                child: DropdownMenu(
+                                                                    width: MediaQuery.of(context).size.width / 2 - 20,
+                                                                    hintText: 'Seat',
+                                                                    inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
+                                                                    onSelected: (s) {
+                                                                      if (s ==
+                                                                          'select an option') {
+                                                                        _seatController.text =
+                                                                            '';
+                                                                      } else {
+                                                                        _seatController
+                                                                            .text = s;
+                                                                      }
+                                                                    },
+                                                                    initialSelection: _seatController.text,
+                                                                    controller: _seatController,
+                                                                    dropdownMenuEntries: (!widget.isInternational
+                                                                            ? (_travelClassController.text == 'Business class' || _travelClassController.text == 'Economy class'
+                                                                                ? ['Select', 'Window', 'Aisle']
+                                                                                : (_travelClassController.text == 'SL' || _travelClassController.text == '3A'
+                                                                                    ? ['Select', 'Lower', 'Middle', 'Side-Lower', 'Side-Middle', 'Side-Upper', 'Upper']
+                                                                                    : (_travelClassController.text == 'SC' || _travelClassController.text == 'CC'
+                                                                                        ? ['Select', 'Normal', 'Window']
+                                                                                        : (_travelClassController.text == '2A'
+                                                                                            ? ['Select', 'Side-Lower', 'Lower', 'Side-Upper', 'Upper']
+                                                                                            : (_travelClassController.text == '1A'
+                                                                                                ? ['Select', 'Cabin', 'Coupe', 'Lower', 'Upper']
+                                                                                                : (_travelClassController.text == 'Car'
+                                                                                                    ? ['Select', 'Normal']
+                                                                                                    : (_travelClassController.text == 'Bus'
+                                                                                                        ? [
+                                                                                                            'Select',
+                                                                                                            "Normal-Non AC",
+                                                                                                            "Semi Sleeper-Normal",
+                                                                                                            "Semi Sleeper-Window AC",
+                                                                                                            "Sleeper-Lower",
+                                                                                                            "Sleeper-Upper",
+                                                                                                            "Window-AC",
+                                                                                                            "Window-Non AC"
+                                                                                                          ]
+                                                                                                        : ([]))))))))
+                                                                            : (_travelClassController.text == 'Business class' || _travelClassController.text == 'Economy class' ? ['Select', 'Window', 'Aisle'] : (_travelClassController.text == 'SL' || _travelClassController.text == '3A' ? ['Select', 'Lower', 'Middle', 'Side-Lower', 'Side-Middle', 'Side-Upper', 'Upper'] : (_travelClassController.text == '2A' ? ['Select', 'Side-Lower', 'Lower', 'Side-Upper', 'Upper'] : (_travelClassController.text == '1A' ? ['Select', 'Cabin', 'Coupe', 'Lower', 'Upper'] : [])))))
+                                                                        .map((e) => DropdownMenuEntry(label: e, value: e))
+                                                                        .toList()),
+                                                              )
                                                             ])))
                                                 : Container(),
                                             !widget.isInternational
@@ -1449,7 +1536,6 @@ class _RoundTripState extends State<RoundTrip> {
                                                   ),
                                           ]),
                                           SizedBox(height: 10),
-
                                           SizedBox(
                                             height: 5,
                                           ),
@@ -2323,129 +2409,206 @@ class _RoundTripState extends State<RoundTrip> {
                                                                       }))
                                                             ])
                                                       : travelmode1[1]
-                                                          ? Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                  Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
+                                                          ? (!widget
+                                                                  .isInternational
+                                                              ? Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
                                                                             .all(
                                                                             8.0),
-                                                                    child: Text(
-                                                                        'Select Travel Class:',
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                12,
-                                                                            color: Color.fromARGB(
-                                                                                255,
-                                                                                1,
-                                                                                75,
-                                                                                148))),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 5,
-                                                                  ),
-                                                                  Container(
-                                                                    height: 50,
-                                                                    width: 210,
-                                                                    child:
-                                                                        ListView(
-                                                                      scrollDirection:
-                                                                          Axis.horizontal,
-                                                                      children: [
-                                                                        ToggleButtons(
-                                                                            renderBorder:
-                                                                                false,
-                                                                            children: [
-                                                                              Tooltip(
-                                                                                  message: 'SL',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass1[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass1[0] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: 'SC',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass1[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('SC', style: TextStyle(fontSize: 24, color: trainclass1[1] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: 'CC',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass1[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('CC', style: TextStyle(fontSize: 24, color: trainclass1[2] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: '3A',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass1[3] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('3A', style: TextStyle(fontSize: 24, color: trainclass1[3] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: '2A',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass1[4] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass1[4] ? Colors.white : Colors.blue[300])))),
-                                                                              Tooltip(
-                                                                                  message: '1A',
-                                                                                  child: Container(
-                                                                                      padding: EdgeInsets.all(8),
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: trainclass1[5] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
-                                                                                        borderRadius: BorderRadius.circular(30),
-                                                                                      ),
-                                                                                      child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass1[5] ? Colors.white : Colors.blue[300]))))
-                                                                            ],
-                                                                            isSelected:
-                                                                                trainclass1,
-                                                                            onPressed:
-                                                                                (index) {
-                                                                              setState(() {
-                                                                                for (int i = 0; i < trainclass1.length; i++) {
-                                                                                  trainclass1[i] = i == index;
-                                                                                }
-                                                                              });
-                                                                              if (trainclass1[0]) {
-                                                                                _travelClass1Controller.text = 'SL';
-                                                                              }
-                                                                              if (trainclass1[1]) {
-                                                                                _travelClass1Controller.text = 'SC';
-                                                                              }
-                                                                              if (trainclass1[2]) {
-                                                                                _travelClass1Controller.text = 'CC';
-                                                                              }
-                                                                              if (trainclass1[3]) {
-                                                                                _travelClass1Controller.text = '3A';
-                                                                              }
-                                                                              if (trainclass1[4]) {
-                                                                                _travelClass1Controller.text = '2A';
-                                                                              }
-                                                                              if (trainclass1[5]) {
-                                                                                _travelClass1Controller.text = '1A';
-                                                                              }
-                                                                            }),
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                ])
+                                                                        child: Text(
+                                                                            'Select Travel Class:',
+                                                                            style:
+                                                                                TextStyle(fontSize: 12, color: Color.fromARGB(255, 1, 75, 148))),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            5,
+                                                                      ),
+                                                                      Container(
+                                                                        height:
+                                                                            50,
+                                                                        width:
+                                                                            210,
+                                                                        child:
+                                                                            ListView(
+                                                                          scrollDirection:
+                                                                              Axis.horizontal,
+                                                                          children: [
+                                                                            ToggleButtons(
+                                                                                renderBorder: false,
+                                                                                children: [
+                                                                                  Tooltip(
+                                                                                      message: 'SL',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass1[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass1[0] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: 'SC',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass1[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('SC', style: TextStyle(fontSize: 24, color: trainclass[1] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: 'CC',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass1[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('CC', style: TextStyle(fontSize: 24, color: trainclass1[2] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '3A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass1[3] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('3A', style: TextStyle(fontSize: 24, color: trainclass1[3] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '2A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass1[4] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass1[4] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '1A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass1[5] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass1[5] ? Colors.white : Colors.blue[300]))))
+                                                                                ],
+                                                                                isSelected: trainclass1,
+                                                                                onPressed: (index) {
+                                                                                  setState(() {
+                                                                                    for (int i = 0; i < trainclass1.length; i++) {
+                                                                                      trainclass1[i] = i == index;
+                                                                                    }
+                                                                                  });
+                                                                                  if (trainclass1[0]) {
+                                                                                    _travelClass1Controller.text = 'SL';
+                                                                                  }
+                                                                                  if (trainclass1[1]) {
+                                                                                    _travelClass1Controller.text = 'SC';
+                                                                                  }
+                                                                                  if (trainclass1[2]) {
+                                                                                    _travelClass1Controller.text = 'CC';
+                                                                                  }
+                                                                                  if (trainclass1[3]) {
+                                                                                    _travelClass1Controller.text = '3A';
+                                                                                  }
+                                                                                  if (trainclass1[4]) {
+                                                                                    _travelClass1Controller.text = '2A';
+                                                                                  }
+                                                                                  if (trainclass1[5]) {
+                                                                                    _travelClass1Controller.text = '1A';
+                                                                                  }
+                                                                                }),
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ])
+                                                              : Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .all(
+                                                                            8.0),
+                                                                        child: Text(
+                                                                            'Select Travel Class:',
+                                                                            style:
+                                                                                TextStyle(fontSize: 12, color: Color.fromARGB(255, 1, 75, 148))),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            5,
+                                                                      ),
+                                                                      Container(
+                                                                        height:
+                                                                            50,
+                                                                        width:
+                                                                            210,
+                                                                        child:
+                                                                            ListView(
+                                                                          scrollDirection:
+                                                                              Axis.horizontal,
+                                                                          children: [
+                                                                            ToggleButtons(
+                                                                                renderBorder: false,
+                                                                                children: [
+                                                                                  Tooltip(
+                                                                                      message: 'SL',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass1[0] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('SL', style: TextStyle(fontSize: 24, color: trainclass1[0] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '2A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass1[1] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('2A', style: TextStyle(fontSize: 24, color: trainclass1[1] ? Colors.white : Colors.blue[300])))),
+                                                                                  Tooltip(
+                                                                                      message: '1A',
+                                                                                      child: Container(
+                                                                                          padding: EdgeInsets.all(8),
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: trainclass1[2] ? Color.fromARGB(255, 1, 75, 148) : Color.fromARGB(255, 191, 218, 240),
+                                                                                            borderRadius: BorderRadius.circular(30),
+                                                                                          ),
+                                                                                          child: Text('1A', style: TextStyle(fontSize: 24, color: trainclass1[2] ? Colors.white : Colors.blue[300]))))
+                                                                                ],
+                                                                                isSelected: trainclass,
+                                                                                onPressed: (index) {
+                                                                                  setState(() {
+                                                                                    for (int i = 0; i < trainclass1.length; i++) {
+                                                                                      trainclass1[i] = i == index;
+                                                                                    }
+                                                                                  });
+                                                                                  if (trainclass1[0]) {
+                                                                                    _travelClass1Controller.text = 'SL';
+                                                                                  }
+
+                                                                                  if (trainclass1[1]) {
+                                                                                    _travelClass1Controller.text = '3A';
+                                                                                  }
+
+                                                                                  if (trainclass1[2]) {
+                                                                                    _travelClass1Controller.text = '1A';
+                                                                                  }
+                                                                                }),
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ]))
                                                           : Container(),
                                             ],
                                           ),
@@ -2655,125 +2818,32 @@ class _RoundTripState extends State<RoundTrip> {
                                                       Text(
                                                           'Select Travel Time:',
                                                           style: TextStyle(
-                                                              color: Colors
-                                                                  .black54,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      1,
+                                                                      75,
+                                                                      148),
                                                               fontSize: 12)),
                                                       SizedBox(
-                                                        height: 20,
+                                                        height: 10,
                                                       ),
-                                                      ToggleButtons(
-                                                        renderBorder: false,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(30),
+                                                      Column(
                                                         children: [
-                                                          Tooltip(
-                                                            message: '6am',
-                                                            triggerMode:
-                                                                TooltipTriggerMode
-                                                                    .manual,
-                                                            child: Container(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(8),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color:
-                                                                    _isSelected1[
-                                                                            0]
-                                                                        ? c2
-                                                                        : c1,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30),
-                                                              ),
-                                                              child: ImageIcon(
-                                                                  AssetImage(
-                                                                      'assets/images/before6am_active.png'),
-                                                                  size: 24,
-                                                                  color: _isSelected1[
-                                                                          0]
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors.blue[
-                                                                          300]),
-                                                            ),
-                                                          ),
-                                                          Tooltip(
-                                                            message:
-                                                                '6amto12pm',
-                                                            triggerMode:
-                                                                TooltipTriggerMode
-                                                                    .manual,
-                                                            child: Container(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(8),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color:
-                                                                    _isSelected1[
-                                                                            1]
-                                                                        ? c2
-                                                                        : c1,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30),
-                                                              ),
-                                                              child: ImageIcon(
-                                                                  AssetImage(
-                                                                      'assets/images/6amto12pm_active.png'),
-                                                                  size: 24,
-                                                                  color: _isSelected1[
-                                                                          1]
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors.blue[
-                                                                          300]),
-                                                            ),
-                                                          ),
-                                                          Tooltip(
-                                                              message:
-                                                                  '12pmto6pm',
-                                                              triggerMode:
-                                                                  TooltipTriggerMode
-                                                                      .manual,
-                                                              child: Container(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .all(8),
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color:
-                                                                      _isSelected1[
-                                                                              2]
-                                                                          ? c2
-                                                                          : c1,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              30),
-                                                                ),
-                                                                child: ImageIcon(
-                                                                    AssetImage(
-                                                                        'assets/images/12pmto6pm_active.png'),
-                                                                    size: 24,
-                                                                    color: _isSelected1[
-                                                                            2]
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .blue[300]),
-                                                              )),
-                                                          Tooltip(
-                                                              message:
-                                                                  'after6pm',
-                                                              triggerMode:
-                                                                  TooltipTriggerMode
-                                                                      .manual,
-                                                              child: Container(
+                                                          ToggleButtons(
+                                                            renderBorder: false,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30),
+                                                            children: [
+                                                              Tooltip(
+                                                                message: '6am',
+                                                                triggerMode:
+                                                                    TooltipTriggerMode
+                                                                        .manual,
+                                                                child:
+                                                                    Container(
                                                                   padding:
                                                                       EdgeInsets
                                                                           .all(
@@ -2781,7 +2851,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     color:
-                                                                        _isSelected1[3]
+                                                                        _isSelected1return[0]
                                                                             ? c2
                                                                             : c1,
                                                                     borderRadius:
@@ -2790,57 +2860,126 @@ class _RoundTripState extends State<RoundTrip> {
                                                                   ),
                                                                   child: ImageIcon(
                                                                       AssetImage(
-                                                                          'assets/images/after6pm_active.png'),
+                                                                          'assets/images/before6am_active.png'),
                                                                       size: 24,
-                                                                      color: _isSelected1[
-                                                                              3]
+                                                                      color: _isSelected1return[
+                                                                              0]
                                                                           ? Colors
                                                                               .white
                                                                           : Colors
-                                                                              .blue[300])))
+                                                                              .blue[300]),
+                                                                ),
+                                                              ),
+                                                              Tooltip(
+                                                                message:
+                                                                    '6amto12pm',
+                                                                triggerMode:
+                                                                    TooltipTriggerMode
+                                                                        .manual,
+                                                                child:
+                                                                    Container(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              8),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color:
+                                                                        _isSelected1return[1]
+                                                                            ? c2
+                                                                            : c1,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            30),
+                                                                  ),
+                                                                  child: ImageIcon(
+                                                                      AssetImage(
+                                                                          'assets/images/6amto12pm_active.png'),
+                                                                      size: 24,
+                                                                      color: _isSelected1return[
+                                                                              1]
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .blue[300]),
+                                                                ),
+                                                              ),
+                                                              Tooltip(
+                                                                  message:
+                                                                      '12pmto6pm',
+                                                                  triggerMode:
+                                                                      TooltipTriggerMode
+                                                                          .manual,
+                                                                  child:
+                                                                      Container(
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .all(8),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: _isSelected1return[
+                                                                              2]
+                                                                          ? c2
+                                                                          : c1,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              30),
+                                                                    ),
+                                                                    child: ImageIcon(
+                                                                        AssetImage(
+                                                                            'assets/images/12pmto6pm_active.png'),
+                                                                        size:
+                                                                            24,
+                                                                        color: _isSelected1return[2]
+                                                                            ? Colors.white
+                                                                            : Colors.blue[300]),
+                                                                  )),
+                                                              Tooltip(
+                                                                  message:
+                                                                      'after6pm',
+                                                                  triggerMode:
+                                                                      TooltipTriggerMode
+                                                                          .manual,
+                                                                  child:
+                                                                      Container(
+                                                                          padding: EdgeInsets.all(
+                                                                              8),
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color: _isSelected1return[3]
+                                                                                ? c2
+                                                                                : c1,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(30),
+                                                                          ),
+                                                                          child: ImageIcon(
+                                                                              AssetImage('assets/images/after6pm_active.png'),
+                                                                              size: 24,
+                                                                              color: _isSelected1return[3] ? Colors.white : Colors.blue[300])))
+                                                            ],
+                                                            isSelected:
+                                                                _isSelected1return,
+                                                            onPressed:
+                                                                (int index) {
+                                                              setState(() {
+                                                                if (_isSelected1return[
+                                                                    index]) {
+                                                                  traveltimevalues.remove(
+                                                                      traveltimevalues1[
+                                                                          index]);
+                                                                } else {
+                                                                  traveltimevalues.add(
+                                                                      traveltimevalues1[
+                                                                          index]);
+                                                                }
+                                                                _isSelected1return[
+                                                                        index] =
+                                                                    !_isSelected1return[
+                                                                        index];
+                                                              });
+                                                            },
+                                                          ),
                                                         ],
-                                                        isSelected:
-                                                            _isSelected1,
-                                                        onPressed: (int index) {
-                                                          setState(() {
-                                                            for (int i = 0;
-                                                                i <
-                                                                    _isSelected1
-                                                                        .length;
-                                                                i++) {
-                                                              _isSelected1[i] =
-                                                                  i == index;
-                                                            }
-                                                          });
-                                                          if (index == 0 &&
-                                                              _isSelected1[
-                                                                      index] ==
-                                                                  true) {
-                                                            _traveltime1Controller
-                                                                    .text =
-                                                                'Before 6am';
-                                                          } else if (index ==
-                                                                  1 &&
-                                                              _isSelected1[
-                                                                      index] ==
-                                                                  true) {
-                                                            _traveltime1Controller
-                                                                    .text =
-                                                                '6am to 12pm';
-                                                          } else if (index ==
-                                                                  2 &&
-                                                              _isSelected1[
-                                                                      index] ==
-                                                                  true) {
-                                                            _traveltime1Controller
-                                                                    .text =
-                                                                '12pm to 6pm';
-                                                          } else {
-                                                            _traveltime1Controller
-                                                                    .text =
-                                                                'After 6pm';
-                                                          }
-                                                        },
                                                       ),
                                                     ]))
                                           ]),
@@ -2970,7 +3109,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                               decoration:
                                                                   BoxDecoration(
                                                                 color:
-                                                                    _isSelected2[
+                                                                    _isSelected2return[
                                                                             0]
                                                                         ? c2
                                                                         : c1,
@@ -2983,7 +3122,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                   AssetImage(
                                                                       'assets/images/carrot.png'),
                                                                   size: 24,
-                                                                  color: _isSelected2[
+                                                                  color: _isSelected2return[
                                                                           0]
                                                                       ? Colors
                                                                           .white
@@ -3002,7 +3141,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                                 decoration:
                                                                     BoxDecoration(
                                                                   color:
-                                                                      _isSelected2[
+                                                                      _isSelected2return[
                                                                               1]
                                                                           ? c2
                                                                           : c1,
@@ -3015,34 +3154,35 @@ class _RoundTripState extends State<RoundTrip> {
                                                                     AssetImage(
                                                                         'assets/images/nonveg.png'),
                                                                     size: 24,
-                                                                    color: _isSelected2[
+                                                                    color: _isSelected2return[
                                                                             1]
                                                                         ? Colors
                                                                             .white
                                                                         : Colors
                                                                             .blue[300])))
                                                       ],
-                                                      isSelected: _isSelected2,
+                                                      isSelected:
+                                                          _isSelected2return,
                                                       onPressed: (int index) {
                                                         setState(() {
                                                           for (int i = 0;
                                                               i <
-                                                                  _isSelected2
+                                                                  _isSelected2return
                                                                       .length;
                                                               i++) {
-                                                            _isSelected2[i] =
-                                                                i == index;
+                                                            _isSelected2return[
+                                                                i] = i == index;
                                                           }
                                                         });
                                                         if (index == 0 &&
-                                                            _isSelected2[
+                                                            _isSelected2return[
                                                                     index] ==
                                                                 true) {
                                                           _food1Controller
                                                                   .text =
                                                               'Vegetarian';
                                                         } else if (index == 1 &&
-                                                            _isSelected2[
+                                                            _isSelected2return[
                                                                     index] ==
                                                                 true) {
                                                           _food1Controller
@@ -3060,12 +3200,20 @@ class _RoundTripState extends State<RoundTrip> {
                                             height: 10,
                                           ),
                                           Row(children: [
-                                            (travelmode[0] || travelmode[1])
+                                            (travelmode1[0] ||
+                                                    travelmode1[1] ||
+                                                    travelmode1[2])
                                                 ? Padding(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             right: 8.0),
                                                     child: Container(
+                                                        width:
+                                                            MediaQuery.of(context)
+                                                                        .size
+                                                                        .width /
+                                                                    2 -
+                                                                20,
                                                         decoration: BoxDecoration(
                                                             borderRadius:
                                                                 BorderRadius
@@ -3079,68 +3227,60 @@ class _RoundTripState extends State<RoundTrip> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              Text(
-                                                                ' Seat Preference',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black54),
-                                                              ),
-                                                              travelmode[0]
-                                                                  ? DropdownMenu(
-                                                                      inputDecorationTheme: InputDecorationTheme(
-                                                                          border: InputBorder
-                                                                              .none),
-                                                                      onSelected:
-                                                                          (s) {
-                                                                        if (s ==
-                                                                            'select an option') {
-                                                                          _seat1Controller.text =
-                                                                              '';
-                                                                        }
-                                                                        if (s ==
-                                                                            'Window') {
-                                                                          _seat1Controller.text =
-                                                                              'Window';
-                                                                        }
-                                                                        if (s ==
-                                                                            'Aisle') {
-                                                                          _seat1Controller.text =
-                                                                              'Aisle';
-                                                                        }
-                                                                      },
-                                                                      controller:
-                                                                          _seat1Controller,
-                                                                      dropdownMenuEntries: [
-                                                                        'select an option',
-                                                                        'Window',
-                                                                        'Aisle'
-                                                                      ]
-                                                                          .map((e) => DropdownMenuEntry(
-                                                                              label:
-                                                                                  e,
-                                                                              value:
-                                                                                  e))
-                                                                          .toList())
-                                                                  : DropdownMenu(
-                                                                      onSelected:
-                                                                          (s) {
-                                                                        if (s ==
-                                                                            'Select an option') {
-                                                                          _seat1Controller.text =
-                                                                              '';
-                                                                        }
-                                                                      },
-                                                                      controller:
-                                                                          _seat1Controller,
-                                                                      inputDecorationTheme: InputDecorationTheme(
-                                                                          border: InputBorder
-                                                                              .none),
-                                                                      dropdownMenuEntries:
-                                                                          [
-                                                                        'Select an option'
-                                                                            'up',
-                                                                        'down'
-                                                                      ].map((e) => DropdownMenuEntry(label: e, value: e)).toList())
+                                                              Text('Seat:',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black)),
+                                                              Padding(
+                                                                padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        8.0),
+                                                                child: DropdownMenu(
+                                                                    width: MediaQuery.of(context).size.width / 2 - 20,
+                                                                    hintText: 'Seat',
+                                                                    inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
+                                                                    onSelected: (s) {
+                                                                      if (s ==
+                                                                          'select an option') {
+                                                                        _seat1Controller.text =
+                                                                            '';
+                                                                      } else {
+                                                                        _seat1Controller
+                                                                            .text = s;
+                                                                      }
+                                                                    },
+                                                                    initialSelection: _seat1Controller.text,
+                                                                    controller: _seat1Controller,
+                                                                    dropdownMenuEntries: (!widget.isInternational
+                                                                            ? (_travelClass1Controller.text == 'Business class' || _travelClass1Controller.text == 'Economy class'
+                                                                                ? ['Select', 'Window', 'Aisle']
+                                                                                : (_travelClass1Controller.text == 'SL' || _travelClass1Controller.text == '3A'
+                                                                                    ? ['Select', 'Lower', 'Middle', 'Side-Lower', 'Side-Middle', 'Side-Upper', 'Upper']
+                                                                                    : (_travelClass1Controller.text == 'SC' || _travelClass1Controller.text == 'CC'
+                                                                                        ? ['Select', 'Normal', 'Window']
+                                                                                        : (_travelClass1Controller.text == '2A'
+                                                                                            ? ['Select', 'Side-Lower', 'Lower', 'Side-Upper', 'Upper']
+                                                                                            : (_travelClass1Controller.text == '1A'
+                                                                                                ? ['Select', 'Cabin', 'Coupe', 'Lower', 'Upper']
+                                                                                                : (_travelClass1Controller.text == 'Car'
+                                                                                                    ? ['Select', 'Normal']
+                                                                                                    : (_travelClass1Controller.text == 'Bus'
+                                                                                                        ? [
+                                                                                                            'Select',
+                                                                                                            "Normal-Non AC",
+                                                                                                            "Semi Sleeper-Normal",
+                                                                                                            "Semi Sleeper-Window AC",
+                                                                                                            "Sleeper-Lower",
+                                                                                                            "Sleeper-Upper",
+                                                                                                            "Window-AC",
+                                                                                                            "Window-Non AC"
+                                                                                                          ]
+                                                                                                        : ([]))))))))
+                                                                            : (_travelClass1Controller.text == 'Business class' || _travelClass1Controller.text == 'Economy class' ? ['Select', 'Window', 'Aisle'] : (_travelClassController.text == 'SL' || _travelClassController.text == '3A' ? ['Select', 'Lower', 'Middle', 'Side-Lower', 'Side-Middle', 'Side-Upper', 'Upper'] : (_travelClassController.text == '2A' ? ['Select', 'Side-Lower', 'Lower', 'Side-Upper', 'Upper'] : (_travelClassController.text == '1A' ? ['Select', 'Cabin', 'Coupe', 'Lower', 'Upper'] : [])))))
+                                                                        .map((e) => DropdownMenuEntry(label: e, value: e))
+                                                                        .toList()),
+                                                              )
                                                             ])))
                                                 : Container(),
                                             !widget.isInternational
@@ -3530,7 +3670,9 @@ class _RoundTripState extends State<RoundTrip> {
                               print("1");
                               if (_travelClassController.text.isNotEmpty &&
                                   _seatController.text.isNotEmpty &&
-                                  _foodController.text.isNotEmpty) {
+                                  _foodController.text.isNotEmpty &&
+                                  _eta1Controller.text.isNotEmpty &&
+                                  _seat1Controller.text.isNotEmpty) {
                                 print(2);
                                 bool isConditionMet = true;
                                 bool Condition2 = true;
@@ -3600,12 +3742,12 @@ class _RoundTripState extends State<RoundTrip> {
                                                   'checkout':
                                                       _checkoutController.text,
                                                   'bags': _bagController.text,
-                                                  'weight':
+                                                  'totalweight':
                                                       _totalweightController
                                                           .text,
                                                   'remarks':
                                                       _remarksController.text,
-                                                  'travelmodeereturn':
+                                                  'travelmodereturn':
                                                       _traveltype1Controller
                                                           .text,
                                                   'travelclassreturn':
@@ -3675,6 +3817,21 @@ class _RoundTripState extends State<RoundTrip> {
                                   }
                                 } else {
                                   if (isConditionMet) {
+                                    String c = '';
+
+                                    for (int i = 0;
+                                        i < traveltimevalues.length;
+                                        i++) {
+                                      c = "$c${traveltimevalues.elementAt(i)} ";
+                                    }
+                                    String c1 = '';
+
+                                    for (int i = 0;
+                                        i < traveltimevaluesreturn.length;
+                                        i++) {
+                                      c1 =
+                                          "$c1${traveltimevaluesreturn.elementAt(i)} ";
+                                    }
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -3694,9 +3851,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                   'traveldate':
                                                       _traveldateController
                                                           .text,
-                                                  'traveltime':
-                                                      _traveltimeController
-                                                          .text,
+                                                  'traveltime': c,
                                                   'eta': _etaController.text,
                                                   'food': _foodController.text,
                                                   'seat': _seatController.text,
@@ -3712,12 +3867,12 @@ class _RoundTripState extends State<RoundTrip> {
                                                   'checkout':
                                                       _checkoutController.text,
                                                   'bags': _bagController.text,
-                                                  'weight':
+                                                  'totalweight':
                                                       _totalweightController
                                                           .text,
                                                   'remarks':
                                                       _remarksController.text,
-                                                  'travelmodeereturn':
+                                                  'travelmodereturn':
                                                       _traveltype1Controller
                                                           .text,
                                                   'travelclassreturn':
@@ -3731,9 +3886,7 @@ class _RoundTripState extends State<RoundTrip> {
                                                   'traveldatereturn':
                                                       _traveldate1Controller
                                                           .text,
-                                                  'traveltimereturn':
-                                                      _traveltime1Controller
-                                                          .text,
+                                                  'traveltimereturn': c1,
                                                   'etareturn':
                                                       _eta1Controller.text,
                                                   'foodreturn':
@@ -3782,6 +3935,38 @@ class _RoundTripState extends State<RoundTrip> {
                                     );
                                   }
                                 }
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Center(
+                                      child: AlertDialog(
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize
+                                              .min, // Ensure it only takes the necessary space
+                                          children: <Widget>[
+                                            Text(
+                                              'Please fill all the details.',
+                                              textAlign: TextAlign
+                                                  .center, // Center the text within the column
+                                            ),
+                                          ],
+                                        ),
+                                        actions: <Widget>[
+                                          Center(
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context)
+                                                    .pop(); // Close the dialog
+                                              },
+                                              child: Text('OK'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
                               }
                             } else {
                               showDialog(

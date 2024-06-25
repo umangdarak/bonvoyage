@@ -1000,53 +1000,47 @@ class _OneWayMiscState extends State<OneWayMisc> {
                                   ],
                                 ),
                                 SizedBox(height: 10),
-                                Expanded(
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.black26),
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Comments',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                                TextFormField(
-                                                    validator:
-                                                        _validateRequired,
-                                                    autovalidateMode:
-                                                        AutovalidateMode
-                                                            .onUserInteraction,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            InputBorder.none,
-                                                        // constraints:
-                                                        //     BoxConstraints(
-                                                        //   maxWidth: MediaQuery.of(
-                                                        //               context)
-                                                        //           .size
-                                                        //           .width -
-                                                        //       100,
-                                                        // ),
-                                                        hintText: 'Comments',
-                                                        hintStyle: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    1,
-                                                                    75,
-                                                                    148))),
-                                                    controller:
-                                                        _commentsController)
-                                              ]))),
-                                ),
+                                Container(
+                                    decoration: BoxDecoration(
+                                        border:
+                                            Border.all(color: Colors.black26),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Comments',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              TextFormField(
+                                                  validator: _validateRequired,
+                                                  autovalidateMode:
+                                                      AutovalidateMode
+                                                          .onUserInteraction,
+                                                  decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      // constraints:
+                                                      //     BoxConstraints(
+                                                      //   maxWidth: MediaQuery.of(
+                                                      //               context)
+                                                      //           .size
+                                                      //           .width -
+                                                      //       100,
+                                                      // ),
+                                                      hintText: 'Comments',
+                                                      hintStyle: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              1,
+                                                              75,
+                                                              148))),
+                                                  controller:
+                                                      _commentsController)
+                                            ]))),
                                 SizedBox(height: 20),
                                 Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

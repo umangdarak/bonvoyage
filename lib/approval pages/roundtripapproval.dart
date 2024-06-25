@@ -3,7 +3,6 @@ import 'package:bonvoyage/screens/dashboard.dart';
 import 'package:bonvoyage/screens/usernamecard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 
 class RoundTripApproval extends StatefulWidget {
   int id;
@@ -16,27 +15,40 @@ class RoundTripApproval extends StatefulWidget {
 
 class _RoundTripApprovalState extends State<RoundTripApproval> {
   List<bool> select = [true, false];
-  Map<String, String> data = {};
+  Map<String, Object?> data = {};
   @override
-  void initState() async {
+  void initState() {
     // TODO: implement initState
     super.initState();
-    setState(() async {
-      var dataa = getData(widget.international);
-      data = dataa;
-    });
+    fetchData();
   }
 
-  getData(int id) async {
+  void fetchData() async {
+    var dataa = getData(widget.international);
+    var fetchedData = await dataa;
+
+    setState(() {
+      data = fetchedData[0];
+    });
+    print(data);
+  }
+
+  Future<List<Map<String, Object?>>> getData(int id) async {
     if (id == 0) {
-      return await DataBaseHelper.readOneItem('onewaydomestic', widget.id);
+      return await DataBaseHelper.readOneItem('roundtripdomestic', widget.id)
+          .then(
+              (futureResult) => futureResult.then((result) => result.toList()));
     } else {
-      return await DataBaseHelper.readOneItem('onewayinternational', widget.id);
+      return await DataBaseHelper.readOneItem(
+              'roundtripinternational', widget.id)
+          .then(
+              (futureResult) => futureResult.then((result) => result.toList()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    print(data);
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.white,
@@ -76,7 +88,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(height: 10),
+                              SizedBox(height: 80),
                               Container(
                                   padding: EdgeInsets.all(8),
                                   decoration: BoxDecoration(
@@ -87,9 +99,9 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                          data['origin']! +
+                                          data['origin'].toString() +
                                               " - " +
-                                              data['destination']!,
+                                              data['destination'].toString(),
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -97,7 +109,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                       SizedBox(
                                         width: 7,
                                       ),
-                                      Text(data['travel-date']!,
+                                      Text(data['traveldate'].toString(),
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -126,7 +138,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text(data['travel-mode']!,
+                                          Text(data['travelmode'].toString(),
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 1, 75, 148),
@@ -152,7 +164,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text(data['travel-class']!,
+                                          Text(data['travelclass'].toString(),
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 1, 75, 148),
@@ -178,19 +190,12 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text(
-                                              DateFormat('yyyy-MM-dd').format(
-                                                  DateFormat('yyyy-MM-dd HH-mm-ss')
-                                                      .parse(
-                                                          data[
-                                                              'travel-date']!)),
-                                              style:
-                                                  TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 1, 75, 148),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 16))
+                                          Text(data['traveldate'].toString(),
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 1, 75, 148),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16))
                                         ],
                                       ),
                                     ),
@@ -216,7 +221,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text(data['eta']!,
+                                          Text(data['eta'].toString(),
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 1, 75, 148),
@@ -242,7 +247,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text(data['seat']!,
+                                          Text(data['seat'].toString(),
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 1, 75, 148),
@@ -268,7 +273,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                           SizedBox(
                                             height: 4,
                                           ),
-                                          Text(data['food']!,
+                                          Text(data['food'].toString(),
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 1, 75, 148),
@@ -300,7 +305,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['region']!,
+                                                Text(data['region'].toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -312,36 +317,41 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                           ),
                                         )
                                       : Container(),
-                                  Container(
-                                    width: 120,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text('Comments',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 14)),
-                                          SizedBox(
-                                            height: 4,
+                                  data['comments'].toString().isNotEmpty
+                                      ? Container(
+                                          width: 120,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text('Comments',
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14)),
+                                                SizedBox(
+                                                  height: 4,
+                                                ),
+                                                Text(
+                                                    data['comments'].toString(),
+                                                    style: TextStyle(
+                                                        color: Color.fromARGB(
+                                                            255, 1, 75, 148),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16))
+                                              ],
+                                            ),
                                           ),
-                                          Text(data['comments']!,
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 1, 75, 148),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16))
-                                        ],
-                                      ),
-                                    ),
-                                  )
+                                        )
+                                      : Container()
                                 ],
                               ),
                               SizedBox(height: 10),
-                              data['accomodation'] != null
+                              data['accomodation'].toString().isNotEmpty
                                   ? Column(children: [
                                       Container(
                                           padding: EdgeInsets.all(8),
@@ -386,7 +396,9 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                   SizedBox(
                                                     height: 4,
                                                   ),
-                                                  Text(data['accomodation']!,
+                                                  Text(
+                                                      data['accomodation']
+                                                          .toString(),
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 1, 75, 148),
@@ -415,7 +427,9 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                   SizedBox(
                                                     height: 4,
                                                   ),
-                                                  Text(data['occupancy']!,
+                                                  Text(
+                                                      data['occupancy']
+                                                          .toString(),
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 1, 75, 148),
@@ -441,7 +455,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text('Taj Krishna',
+                                                Text(data['hotel'].toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -474,10 +488,15 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                   SizedBox(
                                                     height: 4,
                                                   ),
-                                                  Text(data['checkin']!,
+                                                  Text(
+                                                      data['checkin']
+                                                          .toString(),
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
-                                                              255, 1, 75, 148),
+                                                              255,
+                                                              1,
+                                                              75,
+                                                              148),
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           fontSize: 16))
@@ -503,7 +522,9 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                   SizedBox(
                                                     height: 4,
                                                   ),
-                                                  Text(data['checkout']!,
+                                                  Text(
+                                                      data['checkout']
+                                                          .toString(),
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 1, 75, 148),
@@ -519,7 +540,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                     ])
                                   : Container(),
                               SizedBox(height: 10),
-                              data['bags'] != null
+                              data['bags'].toString().isNotEmpty
                                   ? Column(children: [
                                       Container(
                                           padding: EdgeInsets.all(8),
@@ -564,7 +585,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                   SizedBox(
                                                     height: 4,
                                                   ),
-                                                  Text(data['bags']!,
+                                                  Text(data['bags'].toString(),
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 1, 75, 148),
@@ -593,7 +614,8 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                   SizedBox(
                                                     height: 4,
                                                   ),
-                                                  Text(data['weight']!,
+                                                  Text(
+                                                      data['weight'].toString(),
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 1, 75, 148),
@@ -626,7 +648,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['remarks']!,
+                                                Text(data['remarks'].toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -647,7 +669,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                                SizedBox(height: 10),
+                                SizedBox(height: 80),
                                 Container(
                                     padding: EdgeInsets.all(8),
                                     decoration: BoxDecoration(
@@ -658,9 +680,9 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
-                                            data['destination']! +
+                                            data['destination'].toString() +
                                                 " - " +
-                                                data['origin']!,
+                                                data['origin'].toString(),
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
@@ -668,7 +690,8 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                         SizedBox(
                                           width: 7,
                                         ),
-                                        Text(data['traveldatereturn']!,
+                                        Text(
+                                            data['traveldatereturn'].toString(),
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
@@ -697,7 +720,9 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text(data['travelmodereturn']!,
+                                            Text(
+                                                data['travelmodereturn']
+                                                    .toString(),
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 1, 75, 148),
@@ -723,7 +748,9 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text(data['travelclassreturn']!,
+                                            Text(
+                                                data['travelclassreturn']
+                                                    .toString(),
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 1, 75, 148),
@@ -750,11 +777,8 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                               height: 4,
                                             ),
                                             Text(
-                                                DateFormat('yyyy-MM-dd').format(
-                                                    DateFormat(
-                                                            'yyyy-MM-dd HH-mm-ss')
-                                                        .parse(data[
-                                                            'traveldatereturn']!)),
+                                                data['traveldatereturn']
+                                                    .toString(),
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 1, 75, 148),
@@ -785,7 +809,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text(data['etareturn']!,
+                                            Text(data['etareturn'].toString(),
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 1, 75, 148),
@@ -811,7 +835,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text(data['seatreturn']!,
+                                            Text(data['seatreturn'].toString(),
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 1, 75, 148),
@@ -837,7 +861,7 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text(data['foodreturn']!,
+                                            Text(data['foodreturn'].toString(),
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 1, 75, 148),
@@ -870,7 +894,9 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                                   SizedBox(
                                                     height: 4,
                                                   ),
-                                                  Text(data['regionreturn']!,
+                                                  Text(
+                                                      data['regionreturn']
+                                                          .toString(),
                                                       style: TextStyle(
                                                           color: Color.fromARGB(
                                                               255, 1, 75, 148),
@@ -882,32 +908,39 @@ class _RoundTripApprovalState extends State<RoundTripApproval> {
                                             ),
                                           )
                                         : Container(),
-                                    Container(
-                                      width: 120,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text('Comments',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14)),
-                                            SizedBox(
-                                              height: 4,
+                                    data['commentsreturn'] != null
+                                        ? Container(
+                                            width: 120,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text('Comments',
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 14)),
+                                                  SizedBox(
+                                                    height: 4,
+                                                  ),
+                                                  Text(
+                                                      data['commentsreturn']
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 1, 75, 148),
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16))
+                                                ],
+                                              ),
                                             ),
-                                            Text(data['commentsreturn']!,
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 1, 75, 148),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16))
-                                          ],
-                                        ),
-                                      ),
-                                    )
+                                          )
+                                        : Container()
                                   ],
                                 ),
                               ])

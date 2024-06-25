@@ -2,7 +2,6 @@ import 'package:bonvoyage/databasehelper/databasehelper.dart';
 import 'package:bonvoyage/screens/usernamecard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class OneWayApproval extends StatefulWidget {
@@ -15,22 +14,30 @@ class OneWayApproval extends StatefulWidget {
 
 class _OneWayApprovalState extends State<OneWayApproval> {
   bool tripdetails = false;
-  Map<String, String> data = {};
+  Map<String, Object?> data = {};
   @override
-  void initState() async {
-    // TODO: implement initState
+  void initState() {
     super.initState();
-    setState(() async {
-      var dataa = getData(widget.international);
-      data = dataa;
+    fetchData();
+  }
+
+  void fetchData() async {
+    var dataa = getData(widget.international);
+    var fetchedData = await dataa;
+
+    setState(() {
+      data = fetchedData[0];
     });
   }
 
-  getData(int id) async {
+  Future<List<Map<String, Object?>>> getData(int id) async {
     if (id == 0) {
-      return await DataBaseHelper.readOneItem('onewaydomestic', widget.id);
+      return await DataBaseHelper.readOneItem('onewaydomestic', widget.id).then(
+          (futureResult) => futureResult.then((result) => result.toList()));
     } else {
-      return await DataBaseHelper.readOneItem('onewayinternational', widget.id);
+      return await DataBaseHelper.readOneItem('onewayinternational', widget.id)
+          .then(
+              (futureResult) => futureResult.then((result) => result.toList()));
     }
   }
 
@@ -134,9 +141,10 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Text(
-                                                data['origin']! +
+                                                data['origin']!.toString() +
                                                     " - " +
-                                                   data['destination']!,
+                                                    data['destination']!
+                                                        .toString(),
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.bold,
@@ -144,7 +152,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                             SizedBox(
                                               width: 7,
                                             ),
-                                            Text(data['traveldate']!,
+                                            Text(data['traveldate']!.toString(),
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.bold,
@@ -174,10 +182,15 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['travelmode']!,
+                                                Text(
+                                                    data['travelmode']!
+                                                        .toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
-                                                            255, 1, 75, 148),
+                                                            255,
+                                                            1,
+                                                            75,
+                                                            148),
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 16))
@@ -202,7 +215,9 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['travelclass']!,
+                                                Text(
+                                                    data['travelclass']!
+                                                        .toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -231,16 +246,15 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                   height: 4,
                                                 ),
                                                 Text(
-                                                    DateFormat('yyyy-MM-dd')
-                                                        .format(DateFormat(
-                                                                'yyyy-MM-dd HH-mm-ss')
-                                                            .parse(data['traveldate']!)),
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 75, 148),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16))
+                                                  data['traveldate']!
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 1, 75, 148),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16,
+                                                  ),
+                                                )
                                               ],
                                             ),
                                           ),
@@ -267,7 +281,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['eta']!,
+                                                Text(data['eta']!.toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -295,7 +309,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['seat']!,
+                                                Text(data['seat']!.toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -323,7 +337,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['food']!,
+                                                Text(data['food']!.toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -336,345 +350,490 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                         )
                                       ],
                                     ),
-                                    Row(children: [
-                                     data['region']!=null? Container(
-                                          width: 120,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Region',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14)),
-                                                SizedBox(
-                                                  height: 4,
-                                                ),
-                                                Text(data['region']!,
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 75, 148),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16))
-                                              ],
-                                            ),
-                                          ),
-                                        ):Container(),Container(
-                                          width: 120,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Comments',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14)),
-                                                SizedBox(
-                                                  height: 4,
-                                                ),
-                                                Text(data['comments']!,
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 75, 148),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16))
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                    ],),
-                                    SizedBox(height: 10),
-                                  data['accomodation']!=null? Column(children: [ Container(
-                                        padding: EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 1, 75, 148),
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(30))),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text('Accomodation Details',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16)),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                          ],
-                                        )),
-                                    SizedBox(height: 10),
                                     Row(
                                       children: [
-                                        Container(
-                                          width: 120,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Accomodation Type',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14)),
-                                                SizedBox(
-                                                  height: 4,
+                                        data['region'] != null
+                                            ? Container(
+                                                width: 120,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('Region',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 14)),
+                                                      SizedBox(
+                                                        height: 4,
+                                                      ),
+                                                      Text(
+                                                          data['region']!
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      1,
+                                                                      75,
+                                                                      148),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16))
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text(data['accomodation']!,
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 75, 148),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16))
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 120,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Occupancy Type',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14)),
-                                                SizedBox(
-                                                  height: 4,
+                                              )
+                                            : Container(),
+                                        data['comments']!.toString().isNotEmpty
+                                            ? Container(
+                                                width: 120,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('Comments',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 14)),
+                                                      SizedBox(
+                                                        height: 4,
+                                                      ),
+                                                      Text(
+                                                          data['comments']!
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      1,
+                                                                      75,
+                                                                      148),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16))
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text(data['occupancy']!,
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 75, 148),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16))
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Hotel Name',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 14)),
-                                              SizedBox(
-                                                height: 4,
-                                              ),
-                                              Text(data['hotel']!,
-                                                  style: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 1, 75, 148),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 16))
-                                            ],
-                                          ),
-                                        )
+                                              )
+                                            : Container()
                                       ],
                                     ),
                                     SizedBox(height: 10),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 150,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                    data['accomodation'].toString().isNotEmpty
+                                        ? Column(children: [
+                                            Container(
+                                                padding: EdgeInsets.all(8),
+                                                decoration: BoxDecoration(
+                                                    color: Color.fromARGB(
+                                                        255, 1, 75, 148),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    30))),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Text('Accomodation Details',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 16)),
+                                                    SizedBox(
+                                                      width: 2,
+                                                    ),
+                                                  ],
+                                                )),
+                                            SizedBox(height: 10),
+                                            Row(
                                               children: [
-                                                Text('CheckIn',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14)),
-                                                SizedBox(
-                                                  height: 4,
+                                                Container(
+                                                  width: 120,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                            'Accomodation Type',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14)),
+                                                        SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                            data['accomodation']!
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        1,
+                                                                        75,
+                                                                        148),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 16))
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ),
-                                                Text(data['checkin']!,
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 75, 148),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16))
+                                                Container(
+                                                  width: 120,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('Occupancy Type',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14)),
+                                                        SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                            data[
+                                                                    'occupancy']!
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        1,
+                                                                        75,
+                                                                        148),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 16))
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('Hotel Name',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 14)),
+                                                      SizedBox(
+                                                        height: 4,
+                                                      ),
+                                                      Text(
+                                                          data['hotel']!
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      1,
+                                                                      75,
+                                                                      148),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16))
+                                                    ],
+                                                  ),
+                                                )
                                               ],
                                             ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 150,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                            SizedBox(height: 10),
+                                            Row(
                                               children: [
-                                                Text('CheckOut',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14)),
-                                                SizedBox(
-                                                  height: 4,
+                                                Container(
+                                                  width: 150,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('CheckIn',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14)),
+                                                        SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                            data['checkin']!
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        1,
+                                                                        75,
+                                                                        148),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 16))
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ),
-                                                Text(data['checkout']!,
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 75, 148),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16))
+                                                Container(
+                                                  width: 150,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('CheckOut',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14)),
+                                                        SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                            data['checkout']!
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        1,
+                                                                        75,
+                                                                        148),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 16))
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                               ],
                                             ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),]):Container(),
+                                          ])
+                                        : Container(),
                                     SizedBox(height: 10),
-                                   data['bags']!=null?Column(children: [ Container(
-                                        padding: EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 1, 75, 148),
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(30))),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text('Extra Baggage Details',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16)),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                          ],
-                                        )),
-                                    SizedBox(height: 10),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 150,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                    data['bags'].toString().isNotEmpty
+                                        ? Column(children: [
+                                            Container(
+                                                padding: EdgeInsets.all(8),
+                                                decoration: BoxDecoration(
+                                                    color: Color.fromARGB(
+                                                        255, 1, 75, 148),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    30))),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Text(
+                                                        'Extra Baggage Details',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 16)),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                  ],
+                                                )),
+                                            SizedBox(height: 10),
+                                            Row(
                                               children: [
-                                                Text('No of Bags',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14)),
-                                                SizedBox(
-                                                  height: 4,
+                                                Container(
+                                                  width: 150,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('No of Bags',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14)),
+                                                        SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                            data['bags']!
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        1,
+                                                                        75,
+                                                                        148),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 16))
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ),
-                                                Text(data['bags']!,
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 75, 148),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16))
+                                                Container(
+                                                  width: 150,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                            'Total Weight(kgs)',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14)),
+                                                        SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Text(
+                                                            data['weight']!
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        1,
+                                                                        75,
+                                                                        148),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 16))
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                               ],
                                             ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 150,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                            SizedBox(height: 10),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
-                                                Text('Total Weight(kgs)',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14)),
-                                                SizedBox(
-                                                  height: 4,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('Remarks',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 14)),
+                                                      SizedBox(
+                                                        height: 4,
+                                                      ),
+                                                      Text(
+                                                          data['remarks']!
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      1,
+                                                                      75,
+                                                                      148),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16))
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text(data['weight']!,
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 1, 75, 148),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16))
                                               ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Remarks',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 14)),
-                                              SizedBox(
-                                                height: 4,
-                                              ),
-                                              Text(data['remarks']!,
-                                                  style: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 1, 75, 148),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 16))
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    )]):Container()
+                                            )
+                                          ])
+                                        : Container()
                                   ],
                                 )
                               : Container(),

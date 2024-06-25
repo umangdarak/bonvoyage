@@ -1408,49 +1408,7 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                       .map((e) => DropdownMenuEntry(label: e, value: e))
                                                       .toList()),
                                             )
-                                            // : Padding(
-                                            //     padding: const EdgeInsets
-                                            //         .symmetric(
-                                            //         horizontal: 8.0),
-                                            //     child: DropdownMenu(
-                                            //         width:
-                                            //             MediaQuery.of(context)
-                                            //                         .size
-                                            //                         .width /
-                                            //                     2 -
-                                            //                 20,
-                                            //         onSelected: (s) {
-                                            //           if (s ==
-                                            //               'Select an option') {
-                                            //             _seatController
-                                            //                 .text = '';
-                                            //           }
-                                            //         },
-                                            //         controller:
-                                            //             _seatController,
-                                            //         hintText: 'Seat',
-                                            //         inputDecorationTheme:
-                                            //             InputDecorationTheme(
-                                            //                 border:
-                                            //                     InputBorder
-                                            //                         .none,
-                                            //                 hintStyle: TextStyle(
-                                            //                     color: Color.fromARGB(
-                                            //                         255,
-                                            //                         1,
-                                            //                         75,
-                                            //                         148))),
-                                            //         dropdownMenuEntries: [
-                                            //           'Select an option',
-                                            //           'up',
-                                            //           'down'
-                                            //         ]
-                                            //             .map((e) =>
-                                            //                 DropdownMenuEntry(
-                                            //                     label: e,
-                                            //                     value: e))
-                                            //             .toList()),
-                                            //   )
+                                            
                                           ])))
                               : Container(),
                           !widget.isInternational
