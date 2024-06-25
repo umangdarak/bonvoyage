@@ -78,6 +78,9 @@ class _OneWayTicketNewState extends State<OneWay> {
         check = false;
       }
     }
+    trainclass = widget.isInternational
+        ? List.generate(3, (index) => false)
+        : List.generate(6, (index) => false);
     print(widget.name);
     if (check) {
       setState(() {
@@ -143,7 +146,7 @@ class _OneWayTicketNewState extends State<OneWay> {
   List<bool> _accom2 = [false, false];
   List<bool> _occupancy = [false, false, false];
   List<bool> travelmode = [true, false, false];
-  List<bool> trainclass = List.generate(6, (index) => false);
+  late List<bool> trainclass;
   List<bool> roadclass = List.generate(2, (i) => false);
   bool s = false;
   List<bool> accom = [false, false];
@@ -570,7 +573,7 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                               .text);
                                                     }))
                                           ])
-                                    : travelmode[1]
+                                    : travelmode[1] && !widget.isInternational
                                         ? Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -758,7 +761,124 @@ class _OneWayTicketNewState extends State<OneWay> {
                                                   ),
                                                 )
                                               ])
-                                        : Container(),
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                      'Select Travel Class:',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              1,
+                                                              75,
+                                                              148))),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Container(
+                                                  height: 50,
+                                                  width: 210,
+                                                  child: ListView(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    children: [
+                                                      ToggleButtons(
+                                                          renderBorder: false,
+                                                          children: [
+                                                            Tooltip(
+                                                                message: 'SL',
+                                                                child:
+                                                                    Container(
+                                                                        padding:
+                                                                            EdgeInsets.all(
+                                                                                8),
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color: trainclass[0]
+                                                                              ? Color.fromARGB(255, 1, 75, 148)
+                                                                              : Color.fromARGB(255, 191, 218, 240),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(30),
+                                                                        ),
+                                                                        child: Text(
+                                                                            'SL',
+                                                                            style:
+                                                                                TextStyle(fontSize: 24, color: trainclass[0] ? Colors.white : Colors.blue[300])))),
+                                                            Tooltip(
+                                                                message: '2A',
+                                                                child:
+                                                                    Container(
+                                                                        padding:
+                                                                            EdgeInsets.all(
+                                                                                8),
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color: trainclass[1]
+                                                                              ? Color.fromARGB(255, 1, 75, 148)
+                                                                              : Color.fromARGB(255, 191, 218, 240),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(30),
+                                                                        ),
+                                                                        child: Text(
+                                                                            '2A',
+                                                                            style:
+                                                                                TextStyle(fontSize: 24, color: trainclass[1] ? Colors.white : Colors.blue[300])))),
+                                                            Tooltip(
+                                                                message: '1A',
+                                                                child:
+                                                                    Container(
+                                                                        padding:
+                                                                            EdgeInsets.all(
+                                                                                8),
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color: trainclass[2]
+                                                                              ? Color.fromARGB(255, 1, 75, 148)
+                                                                              : Color.fromARGB(255, 191, 218, 240),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(30),
+                                                                        ),
+                                                                        child: Text(
+                                                                            '1A',
+                                                                            style:
+                                                                                TextStyle(fontSize: 24, color: trainclass[2] ? Colors.white : Colors.blue[300]))))
+                                                          ],
+                                                          isSelected:
+                                                              trainclass,
+                                                          onPressed: (index) {
+                                                            setState(() {
+                                                              for (int i = 0;
+                                                                  i <
+                                                                      trainclass
+                                                                          .length;
+                                                                  i++) {
+                                                                trainclass[i] =
+                                                                    i == index;
+                                                              }
+                                                            });
+                                                            if (trainclass[0]) {
+                                                              _travelClassController
+                                                                  .text = 'SL';
+                                                            }
+                                                            if (trainclass[1]) {
+                                                              _travelClassController
+                                                                  .text = '2A';
+                                                            }
+                                                            if (trainclass[2]) {
+                                                              _travelClassController
+                                                                  .text = '1A';
+                                                            }
+                                                          }),
+                                                    ],
+                                                  ),
+                                                )
+                                              ]),
                           ],
                         ),
                         SizedBox(
@@ -1193,7 +1313,7 @@ class _OneWayTicketNewState extends State<OneWay> {
                           height: 10,
                         ),
                         Row(children: [
-                          (travelmode[0] || travelmode[1])
+                          (travelmode[0] || travelmode[1] || travelmode[2])
                               ? Padding(
                                   padding: const EdgeInsets.only(right: 8.0),
                                   child: Container(
@@ -1212,103 +1332,125 @@ class _OneWayTicketNewState extends State<OneWay> {
                                             Text('Seat:',
                                                 style: TextStyle(
                                                     color: Colors.black)),
-                                            travelmode[0]
-                                                ? Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 8.0),
-                                                    child: DropdownMenu(
-                                                        width: MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                2 -
-                                                            20,
-                                                        hintText: 'Seat',
-                                                        inputDecorationTheme:
-                                                            InputDecorationTheme(
-                                                                border: InputBorder
-                                                                    .none,
-                                                                hintStyle: TextStyle(
-                                                                    color: Color.fromARGB(
-                                                                        255,
-                                                                        1,
-                                                                        75,
-                                                                        148))),
-                                                        onSelected: (s) {
-                                                          if (s ==
-                                                              'select an option') {
-                                                            _seatController
-                                                                .text = '';
-                                                          }
-                                                          if (s == 'Window') {
-                                                            _seatController
-                                                                    .text =
-                                                                'Window';
-                                                          }
-                                                          if (s == 'Aisle') {
-                                                            _seatController
-                                                                .text = 'Aisle';
-                                                          }
-                                                        },
-                                                        initialSelection:
-                                                            _seatController
-                                                                .text,
-                                                        controller:
-                                                            _seatController,
-                                                        dropdownMenuEntries: [
-                                                          'Select an option',
-                                                          'Window',
-                                                          'Aisle'
-                                                        ]
-                                                            .map((e) =>
-                                                                DropdownMenuEntry(
-                                                                    label: e,
-                                                                    value: e))
-                                                            .toList()),
-                                                  )
-                                                : Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 8.0),
-                                                    child: DropdownMenu(
-                                                        width:
-                                                            MediaQuery.of(context)
-                                                                        .size
-                                                                        .width /
-                                                                    2 -
-                                                                20,
-                                                        onSelected: (s) {
-                                                          if (s ==
-                                                              'Select an option') {
-                                                            _seatController
-                                                                .text = '';
-                                                          }
-                                                        },
-                                                        controller:
-                                                            _seatController,
-                                                        hintText: 'Seat',
-                                                        inputDecorationTheme:
-                                                            InputDecorationTheme(
-                                                                border:
-                                                                    InputBorder
-                                                                        .none,
-                                                                hintStyle: TextStyle(
-                                                                    color: Color.fromARGB(
-                                                                        255,
-                                                                        1,
-                                                                        75,
-                                                                        148))),
-                                                        dropdownMenuEntries: [
-                                                          'Select an option',
-                                                          'up',
-                                                          'down'
-                                                        ]
-                                                            .map((e) =>
-                                                                DropdownMenuEntry(
-                                                                    label: e,
-                                                                    value: e))
-                                                            .toList()),
-                                                  )
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8.0),
+                                              child: DropdownMenu(
+                                                  width: MediaQuery.of(context).size.width / 2 -
+                                                      20,
+                                                  hintText: 'Seat',
+                                                  inputDecorationTheme: InputDecorationTheme(
+                                                      border: InputBorder.none,
+                                                      hintStyle: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 1, 75, 148))),
+                                                  onSelected: (s) {
+                                                    if (s ==
+                                                        'select an option') {
+                                                      _seatController.text = '';
+                                                    } else {
+                                                      _seatController.text = s;
+                                                    }
+                                                  },
+                                                  initialSelection:
+                                                      _seatController.text,
+                                                  controller: _seatController,
+                                                  dropdownMenuEntries: (!widget
+                                                              .isInternational
+                                                          ? (_travelClassController.text == 'Business class' ||
+                                                                  _travelClassController.text ==
+                                                                      'Economy class'
+                                                              ? [
+                                                                  'Select',
+                                                                  'Window',
+                                                                  'Aisle'
+                                                                ]
+                                                              : (_travelClassController.text == 'SL' ||
+                                                                      _travelClassController.text ==
+                                                                          '3A'
+                                                                  ? [
+                                                                      'Select',
+                                                                      'Lower',
+                                                                      'Middle',
+                                                                      'Side-Lower',
+                                                                      'Side-Middle',
+                                                                      'Side-Upper',
+                                                                      'Upper'
+                                                                    ]
+                                                                  : (_travelClassController.text == 'SC' ||
+                                                                          _travelClassController.text ==
+                                                                              'CC'
+                                                                      ? [
+                                                                          'Select',
+                                                                          'Normal',
+                                                                          'Window'
+                                                                        ]
+                                                                      : (_travelClassController.text == '2A'
+                                                                          ? ['Select', 'Side-Lower', 'Lower', 'Side-Upper', 'Upper']
+                                                                          : (_travelClassController.text == '1A'
+                                                                              ? ['Select', 'Cabin', 'Coupe', 'Lower', 'Upper']
+                                                                              : (_travelClassController.text == 'Car'
+                                                                                  ? ['Select', 'Normal']
+                                                                                  : (_travelClassController.text == 'Bus'
+                                                                                      ? [
+                                                                                          'Select',
+                                                                                          "Normal-Non AC",
+                                                                                          "Semi Sleeper-Normal",
+                                                                                          "Semi Sleeper-Window AC",
+                                                                                          "Sleeper-Lower",
+                                                                                          "Sleeper-Upper",
+                                                                                          "Window-AC",
+                                                                                          "Window-Non AC"
+                                                                                        ]
+                                                                                      : ([]))))))))
+                                                          : (_travelClassController.text == 'Business class' || _travelClassController.text == 'Economy class' ? ['Select', 'Window', 'Aisle'] : (_travelClassController.text == 'SL' || _travelClassController.text == '3A' ? ['Select', 'Lower', 'Middle', 'Side-Lower', 'Side-Middle', 'Side-Upper', 'Upper'] : (_travelClassController.text == '2A' ? ['Select', 'Side-Lower', 'Lower', 'Side-Upper', 'Upper'] : (_travelClassController.text == '1A' ? ['Select', 'Cabin', 'Coupe', 'Lower', 'Upper'] : [])))))
+                                                      .map((e) => DropdownMenuEntry(label: e, value: e))
+                                                      .toList()),
+                                            )
+                                            // : Padding(
+                                            //     padding: const EdgeInsets
+                                            //         .symmetric(
+                                            //         horizontal: 8.0),
+                                            //     child: DropdownMenu(
+                                            //         width:
+                                            //             MediaQuery.of(context)
+                                            //                         .size
+                                            //                         .width /
+                                            //                     2 -
+                                            //                 20,
+                                            //         onSelected: (s) {
+                                            //           if (s ==
+                                            //               'Select an option') {
+                                            //             _seatController
+                                            //                 .text = '';
+                                            //           }
+                                            //         },
+                                            //         controller:
+                                            //             _seatController,
+                                            //         hintText: 'Seat',
+                                            //         inputDecorationTheme:
+                                            //             InputDecorationTheme(
+                                            //                 border:
+                                            //                     InputBorder
+                                            //                         .none,
+                                            //                 hintStyle: TextStyle(
+                                            //                     color: Color.fromARGB(
+                                            //                         255,
+                                            //                         1,
+                                            //                         75,
+                                            //                         148))),
+                                            //         dropdownMenuEntries: [
+                                            //           'Select an option',
+                                            //           'up',
+                                            //           'down'
+                                            //         ]
+                                            //             .map((e) =>
+                                            //                 DropdownMenuEntry(
+                                            //                     label: e,
+                                            //                     value: e))
+                                            //             .toList()),
+                                            //   )
                                           ])))
                               : Container(),
                           !widget.isInternational

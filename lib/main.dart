@@ -1,5 +1,4 @@
 import 'package:bonvoyage/forms/carbooking.dart';
-import 'package:bonvoyage/multicitynew/multicity.dart';
 import 'package:bonvoyage/screens/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +19,6 @@ class Main extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (ctx) => const LoginPage(),
-        'multi': (ctx) => const MultiCity(),
         'car': (ctx) => const CarBooking()
       },
     );
@@ -43,4 +41,3 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
- 

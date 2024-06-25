@@ -351,6 +351,8 @@ class _CarBookingState extends State<CarBooking> {
                                                       fontWeight:
                                                           FontWeight.bold)),
                                               TextFormField(
+                                                  controller:
+                                                      _fromdateController,
                                                   readOnly: true,
                                                   autovalidateMode:
                                                       AutovalidateMode
@@ -382,25 +384,25 @@ class _CarBookingState extends State<CarBooking> {
                                                                 DateTime(2101));
                                                     TimeOfDay? t =
                                                         await showTimePicker(
-                                                            context: context,
                                                             initialTime:
-                                                                TimeOfDay
-                                                                    .now());
+                                                                TimeOfDay.now(),
+                                                            context: context);
+
+                                                    // Check if d and t are not null
                                                     DateTime pickeddate =
                                                         DateTime(
                                                       d!.year,
                                                       d.month,
                                                       d.day,
                                                       t!.hour,
+                                                      t.minute,
                                                     );
-                                                    if (pickeddate != null) {
-                                                      setState(() {
-                                                        _fromdateController
-                                                            .text = DateFormat(
-                                                                "yyyy-MM-dd")
-                                                            .format(pickeddate);
-                                                      });
-                                                    }
+                                                    setState(() {
+                                                      _fromdateController
+                                                          .text = DateFormat(
+                                                              "yyyy-MM-dd HH-mm")
+                                                          .format(pickeddate);
+                                                    });
                                                   })
                                             ]),
                                       )),
@@ -428,6 +430,7 @@ class _CarBookingState extends State<CarBooking> {
                                                       fontWeight:
                                                           FontWeight.bold)),
                                               TextFormField(
+                                                  controller: _todateController,
                                                   style: TextStyle(
                                                       color: Colors.black),
                                                   readOnly: true,
@@ -450,38 +453,69 @@ class _CarBookingState extends State<CarBooking> {
                                                                   .width -
                                                               100)),
                                                   onTap: () async {
-                                                    DateFormat e = DateFormat(
-                                                        "yyyy-MM-dd");
-                                                    DateTime? d = await showDatePicker(
+                                                    if (_fromdateController
+                                                            .text ==
+                                                        '') {
+                                                      showDialog(
                                                         context: context,
-                                                        initialDate: e.parse(
-                                                            _fromdateController
-                                                                .text),
-                                                        firstDate: e.parse(
-                                                            _fromdateController
-                                                                .text),
-                                                        lastDate:
-                                                            DateTime(2101));
-                                                    TimeOfDay? t =
-                                                        await showTimePicker(
-                                                            context: context,
-                                                            initialTime:
-                                                                TimeOfDay
-                                                                    .now());
-                                                    DateTime pickeddate =
-                                                        DateTime(
-                                                      d!.year,
-                                                      d.month,
-                                                      d.day,
-                                                      t!.hour,
-                                                    );
-                                                    if (pickeddate != null) {
-                                                      setState(() {
-                                                        _todateController
-                                                            .text = DateFormat(
-                                                                "yyyy-MM-dd")
-                                                            .format(pickeddate);
-                                                      });
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            title: Text(
+                                                                'Please select from date'),
+                                                            actions: <Widget>[
+                                                              Center(
+                                                                child:
+                                                                    ElevatedButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop(); // Close the dialog
+                                                                  },
+                                                                  child: Text(
+                                                                      'OK'),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      );
+                                                    } else {
+                                                      DateFormat e = DateFormat(
+                                                          "yyyy-MM-dd HH-mm");
+                                                      DateTime? d = await showDatePicker(
+                                                          context: context,
+                                                          initialDate: e.parse(
+                                                              _fromdateController
+                                                                  .text),
+                                                          firstDate: e.parse(
+                                                              _fromdateController
+                                                                  .text),
+                                                          lastDate:
+                                                              DateTime(2101));
+                                                      TimeOfDay? t =
+                                                          await showTimePicker(
+                                                              context: context,
+                                                              initialTime:
+                                                                  TimeOfDay
+                                                                      .now());
+                                                      DateTime pickeddate =
+                                                          DateTime(
+                                                        d!.year,
+                                                        d.month,
+                                                        d.day,
+                                                        t!.hour,
+                                                      );
+                                                      if (pickeddate != null) {
+                                                        setState(() {
+                                                          _todateController
+                                                              .text = DateFormat(
+                                                                  "yyyy-MM-dd")
+                                                              .format(
+                                                                  pickeddate);
+                                                        });
+                                                      }
                                                     }
                                                   })
                                             ]),
@@ -1271,6 +1305,7 @@ class _CarBookingState extends State<CarBooking> {
                                             ],
                                           ),
                                         ])),
+                                        SizedBox(height:10),
                               ]))),
                 ),
                 Row(

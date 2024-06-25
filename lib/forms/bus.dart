@@ -52,6 +52,7 @@ class _BusFormState extends State<BusForm> {
     _requesterController.text = "Umang";
     _debitexpensesController.text = "Cost Center";
     _costorprojectController.text = "project";
+    _peopleController.text = "1";
   }
 
   @override
@@ -593,6 +594,7 @@ class _BusFormState extends State<BusForm> {
                                                       fontWeight:
                                                           FontWeight.bold)),
                                               DropdownMenu(
+                                                controller: _peopleController,
                                                 width: MediaQuery.of(context)
                                                             .size
                                                             .width /
@@ -837,7 +839,7 @@ class _BusFormState extends State<BusForm> {
                                                       .width /
                                                   2 -
                                               20,
-                                          height: 80,
+                                          height: 100,
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.black26),
@@ -945,10 +947,6 @@ class _BusFormState extends State<BusForm> {
                                                   left: 8.0),
                                               child: TextFormField(
                                                 controller: _commentsController,
-                                                autovalidateMode:
-                                                    AutovalidateMode
-                                                        .onUserInteraction,
-                                                validator: _validateRequired,
                                                 decoration: InputDecoration(
                                                     hintText: 'Comments',
                                                     hintStyle: TextStyle(

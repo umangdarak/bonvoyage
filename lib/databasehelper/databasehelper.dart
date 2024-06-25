@@ -244,22 +244,23 @@ CREATE TABLE roundtripinternational(
         children TEXT,
         rooms TEXT,
         remarks TEXT,
-        currencymode TEXT,
+       currencymode TEXT,
         currency TEXT,
         amount TEXT,
-        remarks TEXT,
-        approver TEXT,
-        travellername TEXT,
-        travellergender TEXT,
-        travellerlevel TEXT,
-        department TEXT,
-        email TEXT,
-        mobileno TEXT,
-        debitexpenses TEXT,
-        costorproject TEXT,
-        requester TEXT,
-        comments TEXT
-        issync INTEGER DEFAULT 0
+       cab TEXT,
+        purpose TEXT,
+ approver TEXT,
+    travellername TEXT,
+    travellergender TEXT,
+    travellerlevel TEXT,
+    department TEXT,
+    email TEXT,
+    mobileno TEXT,
+    debitexpenses TEXT,
+    costorproject TEXT, 
+    requester TEXT,
+    comments TEXT,
+            issync INTEGER DEFAULT 0
       )
 ''');
   }

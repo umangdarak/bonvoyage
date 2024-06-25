@@ -352,14 +352,24 @@ class _DashBoardState extends State<DashBoard> {
                                                                     false)));
                                               }
                                               if ((triptype[2] &&
-                                                      traveltype[0]) ||
-                                                  (triptype[2] &&
-                                                      traveltype[1])) {
+                                                  traveltype[0])) {
                                                 Navigator.push(
                                                     ctx,
                                                     MaterialPageRoute(
                                                         builder: (_) =>
-                                                            MultiCity()));
+                                                            MultiCity(
+                                                                isInternational:
+                                                                    false)));
+                                              }
+                                              if ((triptype[2] &&
+                                                  traveltype[1])) {
+                                                Navigator.push(
+                                                    ctx,
+                                                    MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            MultiCity(
+                                                                isInternational:
+                                                                    true)));
                                               }
                                               if (triptype[0] &&
                                                   traveltype[1]) {
@@ -1107,9 +1117,13 @@ class _DashBoardState extends State<DashBoard> {
                                                                                 traveltype[0]) {
                                                                               Navigator.push(ctx, MaterialPageRoute(builder: (_) => RoundTrip(isInternational: false)));
                                                                             }
-                                                                            if ((triptype[2] && traveltype[0]) ||
-                                                                                (triptype[2] && traveltype[1])) {
-                                                                              Navigator.push(ctx, MaterialPageRoute(builder: (_) => MultiCity()));
+                                                                            if ((triptype[2] &&
+                                                                                traveltype[0])) {
+                                                                              Navigator.push(ctx, MaterialPageRoute(builder: (_) => MultiCity(isInternational: false)));
+                                                                            }
+                                                                            if ((triptype[2] &&
+                                                                                traveltype[1])) {
+                                                                              Navigator.push(ctx, MaterialPageRoute(builder: (_) => MultiCity(isInternational: true)));
                                                                             }
                                                                             if (triptype[0] &&
                                                                                 traveltype[1]) {

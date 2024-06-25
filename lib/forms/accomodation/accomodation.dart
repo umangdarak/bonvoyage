@@ -45,6 +45,14 @@ class _AccomodationPageState extends State<AccomodationPage> {
 
   bool show = false;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _accomodationController.text = 'Private House';
+    _accom2[0] = true;
+  }
+
   TextEditingController amount1 = TextEditingController();
   TextEditingController remarks1 = TextEditingController();
   @override
@@ -407,9 +415,19 @@ class _AccomodationPageState extends State<AccomodationPage> {
                                                 TextFormField(
                                                   controller: _hotelController,
                                                   autovalidateMode:
-                                                      AutovalidateMode
-                                                          .onUserInteraction,
-                                                  validator: _validateRequired,
+                                                      _accomodationController
+                                                                  .text ==
+                                                              'Hotel'
+                                                          ? AutovalidateMode
+                                                              .onUserInteraction
+                                                          : AutovalidateMode
+                                                              .disabled,
+                                                  validator:
+                                                      _accomodationController
+                                                                  .text ==
+                                                              'Hotel'
+                                                          ? _validateRequired
+                                                          : (s) {},
                                                   decoration: InputDecoration(
                                                       hintText:
                                                           'Hotel Preference',
@@ -730,14 +748,14 @@ class _AccomodationPageState extends State<AccomodationPage> {
                                                           1;
                                                     });
                                                   },
-                                                  onChanged: (s){
-                                                     setState(() {
+                                                  onChanged: (s) {
+                                                    setState(() {
                                                       peeps = int.parse(
                                                               _peopleController
                                                                   .text) +
                                                           1;
                                                     });
-                                                  } ,
+                                                  },
                                                 ),
                                               ],
                                             )),
@@ -973,11 +991,6 @@ class _AccomodationPageState extends State<AccomodationPage> {
                                                     TextFormField(
                                                       controller:
                                                           _remarksController,
-                                                      autovalidateMode:
-                                                          AutovalidateMode
-                                                              .onUserInteraction,
-                                                      validator:
-                                                          _validateRequired,
                                                       decoration: InputDecoration(
                                                           hintText: 'Remarks',
                                                           hintStyle: TextStyle(

@@ -8,7 +8,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class MultiCity extends StatefulWidget {
-  const MultiCity({super.key});
+  MultiCity({super.key, required this.isInternational});
+  bool isInternational;
 
   @override
   State<MultiCity> createState() => _MultiCityState();
@@ -63,9 +64,17 @@ class _MultiCityState extends State<MultiCity> {
       List.generate(1, (index) => TextEditingController());
 
   List<List<bool>> travelmode = List.generate(1, (index) => [true, false]);
+
+  List<List<bool>> travelmodedomestic =
+      List.generate(1, (index) => [true, false, false]);
   List<List<bool>> _isSelected = List.generate(1, (index) => [false, false]);
+
   List<List<bool>> trainclass =
       List.generate(1, (index) => List.generate(3, (index) => false));
+  List<List<bool>> trainclassdomestic =
+      List.generate(1, (index) => List.generate(6, (index) => false));
+  List<List<bool>> roadclassdomestic =
+      List.generate(1, (index) => [false, false]);
   List<List<bool>> _isSelected1 =
       List.generate(1, (index) => List.generate(4, (index) => false));
   List<List<bool>> _isSelected2 = List.generate(1, (index) => [false, false]);
@@ -92,7 +101,6 @@ class _MultiCityState extends State<MultiCity> {
     return base64Url.encode(utf8.encode(result.join()));
   }
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,53 +184,84 @@ class _MultiCityState extends State<MultiCity> {
                                                     setState(() {
                                                       counter--;
 
-                                                      gestures.removeLast();
+                                                      gestures.removeAt(
+                                                          counter - 1);
                                                       _traveltypeController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
                                                       _travelClassController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
                                                       _originController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
                                                       _destinationController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
                                                       _traveldateController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
 
-                                                      _etaController
-                                                          .removeLast();
-                                                      _foodController
-                                                          .removeLast();
-                                                      _seatController
-                                                          .removeLast();
+                                                      _etaController.removeAt(
+                                                          counter - 1);
+                                                      _foodController.removeAt(
+                                                          counter - 1);
+                                                      _seatController.removeAt(
+                                                          counter - 1);
                                                       _accomodationController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
                                                       _occupancyController
-                                                          .removeLast();
-                                                      _hotelController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
+                                                      _hotelController.removeAt(
+                                                          counter - 1);
                                                       _checkinController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
                                                       _checkoutController
-                                                          .removeLast();
-                                                      _bagController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
+                                                      _bagController.removeAt(
+                                                          counter - 1);
                                                       _totalweightController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
                                                       _remarksController
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
                                                       _regionController
-                                                          .removeLast();
-                                                      travelmode.removeLast();
-                                                      _isSelected.removeLast();
-                                                      trainclass.removeLast();
-                                                      _isSelected1.removeLast();
-                                                      _isSelected2.removeLast();
-                                                      _accom2.removeLast();
-                                                      _occupancy.removeLast();
-                                                      accom.removeLast();
-                                                      bags.removeLast();
-                                                      traveltimevalues
-                                                          .removeLast();
+                                                          .removeAt(
+                                                              counter - 1);
+                                                      travelmode.removeAt(
+                                                          counter - 1);
+                                                      _isSelected.removeAt(
+                                                          counter - 1);
+                                                      trainclass.removeAt(
+                                                          counter - 1);
+                                                      _isSelected1.removeAt(
+                                                          counter - 1);
+                                                      _isSelected2.removeAt(
+                                                          counter - 1);
+                                                      _accom2.removeAt(
+                                                          counter - 1);
+                                                      _occupancy.removeAt(
+                                                          counter - 1);
+                                                      accom.removeAt(
+                                                          counter - 1);
+                                                      bags.removeAt(
+                                                          counter - 1);
+                                                      traveltimevalues.removeAt(
+                                                          counter - 1);
+                                                      travelmodedomestic
+                                                          .removeAt(
+                                                              counter - 1);
+                                                      trainclassdomestic
+                                                          .removeAt(
+                                                              counter - 1);
+                                                      roadclassdomestic
+                                                          .removeAt(
+                                                              counter - 1);
                                                     });
                                                   },
                                                   icon: Icon(
@@ -359,102 +398,261 @@ class _MultiCityState extends State<MultiCity> {
                                                               color: Colors
                                                                   .black)),
                                                     ),
-                                                    ToggleButtons(
-                                                      isSelected:
-                                                          travelmode[index],
-                                                      renderBorder: false,
-                                                      children: [
-                                                        Tooltip(
-                                                          message: 'Flight',
-                                                          triggerMode:
-                                                              TooltipTriggerMode
-                                                                  .manual,
-                                                          child: Container(
-                                                              padding:
-                                                                  EdgeInsets.all(
-                                                                      8),
-                                                              decoration: BoxDecoration(
-                                                                  color: travelmode[index][0]
-                                                                      ? Color.fromARGB(
-                                                                          255, 1, 75, 148)
-                                                                      : Color.fromARGB(
-                                                                          255,
-                                                                          191,
-                                                                          218,
-                                                                          240),
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          30)),
-                                                              child: Icon(FontAwesomeIcons.plane,
-                                                                  size: 24,
-                                                                  color: travelmode[index][0]
-                                                                      ? Colors.white
-                                                                      : Colors.blue[300])),
-                                                        ),
-                                                        Tooltip(
-                                                          message: 'Train',
-                                                          triggerMode:
-                                                              TooltipTriggerMode
-                                                                  .manual,
-                                                          child: Container(
-                                                              padding:
-                                                                  EdgeInsets.all(
-                                                                      8),
-                                                              decoration: BoxDecoration(
-                                                                  color: travelmode[index][1]
-                                                                      ? Color.fromARGB(
-                                                                          255, 1, 75, 148)
-                                                                      : Color.fromARGB(
-                                                                          255,
-                                                                          191,
-                                                                          218,
-                                                                          240),
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          30)),
-                                                              child: Icon(FontAwesomeIcons.train,
-                                                                  size: 24,
-                                                                  color: travelmode[index][1]
-                                                                      ? Colors.white
-                                                                      : Colors.blue[300])),
-                                                        ),
-                                                      ],
-                                                      onPressed: (p) {
-                                                        print(
-                                                            _traveltypeController[
-                                                                    index]
-                                                                .text);
-                                                        setState(() {
-                                                          for (int i = 0;
-                                                              i <
+                                                    widget.isInternational
+                                                        ? ToggleButtons(
+                                                            isSelected:
+                                                                travelmode[
+                                                                    index],
+                                                            renderBorder: false,
+                                                            children: [
+                                                              Tooltip(
+                                                                message:
+                                                                    'Flight',
+                                                                triggerMode:
+                                                                    TooltipTriggerMode
+                                                                        .manual,
+                                                                child: Container(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            8),
+                                                                    decoration: BoxDecoration(
+                                                                        color: travelmode[index][0]
+                                                                            ? Color.fromARGB(
+                                                                                255,
+                                                                                1,
+                                                                                75,
+                                                                                148)
+                                                                            : Color.fromARGB(
+                                                                                255,
+                                                                                191,
+                                                                                218,
+                                                                                240),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                30)),
+                                                                    child: Icon(
+                                                                        FontAwesomeIcons.plane,
+                                                                        size: 24,
+                                                                        color: travelmode[index][0] ? Colors.white : Colors.blue[300])),
+                                                              ),
+                                                              Tooltip(
+                                                                message:
+                                                                    'Train',
+                                                                triggerMode:
+                                                                    TooltipTriggerMode
+                                                                        .manual,
+                                                                child: Container(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            8),
+                                                                    decoration: BoxDecoration(
+                                                                        color: travelmode[index][1]
+                                                                            ? Color.fromARGB(
+                                                                                255,
+                                                                                1,
+                                                                                75,
+                                                                                148)
+                                                                            : Color.fromARGB(
+                                                                                255,
+                                                                                191,
+                                                                                218,
+                                                                                240),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                30)),
+                                                                    child: Icon(
+                                                                        FontAwesomeIcons.train,
+                                                                        size: 24,
+                                                                        color: travelmode[index][1] ? Colors.white : Colors.blue[300])),
+                                                              ),
+                                                            ],
+                                                            onPressed: (p) {
+                                                              print(
+                                                                  _traveltypeController[
+                                                                          index]
+                                                                      .text);
+                                                              setState(() {
+                                                                for (int i = 0;
+                                                                    i <
+                                                                        travelmode[index]
+                                                                            .length;
+                                                                    i++) {
                                                                   travelmode[
                                                                           index]
-                                                                      .length;
-                                                              i++) {
-                                                            travelmode[index]
-                                                                [i] = i == p;
-                                                          }
-                                                        });
-                                                        if (p == 0 &&
-                                                            travelmode[index]
-                                                                [p]) {
-                                                          _traveltypeController[
-                                                                  index]
-                                                              .text = 'Flight';
-                                                        }
-                                                        if (p == 1 &&
-                                                            travelmode[index]
-                                                                [p]) {
-                                                          _traveltypeController[
-                                                                  index]
-                                                              .text = 'Rail';
-                                                        }
-                                                        print(
-                                                            _traveltypeController[
-                                                                    index]
-                                                                .text);
-                                                      },
-                                                    )
+                                                                      [
+                                                                      i] = i == p;
+                                                                }
+                                                              });
+                                                              if (p == 0 &&
+                                                                  travelmode[
+                                                                          index]
+                                                                      [p]) {
+                                                                _traveltypeController[
+                                                                            index]
+                                                                        .text =
+                                                                    'Flight';
+                                                              }
+                                                              if (p == 1 &&
+                                                                  travelmode[
+                                                                          index]
+                                                                      [p]) {
+                                                                _traveltypeController[
+                                                                            index]
+                                                                        .text =
+                                                                    'Rail';
+                                                              }
+                                                              print(
+                                                                  _traveltypeController[
+                                                                          index]
+                                                                      .text);
+                                                            },
+                                                          )
+                                                        : ToggleButtons(
+                                                            isSelected:
+                                                                travelmodedomestic[
+                                                                    index],
+                                                            renderBorder: false,
+                                                            children: [
+                                                              Tooltip(
+                                                                message:
+                                                                    'Flight',
+                                                                triggerMode:
+                                                                    TooltipTriggerMode
+                                                                        .manual,
+                                                                child: Container(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            8),
+                                                                    decoration: BoxDecoration(
+                                                                        color: travelmodedomestic[index][0]
+                                                                            ? Color.fromARGB(
+                                                                                255,
+                                                                                1,
+                                                                                75,
+                                                                                148)
+                                                                            : Color.fromARGB(
+                                                                                255,
+                                                                                191,
+                                                                                218,
+                                                                                240),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                30)),
+                                                                    child: Icon(
+                                                                        FontAwesomeIcons.plane,
+                                                                        size: 24,
+                                                                        color: travelmodedomestic[index][0] ? Colors.white : Colors.blue[300])),
+                                                              ),
+                                                              Tooltip(
+                                                                message:
+                                                                    'Train',
+                                                                triggerMode:
+                                                                    TooltipTriggerMode
+                                                                        .manual,
+                                                                child: Container(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            8),
+                                                                    decoration: BoxDecoration(
+                                                                        color: travelmodedomestic[index][1]
+                                                                            ? Color.fromARGB(
+                                                                                255,
+                                                                                1,
+                                                                                75,
+                                                                                148)
+                                                                            : Color.fromARGB(
+                                                                                255,
+                                                                                191,
+                                                                                218,
+                                                                                240),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                30)),
+                                                                    child: Icon(
+                                                                        FontAwesomeIcons.train,
+                                                                        size: 24,
+                                                                        color: travelmodedomestic[index][1] ? Colors.white : Colors.blue[300])),
+                                                              ),
+                                                              Tooltip(
+                                                                message: 'Road',
+                                                                triggerMode:
+                                                                    TooltipTriggerMode
+                                                                        .manual,
+                                                                child: Container(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            8),
+                                                                    decoration: BoxDecoration(
+                                                                        color: travelmodedomestic[index][2]
+                                                                            ? Color.fromARGB(
+                                                                                255,
+                                                                                1,
+                                                                                75,
+                                                                                148)
+                                                                            : Color.fromARGB(
+                                                                                255,
+                                                                                191,
+                                                                                218,
+                                                                                240),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                30)),
+                                                                    child: Icon(
+                                                                        FontAwesomeIcons.car,
+                                                                        size: 24,
+                                                                        color: travelmodedomestic[index][2] ? Colors.white : Colors.blue[300])),
+                                                              )
+                                                            ],
+                                                            onPressed: (p) {
+                                                              print(
+                                                                  _traveltypeController[
+                                                                          index]
+                                                                      .text);
+                                                              setState(() {
+                                                                for (int i = 0;
+                                                                    i <
+                                                                        travelmodedomestic[index]
+                                                                            .length;
+                                                                    i++) {
+                                                                  travelmodedomestic[
+                                                                          index]
+                                                                      [
+                                                                      i] = i == p;
+                                                                }
+                                                              });
+                                                              if (p == 0 &&
+                                                                  travelmodedomestic[
+                                                                          index]
+                                                                      [p]) {
+                                                                _traveltypeController[
+                                                                            index]
+                                                                        .text =
+                                                                    'Flight';
+                                                              }
+                                                              if (p == 1 &&
+                                                                  travelmodedomestic[
+                                                                          index]
+                                                                      [p]) {
+                                                                _traveltypeController[
+                                                                            index]
+                                                                        .text =
+                                                                    'Rail';
+                                                              }
+                                                              if (p == 2 &&
+                                                                  travelmodedomestic[
+                                                                          index]
+                                                                      [p]) {
+                                                                _traveltypeController[
+                                                                            index]
+                                                                        .text =
+                                                                    'Road';
+                                                              }
+                                                              print(
+                                                                  _traveltypeController[
+                                                                          index]
+                                                                      .text);
+                                                            },
+                                                          )
                                                   ],
                                                 ),
                                                 SizedBox(width: 20),
@@ -2042,8 +2240,12 @@ class _MultiCityState extends State<MultiCity> {
                               ))),
                       TextButton(
                           onPressed: () async {
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (_) => MultiCity()));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => MultiCity(
+                                        isInternational:
+                                            widget.isInternational)));
                           },
                           child: Container(
                               width: 100,
@@ -2082,9 +2284,16 @@ class _MultiCityState extends State<MultiCity> {
             _totalweightController.add(TextEditingController());
             _remarksController.add(TextEditingController());
             _regionController.add(TextEditingController());
-            travelmode.add([true, false]);
-            _isSelected.add([false, false]);
-            trainclass.add(List.generate(6, (index) => false));
+            if (widget.isInternational) {
+              travelmode.add([true, false]);
+              _isSelected.add([false, false]);
+              trainclass.add(List.generate(3, (index) => false));
+            } else {
+              travelmodedomestic.add([true, false, false]);
+              trainclassdomestic.add(List.generate(6, (index) => false));
+              _isSelected.add([false, false]);
+              roadclassdomestic.add([false, false]);
+            }
             _isSelected1.add(List.generate(4, (index) => false));
             _isSelected2.add([false, false]);
             _accom2.add([false, false]);
