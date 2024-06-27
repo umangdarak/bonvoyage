@@ -936,7 +936,7 @@ class _MultiCityState extends State<MultiCity> {
                                                                               true) {
                                                                         _travelClassController[index].text =
                                                                             'Economy class';
-                                                                      } else if (index ==
+                                                                      } else if (index1 ==
                                                                               1 &&
                                                                           _isSelected[index][index1] ==
                                                                               true) {
@@ -1065,6 +1065,7 @@ class _MultiCityState extends State<MultiCity> {
                                                                                 if (trainclassdomestic[index][5]) {
                                                                                   _travelClassController[index].text = '1A';
                                                                                 }
+                                                                                print(_travelClassController[index].text);
                                                                               }),
                                                                         ],
                                                                       ),
@@ -1683,12 +1684,7 @@ class _MultiCityState extends State<MultiCity> {
                                                                               if (s == 'select an option') {
                                                                                 _seatController[index].text = '';
                                                                               }
-                                                                              if (s == 'Window') {
-                                                                                _seatController[index].text = 'Window';
-                                                                              }
-                                                                              if (s == 'Aisle') {
-                                                                                _seatController[index].text = 'Aisle';
-                                                                              }
+                                                                              _seatController[index].text = s!;
                                                                             },
                                                                             initialSelection: _seatController[index].text,
                                                                             controller: _seatController[index],
@@ -1705,6 +1701,7 @@ class _MultiCityState extends State<MultiCity> {
                                                                               if (s == 'Select an option') {
                                                                                 _seatController[index].text = '';
                                                                               }
+                                                                              _seatController[index].text = s!;
                                                                             },
                                                                             controller: _seatController[index],
                                                                             hintText: 'Seat',

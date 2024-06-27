@@ -19,7 +19,7 @@ class Main extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (ctx) => const LoginPage(),
-        'car': (ctx) => const CarBooking()
+        'car': (ctx) => const CarBooking(),
       },
     );
   }

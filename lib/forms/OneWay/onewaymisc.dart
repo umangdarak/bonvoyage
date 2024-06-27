@@ -84,7 +84,7 @@ class _OneWayMiscState extends State<OneWayMisc> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0.0,
-          leadingWidth: 20,
+          leadingWidth: 25,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(
@@ -451,7 +451,7 @@ class _OneWayMiscState extends State<OneWayMisc> {
                                     Text('To change Approver this part')
                                   ],
                                 ),
-                                requester
+                                !requester
                                     ? Column(
                                         children: [
                                           SizedBox(height: 10),
@@ -894,7 +894,6 @@ class _OneWayMiscState extends State<OneWayMisc> {
                                             MediaQuery.of(context).size.width /
                                                     2 -
                                                 20,
-                                        height: 80,
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: Colors.black26),
@@ -909,6 +908,8 @@ class _OneWayMiscState extends State<OneWayMisc> {
                                                 children: [
                                                   Text(
                                                       'Cost Center/Project Name',
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold)),
@@ -1017,10 +1018,6 @@ class _OneWayMiscState extends State<OneWayMisc> {
                                                       fontWeight:
                                                           FontWeight.bold)),
                                               TextFormField(
-                                                  validator: _validateRequired,
-                                                  autovalidateMode:
-                                                      AutovalidateMode
-                                                          .onUserInteraction,
                                                   decoration: InputDecoration(
                                                       border: InputBorder.none,
                                                       // constraints:

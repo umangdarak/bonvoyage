@@ -1,5 +1,6 @@
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
 import 'package:bonvoyage/screens/dashboard.dart';
+import 'package:bonvoyage/screens/usernamecard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -61,7 +62,7 @@ class _BusFormState extends State<BusForm> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0.0,
-          leadingWidth: 20,
+          leadingWidth: 25,
           leading: IconButton(
               onPressed: () {
                 Navigator.pushReplacement(
@@ -103,6 +104,7 @@ class _BusFormState extends State<BusForm> {
                             child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(children: [
+                                  UsernameCard(),
                                   Row(children: [
                                     Icon(FontAwesomeIcons.locationDot,
                                         size: 24,
@@ -163,7 +165,7 @@ class _BusFormState extends State<BusForm> {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                     2 -
-                                                20,
+                                                10,
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: Colors.black26),
@@ -235,7 +237,7 @@ class _BusFormState extends State<BusForm> {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                     2 -
-                                                20,
+                                                30,
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: Colors.black26),
@@ -788,7 +790,6 @@ class _BusFormState extends State<BusForm> {
                                                       .width /
                                                   2 -
                                               20,
-                                          height: 80,
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.black26),
@@ -803,6 +804,8 @@ class _BusFormState extends State<BusForm> {
                                                   children: [
                                                     Text(
                                                         'Cost Center/Project Name',
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
@@ -832,14 +835,15 @@ class _BusFormState extends State<BusForm> {
                                                         controller:
                                                             _costorprojectController)
                                                   ]))),
-                                      SizedBox(width: 10),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
                                       Container(
                                           width: MediaQuery.of(context)
                                                       .size
                                                       .width /
                                                   2 -
                                               20,
-                                          height: 100,
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.black26),
@@ -992,6 +996,12 @@ class _BusFormState extends State<BusForm> {
                                       _debitexpensesController.text,
                                   "costorproject": _costorprojectController.text
                                 }, "companybus");
+                                print(await DataBaseHelper.readOneWayDom(
+                                    'companybus'));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => DashBoard()));
                               } else {
                                 showDialog(
                                   context: context,

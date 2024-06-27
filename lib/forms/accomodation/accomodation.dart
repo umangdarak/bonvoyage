@@ -61,7 +61,7 @@ class _AccomodationPageState extends State<AccomodationPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0.0,
-          leadingWidth: 20,
+          leadingWidth: 25,
           leading: IconButton(
               onPressed: () {
                 Navigator.pushReplacement(
@@ -373,7 +373,7 @@ class _AccomodationPageState extends State<AccomodationPage> {
                                                       _occupancyController
                                                           .text = 'Single';
                                                     } else if (index == 1 &&
-                                                        _accom2[index] ==
+                                                        _occupancy[index] ==
                                                             true) {
                                                       _occupancyController
                                                           .text = 'Couple';
@@ -1018,33 +1018,33 @@ class _AccomodationPageState extends State<AccomodationPage> {
                           ),
                         ],
                       ),
-                      Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          elevation: 4.0,
-                          child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                              ),
-                              child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(children: [
-                                    Row(children: [
-                                      Icon(FontAwesomeIcons.handshake,
-                                          size: 24,
-                                          color:
-                                              Color.fromARGB(255, 1, 75, 148)),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        'Travel Advance',
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromARGB(255, 1, 75, 148),
-                                            fontSize: 24),
-                                      )
-                                    ]),
-                                  ])))),
+                      // Card(
+                      //     shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(10),
+                      //     ),
+                      //     elevation: 4.0,
+                      //     child: Container(
+                      //         decoration: BoxDecoration(
+                      //           color: Colors.white,
+                      //         ),
+                      //         child: Padding(
+                      //             padding: const EdgeInsets.all(8.0),
+                      //             child: Column(children: [
+                      //               Row(children: [
+                      //                 Icon(FontAwesomeIcons.handshake,
+                      //                     size: 24,
+                      //                     color:
+                      //                         Color.fromARGB(255, 1, 75, 148)),
+                      //                 SizedBox(width: 10),
+                      //                 Text(
+                      //                   'Travel Advance',
+                      //                   style: TextStyle(
+                      //                       color:
+                      //                           Color.fromARGB(255, 1, 75, 148),
+                      //                       fontSize: 24),
+                      //                 )
+                      //               ]),
+                      //             ])))),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -1063,7 +1063,15 @@ class _AccomodationPageState extends State<AccomodationPage> {
                           //         ))),
                           TextButton(
                               onPressed: () {
-                                if (_peopleController.text.isEmpty) {
+                                if (_peopleController.text.isEmpty ||
+                                    _peopleController.text == '0' ||
+                                    _peopleController.text !=
+                                        "" +
+                                            (int.parse(_adultsController.text) +
+                                                    int.parse(
+                                                        _childrenController
+                                                            .text))
+                                                .toString()) {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
@@ -1074,7 +1082,7 @@ class _AccomodationPageState extends State<AccomodationPage> {
                                                 .min, // Ensure it only takes the necessary space
                                             children: <Widget>[
                                               Text(
-                                                'Please Enter No of People.',
+                                                'Please Check Number of People/Adults/Children',
                                                 textAlign: TextAlign
                                                     .center, // Center the text within the column
                                               ),

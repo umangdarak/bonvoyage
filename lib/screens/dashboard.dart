@@ -109,7 +109,7 @@ class _DashBoardState extends State<DashBoard> {
                     builder: (ctx) {
                       return StatefulBuilder(builder: (ctx, setState) {
                         return AlertDialog(
-                          insetPadding: EdgeInsets.symmetric(horizontal: 50),
+                          insetPadding: EdgeInsets.symmetric(horizontal: 10),
                           alignment: Alignment.topCenter,
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -769,7 +769,7 @@ class _DashBoardState extends State<DashBoard> {
                                                       return AlertDialog(
                                                         insetPadding: EdgeInsets
                                                             .symmetric(
-                                                                horizontal: 50),
+                                                                horizontal: 10),
                                                         alignment:
                                                             Alignment.topCenter,
                                                         title: Row(
@@ -1214,6 +1214,9 @@ class _DashBoardState extends State<DashBoard> {
                                                                   .all(2.0),
                                                           child: Text(
                                                               'Out Station',
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
                                                               style: TextStyle(
                                                                   fontSize:
                                                                       14)),

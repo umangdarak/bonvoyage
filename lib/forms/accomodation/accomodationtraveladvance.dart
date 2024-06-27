@@ -25,7 +25,7 @@ class _AccomTravelAdvanceState extends State<AccomTravelAdvance> {
     return null;
   }
 
-  bool requester = false;
+  bool requester = true;
 
   TextEditingController _approverController = TextEditingController();
   TextEditingController _travellernameController = TextEditingController();
@@ -68,7 +68,7 @@ class _AccomTravelAdvanceState extends State<AccomTravelAdvance> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0.0,
-          leadingWidth: 20,
+          leadingWidth: 25,
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -504,7 +504,7 @@ class _AccomTravelAdvanceState extends State<AccomTravelAdvance> {
                                                   'To change Approver this part')
                                             ],
                                           ),
-                                          requester
+                                          !requester
                                               ? Column(
                                                   children: [
                                                     SizedBox(height: 10),
@@ -824,7 +824,7 @@ class _AccomTravelAdvanceState extends State<AccomTravelAdvance> {
                                                               .size
                                                               .width /
                                                           2 -
-                                                      20,
+                                                      10,
                                                   height: 80,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
@@ -946,6 +946,8 @@ class _AccomTravelAdvanceState extends State<AccomTravelAdvance> {
                                     'requester': _requesternameController.text,
                                     'comments': _commentsController.text
                                   }, 'accomodation');
+                                  // print(await DataBaseHelper.readOneWayDom(
+                                  //     "accomodation"));
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(

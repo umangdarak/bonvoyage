@@ -58,9 +58,10 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
   fetchData() async {
     data1 = await getData();
 
-    data = await getAllData(data1[0]['sameuser']!);
-    print(data);
-
+    var data3 = await getAllData(data1[0]['sameuser']!);
+    setState(() {
+      data = data3;
+    });
     gestures = List.generate(data.length, (index) => false);
   }
 
@@ -359,47 +360,45 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
                                                               ),
                                                             ),
                                                           ),
-                                                          Container(
-                                                            width: 120,
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                      'Seat Preference',
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              14)),
-                                                                  SizedBox(
-                                                                    height: 4,
+                                                          data[index]['seat']
+                                                                  .toString()
+                                                                  .isNotEmpty
+                                                              ? Container(
+                                                                  width: 120,
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                            8.0),
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                            'Seat Preference',
+                                                                            style: TextStyle(
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 14)),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              4,
+                                                                        ),
+                                                                        Text(
+                                                                            data[index][
+                                                                                'seat']!,
+                                                                            style: TextStyle(
+                                                                                color: Color.fromARGB(255, 1, 75, 148),
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16))
+                                                                      ],
+                                                                    ),
                                                                   ),
-                                                                  Text(
-                                                                      data[index]
-                                                                          [
-                                                                          'seat']!,
-                                                                      style: TextStyle(
-                                                                          color: Color.fromARGB(
-                                                                              255,
-                                                                              1,
-                                                                              75,
-                                                                              148),
-                                                                          fontWeight: FontWeight
-                                                                              .bold,
-                                                                          fontSize:
-                                                                              16))
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
+                                                                )
+                                                              : Container(),
                                                           Container(
                                                             width: 120,
                                                             child: Padding(

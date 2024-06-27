@@ -1,4 +1,5 @@
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
+import 'package:bonvoyage/screens/dashboard.dart';
 import 'package:bonvoyage/screens/usernamecard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -616,7 +617,6 @@ class _CarBookingState extends State<CarBooking> {
                                                                       .width /
                                                                   2 -
                                                               40,
-                                                      height: 80,
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors
@@ -665,7 +665,6 @@ class _CarBookingState extends State<CarBooking> {
                                                               ]))),
                                                   SizedBox(width: 10),
                                                   Container(
-                                                      height: 80,
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors
@@ -753,7 +752,6 @@ class _CarBookingState extends State<CarBooking> {
                                                                       .width /
                                                                   2 -
                                                               40,
-                                                      height: 80,
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors
@@ -808,7 +806,6 @@ class _CarBookingState extends State<CarBooking> {
                                                                       .width /
                                                                   2 -
                                                               40,
-                                                      height: 80,
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               color: Colors
@@ -866,7 +863,6 @@ class _CarBookingState extends State<CarBooking> {
                                                                     .width /
                                                                 2 -
                                                             40,
-                                                    height: 80,
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color:
@@ -921,7 +917,6 @@ class _CarBookingState extends State<CarBooking> {
                                                                     .width /
                                                                 2 -
                                                             40,
-                                                    height: 80,
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color:
@@ -1030,7 +1025,6 @@ class _CarBookingState extends State<CarBooking> {
                                           ),
                                           SizedBox(height: 10),
                                           Container(
-                                              height: 80,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: Colors.black26),
@@ -1099,7 +1093,6 @@ class _CarBookingState extends State<CarBooking> {
                                                               .width /
                                                           2 -
                                                       20,
-                                                  height: 80,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color:
@@ -1118,6 +1111,9 @@ class _CarBookingState extends State<CarBooking> {
                                                           children: [
                                                             Text(
                                                                 'Cost Center/Project Name',
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
                                                                 style: TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
@@ -1153,7 +1149,6 @@ class _CarBookingState extends State<CarBooking> {
                                                               .width /
                                                           2 -
                                                       40,
-                                                  height: 80,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color:
@@ -1211,7 +1206,6 @@ class _CarBookingState extends State<CarBooking> {
                                                               .width /
                                                           2 -
                                                       40,
-                                                  height: 80,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color:
@@ -1260,7 +1254,6 @@ class _CarBookingState extends State<CarBooking> {
                                                               .width /
                                                           2 -
                                                       40,
-                                                  height: 80,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color:
@@ -1283,11 +1276,6 @@ class _CarBookingState extends State<CarBooking> {
                                                                         FontWeight
                                                                             .bold)),
                                                             TextFormField(
-                                                                autovalidateMode:
-                                                                    AutovalidateMode
-                                                                        .onUserInteraction,
-                                                                validator:
-                                                                    _validateRequired,
                                                                 decoration:
                                                                     InputDecoration(
                                                                   labelText:
@@ -1305,7 +1293,7 @@ class _CarBookingState extends State<CarBooking> {
                                             ],
                                           ),
                                         ])),
-                                        SizedBox(height:10),
+                                SizedBox(height: 10),
                               ]))),
                 ),
                 Row(
@@ -1339,6 +1327,8 @@ class _CarBookingState extends State<CarBooking> {
                             var c = await DataBaseHelper.readOneWayDom(
                                 'carbooking');
                             print(c);
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (_) => DashBoard()));
                           } else {
                             showDialog(
                               context: context,

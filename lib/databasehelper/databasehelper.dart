@@ -9,6 +9,7 @@ class DataBaseHelper {
       await oneWayInternationalTable(database);
       await travellerDetailsTable(database);
       await companyBusTable(database);
+      await accomodationDetails(database);
       await carBookingDetails(database);
       await roundtrip(database);
       await roundtripinternational(database);
@@ -284,7 +285,6 @@ CREATE TABLE roundtripinternational(
         city TEXT,
         checkin TEXT,
         checkout TEXT,
-        people TEXT,
         people TEXT,
         adults TEXT,
         children TEXT,
