@@ -436,7 +436,7 @@ class _RoundTripDomesticState extends State<RoundTripDomestic> {
                                     Text('To change Approver this part')
                                   ],
                                 ),
-                                requester
+                                !requester
                                     ? Column(
                                         children: [
                                           SizedBox(height: 10),
@@ -986,7 +986,6 @@ class _RoundTripDomesticState extends State<RoundTripDomestic> {
                                 ),
                                 SizedBox(height: 10),
                                 Container(
-                                    height: 80,
                                     decoration: BoxDecoration(
                                         border:
                                             Border.all(color: Colors.black26),
@@ -1027,96 +1026,150 @@ class _RoundTripDomesticState extends State<RoundTripDomestic> {
                                                   controller:
                                                       _commentsController)
                                             ]))),
-                                TextButton(
-                                    onPressed: () async {
-                                      if (formkey.currentState!.validate() &&
-                                          _travellergenderController
-                                              .text.isNotEmpty &&
-                                          _debitexpensesController
-                                              .text.isNotEmpty) {
-                                        String connection =
-                                            generateRandomString();
-                                        var e = await DataBaseHelper
-                                            .insertItemOneWayDom({
-                                          ...widget.data,
-                                          'currencymode': _modeController.text,
-                                          'currency': _currencyController.text,
-                                          'amount': _amountController.text,
-                                          'cab': _cabController.text,
-                                          'purpose': _purposeController.text,
-                                          'connectiontotravellertable':
-                                              connection
-                                        }, 'roundtripdomestic');
-                                        print(e);
-                                        var d =
-                                            await DataBaseHelper.readOneWayDom(
-                                                'roundtripdomestic');
-                                        var c = await DataBaseHelper
-                                            .insertItemOneWayDom({
-                                          'connection': connection,
-                                          'approver': _approverController.text,
-                                          'travellername':
-                                              _travellernameController.text,
-                                          'travellergender':
-                                              _travellergenderController.text,
-                                          'travellerlevel':
-                                              _levelController.text,
-                                          'department':
-                                              _departmentController.text,
-                                          'email':
-                                              _travelleremailController.text,
-                                          'mobileno':
-                                              _travellermobilenoContorller.text,
-                                          'debitexpenses':
-                                              _debitexpensesController.text,
-                                          'costorproject':
-                                              _costorprojectController.text,
-                                          'requester':
-                                              _requesternameController.text,
-                                          'comments': _commentsController.text
-                                        }, 'travellerdetails');
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    RoundTripApproval(
-                                                        id: e,
-                                                        international: 0)));
-                                      } else {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return Center(
-                                              child: AlertDialog(
-                                                content: Column(
-                                                  mainAxisSize: MainAxisSize
-                                                      .min, // Ensure it only takes the necessary space
-                                                  children: <Widget>[
-                                                    Text(
-                                                      'Please fill all the details.',
-                                                      textAlign: TextAlign
-                                                          .center, // Center the text within the column
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    TextButton(
+                                        onPressed: () async {
+                                          if (formkey.currentState!
+                                                  .validate() &&
+                                              _travellergenderController
+                                                  .text.isNotEmpty &&
+                                              _debitexpensesController
+                                                  .text.isNotEmpty) {
+                                            String connection =
+                                                generateRandomString();
+                                            var e = await DataBaseHelper
+                                                .insertItemOneWayDom({
+                                              ...widget.data,
+                                              'currencymode':
+                                                  _modeController.text,
+                                              'currency':
+                                                  _currencyController.text,
+                                              'amount': _amountController.text,
+                                              'cab': _cabController.text,
+                                              'purpose':
+                                                  _purposeController.text,
+                                              'connectiontotravellertable':
+                                                  connection
+                                            }, 'roundtripdomestic');
+                                            print(e);
+                                            var d = await DataBaseHelper
+                                                .readOneWayDom(
+                                                    'roundtripdomestic');
+                                            var c = await DataBaseHelper
+                                                .insertItemOneWayDom({
+                                              'connection': connection,
+                                              'approver':
+                                                  _approverController.text,
+                                              'travellername':
+                                                  _travellernameController.text,
+                                              'travellergender':
+                                                  _travellergenderController
+                                                      .text,
+                                              'travellerlevel':
+                                                  _levelController.text,
+                                              'department':
+                                                  _departmentController.text,
+                                              'email': _travelleremailController
+                                                  .text,
+                                              'mobileno':
+                                                  _travellermobilenoContorller
+                                                      .text,
+                                              'debitexpenses':
+                                                  _debitexpensesController.text,
+                                              'costorproject':
+                                                  _costorprojectController.text,
+                                              'requester':
+                                                  _requesternameController.text,
+                                              'comments':
+                                                  _commentsController.text
+                                            }, 'travellerdetails');
+                                            print(await DataBaseHelper
+                                                .readOneWayDom(
+                                                    'travellerdetails'));
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        RoundTripApproval(
+                                                            id: e,
+                                                            international: 0)));
+                                          } else {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return Center(
+                                                  child: AlertDialog(
+                                                    content: Column(
+                                                      mainAxisSize: MainAxisSize
+                                                          .min, // Ensure it only takes the necessary space
+                                                      children: <Widget>[
+                                                        Text(
+                                                          'Please fill all the details.',
+                                                          textAlign: TextAlign
+                                                              .center, // Center the text within the column
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                actions: <Widget>[
-                                                  Center(
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop(); // Close the dialog
-                                                      },
-                                                      child: Text('OK'),
-                                                    ),
+                                                    actions: <Widget>[
+                                                      Center(
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
+                                                          },
+                                                          child: Text('OK'),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
+                                                );
+                                              },
                                             );
-                                          },
-                                        );
-                                      }
-                                    },
-                                    child: Text('SaveData'))
+                                          }
+                                        },
+                                        child: Container(
+                                            width: 100,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: Color.fromARGB(
+                                                    255, 13, 211, 50)),
+                                            child: Center(
+                                              child: Text('Submit',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20)),
+                                            ))),
+                                    TextButton(
+                                        onPressed: () async {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      RoundTripDomestic(
+                                                          data: widget.data)));
+                                        },
+                                        child: Container(
+                                            width: 100,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: const Color.fromARGB(
+                                                    255, 131, 14, 5)),
+                                            child: Center(
+                                              child: Text('Clear',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20)),
+                                            ))),
+                                  ],
+                                )
                               ]),
                         )),
                   ]),

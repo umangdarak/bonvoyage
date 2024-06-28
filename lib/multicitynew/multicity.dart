@@ -2398,28 +2398,28 @@ class _MultiCityState extends State<MultiCity> {
                               List<Map<String, String>> d = [];
                               for (int i = 0; i <= counter - 1; i++) {
                                 if (formkey.currentState!.validate()) {
-                                  Map<String, String> each = {
-                                    'travelmode': _traveltypeController[i].text,
-                                    'travelclass':
-                                        _travelClassController[i].text,
-                                    'origin': _originController[i].text,
-                                    'destination':
-                                        _destinationController[i].text,
-                                    'traveldate': _traveldateController[i].text,
-                                    // 'traveltime': c,
-                                    'eta': _etaController[i].text,
-                                    'food': _foodController[i].text,
-                                    'seat': _seatController[i].text,
-                                    'accomodation':
-                                        _accomodationController[i].text,
-                                    'occupancy': _occupancyController[i].text,
-                                    'checkin': _checkinController[i].text,
-                                    'checkout': _checkoutController[i].text,
-                                    'bags': _bagController[i].text,
-                                    'weight': _totalweightController[i].text,
-                                    'remarks': _remarksController[i].text,
-                                  };
-                                  print(each);
+                                  // Map<String, String> each = {
+                                  //   'travelmode': _traveltypeController[i].text,
+                                  //   'travelclass':
+                                  //       _travelClassController[i].text,
+                                  //   'origin': _originController[i].text,
+                                  //   'destination':
+                                  //       _destinationController[i].text,
+                                  //   'traveldate': _traveldateController[i].text,
+                                  //   // 'traveltime': c,
+                                  //   'eta': _etaController[i].text,
+                                  //   'food': _foodController[i].text,
+                                  //   'seat': _seatController[i].text,
+                                  //   'accomodation':
+                                  //       _accomodationController[i].text,
+                                  //   'occupancy': _occupancyController[i].text,
+                                  //   'checkin': _checkinController[i].text,
+                                  //   'checkout': _checkoutController[i].text,
+                                  //   'bags': _bagController[i].text,
+                                  //   'weight': _totalweightController[i].text,
+                                  //   'remarks': _remarksController[i].text,
+                                  // };
+                                  // print(each);
                                   if (_travelClassController[i]
                                           .text
                                           .isNotEmpty &&
@@ -2471,17 +2471,18 @@ class _MultiCityState extends State<MultiCity> {
                                           'food': _foodController[i].text,
                                           'seat': _seatController[i].text,
                                           'region': _regionController[i].text,
-                                          'accomodation':
-                                              _accomodationController[i].text,
-                                          'occupancy':
-                                              _occupancyController[i].text,
-                                          'checkin': _checkinController[i].text,
-                                          'checkout':
-                                              _checkoutController[i].text,
-                                          'bags': _bagController[i].text,
-                                          'weight':
-                                              _totalweightController[i].text,
-                                          'remarks': _remarksController[i].text,
+                                          'accomodation':accom[i][0]?
+                                              _accomodationController[i].text:'',
+                                          'occupancy':accom[i][0]?
+                                              _occupancyController[i].text:'',
+                                              'hotel':accom[i][0]?_accomodationController[i].text=='Hotel'?_hotelController[i].text:'':'',
+                                          'checkin':accom[i][0]? _checkinController[i].text:'',
+                                          'checkout':accom[i][0]?
+                                              _checkoutController[i].text:'',
+                                          'bags': accom[i][1]?_bagController[i].text:'',
+                                          'weight':accom[i][1]?
+                                              _totalweightController[i].text:"",
+                                          'remarks':accom[i][1]? _remarksController[i].text:'',
                                         };
                                         print(each);
                                         d.add(each);
@@ -2502,17 +2503,19 @@ class _MultiCityState extends State<MultiCity> {
                                           'eta': _etaController[i].text,
                                           'food': _foodController[i].text,
                                           'seat': _seatController[i].text,
-                                          'accomodation':
-                                              _accomodationController[i].text,
-                                          'occupancy':
-                                              _occupancyController[i].text,
-                                          'checkin': _checkinController[i].text,
-                                          'checkout':
-                                              _checkoutController[i].text,
-                                          'bags': _bagController[i].text,
-                                          'weight':
-                                              _totalweightController[i].text,
-                                          'remarks': _remarksController[i].text,
+                                          'accomodation':accom[i][0]?
+                                              _accomodationController[i].text:'',
+                                                                                            'hotel':accom[i][0]?_accomodationController[i].text=='Hotel'?_hotelController[i].text:'':'',
+
+                                          'occupancy':accom[i][0]?
+                                              _occupancyController[i].text:'',
+                                          'checkin':accom[i][0]? _checkinController[i].text:'',
+                                          'checkout':accom[i][0]?
+                                              _checkoutController[i].text:'',
+                                          'bags': accom[i][1]?_bagController[i].text:'',
+                                          'weight':accom[i][1]?
+                                              _totalweightController[i].text:"",
+                                          'remarks':accom[i][1]? _remarksController[i].text:'',
                                         };
                                         print(each);
                                         d.add(each);

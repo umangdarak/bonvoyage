@@ -1,4 +1,5 @@
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
+import 'package:bonvoyage/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -286,7 +287,7 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
                                                                         .start,
                                                                 children: [
                                                                   Text(
-                                                                      'TravelDate',
+                                                                      'TravelTime',
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .black,
@@ -525,7 +526,9 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
                                                       SizedBox(height: 10),
                                                       data[index]['accomodation'] !=
                                                               ''
-                                                          ? Column(children: [
+                                                          ? Column(
+                                                            crossAxisAlignment:CrossAxisAlignment.start,
+                                                            children: [
                                                               Container(
                                                                   padding:
                                                                       EdgeInsets
@@ -697,7 +700,9 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
                                                           : Container(),
                                                       SizedBox(height: 10),
                                                       data[index]['bags'] != ''
-                                                          ? Column(children: [
+                                                          ? Column(
+                                                            crossAxisAlignment:CrossAxisAlignment.start,
+                                                            children: [
                                                               Container(
                                                                   padding:
                                                                       EdgeInsets
@@ -833,7 +838,28 @@ class _MultiCityApprovalPageState extends State<MultiCityApprovalPage> {
                                                   )
                                                 : Container()
                                           ])));
-                            }))
+                            })),
+                             Center(
+                            child: TextButton(
+                              child: Container(
+                                  width: 100,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.green),
+                                  child: Center(
+                                    child: Text('Confirm',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20)),
+                                  )),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => DashBoard()));
+                              },
+                            ),
+                          )
                   ],
                 ))));
   }

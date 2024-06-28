@@ -433,7 +433,7 @@ class _MulticitynewdomesticState extends State<Multicitynewdomestic> {
                                     Text('To change Approver this part')
                                   ],
                                 ),
-                                requester
+                                !requester
                                     ? Column(
                                         children: [
                                           SizedBox(height: 10),
@@ -1020,108 +1020,158 @@ class _MulticitynewdomesticState extends State<Multicitynewdomestic> {
                                                   controller:
                                                       _commentsController)
                                             ]))),
-                                TextButton(
-                                    onPressed: () async {
-                                      if (formkey.currentState!.validate() &&
-                                          _travellergenderController
-                                              .text.isNotEmpty &&
-                                          _debitexpensesController
-                                              .text.isNotEmpty) {
-                                        String connection =
-                                            generateRandomString();
-                                        var d = await DataBaseHelper
-                                            .insertItemOneWayDom({
-                                          'sameuser': connection,
-                                          'currencymode': _modeController.text,
-                                          'currency': _currencyController.text,
-                                          'amount': _amountController.text,
-                                          'cab': _cabController.text,
-                                          'purpose': _purposeController.text,
-                                          'connectiontotravellertable':
-                                              connection
-                                        }, "multicitydomestic");
-                                        for (int i = 0;
-                                            i < widget.data.length;
-                                            i++) {
-                                          await DataBaseHelper
-                                              .insertItemOneWayDom({
-                                            ...widget.data[i],
-                                            'connection': connection
-                                          }, 'multicityeachdomestic');
-                                        }
-                                        var c = await DataBaseHelper
-                                            .insertItemOneWayDom({
-                                          'connection': connection,
-                                          'approver': _approverController.text,
-                                          'travellername':
-                                              _travellernameController.text,
-                                          'travellergender':
-                                              _travellergenderController.text,
-                                          'travellerlevel':
-                                              _levelController.text,
-                                          'department':
-                                              _departmentController.text,
-                                          'email':
-                                              _travelleremailController.text,
-                                          'mobileno':
-                                              _travellermobilenoContorller.text,
-                                          'debitexpenses':
-                                              _debitexpensesController.text,
-                                          'costorproject':
-                                              _costorprojectController.text,
-                                          'requester':
-                                              _requesternameController.text,
-                                          'comments': _commentsController.text
-                                        }, 'travellerdetails');
-                                        print(d);
-                                        print(c);
-                                        print(await DataBaseHelper
-                                            .readOneItemRandom(
-                                                'multicityeachdomestic',
-                                                'connection',
-                                                connection));
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    MultiCityApprovalPage(
-                                                        id: d,
-                                                        international: 0)));
-                                      } else {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return Center(
-                                              child: AlertDialog(
-                                                content: Column(
-                                                  mainAxisSize: MainAxisSize
-                                                      .min, // Ensure it only takes the necessary space
-                                                  children: <Widget>[
-                                                    Text(
-                                                      'Please fill all the details.',
-                                                      textAlign: TextAlign
-                                                          .center, // Center the text within the column
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TextButton(
+                                        onPressed: () async {
+                                          if (formkey.currentState!
+                                                  .validate() &&
+                                              _travellergenderController
+                                                  .text.isNotEmpty &&
+                                              _debitexpensesController
+                                                  .text.isNotEmpty) {
+                                            String connection =
+                                                generateRandomString();
+                                            var d = await DataBaseHelper
+                                                .insertItemOneWayDom({
+                                              'sameuser': connection,
+                                              'currencymode':
+                                                  _modeController.text,
+                                              'currency':
+                                                  _currencyController.text,
+                                              'amount': _amountController.text,
+                                              'cab': _cabController.text,
+                                              'purpose':
+                                                  _purposeController.text,
+                                              'connectiontotravellertable':
+                                                  connection
+                                            }, "multicitydomestic");
+                                            for (int i = 0;
+                                                i < widget.data.length;
+                                                i++) {
+                                              await DataBaseHelper
+                                                  .insertItemOneWayDom({
+                                                ...widget.data[i],
+                                                'connection': connection
+                                              }, 'multicityeachdomestic');
+                                            }
+                                            var c = await DataBaseHelper
+                                                .insertItemOneWayDom({
+                                              'connection': connection,
+                                              'approver':
+                                                  _approverController.text,
+                                              'travellername':
+                                                  _travellernameController.text,
+                                              'travellergender':
+                                                  _travellergenderController
+                                                      .text,
+                                              'travellerlevel':
+                                                  _levelController.text,
+                                              'department':
+                                                  _departmentController.text,
+                                              'email': _travelleremailController
+                                                  .text,
+                                              'mobileno':
+                                                  _travellermobilenoContorller
+                                                      .text,
+                                              'debitexpenses':
+                                                  _debitexpensesController.text,
+                                              'costorproject':
+                                                  _costorprojectController.text,
+                                              'requester':
+                                                  _requesternameController.text,
+                                              'comments':
+                                                  _commentsController.text
+                                            }, 'travellerdetails');
+                                            print(d);
+                                            print(c);
+                                            print(await DataBaseHelper
+                                                .readOneItemRandom(
+                                                    'multicityeachdomestic',
+                                                    'connection',
+                                                    connection));
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        MultiCityApprovalPage(
+                                                            id: d,
+                                                            international: 0)));
+                                          } else {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return Center(
+                                                  child: AlertDialog(
+                                                    content: Column(
+                                                      mainAxisSize: MainAxisSize
+                                                          .min, // Ensure it only takes the necessary space
+                                                      children: <Widget>[
+                                                        Text(
+                                                          'Please fill all the details.',
+                                                          textAlign: TextAlign
+                                                              .center, // Center the text within the column
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                actions: <Widget>[
-                                                  Center(
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop(); // Close the dialog
-                                                      },
-                                                      child: Text('OK'),
-                                                    ),
+                                                    actions: <Widget>[
+                                                      Center(
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
+                                                          },
+                                                          child: Text('OK'),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
+                                                );
+                                              },
                                             );
-                                          },
-                                        );
-                                      }
-                                    },
-                                    child: Text('SaveData'))
+                                          }
+                                        },
+                                        child: Container(
+                                            width: 100,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: Color.fromARGB(
+                                                    255, 1, 75, 148)),
+                                            child: Center(
+                                              child: Text('Submit',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20)),
+                                            ))),
+                                    TextButton(
+                                        onPressed: () async {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      Multicitynewdomestic(
+                                                          data: widget.data)));
+                                        },
+                                        child: Container(
+                                            width: 100,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: const Color.fromARGB(
+                                                    255, 131, 14, 5)),
+                                            child: Center(
+                                              child: Text('Clear',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20)),
+                                            ))),
+                                  ],
+                                )
                               ]),
                         )),
                   ]),

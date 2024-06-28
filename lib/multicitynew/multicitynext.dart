@@ -163,691 +163,373 @@ class _MultiCityNextState extends State<MultiCityNext> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(color: Colors.black26)),
-                                child: Column(
-                                  children: [
-                                    Row(children: [
-                                      Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0),
-                                          child: Container(
-                                              width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      2 -
-                                                  30,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  border: Border.all(
-                                                      color: Colors.black26)),
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Mode',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 8.0),
-                                                      child: DropdownMenu(
-                                                          width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  2 -
-                                                              30,
-                                                          inputDecorationTheme:
-                                                              InputDecorationTheme(
-                                                                  border:
-                                                                      InputBorder
-                                                                          .none),
-                                                          onSelected: (s) {
-                                                            if (s ==
-                                                                'select an option') {
-                                                            } else {
-                                                              if (currencymode
-                                                                      .length ==
-                                                                  0) {
-                                                                currencymode
-                                                                    .add(s!);
-                                                              } else {
-                                                                currencymode[
-                                                                    0] = s!;
-                                                              }
+                          ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: indexcurrency,
+                              itemBuilder: (ctx, index) {
+                                print(index);
+                                if (true) {
+                                  return Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border.all(
+                                                  color: Colors.black26)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(children: [
+                                                  Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
+                                                      child: Container(
+                                                          width:
+                                                              MediaQuery.of(context)
+                                                                          .size
+                                                                          .width /
+                                                                      2 -
+                                                                  60,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .black26)),
+                                                          child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Mode',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black54),
+                                                                ),
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          8.0),
+                                                                  child:
+                                                                      DropdownMenu(
+                                                                          width: MediaQuery.of(context).size.width / 2 -
+                                                                              60,
+                                                                          inputDecorationTheme: InputDecorationTheme(
+                                                                              border: InputBorder
+                                                                                  .none),
+                                                                          onSelected:
+                                                                              (s) {
+                                                                            if (s ==
+                                                                                'select an option') {
+                                                                            } else {
+                                                                              if (currencymode.length == index) {
+                                                                                currencymode.add(s!);
+                                                                              } else {
+                                                                                currencymode[index] = s!;
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          dropdownMenuEntries:
+                                                                              [
+                                                                            'Select an option',
+                                                                            'Foreign Currency',
+                                                                            'Forex Card'
+                                                                          ].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
+                                                                )
+                                                              ]))),
+                                                  SizedBox(width: 5),
+                                                  Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
+                                                      child: Container(
+                                                          width:
+                                                              MediaQuery.of(context)
+                                                                          .size
+                                                                          .width /
+                                                                      2 -
+                                                                  60,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .black26)),
+                                                          child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Currency',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black54),
+                                                                ),
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          8.0),
+                                                                  child:
+                                                                      DropdownMenu(
+                                                                          width: MediaQuery.of(context).size.width / 2 -
+                                                                              60,
+                                                                          inputDecorationTheme: InputDecorationTheme(
+                                                                              border: InputBorder
+                                                                                  .none),
+                                                                          onSelected:
+                                                                              (s) {
+                                                                            if (s ==
+                                                                                'select an option') {
+                                                                            } else {
+                                                                              if (currency.length == index) {
+                                                                                currency.add(s!);
+                                                                              } else {
+                                                                                currency[index] = s!;
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          dropdownMenuEntries:
+                                                                              [
+                                                                            'Select an option',
+                                                                            'EURO',
+                                                                            'GBP',
+                                                                            'SGD',
+                                                                            'USD'
+                                                                          ].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
+                                                                )
+                                                              ]))),
+                                                  Column(children: [
+                                                    IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            if (currencymode
+                                                                        .length ==
+                                                                    index + 1 &&
+                                                                currency.length ==
+                                                                    index + 1 &&
+                                                                amount.length ==
+                                                                    index + 1 &&
+                                                                remarks.length ==
+                                                                    index + 1) {
+                                                              indexcurrency +=
+                                                                  1;
+
+                                                              print(currency);
                                                               print(
                                                                   currencymode);
-                                                            }
-                                                          },
-                                                          dropdownMenuEntries: [
-                                                            'Select an option',
-                                                            'Foreign Currency',
-                                                            'Forex Card'
-                                                          ]
-                                                              .map((e) =>
-                                                                  DropdownMenuEntry(
-                                                                      label: e,
-                                                                      value: e))
-                                                              .toList()),
-                                                    )
-                                                  ]))),
-                                      SizedBox(width: 5),
-                                      Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0),
-                                          child: Container(
-                                              width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      2 -
-                                                  30,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  border: Border.all(
-                                                      color: Colors.black26)),
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Currency',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 8.0),
-                                                      child: DropdownMenu(
-                                                          inputDecorationTheme:
-                                                              InputDecorationTheme(
-                                                                  border:
-                                                                      InputBorder
-                                                                          .none),
-                                                          onSelected: (s) {
-                                                            if (s ==
-                                                                'select an option') {
+                                                              print(amount);
+                                                              print(remarks);
                                                             } else {
-                                                              if (currency
-                                                                      .length ==
-                                                                  0) {
-                                                                currency
-                                                                    .add(s!);
-                                                              } else {
-                                                                currency[0] =
-                                                                    s!;
-                                                              }
-                                                              print(currency);
+                                                              showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return Center(
+                                                                    child:
+                                                                        AlertDialog(
+                                                                      content:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.min, // Ensure it only takes the necessary space
+                                                                        children: <Widget>[
+                                                                          Text(
+                                                                            'Please fill all the details.',
+                                                                            textAlign:
+                                                                                TextAlign.center, // Center the text within the column
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      actions: <Widget>[
+                                                                        Center(
+                                                                          child:
+                                                                              ElevatedButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop(); // Close the dialog
+                                                                            },
+                                                                            child:
+                                                                                Text('OK'),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              );
                                                             }
-                                                          },
-                                                          dropdownMenuEntries: [
-                                                            'Select an option',
-                                                            'EURO',
-                                                            'GBP',
-                                                            'SGD',
-                                                            'USD'
-                                                          ]
-                                                              .map((e) =>
-                                                                  DropdownMenuEntry(
-                                                                      label: e,
-                                                                      value: e))
-                                                              .toList()),
-                                                    )
-                                                  ])))
-                                    ]),
-                                    SizedBox(height: 10),
-                                    Row(children: [
-                                      Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0),
-                                          child: Container(
-                                              width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      2 -
-                                                  30,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  border: Border.all(
-                                                      color: Colors.black26)),
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Amount',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                    Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    8.0),
-                                                        child: TextFormField(
-                                                          validator:
-                                                              _validateRequired,
-                                                          autovalidateMode:
-                                                              AutovalidateMode
-                                                                  .onUserInteraction,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.black),
-                                                          controller: amount1,
-                                                          onEditingComplete:
-                                                              () {
-                                                            setState(() {
-                                                              if (amount
-                                                                      .length ==
-                                                                  0) {
-                                                                amount.add(
-                                                                    amount1
-                                                                        .text);
-                                                              } else {
-                                                                amount[0] =
-                                                                    amount1
-                                                                        .text;
-                                                              }
-                                                              print(amount);
-                                                            });
-                                                          },
-                                                          onChanged: (s) {
-                                                            setState(() {
-                                                              if (amount
-                                                                      .length ==
-                                                                  0) {
-                                                                amount.add(s);
-                                                              } else {
-                                                                amount[0] = s;
-                                                              }
-                                                              print(amount);
-                                                            });
-                                                          },
-                                                          onFieldSubmitted:
-                                                              (s) {
-                                                            setState(() {
-                                                              if (amount
-                                                                      .length ==
-                                                                  0) {
-                                                                amount.add(
-                                                                    amount1
-                                                                        .text);
-                                                              } else {
-                                                                amount[0] =
-                                                                    amount1
-                                                                        .text;
-                                                              }
-                                                              print(amount);
-                                                            });
-                                                          },
-                                                        ))
-                                                  ]))),
-                                      SizedBox(width: 5),
-                                      Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0),
-                                          child: Container(
-                                              width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      2 -
-                                                  30,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  border: Border.all(
-                                                      color: Colors.black26)),
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Remarks',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                    Padding(
-                                                        padding: const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal: 8.0),
-                                                        child: TextFormField(
-                                                            validator:
-                                                                _validateRequired,
-                                                            autovalidateMode:
-                                                                AutovalidateMode
-                                                                    .onUserInteraction,
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
-                                                            controller:
-                                                                remarks1,
-                                                            onEditingComplete:
-                                                                () {
+                                                          });
+                                                        },
+                                                        iconSize: 20,
+                                                        icon: Icon(
+                                                            FontAwesomeIcons
+                                                                .add)),
+                                                    indexcurrency != 1
+                                                        ? IconButton(
+                                                            iconSize: 20,
+                                                            onPressed: () {
                                                               setState(() {
-                                                                if (remarks
-                                                                        .length ==
-                                                                    0) {
-                                                                  remarks.add(
-                                                                      remarks1
-                                                                          .text);
-                                                                } else {
-                                                                  remarks[0] =
-                                                                      remarks1
-                                                                          .text;
-                                                                }
-                                                              });
-                                                            },
-                                                            onFieldSubmitted:
-                                                                (s) {
-                                                              setState(() {
-                                                                if (remarks
-                                                                        .length ==
-                                                                    0) {
-                                                                  remarks.add(
-                                                                      remarks1
-                                                                          .text);
-                                                                } else {
-                                                                  remarks[0] =
-                                                                      remarks1
-                                                                          .text;
-                                                                }
-                                                              });
-                                                            },
-                                                            onChanged: (s) {
-                                                              setState(() {
-                                                                if (remarks
-                                                                        .length ==
-                                                                    0) {
+                                                                if (currencymode
+                                                                            .length ==
+                                                                        index +
+                                                                            1 ||
+                                                                    currency.length ==
+                                                                        index +
+                                                                            1 ||
+                                                                    amount.length ==
+                                                                        index +
+                                                                            1 ||
+                                                                    remarks.length ==
+                                                                        index +
+                                                                            1) {
+                                                                  currencymode
+                                                                      .removeAt(
+                                                                          index);
+                                                                  amount
+                                                                      .removeAt(
+                                                                          index);
+                                                                  currency
+                                                                      .removeAt(
+                                                                          index);
                                                                   remarks
-                                                                      .add(s);
+                                                                      .removeAt(
+                                                                          index);
+                                                                  print(
+                                                                      currencymode);
+                                                                  print(
+                                                                      currency);
+                                                                  print(amount);
+                                                                  print(
+                                                                      remarks);
+                                                                  indexcurrency -=
+                                                                      1;
                                                                 } else {
-                                                                  remarks[0] =
-                                                                      s;
+                                                                  print(
+                                                                      "error");
+
+                                                                  indexcurrency -=
+                                                                      1;
                                                                 }
                                                               });
-                                                            }))
-                                                  ]))),
-                                    ]),
-                                    SizedBox(height: 10),
-                                    IconButton(
-                                        onPressed: () {
-                                          if (currencymode.isEmpty ||
-                                              currency.isEmpty ||
-                                              amount.isEmpty) {
-                                            print("Error");
-                                          } else {
-                                            setState(() {
-                                              indexcurrency += 1;
-                                              print(currency);
-                                              print(currencymode);
-                                              print(amount);
-                                              print(remarks);
-                                            });
-                                          }
-                                        },
-                                        icon: Icon(FontAwesomeIcons.add)),
-                                  ],
-                                )),
-                          ),
-                          Column(
-                              children: List.generate(indexcurrency, (index) {
-                            TextEditingController amount1 =
-                                TextEditingController();
-                            TextEditingController remarks1 =
-                                TextEditingController();
-                            if (index != 0) {
-                              return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          border: Border.all(
-                                              color: Colors.black26)),
-                                      child: Column(
-                                        children: [
-                                          Row(children: [
-                                            Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8.0),
-                                                child: Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                2 -
-                                                            30,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                            color: Colors
-                                                                .black26)),
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            'Mode',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black54),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                                    horizontal:
-                                                                        8.0),
-                                                            child: DropdownMenu(
-                                                                width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width /
-                                                                        2 -
-                                                                    30,
-                                                                inputDecorationTheme:
-                                                                    InputDecorationTheme(
-                                                                        border: InputBorder
-                                                                            .none),
-                                                                onSelected:
-                                                                    (s) {
-                                                                  if (s ==
-                                                                      'select an option') {
-                                                                  } else {
-                                                                    if (currencymode
-                                                                            .length ==
-                                                                        index) {
-                                                                      currencymode
-                                                                          .add(
-                                                                              s!);
-                                                                    } else {
-                                                                      currencymode[
-                                                                          index] = s!;
-                                                                    }
-                                                                  }
-                                                                },
-                                                                dropdownMenuEntries: [
-                                                                  'Select an option',
-                                                                  'Foreign Currency',
-                                                                  'Forex Card'
-                                                                ]
-                                                                    .map((e) => DropdownMenuEntry(
-                                                                        label:
-                                                                            e,
-                                                                        value:
-                                                                            e))
-                                                                    .toList()),
-                                                          )
-                                                        ]))),
-                                            SizedBox(width: 5),
-                                            Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8.0),
-                                                child: Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                2 -
-                                                            30,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                            color: Colors
-                                                                .black26)),
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            'Currency',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black54),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                                    horizontal:
-                                                                        8.0),
-                                                            child: DropdownMenu(
-                                                                inputDecorationTheme:
-                                                                    InputDecorationTheme(
-                                                                        border: InputBorder
-                                                                            .none),
-                                                                onSelected:
-                                                                    (s) {
-                                                                  if (s ==
-                                                                      'select an option') {
-                                                                  } else {
-                                                                    if (currency
-                                                                            .length ==
-                                                                        index) {
-                                                                      currency
-                                                                          .add(
-                                                                              s!);
-                                                                    } else {
-                                                                      currency[
-                                                                          index] = s!;
-                                                                    }
-                                                                  }
-                                                                },
-                                                                dropdownMenuEntries: [
-                                                                  'Select an option',
-                                                                  'EURO',
-                                                                  'GBP',
-                                                                  'SGD',
-                                                                  'USD'
-                                                                ]
-                                                                    .map((e) => DropdownMenuEntry(
-                                                                        label:
-                                                                            e,
-                                                                        value:
-                                                                            e))
-                                                                    .toList()),
-                                                          )
-                                                        ])))
-                                          ]),
-                                          SizedBox(height: 10),
-                                          Row(children: [
-                                            Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8.0),
-                                                child: Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                2 -
-                                                            30,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                            color: Colors
-                                                                .black26)),
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            'Amount',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black54),
-                                                          ),
-                                                          Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                          8.0),
-                                                              child:
-                                                                  TextFormField(
-                                                                validator:
-                                                                    _validateRequired,
-                                                                autovalidateMode:
-                                                                    AutovalidateMode
-                                                                        .onUserInteraction,
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .number,
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
-                                                                controller:
-                                                                    amount1,
-                                                                onFieldSubmitted:
-                                                                    (s) {
-                                                                  setState(() {
-                                                                    if (amount
-                                                                            .length ==
-                                                                        index) {
-                                                                      amount.add(
-                                                                          s);
-                                                                    } else {
-                                                                      amount[index] =
-                                                                          s;
-                                                                    }
-                                                                    print(
-                                                                        amount);
-                                                                  });
-                                                                },
-                                                                onChanged: (s) {
-                                                                  setState(() {
-                                                                    if (amount
-                                                                            .length ==
-                                                                        index) {
-                                                                      amount.add(
-                                                                          s);
-                                                                    } else {
-                                                                      amount[index] =
-                                                                          s;
-                                                                    }
-                                                                    print(
-                                                                        amount);
-                                                                  });
-                                                                },
-                                                                onEditingComplete:
-                                                                    () {
-                                                                  setState(() {
-                                                                    if (amount
-                                                                            .length ==
-                                                                        index) {
-                                                                      amount.add(
-                                                                          amount1
-                                                                              .text);
-                                                                    } else {
-                                                                      amount[index] =
-                                                                          amount1
-                                                                              .text;
-                                                                    }
-                                                                    print(
-                                                                        amount);
-                                                                  });
-                                                                },
-                                                              ))
-                                                        ]))),
-                                            SizedBox(width: 5),
-                                            Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8.0),
-                                                child: Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                2 -
-                                                            30,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        border: Border.all(
-                                                            color: Colors
-                                                                .black26)),
-                                                    child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            'Remarks',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black54),
-                                                          ),
-                                                          Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                          8.0),
-                                                              child:
-                                                                  TextFormField(
+                                                            },
+                                                            icon: Icon(
+                                                                Icons.delete))
+                                                        : Container()
+                                                  ]),
+                                                ]),
+                                                SizedBox(height: 10),
+                                                Row(children: [
+                                                  Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
+                                                      child: Container(
+                                                          width:
+                                                              MediaQuery.of(context)
+                                                                          .size
+                                                                          .width /
+                                                                      2 -
+                                                                  60,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .black26)),
+                                                          child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Amount',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black54),
+                                                                ),
+                                                                Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            8.0),
+                                                                    child: TextFormField(
+                                                                        validator: _validateRequired,
+                                                                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                                                                        keyboardType: TextInputType.number,
+                                                                        style: TextStyle(color: Colors.black),
+                                                                        onChanged: (s) {
+                                                                          setState(
+                                                                              () {
+                                                                            if (amount.length ==
+                                                                                index) {
+                                                                              amount.add(s);
+                                                                            } else {
+                                                                              amount[index] = s;
+                                                                            }
+                                                                            print(amount);
+                                                                          });
+                                                                        }))
+                                                              ]))),
+                                                  SizedBox(width: 5),
+                                                  Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
+                                                      child: Container(
+                                                          width:
+                                                              MediaQuery.of(context)
+                                                                          .size
+                                                                          .width /
+                                                                      2 -
+                                                                  60,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .black26)),
+                                                          child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'Remarks',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black54),
+                                                                ),
+                                                                Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            8.0),
+                                                                    child:
+                                                                        TextFormField(
                                                                       validator:
                                                                           _validateRequired,
                                                                       autovalidateMode:
                                                                           AutovalidateMode
                                                                               .onUserInteraction,
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .black),
-                                                                      controller:
-                                                                          remarks1,
-                                                                      onFieldSubmitted:
-                                                                          (s) {
-                                                                        setState(
-                                                                            () {
-                                                                          if (remarks.length ==
-                                                                              index) {
-                                                                            remarks.add(s);
-                                                                          } else {
-                                                                            remarks[index] =
-                                                                                s;
-                                                                          }
-                                                                        });
-                                                                      },
-                                                                      onEditingComplete:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          if (remarks.length ==
-                                                                              index) {
-                                                                            remarks.add(remarks1.text);
-                                                                          } else {
-                                                                            remarks[index] =
-                                                                                remarks1.text;
-                                                                          }
-                                                                        });
-                                                                      },
+                                                                          color:
+                                                                              Colors.black),
                                                                       onChanged:
                                                                           (s) {
                                                                         setState(
@@ -860,96 +542,18 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                                                 s;
                                                                           }
                                                                         });
-                                                                      }))
-                                                        ]))),
-                                          ]),
-                                          SizedBox(height: 10),
-                                          IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  if (currencymode.length ==
-                                                          2 &&
-                                                      currency.length == 2 &&
-                                                      amount.length == 2 &&
-                                                      remarks.length == 2) {
-                                                    indexcurrency += 1;
-                                                    print(currency);
-                                                    print(currencymode);
-                                                    print(amount);
-                                                    print(remarks);
-                                                  } else {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return Center(
-                                                          child: AlertDialog(
-                                                            content: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .min, // Ensure it only takes the necessary space
-                                                              children: <Widget>[
-                                                                Text(
-                                                                  'Please fill all the details.',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center, // Center the text within the column
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            actions: <Widget>[
-                                                              Center(
-                                                                child:
-                                                                    ElevatedButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop(); // Close the dialog
-                                                                  },
-                                                                  child: Text(
-                                                                      'OK'),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        );
-                                                      },
-                                                    );
-                                                  }
-                                                });
-                                              },
-                                              icon: Icon(FontAwesomeIcons.add)),
-                                          IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  if (currencymode.length ==
-                                                          2 ||
-                                                      currency.length == 2 ||
-                                                      amount.length == 2 ||
-                                                      remarks.length == 2) {
-                                                    currencymode
-                                                        .removeAt(index);
-                                                    amount.removeAt(index);
-                                                    currency.removeAt(index);
-                                                    remarks.removeAt(index);
-                                                    print(currencymode);
-                                                    print(currency);
-                                                    print(amount);
-                                                    print(remarks);
-                                                    indexcurrency -= 1;
-                                                  } else {
-                                                    print("error");
-                                                    indexcurrency -= 1;
-                                                  }
-                                                });
-                                              },
-                                              icon: Icon(FontAwesomeIcons.cut))
-                                        ],
-                                      )));
-                            } else {
-                              return Container();
-                            }
-                          })),
+                                                                      },
+                                                                    ))
+                                                              ]))),
+                                                ]),
+                                                SizedBox(height: 10),
+                                              ],
+                                            ),
+                                          )));
+                                } else {
+                                  return Container();
+                                }
+                              }),
                           Divider(),
                           Column(
                             children: [
@@ -1101,6 +705,7 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                               ),
                                             ),
                                           ),
+                                          SizedBox(width: 10),
                                           Container(
                                             decoration: BoxDecoration(
                                                 border: Border.all(
@@ -1646,7 +1251,7 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                     Text('To change Approver this part')
                                   ],
                                 ),
-                                requester
+                                !requester
                                     ? Column(
                                         children: [
                                           SizedBox(height: 10),
@@ -2196,7 +1801,6 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                 ),
                                 SizedBox(height: 10),
                                 Container(
-                                    height: 80,
                                     decoration: BoxDecoration(
                                         border:
                                             Border.all(color: Colors.black26),
@@ -2213,10 +1817,6 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                       fontWeight:
                                                           FontWeight.bold)),
                                               TextFormField(
-                                                  validator: _validateRequired,
-                                                  autovalidateMode:
-                                                      AutovalidateMode
-                                                          .onUserInteraction,
                                                   decoration: InputDecoration(
                                                       border: InputBorder.none,
                                                       constraints:
