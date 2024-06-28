@@ -154,7 +154,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                             SizedBox(
                                               width: 7,
                                             ),
-                                            Text(data['traveldate']!.toString(),
+                                            Text(data['traveldate'].toString(),
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.bold,
@@ -185,14 +185,11 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                   height: 4,
                                                 ),
                                                 Text(
-                                                    data['travelmode']!
+                                                    data['travelmode']
                                                         .toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
-                                                            255,
-                                                            1,
-                                                            75,
-                                                            148),
+                                                            255, 1, 75, 148),
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 16))
@@ -218,11 +215,14 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                   height: 4,
                                                 ),
                                                 Text(
-                                                    data['travelclass']!
+                                                    data['travelclass']
                                                         .toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
-                                                            255, 1, 75, 148),
+                                                            255,
+                                                            1,
+                                                            75,
+                                                            148),
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 16))
@@ -248,8 +248,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                   height: 4,
                                                 ),
                                                 Text(
-                                                  data['traveldate']!
-                                                      .toString(),
+                                                  data['traveldate'].toString(),
                                                   style: TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 1, 75, 148),
@@ -283,7 +282,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['eta']!.toString(),
+                                                Text(data['eta'].toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -311,7 +310,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['seat']!.toString(),
+                                                Text(data['seat'].toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -339,7 +338,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                 SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(data['food']!.toString(),
+                                                Text(data['food'].toString(),
                                                     style: TextStyle(
                                                         color: Color.fromARGB(
                                                             255, 1, 75, 148),
@@ -377,7 +376,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                         height: 4,
                                                       ),
                                                       Text(
-                                                          data['region']!
+                                                          data['region']
                                                               .toString(),
                                                           style: TextStyle(
                                                               color: Color
@@ -395,7 +394,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                 ),
                                               )
                                             : Container(),
-                                        data['comments']!.toString().isNotEmpty
+                                        data['comments'].toString().isNotEmpty
                                             ? Container(
                                                 width: 120,
                                                 child: Padding(
@@ -418,7 +417,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                         height: 4,
                                                       ),
                                                       Text(
-                                                          data['comments']!
+                                                          data['comments']
                                                               .toString(),
                                                           style: TextStyle(
                                                               color: Color
@@ -500,7 +499,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                               height: 4,
                                                             ),
                                                             Text(
-                                                                data['accomodation']!
+                                                                data['accomodation']
                                                                     .toString(),
                                                                 style: TextStyle(
                                                                     color: Color
@@ -543,7 +542,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                               height: 4,
                                                             ),
                                                             Text(
-                                                                data['occupancy']!
+                                                                data['occupancy']
                                                                     .toString(),
                                                                 style: TextStyle(
                                                                     color: Color
@@ -583,8 +582,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                             height: 4,
                                                           ),
                                                           Text(
-                                                              data[
-                                                                      'hotel']!
+                                                              data['hotel']
                                                                   .toString(),
                                                               style: TextStyle(
                                                                   color: Color
@@ -629,7 +627,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                               height: 4,
                                                             ),
                                                             Text(
-                                                                data['checkin']!
+                                                                data['checkin']
                                                                     .toString(),
                                                                 style: TextStyle(
                                                                     color: Color
@@ -671,7 +669,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                               height: 4,
                                                             ),
                                                             Text(
-                                                                data['checkout']!
+                                                                data['checkout']
                                                                     .toString(),
                                                                 style: TextStyle(
                                                                     color: Color
@@ -754,7 +752,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                               height: 4,
                                                             ),
                                                             Text(
-                                                                data['bags']!
+                                                                data['bags']
                                                                     .toString(),
                                                                 style: TextStyle(
                                                                     color: Color
@@ -797,7 +795,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                               height: 4,
                                                             ),
                                                             Text(
-                                                                data['weight']!
+                                                                data['weight']
                                                                     .toString(),
                                                                 style: TextStyle(
                                                                     color: Color
@@ -844,7 +842,7 @@ class _OneWayApprovalState extends State<OneWayApproval> {
                                                             height: 4,
                                                           ),
                                                           Text(
-                                                              data['remarks']!
+                                                              data['remarks']
                                                                   .toString(),
                                                               style: TextStyle(
                                                                   color: Color

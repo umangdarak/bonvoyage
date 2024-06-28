@@ -37,10 +37,14 @@ class _MultiCityNextState extends State<MultiCityNext> {
   TextEditingController _insuranceavailableController = TextEditingController();
   TextEditingController _insurancenameController = TextEditingController();
   TextEditingController _insurancevaliddateController = TextEditingController();
-  List<String> currencymode = [];
-  List<String> currency = [];
-  List<String> amount = [];
-  List<String> remarks = [];
+  List<TextEditingController> currencymode =
+      List.generate(1, (index) => TextEditingController());
+  List<TextEditingController> currency =
+      List.generate(1, (index) => TextEditingController());
+  List<TextEditingController> amount =
+      List.generate(1, (index) => TextEditingController());
+  List<TextEditingController> remarks =
+      List.generate(1, (index) => TextEditingController());
   int indexcurrency = 1;
 
   String gender = 'Male';
@@ -87,6 +91,14 @@ class _MultiCityNextState extends State<MultiCityNext> {
     final result =
         List.generate(length, (index) => _chars[random.nextInt(_chars.length)]);
     return result.join();
+  }
+
+  String getTextFromControllers(List<TextEditingController> a) {
+    String text = "";
+    for (TextEditingController t in a) {
+      text += t.text + ",";
+    }
+    return text;
   }
 
   TextEditingController amount1 = TextEditingController();
@@ -166,7 +178,7 @@ class _MultiCityNextState extends State<MultiCityNext> {
                           ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: indexcurrency,
+                              itemCount: currencymode.length,
                               itemBuilder: (ctx, index) {
                                 print(index);
                                 if (true) {
@@ -230,13 +242,11 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                                             if (s ==
                                                                                 'select an option') {
                                                                             } else {
-                                                                              if (currencymode.length == index) {
-                                                                                currencymode.add(s!);
-                                                                              } else {
-                                                                                currencymode[index] = s!;
-                                                                              }
+                                                                              currencymode[index].text = s!;
                                                                             }
                                                                           },
+                                                                          controller: currencymode[
+                                                                              index],
                                                                           dropdownMenuEntries:
                                                                               [
                                                                             'Select an option',
@@ -293,13 +303,11 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                                             if (s ==
                                                                                 'select an option') {
                                                                             } else {
-                                                                              if (currency.length == index) {
-                                                                                currency.add(s!);
-                                                                              } else {
-                                                                                currency[index] = s!;
-                                                                              }
+                                                                              currency[index].text = s!;
                                                                             }
                                                                           },
+                                                                          controller: currency[
+                                                                              index],
                                                                           dropdownMenuEntries:
                                                                               [
                                                                             'Select an option',
@@ -314,17 +322,31 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                     IconButton(
                                                         onPressed: () {
                                                           setState(() {
-                                                            if (currencymode
-                                                                        .length ==
-                                                                    index + 1 &&
-                                                                currency.length ==
-                                                                    index + 1 &&
-                                                                amount.length ==
-                                                                    index + 1 &&
-                                                                remarks.length ==
-                                                                    index + 1) {
-                                                              indexcurrency +=
-                                                                  1;
+                                                            if (currencymode[
+                                                                        index]
+                                                                    .text
+                                                                    .isNotEmpty &&
+                                                                currency[index]
+                                                                    .text
+                                                                    .isNotEmpty &&
+                                                                amount[index]
+                                                                    .text
+                                                                    .isNotEmpty &&
+                                                                remarks[index]
+                                                                    .text
+                                                                    .isNotEmpty) {
+                                                              setState(() {
+                                                                indexcurrency +=
+                                                                    1;
+                                                                currency.add(
+                                                                    TextEditingController());
+                                                                currencymode.add(
+                                                                    TextEditingController());
+                                                                amount.add(
+                                                                    TextEditingController());
+                                                                remarks.add(
+                                                                    TextEditingController());
+                                                              });
 
                                                               print(currency);
                                                               print(
@@ -376,52 +398,60 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                         icon: Icon(
                                                             FontAwesomeIcons
                                                                 .add)),
-                                                    indexcurrency != 1
+                                                    index != 0
                                                         ? IconButton(
                                                             iconSize: 20,
                                                             onPressed: () {
                                                               setState(() {
-                                                                if (currencymode
-                                                                            .length ==
-                                                                        index +
-                                                                            1 ||
-                                                                    currency.length ==
-                                                                        index +
-                                                                            1 ||
-                                                                    amount.length ==
-                                                                        index +
-                                                                            1 ||
-                                                                    remarks.length ==
-                                                                        index +
-                                                                            1) {
+                                                                if (index >=
+                                                                        0 &&
+                                                                    index <
+                                                                        currencymode
+                                                                            .length) {
+                                                                  currencymode[
+                                                                          index]
+                                                                      .dispose();
                                                                   currencymode
                                                                       .removeAt(
                                                                           index);
+                                                                }
+                                                                if (index >=
+                                                                        0 &&
+                                                                    index <
+                                                                        amount
+                                                                            .length) {
+                                                                  amount[index]
+                                                                      .dispose();
                                                                   amount
                                                                       .removeAt(
                                                                           index);
+                                                                }
+                                                                if (index >=
+                                                                        0 &&
+                                                                    index <
+                                                                        currency
+                                                                            .length) {
+                                                                  currency[
+                                                                          index]
+                                                                      .dispose();
                                                                   currency
                                                                       .removeAt(
                                                                           index);
+                                                                }
+                                                                if (index >=
+                                                                        0 &&
+                                                                    index <
+                                                                        remarks
+                                                                            .length) {
+                                                                  remarks[index]
+                                                                      .dispose();
                                                                   remarks
                                                                       .removeAt(
                                                                           index);
-                                                                  print(
-                                                                      currencymode);
-                                                                  print(
-                                                                      currency);
-                                                                  print(amount);
-                                                                  print(
-                                                                      remarks);
-                                                                  indexcurrency -=
-                                                                      1;
-                                                                } else {
-                                                                  print(
-                                                                      "error");
-
-                                                                  indexcurrency -=
-                                                                      1;
                                                                 }
+
+                                                                indexcurrency -=
+                                                                    1;
                                                               });
                                                             },
                                                             icon: Icon(
@@ -471,15 +501,13 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                                         autovalidateMode: AutovalidateMode.onUserInteraction,
                                                                         keyboardType: TextInputType.number,
                                                                         style: TextStyle(color: Colors.black),
+                                                                        controller: amount[index],
                                                                         onChanged: (s) {
                                                                           setState(
                                                                               () {
-                                                                            if (amount.length ==
-                                                                                index) {
-                                                                              amount.add(s);
-                                                                            } else {
-                                                                              amount[index] = s;
-                                                                            }
+                                                                            amount[index].text =
+                                                                                s;
+
                                                                             print(amount);
                                                                           });
                                                                         }))
@@ -522,6 +550,9 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                                             8.0),
                                                                     child:
                                                                         TextFormField(
+                                                                      controller:
+                                                                          remarks[
+                                                                              index],
                                                                       validator:
                                                                           _validateRequired,
                                                                       autovalidateMode:
@@ -534,13 +565,8 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                                                           (s) {
                                                                         setState(
                                                                             () {
-                                                                          if (remarks.length ==
-                                                                              index) {
-                                                                            remarks.add(s);
-                                                                          } else {
-                                                                            remarks[index] =
-                                                                                s;
-                                                                          }
+                                                                          remarks[index].text =
+                                                                              s;
                                                                         });
                                                                       },
                                                                     ))
@@ -1860,11 +1886,11 @@ class _MultiCityNextState extends State<MultiCityNext> {
                                               'sameuser': connection,
                                               'visa': _visaController.text,
                                               "currencymode":
-                                                  currencymode.join(","),
-                                              "currency": currency.join(","),
-                                              "amount": amount.join(","),
+                                                  getTextFromControllers(currencymode),
+                                              "currency": getTextFromControllers(currency),
+                                              "amount": getTextFromControllers(amount),
                                               "remarkscurrency":
-                                                  remarks.join(","),
+                                                  getTextFromControllers(remarks),
                                               'cab': _cabController.text,
                                               'purpose':
                                                   _purposeController.text,

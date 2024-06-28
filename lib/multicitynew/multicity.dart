@@ -138,7 +138,7 @@ class _MultiCityState extends State<MultiCity> {
                 child: Column(children: [
                   Flexible(
                     child: ListView.builder(
-                        itemCount: counter,
+                        itemCount: gestures.length,
                         itemBuilder: (context, index) {
                           return Card(
                             color: Color.fromARGB(255, 250, 246, 246),
@@ -184,85 +184,39 @@ class _MultiCityState extends State<MultiCity> {
                                                   onPressed: () {
                                                     setState(() {
                                                       counter--;
+                                                      if (index >= 0 && index < gestures.length) {     gestures.removeAt(index);    }
+                                                      if (index >= 0 && index < _traveltypeController.length) {     _traveltypeController.removeAt(index);    }
+                                                      if (index >= 0 && index < _travelClassController.length) {     _travelClassController.removeAt(index);    }
+                                                      if (index >= 0 && index < _originController.length) {     _originController.removeAt(index);    }
+                                                      if (index >= 0 && index < _destinationController.length) {     _destinationController.removeAt(index);    }
+                                                      if (index >= 0 && index < _traveldateController.length) {     _traveldateController.removeAt(index);    }
+                                                      if (index >= 0 && index < _etaController.length) {     _etaController.removeAt(index);    }
+                                                      if (index >= 0 && index < _foodController.length) {     _foodController.removeAt(index);    }
+                                                      if (index >= 0 && index < _seatController.length) {     _seatController.removeAt(index);    }
+                                                      if (index >= 0 && index < _accomodationController.length) {     _accomodationController.removeAt(index);    }
+                                                      if (index >= 0 && index < _occupancyController.length) {     _occupancyController.removeAt(index);    }
+                                                      if (index >= 0 && index < _hotelController.length) {     _hotelController.removeAt(index);    }
+                                                      if (index >= 0 && index < _checkinController.length) {     _checkinController.removeAt(index);    }
+                                                      if (index >= 0 && index < _checkoutController.length) {     _checkoutController.removeAt(index);    }
+                                                      if (index >= 0 && index < _bagController.length) {     _bagController.removeAt(index);    }
+                                                      if (index >= 0 && index < _totalweightController.length) {     _totalweightController.removeAt(index);    }
+                                                      if (index >= 0 && index < _remarksController.length) {     _remarksController.removeAt(index);    }
+                                                      if (index >= 0 && index < _regionController.length) {     _regionController.removeAt(index);    }
+                                                      if (index >= 0 && index < travelmode.length) {     travelmode.removeAt(index);    }
+                                                      if (index >= 0 && index < _isSelected.length) {     _isSelected.removeAt(index);    }
+                                                      if (index >= 0 && index < trainclass.length) {     trainclass.removeAt(index);    }
+                                                      if (index >= 0 && index < _isSelected1.length) {     _isSelected1.removeAt(index);    }
+                                                      if (index >= 0 && index < _isSelected2.length) {     _isSelected2.removeAt(index);    }
+                                                      if (index >= 0 && index < _accom2.length) {     _accom2.removeAt(index);    }
+                                                      if (index >= 0 && index < _occupancy.length) {     _occupancy.removeAt(index);    }
+                                                      if (index >= 0 && index < accom.length) {     accom.removeAt(index);    }
+                                                      if (index >= 0 && index < bags.length) {     bags.removeAt(index);    }
+                                                      if (index >= 0 && index < traveltimevalues.length) {     traveltimevalues.removeAt(index);    }
+                                                      if (index >= 0 && index < travelmodedomestic.length) {     travelmodedomestic.removeAt(index);    }
+                                                      if (index >= 0 && index < trainclassdomestic.length) {     trainclassdomestic.removeAt(index);    }
+                                                      if (index >= 0 && index < roadclassdomestic.length) {     roadclassdomestic.removeAt(index);    }
 
-                                                      gestures.removeAt(
-                                                          counter - 1);
-                                                      _traveltypeController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _travelClassController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _originController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _destinationController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _traveldateController
-                                                          .removeAt(
-                                                              counter - 1);
-
-                                                      _etaController.removeAt(
-                                                          counter - 1);
-                                                      _foodController.removeAt(
-                                                          counter - 1);
-                                                      _seatController.removeAt(
-                                                          counter - 1);
-                                                      _accomodationController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _occupancyController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _hotelController.removeAt(
-                                                          counter - 1);
-                                                      _checkinController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _checkoutController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _bagController.removeAt(
-                                                          counter - 1);
-                                                      _totalweightController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _remarksController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      _regionController
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      travelmode.removeAt(
-                                                          counter - 1);
-                                                      _isSelected.removeAt(
-                                                          counter - 1);
-                                                      trainclass.removeAt(
-                                                          counter - 1);
-                                                      _isSelected1.removeAt(
-                                                          counter - 1);
-                                                      _isSelected2.removeAt(
-                                                          counter - 1);
-                                                      _accom2.removeAt(
-                                                          counter - 1);
-                                                      _occupancy.removeAt(
-                                                          counter - 1);
-                                                      accom.removeAt(
-                                                          counter - 1);
-                                                      bags.removeAt(
-                                                          counter - 1);
-                                                      traveltimevalues.removeAt(
-                                                          counter - 1);
-                                                      travelmodedomestic
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      trainclassdomestic
-                                                          .removeAt(
-                                                              counter - 1);
-                                                      roadclassdomestic
-                                                          .removeAt(
-                                                              counter - 1);
+                                                      
                                                     });
                                                   },
                                                   icon: Icon(
@@ -1638,160 +1592,102 @@ class _MultiCityState extends State<MultiCity> {
                                             ),
                                             SizedBox(height: 10),
                                             Row(children: [
-                                              widget.isInternational
-                                                  ? (travelmode[index][0] ||
-                                                          travelmode[index][1])
-                                                      ? Container(
-                                                          width: MediaQuery.of(context).size.width / 2 -
-                                                              40,
-                                                          decoration: BoxDecoration(
-                                                              borderRadius: BorderRadius.circular(
-                                                                  5),
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .black26)),
-                                                          child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          left:
-                                                                              8.0,
-                                                                          top:
-                                                                              8),
-                                                                  child: Text(
-                                                                      'Seat:',
-                                                                      style: TextStyle(
-                                                                          color:
-                                                                              Colors.black)),
-                                                                ),
-                                                                travelmode[index]
-                                                                        [0]
-                                                                    ? Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                            horizontal:
-                                                                                8.0),
-                                                                        child: DropdownMenu(
-                                                                            width: MediaQuery.of(context).size.width / 2 - 40,
-                                                                            hintText: 'Seat',
-                                                                            inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
-                                                                            onSelected: (s) {
-                                                                              if (s == 'select an option') {
-                                                                                _seatController[index].text = '';
-                                                                              }
-                                                                              _seatController[index].text = s!;
-                                                                            },
-                                                                            initialSelection: _seatController[index].text,
-                                                                            controller: _seatController[index],
-                                                                            dropdownMenuEntries: ['Select an option', 'Window', 'Aisle'].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
-                                                                      )
-                                                                    : Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                            horizontal:
-                                                                                8.0),
-                                                                        child: DropdownMenu(
-                                                                            width: MediaQuery.of(context).size.width / 2 - 40,
-                                                                            onSelected: (s) {
-                                                                              if (s == 'Select an option') {
-                                                                                _seatController[index].text = '';
-                                                                              }
-                                                                              _seatController[index].text = s!;
-                                                                            },
-                                                                            controller: _seatController[index],
-                                                                            hintText: 'Seat',
-                                                                            inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
-                                                                            dropdownMenuEntries: ['Select an option', 'up', 'down'].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
-                                                                      ),
-                                                              ]))
-                                                      : Container()
-                                                  : (travelmodedomestic[index]
-                                                              [0] ||
-                                                          travelmodedomestic[index]
-                                                              [1])
-                                                      ? Container(
-                                                          width:
-                                                              MediaQuery.of(context)
-                                                                          .size
-                                                                          .width /
-                                                                      2 -
-                                                                  40,
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius.circular(
-                                                                      5),
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .black26)),
-                                                          child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          left:
-                                                                              8.0,
-                                                                          top:
-                                                                              8),
-                                                                  child: Text(
-                                                                      'Seat:',
-                                                                      style: TextStyle(
-                                                                          color:
-                                                                              Colors.black)),
-                                                                ),
-                                                                travelmodedomestic[
-                                                                        index][0]
-                                                                    ? Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                            horizontal:
-                                                                                8.0),
-                                                                        child: DropdownMenu(
-                                                                            width: MediaQuery.of(context).size.width / 2 - 40,
-                                                                            hintText: 'Seat',
-                                                                            inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
-                                                                            onSelected: (s) {
-                                                                              if (s == 'select an option') {
-                                                                                _seatController[index].text = '';
-                                                                              }
-                                                                              if (s == 'Window') {
-                                                                                _seatController[index].text = 'Window';
-                                                                              }
-                                                                              if (s == 'Aisle') {
-                                                                                _seatController[index].text = 'Aisle';
-                                                                              }
-                                                                            },
-                                                                            initialSelection: _seatController[index].text,
-                                                                            controller: _seatController[index],
-                                                                            dropdownMenuEntries: ['Select an option', 'Window', 'Aisle'].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
-                                                                      )
-                                                                    : Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                            horizontal:
-                                                                                8.0),
-                                                                        child: DropdownMenu(
-                                                                            width: MediaQuery.of(context).size.width / 2 - 40,
-                                                                            onSelected: (s) {
-                                                                              if (s == 'Select an option') {
-                                                                                _seatController[index].text = '';
-                                                                              }
-                                                                            },
-                                                                            controller: _seatController[index],
-                                                                            hintText: 'Seat',
-                                                                            inputDecorationTheme: InputDecorationTheme(border: InputBorder.none, hintStyle: TextStyle(color: Color.fromARGB(255, 1, 75, 148))),
-                                                                            dropdownMenuEntries: ['Select an option', 'up', 'down'].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
-                                                                      ),
-                                                              ]))
-                                                      : Container(),
+                                              (travelmode[index][0] || travelmode[index][1] || travelmode[index][2])
+                              ? Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Container(
+                                      width: MediaQuery.of(context).size.width / 2 -
+                                                      40,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          border: Border.all(
+                                              color: Colors.black26)),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text('Seat:',
+                                                style: TextStyle(
+                                                    color: Colors.black)),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8.0),
+                                              child: DropdownMenu(
+                                                  width: MediaQuery.of(context).size.width / 2 -
+                                                      40,
+                                                  hintText: 'Seat',
+                                                  inputDecorationTheme: InputDecorationTheme(
+                                                      border: InputBorder.none,
+                                                      hintStyle: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 1, 75, 148))),
+                                                  onSelected: (s) {
+                                                    if (s ==
+                                                        'select an option') {
+                                                      _seatController[index].text = '';
+                                                    } else {
+                                                      _seatController[index].text = s;
+                                                    }
+                                                  },
+                                                  initialSelection:
+                                                      _seatController[index].text,
+                                                  controller: _seatController[index],
+                                                  dropdownMenuEntries: (!widget
+                                                              .isInternational
+                                                          ? (_travelClassController[index].text == 'Business class' ||
+                                                                  _travelClassController[index].text ==
+                                                                      'Economy class'
+                                                              ? [
+                                                                  'Select',
+                                                                  'Window',
+                                                                  'Aisle'
+                                                                ]
+                                                              : (_travelClassController[index].text == 'SL' ||
+                                                                      _travelClassController[index].text ==
+                                                                          '3A'
+                                                                  ? [
+                                                                      'Select',
+                                                                      'Lower',
+                                                                      'Middle',
+                                                                      'Side-Lower',
+                                                                      'Side-Middle',
+                                                                      'Side-Upper',
+                                                                      'Upper'
+                                                                    ]
+                                                                  : (_travelClassController[index].text == 'SC' ||
+                                                                          _travelClassController[index].text ==
+                                                                              'CC'
+                                                                      ? [
+                                                                          'Select',
+                                                                          'Normal',
+                                                                          'Window'
+                                                                        ]
+                                                                      : (_travelClassController[index].text == '2A'
+                                                                          ? ['Select', 'Side-Lower', 'Lower', 'Side-Upper', 'Upper']
+                                                                          : (_travelClassController[index].text == '1A'
+                                                                              ? ['Select', 'Cabin', 'Coupe', 'Lower', 'Upper']
+                                                                              : (_travelClassController[index].text == 'Car'
+                                                                                  ? ['Select', 'Normal']
+                                                                                  : (_travelClassController[index].text == 'Bus'
+                                                                                      ? [
+                                                                                          'Select',
+                                                                                          "Normal-Non AC",
+                                                                                          "Semi Sleeper-Normal",
+                                                                                          "Semi Sleeper-Window AC",
+                                                                                          "Sleeper-Lower",
+                                                                                          "Sleeper-Upper",
+                                                                                          "Window-AC",
+                                                                                          "Window-Non AC"
+                                                                                        ]
+                                                                                      : ([]))))))))
+                                                          : (_travelClassController[index].text == 'Business class' || _travelClassController[index].text == 'Economy class' ? ['Select', 'Window', 'Aisle'] : (_travelClassController[index].text == 'SL' || _travelClassController[index].text == '3A' ? ['Select', 'Lower', 'Middle', 'Side-Lower', 'Side-Middle', 'Side-Upper', 'Upper'] : (_travelClassController[index].text == '2A' ? ['Select', 'Side-Lower', 'Lower', 'Side-Upper', 'Upper'] : (_travelClassController[index].text == '1A' ? ['Select', 'Cabin', 'Coupe', 'Lower', 'Upper'] : [])))))
+                                                      .map((e) => DropdownMenuEntry(label: e, value: e))
+                                                      .toList()),
+                                            )
+                                          ])))
+                              : Container(),
                                               SizedBox(width: 10),
                                               widget.isInternational
                                                   ? Padding(
