@@ -1,3 +1,4 @@
+import 'package:bonvoyage/approval/approval.dart';
 import 'package:bonvoyage/forms/accomodation/accomodation.dart';
 import 'package:bonvoyage/forms/bus.dart';
 import 'package:bonvoyage/main.dart';
@@ -84,7 +85,7 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    'Mr ${authProvider.username}',
+                    'Mr ${authProvider.current.employeeName}',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 34,
@@ -683,7 +684,7 @@ class _DashBoardState extends State<DashBoard> {
                                           SizedBox(
                                             width: 200,
                                             child: Text(
-                                                'Good $s ${authProvider.username}',
+                                                'Good $s ${authProvider.current.employeeName}',
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                       255,
@@ -1629,6 +1630,12 @@ class _DashBoardState extends State<DashBoard> {
         child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             selectedItemColor: const Color.fromARGB(255, 1, 75, 148),
+            onTap: (int i) {
+              if (i == 2) {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => Approval()));
+              }
+            },
             items: [
               const BottomNavigationBarItem(
                   icon: Icon(Icons.home_outlined, size: 24), label: 'Home'),

@@ -17,6 +17,8 @@ class DataBaseHelper {
       await multicityTable(database);
       await multicityTabledomestic(database);
       await multicityMultipleTableDomestic(database);
+      await Employee(database);
+      await Requests(database);
     });
   }
 
@@ -235,6 +237,76 @@ CREATE TABLE roundtripinternational(
 ''');
   }
 
+  static Future<void> Employee(sql.Database database) async {
+    await database.execute('''
+ CREATE TABLE Employee(
+        id INTEGER PRIMARY KEY NOT NULL,
+        EmployeeNumber INTEGER,
+        EmployeeName TEXT,
+        EmployeeType TEXT,
+        JoinDate TEXT,
+        BirthDate TEXT,
+        LeftDate TEXT,
+        Category INTEGER,
+        CategoryName TEXT,
+        DescCode INTEGER,
+        DescName TEXT,
+        LocationCode INTEGER,
+        LocationName TEXT,
+        DeptCode INTEGER,
+        DeptName TEXT,
+        EmailId TEXT,
+        Place TEXT,
+        Sex TEXT,
+        IncDate TEXT,
+        PanGIRNumber TEXT,
+        State TEXT,
+        OrgCode TEXT,
+        DivCode TEXT,
+        FatherOrHusbandName TEXT,
+        ManagerId INTEGER,
+        HodId INTEGER,
+        MobileNo TEXT,
+        ProfitCentre TEXT,
+        CostCentre TEXT,
+        GradeCode INTEGER,
+        Cadre TEXT,
+        LevelId TEXT,
+        MprDeptCode INTEGER,
+        MprDivision TEXT,
+        MprFunction TEXT,
+        MprDepartment TEXT,
+        MprLocation TEXT,
+        EsiEligibleDate TEXT,
+        ModifiedDate TEXT,
+        ManagerName TEXT,
+        ManagerMail TEXT,
+        HODName TEXT,
+        HODMail TEXT
+        )
+''');
+  }
+
+  static Future<void> Requests(sql.Database database) async {
+    await database.execute('''
+ CREATE TABLE Requests(
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        EmployeeNumber INTEGER,
+        TravellerName TEXT,
+        Designation TEXT,
+        Status TEXT,
+        TravelType TEXT,
+        TripType TEXT,
+        Origin TEXT,
+        Destination TEXT,
+        ETA TEXT,
+        Purpose TEXT,
+        ApproverId INTEGER,
+        connection INTEGER
+        )
+''');
+  }
+
   static Future<void> roundtrip(sql.Database database) async {
     await database.execute('''
  CREATE TABLE roundtripdomestic(
@@ -410,14 +482,14 @@ CREATE TABLE roundtripinternational(
     return output.query(table);
   }
 
-  static Future<Future<List<Map<String, Object?>>>> readOneItem(
+  static Future<Future<List<Map<String, dynamic>>>> readOneItem(
       String table, int id) async {
     final output = await db();
     return output.query(table, where: "id=?", whereArgs: [id]);
   }
 
   static Future<List<Map<String, dynamic>>> readOneItemRandom(
-      String table, String column, String columnvalue) async {
+      String table, String column, dynamic columnvalue) async {
     final output = await db();
     return output.query(table, where: "${column}=?", whereArgs: [columnvalue]);
   }

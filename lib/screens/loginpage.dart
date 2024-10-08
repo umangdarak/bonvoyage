@@ -1,3 +1,4 @@
+import 'package:bonvoyage/databasehelper/databasehelper.dart';
 import 'package:bonvoyage/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,12 @@ class _LoginPageState extends State<LoginPage> {
       return 'This field is required';
     }
     return null;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -87,8 +94,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         if (formkey.currentState!.validate()) {
+                          var data = await DataBaseHelper.readOneItemRandom(
+                              "Employee",
+                              "EmployeeNumber",
+                              int.parse(_usernameController.text));
+                          authProvider.updateCurrentEmployee(data[0]);
+                          print(authProvider.current.toMap());
+                          //authProvider.setData();
                           Navigator.push(
                               context,
                               MaterialPageRoute(

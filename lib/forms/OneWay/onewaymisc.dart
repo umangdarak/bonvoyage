@@ -5,9 +5,11 @@ import 'package:bonvoyage/approval%20pages/onewayapproval.dart';
 import 'package:bonvoyage/classmodels/oneway/OneWayModel.dart';
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
 import 'package:bonvoyage/forms/OneWay/oneway.dart';
+import 'package:bonvoyage/main.dart';
 import 'package:bonvoyage/screens/usernamecard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class OneWayMisc extends StatefulWidget {
   bool? isInternational;
@@ -58,16 +60,16 @@ class _OneWayMiscState extends State<OneWayMisc> {
     super.initState();
     _cabController.text = 'No';
     model = widget.model!;
-    _travellernameController.text = "Umang";
-    _travellergenderController.text = "Male";
-    _travelleremailController.text = "abc@gmail.com";
-    _travellermobilenoContorller.text = "909999999";
-    _levelController.text = "xyz";
-    _departmentController.text = "abc";
-    _debitexpensesController.text = "Cost Center";
-    _costorprojectController.text = "project";
-    _requesternameController.text = "Umang";
-    _approverController.text = "dde";
+    // _travellernameController.text = "Umang";
+    // _travellergenderController.text = "Male";
+    // _travelleremailController.text = "abc@gmail.com";
+    // _travellermobilenoContorller.text = "909999999";
+    // _levelController.text = "xyz";
+    // _departmentController.text = "abc";
+    // _debitexpensesController.text = "Cost Center";
+    // _costorprojectController.text = "project";
+    // _requesternameController.text = "Umang";
+    // _approverController.text = "dde";
   }
 
   String generateRandomString({int length = 10}) {
@@ -80,6 +82,18 @@ class _OneWayMiscState extends State<OneWayMisc> {
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context);
+    _travellernameController.text = auth.current.employeeName;
+    _travellergenderController.text =
+        auth.current.sex == 'M' ? "Male" : "Female";
+    _travelleremailController.text = auth.current.emailId;
+    _travellermobilenoContorller.text = auth.current.mobileNo;
+    _levelController.text = auth.current.descName;
+    _departmentController.text = auth.current.deptName;
+    _debitexpensesController.text = "Cost Center";
+    _costorprojectController.text = auth.current.costCentre;
+    _requesternameController.text = auth.current.employeeName;
+    _approverController.text = auth.current.managerName;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,

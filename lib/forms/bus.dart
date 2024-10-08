@@ -1,9 +1,11 @@
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
+import 'package:bonvoyage/main.dart';
 import 'package:bonvoyage/screens/dashboard.dart';
 import 'package:bonvoyage/screens/usernamecard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class BusForm extends StatefulWidget {
   String destination;
@@ -43,21 +45,33 @@ class _BusFormState extends State<BusForm> {
     // TODO: implement initState
     super.initState();
     _goingtoController.text = widget.destination;
-    _travellerController.text = "Umang";
-    _genderController.text = "Male";
-    _emailController.text = "abc@gmail.com";
-    _mobileController.text = "909999999";
-    _designationController.text = "xyz";
-    _departmentController.text = "abc";
-    _approverController.text = "ddc";
-    _requesterController.text = "Umang";
-    _debitexpensesController.text = "Cost Center";
-    _costorprojectController.text = "project";
+    // _travellerController.text = "Umang";
+    // _genderController.text = "Male";
+    // _emailController.text = "abc@gmail.com";
+    // _mobileController.text = "909999999";
+    // _designationController.text = "xyz";
+    // _departmentController.text = "abc";
+    // _approverController.text = "ddc";
+    // _requesterController.text = "Umang";
+    // _debitexpensesController.text = "Cost Center";
+    // _costorprojectController.text = "project";
     _peopleController.text = "1";
   }
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context);
+    _travellerController.text = auth.current.employeeName;
+    _genderController.text =
+        auth.current.sex == 'M' ? "Male" : "Female";
+    _emailController.text = auth.current.emailId;
+    _mobileController.text = auth.current.mobileNo;
+    _designationController.text = auth.current.descName;
+    _departmentController.text = auth.current.deptName;
+    _debitexpensesController.text = "Cost Center";
+    _costorprojectController.text = auth.current.costCentre;
+    _requesterController.text = auth.current.employeeName;
+    _approverController.text = auth.current.managerName;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,

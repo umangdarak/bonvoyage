@@ -1,9 +1,11 @@
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
+import 'package:bonvoyage/main.dart';
 import 'package:bonvoyage/screens/dashboard.dart';
 import 'package:bonvoyage/screens/usernamecard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CarBooking extends StatefulWidget {
   const CarBooking({super.key});
@@ -52,20 +54,32 @@ class _CarBookingState extends State<CarBooking> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _travellernameController.text = "Umang";
-    _travellergenderController.text = "Male";
-    _travelleremailController.text = "abc@gmail.com";
-    _travellermobilenoContorller.text = "909999999";
-    _levelController.text = "xyz";
-    _departmentController.text = "abc";
-    _debitexpensesController.text = "Cost Center";
-    _costorprojectController.text = "project";
-    _requesternameController.text = "Umang";
-    _approverController.text = "dde";
+    // _travellernameController.text = "Umang";
+    // _travellergenderController.text = "Male";
+    // _travelleremailController.text = "abc@gmail.com";
+    // _travellermobilenoContorller.text = "909999999";
+    // _levelController.text = "xyz";
+    // _departmentController.text = "abc";
+    // _debitexpensesController.text = "Cost Center";
+    // _costorprojectController.text = "project";
+    // _requesternameController.text = "Umang";
+    // _approverController.text = "dde";
   }
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context);
+    _travellernameController.text = auth.current.employeeName;
+    _travellergenderController.text =
+        auth.current.sex == 'M' ? "Male" : "Female";
+    _travelleremailController.text = auth.current.emailId;
+    _travellermobilenoContorller.text = auth.current.mobileNo;
+    _levelController.text = auth.current.descName;
+    _departmentController.text = auth.current.deptName;
+    _debitexpensesController.text = "Cost Center";
+    _costorprojectController.text = auth.current.costCentre;
+    _requesternameController.text = auth.current.employeeName;
+    _approverController.text = auth.current.managerName;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -1327,6 +1341,20 @@ class _CarBookingState extends State<CarBooking> {
                             var c = await DataBaseHelper.readOneWayDom(
                                 'carbooking');
                             print(c);
+                            var e = await DataBaseHelper.insertItemOneWayDom({
+                              "EmployeeNumber": auth.current.employeeNumber,
+                              "TravellerName": _travellernameController.text,
+                              "Designation": auth.current.descName,
+                              "Status": "New",
+                              "TravelType": "Local",
+                              "TripType": "Car Travel",
+                              "Origin": _fromplaceController.text,
+                              "Destination": _placestovisitController.text,
+                              "ETA": _todateController.text,
+                              "Purpose": _purposeController.text,
+                              "ApproverId": auth.current.managerId,
+                              "connection": d
+                            }, "Requests");
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(builder: (_) => DashBoard()));
                           } else {

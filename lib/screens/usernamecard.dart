@@ -1,11 +1,16 @@
+import 'package:bonvoyage/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:provider/provider.dart';
 
 class UsernameCard extends StatelessWidget {
   const UsernameCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context);
+
     return Container(
       height: 150,
       child: Stack(
@@ -38,7 +43,7 @@ class UsernameCard extends StatelessWidget {
                               Text('Traveller Name',
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 14)),
-                              Text('Employee Name',
+                              Text(auth.current.employeeName,
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 1, 75, 148),
                                       fontWeight: FontWeight.bold,
@@ -57,7 +62,7 @@ class UsernameCard extends StatelessWidget {
                                   Text('Designation',
                                       style: TextStyle(
                                           color: Colors.grey, fontSize: 14)),
-                                  Text('Designation Name',
+                                  Text(auth.current.descName,
                                       style: TextStyle(
                                           color:
                                               Color.fromARGB(255, 1, 75, 148),
@@ -74,7 +79,7 @@ class UsernameCard extends StatelessWidget {
                                   Text('Department',
                                       style: TextStyle(
                                           color: Colors.grey, fontSize: 14)),
-                                  Text('Department Name',
+                                  Text(auth.current.deptName,
                                       style: TextStyle(
                                           color:
                                               Color.fromARGB(255, 1, 75, 148),
@@ -148,7 +153,9 @@ class UsernameCard extends StatelessWidget {
                                                                       .grey,
                                                                   fontSize:
                                                                       14)),
-                                                          Text('Employee Name',
+                                                          Text(
+                                                              auth
+                                                                  .current.employeeName,
                                                               style: TextStyle(
                                                                   color: Color
                                                                       .fromARGB(
@@ -183,7 +190,8 @@ class UsernameCard extends StatelessWidget {
                                                                       fontSize:
                                                                           14)),
                                                               Text(
-                                                                  'Designation Name',
+                                                                  auth.current
+                                                                      .descName,
                                                                   style: TextStyle(
                                                                       color: Color.fromARGB(
                                                                           255,
@@ -212,7 +220,8 @@ class UsernameCard extends StatelessWidget {
                                                                       fontSize:
                                                                           14)),
                                                               Text(
-                                                                  'Department Name',
+                                                                  auth.current
+                                                                      .deptName,
                                                                   style: TextStyle(
                                                                       color: Color.fromARGB(
                                                                           255,
@@ -247,7 +256,7 @@ class UsernameCard extends StatelessWidget {
                                                         style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 14)),
-                                                    Text('99999999',
+                                                    Text(auth.current.mobileNo,
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -269,7 +278,7 @@ class UsernameCard extends StatelessWidget {
                                                         style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 14)),
-                                                    Text('Male',
+                                                    Text(auth.current.sex,
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -351,7 +360,7 @@ class UsernameCard extends StatelessWidget {
                                                         style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 14)),
-                                                    Text('testemail@gmail.com',
+                                                    Text(auth.current.emailId,
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -409,7 +418,9 @@ class UsernameCard extends StatelessWidget {
                                                         style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 14)),
-                                                    Text('Approver Name',
+                                                    Text(
+                                                        auth.current
+                                                            .managerName,
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -431,7 +442,9 @@ class UsernameCard extends StatelessWidget {
                                                         style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 14)),
-                                                    Text('Approver Designation',
+                                                    Text(
+                                                        auth.current
+                                                            .managerName,
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -460,15 +473,15 @@ class UsernameCard extends StatelessWidget {
                                                             color: Colors.grey,
                                                             fontSize: 14)),
                                                     Text(
-                                                        'testexample@gmail.com',
+                                                        auth.current
+                                                            .managerMail,
                                                         style: TextStyle(
                                                             color:
-                                                                Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        1,
-                                                                        75,
-                                                                        148),
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    1,
+                                                                    75,
+                                                                    148),
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontSize: 15))

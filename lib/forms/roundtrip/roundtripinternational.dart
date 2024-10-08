@@ -3,11 +3,13 @@ import 'dart:math';
 
 import 'package:bonvoyage/approval%20pages/roundtripapproval.dart';
 import 'package:bonvoyage/databasehelper/databasehelper.dart';
+import 'package:bonvoyage/main.dart';
 import 'package:bonvoyage/screens/usernamecard.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class RoundTripInternational extends StatefulWidget {
   Map<String, String> data;
@@ -68,21 +70,20 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
 
     super.initState();
 
-   
-     _cabController.text = 'No';
+    _cabController.text = 'No';
     _visaController.text = 'No';
     _insurancerequiredController.text = 'No';
     _insuranceavailableController.text = 'No';
-    _travellernameController.text = "Umang";
-    _travellergenderController.text = "Male";
-    _travelleremailController.text = "abc@gmail.com";
-    _travellermobilenoContorller.text = "909999999";
-    _levelController.text = "xyz";
-    _departmentController.text = "abc";
-    _debitexpensesController.text = "Cost Center";
-    _costorprojectController.text = "project";
-    _requesternameController.text = "Umang";
-    _approverController.text = "dde";
+    // _travellernameController.text = "Umang";
+    // _travellergenderController.text = "Male";
+    // _travelleremailController.text = "abc@gmail.com";
+    // _travellermobilenoContorller.text = "909999999";
+    // _levelController.text = "xyz";
+    // _departmentController.text = "abc";
+    // _debitexpensesController.text = "Cost Center";
+    // _costorprojectController.text = "project";
+    // _requesternameController.text = "Umang";
+    // _approverController.text = "dde";
   }
 
   String generateRandomString({int length = 10}) {
@@ -92,7 +93,8 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
         List.generate(length, (index) => chars[random.nextInt(chars.length)]);
     return base64Url.encode(utf8.encode(result.join()));
   }
-    String getTextFromControllers(List<TextEditingController> a) {
+
+  String getTextFromControllers(List<TextEditingController> a) {
     String text = "";
     for (TextEditingController t in a) {
       text += t.text + ",";
@@ -102,6 +104,18 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context);
+    _travellernameController.text = auth.current.employeeName;
+    _travellergenderController.text =
+        auth.current.sex == 'M' ? "Male" : "Female";
+    _travelleremailController.text = auth.current.emailId;
+    _travellermobilenoContorller.text = auth.current.mobileNo;
+    _levelController.text = auth.current.descName;
+    _departmentController.text = auth.current.deptName;
+    _debitexpensesController.text = "Cost Center";
+    _costorprojectController.text = auth.current.costCentre;
+    _requesternameController.text = auth.current.employeeName;
+    _approverController.text = auth.current.managerName;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -172,7 +186,7 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
                         child: Column(children: [
-                       ListView.builder(
+                          ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: currencymode.length,
@@ -288,31 +302,25 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                                       .symmetric(
                                                                       horizontal:
                                                                           8.0),
-                                                                  child:
-                                                                      DropdownMenu(
-                                                                          width: MediaQuery.of(context).size.width / 2 -
-                                                                              60,
-                                                                          inputDecorationTheme: InputDecorationTheme(
-                                                                              border: InputBorder
-                                                                                  .none),
-                                                                          onSelected:
-                                                                              (s) {
-                                                                            if (s ==
-                                                                                'select an option') {
-                                                                            } else {
-                                                                              currency[index].text = s!;
-                                                                            }
-                                                                          },
-                                                                          controller: currency[
-                                                                              index],
-                                                                          dropdownMenuEntries:
-                                                                              [
-                                                                            'Select an option',
-                                                                            'EURO',
-                                                                            'GBP',
-                                                                            'SGD',
-                                                                            'USD'
-                                                                          ].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
+                                                                  child: DropdownMenu(
+                                                                      width: MediaQuery.of(context).size.width / 2 - 60,
+                                                                      inputDecorationTheme: InputDecorationTheme(border: InputBorder.none),
+                                                                      onSelected: (s) {
+                                                                        if (s ==
+                                                                            'select an option') {
+                                                                        } else {
+                                                                          currency[index].text =
+                                                                              s!;
+                                                                        }
+                                                                      },
+                                                                      controller: currency[index],
+                                                                      dropdownMenuEntries: [
+                                                                        'Select an option',
+                                                                        'EURO',
+                                                                        'GBP',
+                                                                        'SGD',
+                                                                        'USD', 
+                                                                      ].map((e) => DropdownMenuEntry(label: e, value: e)).toList()),
                                                                 )
                                                               ]))),
                                                   Column(children: [
@@ -576,7 +584,8 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                 } else {
                                   return Container();
                                 }
-                              }), Divider(),
+                              }),
+                          Divider(),
                           Column(
                             children: [
                               Padding(
@@ -1856,11 +1865,17 @@ class _RoundTripInternationalState extends State<RoundTripInternational> {
                                                   var d = await DataBaseHelper
                                                       .insertItemOneWayDom({
                                                     "currencymode":
-                                                  getTextFromControllers(currencymode),
-                                              "currency": getTextFromControllers(currency),
-                                              "amount": getTextFromControllers(amount),
-                                              "remarkscurrency":
-                                                  getTextFromControllers(remarks),
+                                                        getTextFromControllers(
+                                                            currencymode),
+                                                    "currency":
+                                                        getTextFromControllers(
+                                                            currency),
+                                                    "amount":
+                                                        getTextFromControllers(
+                                                            amount),
+                                                    "remarkscurrency":
+                                                        getTextFromControllers(
+                                                            remarks),
                                                     "insurancerequired":
                                                         _insurancerequiredController
                                                             .text,
